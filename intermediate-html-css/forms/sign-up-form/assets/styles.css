@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: Secular One;
+    src: url("SecularOne-Regular.ttf");
+}
+
+main {
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+}
+
+a {
+    color: inherit;
+}
+
+.side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40vw;
+    height: 100vh;
+    background: url("background.jpg") 60% 15%;
+    color: white;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 0;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    font-family: Secular One;
+    font-size: 2rem;
+}
+
+.logo > img {
+    margin-right: 10px;
+    width: 64px;
+}
+
+.side > p {
+    text-align: center;
+    opacity: 70%;
+    margin-bottom: 5px;
+}
+
