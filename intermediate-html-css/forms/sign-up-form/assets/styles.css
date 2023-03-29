@@ -136,3 +136,15 @@ span.spacer:first-child {
 span.spacer:last-child {
     flex: 1 1 60%;
 }
+
+.required:invalid {
+    border-color: red;
+}
+
+input:focus {
+    box-shadow: #555 0 0 8px;
+}
+
+.noMatch {
+    border-color: green;
+}
