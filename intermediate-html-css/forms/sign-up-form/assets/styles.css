@@ -5,7 +5,7 @@
     --focus-input: #3053DB;
 }
 
-:root.dark {
+:root.Dark {
     --font-color: #c3ccdc;
     --content-bg: #011627;
     --banner-bg: #01213c;
@@ -15,7 +15,7 @@
     --theme-color: --font-color;
 }
 
-:root.light {
+:root.Light {
     --font-color: #323a48;
     --content-bg: #f9fafb;
     --banner-bg: white;
