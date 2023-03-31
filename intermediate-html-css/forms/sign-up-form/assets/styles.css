@@ -13,6 +13,7 @@
     --placeholder-color:#7b818b;
     --shadow: #00080f 0 0 9px;
     --theme-color: --font-color;
+    --link-color: #619dff;
 }
 
 :root.Light {
@@ -23,6 +24,7 @@
     --placeholder-color: #767676;
     --shadow: #ccc 0 0 9px;
     --theme-color: white;
+    --link-color: --accent;
 }
 
 * {
@@ -94,7 +96,7 @@ a {
 }
 
 .content a {
-    color: var(--accent);
+    color: var(--link-color);
     font-weight: bold;
     text-decoration: none;
 }
@@ -152,6 +154,7 @@ span.spacer:last-child {
     position: absolute;
     top: 1rem;
     left: 0.7rem;
+    padding-right: 10px;
 
     opacity: 0.6;
     font-weight: 500;
