@@ -23,3 +23,11 @@ inputs.forEach(input => {
 });
 
 
+let darkTheme = false;
+const toggleTheme = () => {
+    darkTheme = !darkTheme;
+    document.documentElement.className = darkTheme ? "dark" : "light";
+    console.log("theme is", darkTheme ? "dark" : "light");
+}
+toggleTheme();
+document.querySelector(".toggle-theme").addEventListener("click", toggleTheme);

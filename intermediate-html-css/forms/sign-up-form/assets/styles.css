@@ -1,9 +1,33 @@
+:root {
+    --accent: #173e7f;
+    --valid-input: green;
+    --error-input: #BA3431;
+    --focus-input: #3053DB;
+}
+
+:root.dark {
+    --font-color: #c3ccdc;
+    --content-bg: #011627;
+    --banner-bg: #01213c;
+    --default-input: #5f7284;
+    --placeholder-color:#7b818b;
+    --shadow: #00080f 0 0 9px;
+    --theme-color: --font-color;
+}
+
+:root.light {
+    --font-color: #323a48;
+    --content-bg: #f9fafb;
+    --banner-bg: white;
+    --default-input: #E5E7EB;
+    --placeholder-color: #767676;
+    --shadow: #ccc 0 0 9px;
+    --theme-color: white;
+}
+
 * {
     margin: 0;
     padding: 0;
-    --accent: #173e7f;
-    --font-color: #323a48;
-    --content-bg: #f9fafb;
 }
 
 @font-face {
@@ -99,8 +123,8 @@ span.spacer:last-child {
 .form-banner {
     padding-top: 25px;
     padding-bottom: 30px;
-    background-color: white;
-    box-shadow: #ddd 0 3px 10px;
+    background-color: var(--banner-bg);
+    box-shadow: var(--shadow);
 }
 
 .form-banner > h2 {
@@ -141,8 +165,11 @@ span.spacer:last-child {
     width: 100%;
     max-width: 300px;
     padding: 15px 10px;
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--default-input);
     border-radius: 5px;
+    background: var(--banner-bg);
+    color: inherit;
+    font-family: inherit;
 }
 
 /* Form validation */
@@ -152,29 +179,29 @@ span.spacer:last-child {
     opacity: 1;
     top: -0.5rem;
     font-size: 0.9rem;
-    background-color: white;
+    background-color: var(--banner-bg);
     padding: 0 2px;
 }
 
 .inputs-container input.required:invalid + label,
 .inputs-container input.noMatch + label {
-    color: #BA3431;
+    color: var(--error-input);
 }
 
 /* Border */
 .inputs-container input:not(:placeholder-shown):valid {
-    border-color: green;
+    border-color: var(--valid-input);
 }
 
 .inputs-container input:focus {
-    box-shadow: #ccc 0 0 8px;
-    border: solid 1px #3053DB;
+    box-shadow: var(--shadow);
+    border: solid 1px var(--focus-input);
     outline: none;
 }
 
 .inputs-container input.required:invalid,
 .inputs-container input.noMatch:valid {
-    border: solid 1px #BA3431;
+    border: solid 1px var(--error-input);
 }
 
 /* Placeholder */
@@ -184,7 +211,7 @@ span.spacer:last-child {
 
 .inputs-container input:focus::placeholder {
     opacity: 1;
-    color: #767676;
+    color: var(--placeholder-color);
 }
 
 /* Error message */
@@ -192,7 +219,7 @@ span.spacer:last-child {
     margin-top: 3px;
     display: none;
     font-size: 0.8rem;
-    color: #BA3431;
+    color: var(--error-input);
 }
 
 .inputs-container input.required:invalid ~ span,
@@ -210,5 +237,24 @@ form button {
     font-family: inherit;
     color: white;
     background-color: var(--accent);
+    border: 2px solid var(--accent);
 }
 
+/* Theme button */
+.toggle-theme {
+    position: absolute;
+    top: 10px;
+    margin-left: 10px;
+    content: "dark";
+    background-color: var(--accent);
+    border: 2px solid var(--accent);
+    color: var(--theme-color);
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+form button:hover,
+.toggle-theme:hover {
+    border: 2px solid var(--font-color);
+    box-shadow: var(--shadow);
+}
