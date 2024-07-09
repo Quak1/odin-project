@@ -19,6 +19,11 @@ ul {
     list-style-type: none;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 body {
     display: grid;
     grid-template-rows: 1fr 5fr;
@@ -52,7 +57,7 @@ nav>h1>img {
     width: 60px;
 }
 
-nav li {
+nav li a {
     display: flex;
     align-items: center;
     gap: 25px;
@@ -140,7 +145,7 @@ header ul {
     justify-content: space-between;
 }
 
-header ul li {
+header ul a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,7 +164,7 @@ main {
     grid-column: 2 / 3;
 
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: auto auto;
     grid-template-columns: 3fr 1fr;
     grid-gap: 30px;
     padding: 35px 25px;
@@ -211,7 +216,7 @@ main .projects .entry-actions {
 }
 
 main .projects .entry-actions img {
-    height: 35px;
+    height: 30px;
 }
 
 main .card {
