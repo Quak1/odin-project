@@ -6,40 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Dashboard</title>
     <link href="style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
     <nav>
-        <p>Dashboard</p>
+        <h1><img src="assets/view-dashboard.svg" alt="Dashboard icon">Dashboard</h1>
         <ul>
-            <li>Home</li>
-            <li>Profile</li>
-            <li>Messages</li>
-            <li>History</li>
-            <li>Tasks</li>
-            <li>Communities</li>
+            <li><img src="assets/home.svg" alt="Home icon">Home</li>
+            <li><img src="assets/card-account-details-outline.svg" alt="Profile icon">Profile</li>
+            <li><img src="assets/message.svg" alt="Messages icon">Messages</li>
+            <li><img src="assets/clock-time-three.svg" alt="History icon">History</li>
+            <li><img src="assets/note-multiple.svg" alt="Tasks icon">Tasks</li>
+            <li><img src="assets/account-group.svg" alt="Communities icon">Communities</li>
         </ul>
         <ul>
-            <li>Settings</li>
-            <li>Supports</li>
-            <li>Privacy</li>
+            <li><img src="assets/cog.svg" alt="Settings icon">Settings</li>
+            <li><img src="assets/help-box.svg" alt="Support icon">Support</li>
+            <li><img src="assets/shield-check.svg" alt="Privacy icon">Privacy</li>
         </ul>
     </nav>
 
     <header>
         <div class="search-bar">
-            <p id="search-icon">icon</p>
+            <img src="assets/magnify.svg" alt="Search bar icon">
             <input type="text" id="search-bar">
         </div>
         <div class="notifications">
-            <p>bell icon</p>
-            <p id="not-picture">np</p>
-            <p id="not-name">Aldo Camacho</p>
+            <img src="assets/bell-ring-outline.svg" alt="Notifications icon">
+            <img id="notifications-pfp" src="assets/pfp.png" alt="Profile picture">
+            <p>Aldo Camacho</p>
         </div>
         <article class="profile">
-            <p id="pf-picture">pfp</p>
-            <p id="pf-greeting">Hi there,</p>
-            <p id="pf-name">Aldo Camacho (@quak)</p>
+            <img src="assets/pfp.png" alt="Profile picture">
+            <div>
+                <p>Hi there,</p>
+                <p id="profile-name">Aldo Camacho (@quak)</p>
+            </div>
         </article>
         <ul>
             <li>New</li>
@@ -47,111 +54,131 @@
             <li>Share</li>
         </ul>
     </header>
+
     <main>
         <section class="projects">
             <h2>Your Projects</h2>
-            <article>
-                <h3>Super Cool Project</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.</p>
-                <div class="entry-actions">
-                    <p>start icon</p>
-                    <p>eye icon</p>
-                    <p>fork icon</p>
-                </div>
-            </article>
-            <article>
-                <h3>Less Cool Project</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.</p>
-                <div class="entry-actions">
-                    <p>start icon</p>
-                    <p>eye icon</p>
-                    <p>fork icon</p>
-                </div>
-            </article>
-            <article>
-                <h3>Impossible App</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.</p>
-                <div class="entry-actions">
-                    <p>start icon</p>
-                    <p>eye icon</p>
-                    <p>fork icon</p>
-                </div>
-            </article>
-            <article>
-                <h3>Easy Peasy App</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.</p>
-                <div class="entry-actions">
-                    <p>start icon</p>
-                    <p>eye icon</p>
-                    <p>fork icon</p>
-                </div>
-            </article>
-            <article>
-                <h3>Ad Blocker</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.</p>
-                <div class="entry-actions">
-                    <p>start icon</p>
-                    <p>eye icon</p>
-                    <p>fork icon</p>
-                </div>
-            </article>
-            <article>
-                <h3>Money Maker</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.</p>
-                <div class="entry-actions">
-                    <p>start icon</p>
-                    <p>eye icon</p>
-                    <p>fork icon</p>
-                </div>
-            </article>
+            <div>
+                <article>
+                    <h3>Super Cool Project</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut
+                        labore
+                        et dolore magna aliqua.</p>
+                    <div class="entry-actions">
+                        <img src="assets/star-plus-outline.svg" alt="Favorite button icon">
+                        <img src="assets/eye-plus-outline.svg" alt="Follow button icon">
+                        <img src="assets/source-fork.svg" alt="Fork button icon">
+                    </div>
+                </article>
+                <article>
+                    <h3>Less Cool Project</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua.</p>
+                    <div class="entry-actions">
+                        <img src="assets/star-plus-outline.svg" alt="Favorite button icon">
+                        <img src="assets/eye-plus-outline.svg" alt="Follow button icon">
+                        <img src="assets/source-fork.svg" alt="Fork button icon">
+                    </div>
+                </article>
+                <article>
+                    <h3>Impossible App</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua.</p>
+                    <div class="entry-actions">
+                        <img src="assets/star-plus-outline.svg" alt="Favorite button icon">
+                        <img src="assets/eye-plus-outline.svg" alt="Follow button icon">
+                        <img src="assets/source-fork.svg" alt="Fork button icon">
+                    </div>
+                </article>
+                <article>
+                    <h3>Easy Peasy App</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua.</p>
+                    <div class="entry-actions">
+                        <img src="assets/star-plus-outline.svg" alt="Favorite button icon">
+                        <img src="assets/eye-plus-outline.svg" alt="Follow button icon">
+                        <img src="assets/source-fork.svg" alt="Fork button icon">
+                    </div>
+                </article>
+                <article>
+                    <h3>Ad Blocker</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua.</p>
+                    <div class="entry-actions">
+                        <img src="assets/star-plus-outline.svg" alt="Favorite button icon">
+                        <img src="assets/eye-plus-outline.svg" alt="Follow button icon">
+                        <img src="assets/source-fork.svg" alt="Fork button icon">
+                    </div>
+                </article>
+                <article>
+                    <h3>Money Maker</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua.</p>
+                    <div class="entry-actions">
+                        <img src="assets/star-plus-outline.svg" alt="Favorite button icon">
+                        <img src="assets/eye-plus-outline.svg" alt="Follow button icon">
+                        <img src="assets/source-fork.svg" alt="Fork button icon">
+                    </div>
+                </article>
+            </div>
         </section>
         <section class="announcements">
             <h2>Announcements</h2>
-            <article>
+            <div class="side-card">
                 <article>
-                    <p>Site Maintenance</p>
+                    <h3>Site Maintenance</h3>
                     <p>Ultrices dui sapien eget mi proin. Quis blandit turpis cursus in hac habitasse.</p>
                 </article>
                 <article>
-                    <p>Community Share Day</p>
+                    <h3>Community Share Day</h3>
                     <p>Ultrices dui sapien eget mi proin. Quis blandit turpis cursus in hac habitasse.</p>
                 </article>
                 <article>
-                    <p>Updated Privacy Policy</p>
+                    <h3>Updated Privacy Policy</h3>
                     <p>Ultrices dui sapien eget mi proin. Quis blandit turpis cursus in hac habitasse.</p>
                 </article>
-            </article>
+            </div>
         </section>
         <section class="trending">
-            <h2>trending</h2>
-            <article>
+            <h2>Trending</h2>
+            <div class="side-card">
                 <article>
-                    <p>pfp</p>
-                    <p>@tegan</p>
-                    <p>World Peace Builder</p>
+                    <img src="assets/pfp.png" alt="User profile picture">
+                    <div>
+                        <p>@tegan</p>
+                        <p>World Peace Builder</p>
+                    </div>
                 </article>
                 <article>
-                    <p>pfp</p>
-                    <p>@morgan</p>
-                    <p>Super Cool Project</p>
+                    <img src="assets/pfp.png" alt="User profile picture">
+                    <div>
+                        <p>@morgan</p>
+                        <p>Super Cool Project</p>
+                    </div>
                 </article>
                 <article>
-                    <p>pfp</p>
-                    <p>@kendall</p>
-                    <p>Life Changing App</p>
+                    <img src="assets/pfp.png" alt="User profile picture">
+                    <div>
+                        <p>@kendall</p>
+                        <p>Life Changing App</p>
+                    </div>
                 </article>
                 <article>
-                    <p>pfp</p>
-                    <p>@alex</p>
-                    <p>No Traffic Maker</p>
+                    <img src="assets/pfp.png" alt="User profile picture">
+                    <div>
+                        <p>@alex</p>
+                        <p>No Traffic Maker</p>
+                    </div>
                 </article>
-            </article>
+            </div>
         </section>
     </main>
 </body>
