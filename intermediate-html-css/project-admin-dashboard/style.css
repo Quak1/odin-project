@@ -8,6 +8,7 @@
     --yellow: #f0b429;
     --foreground: #fff;
     --background: #e2e8f0;
+    --grey: #666;
 }
 
 img {
@@ -34,20 +35,21 @@ nav {
 
     display: grid;
     align-content: start;
-    grid-gap: 50px;
+    grid-gap: 70px;
 
     padding: 20px;
-    font-size: 20px;
+    z-index: 2;
 }
 
 nav h1 {
     display: flex;
     align-items: center;
     gap: 10px;
+    font-size: 35px;
 }
 
 nav>h1>img {
-    width: 45px;
+    width: 60px;
 }
 
 nav li {
@@ -55,11 +57,12 @@ nav li {
     align-items: center;
     gap: 25px;
     font-weight: bold;
-    margin: 0 0 20px 10px;
+    margin: 0 0 30px 15px;
+    font-size: 25px;
 }
 
 nav li>img {
-    width: 25px;
+    width: 30px;
 }
 
 header {
@@ -68,45 +71,49 @@ header {
     background-color: var(--foreground);
 
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 2fr;
     grid-template-columns: 2fr 1fr;
-    padding: 10px 20px;
+    grid-column-gap: 40px;
+    padding: 0 80px 0 60px;
+    box-shadow: #cdd2d9 0 5px 5px;
+    z-index: 1;
 }
 
 header .search-bar {
     display: flex;
     align-items: center;
+    margin-top: 20px;
 }
 
 header #search-bar {
     background-color: var(--background);
-    height: 30px;
     width: 100%;
-    padding: 2px 13px;
+    padding: 9px 13px;
     margin-left: 15px;
     border: none;
-    border-radius: 20px;
-    font-size: 16px;
+    border-radius: 40px;
+    font-size: 20px;
 }
 
 header .notifications {
+    margin-top: 25px;
     display: flex;
     align-items: center;
     justify-content: right;
-    gap: 25px;
+    gap: 35px;
 
     font-weight: bold;
-    font-size: 18px;
+    font-size: 25px;
 }
 
 header .notifications img {
-    height: 23px;
+    height: 40px;
 }
 
 header #notifications-pfp {
     border-radius: 100%;
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
 }
 
 header .profile {
@@ -117,13 +124,14 @@ header .profile {
 }
 
 header .profile img {
-    width: 80px;
-    height: 80px;
+    width: 95px;
+    height: 95px;
     border-radius: 100%;
 }
 
 header #profile-name {
-    font-size: 25px;
+    margin-top: 5px;
+    font-size: 35px;
 }
 
 header ul {
@@ -133,13 +141,17 @@ header ul {
 }
 
 header ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: var(--blue);
     padding: 10px 20px;
-    width: 60px;
+    height: 30px;
+    width: 85px;
     color: white;
     font-weight: bold;
+    font-size: 20px;
     border-radius: 25px;
-    text-align: center;
 }
 
 main {
@@ -150,8 +162,14 @@ main {
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 3fr 1fr;
     grid-gap: 30px;
-    padding: 30px;
+    padding: 35px 25px;
     background-color: var(--background);
+}
+
+main h2 {
+    font-weight: 500;
+    font-size: 25px;
+    margin-bottom: 15px;
 }
 
 main .projects {
@@ -161,40 +179,51 @@ main .projects {
 main .projects>div {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 33px;
 }
 
 main .projects article {
-    padding: 20px;
-    background-color: var(--foreground);
-    border-radius: 8px;
-    border-left: solid 8px var(--yellow);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 35px 25px;
+    border-left: solid 10px var(--yellow);
+}
+
+main .projects article h3 {
+    font-size: 25px;
+    font-weight: 600;
 }
 
 main .projects article p {
-    font-size: 15px;
+    font-size: 20px;
     color: #666;
 }
 
 main .projects .entry-actions {
+    flex: 1;
     display: flex;
+    margin-right: 15px;
     justify-content: flex-end;
+    align-items: end;
     gap: 20px;
 }
 
 main .projects .entry-actions img {
-    height: 23px;
+    height: 35px;
 }
 
-main .side-card {
+main .card {
     padding: 0px 30px;
     background-color: var(--foreground);
-    border-radius: 8px;
+    border-radius: 10px;
+    box-shadow: #cdd2d9 0 5px 5px;
 }
 
 main .announcements article {
-    padding: 30px 0;
-    border-top: solid 1px #666;
+    padding: 25px 6px;
+    border-top: solid 1px #ccc;
 }
 
 main .announcements article:first-child {
@@ -205,17 +234,21 @@ main .announcements article p {
     color: #666;
 }
 
+main .trending>div {
+    padding-top: 25px;
+}
+
 main .trending article {
     display: flex;
-    padding: 15px 0;
+    padding-bottom: 25px;
     align-items: center;
     gap: 15px;
 }
 
 main .trending img {
     border-radius: 100%;
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
 }
 
 main .trending article p:nth-child(2) {
