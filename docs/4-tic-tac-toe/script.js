@@ -1,11 +1,11 @@
 function Gameboard() {
-  const board = new Array(9).fill(" ");
+  const board = new Array(9).fill(".");
   let markCount = 0;
 
   const getBoard = () => board;
 
   const addMark = (pos, mark) => {
-    if (pos > 8 || pos < 0 || board[pos] !== " ") return;
+    if (pos > 8 || pos < 0 || board[pos] !== ".") return;
     board[pos] = mark;
     return ++markCount;
   };
@@ -13,7 +13,7 @@ function Gameboard() {
   const isFull = () => markCount >= 9;
 
   const resetBoard = () => {
-    board.fill(" ");
+    board.fill(".");
     markCount = 0;
   };
 
@@ -135,15 +135,14 @@ function displayController() {
   const announcementDialog = document.querySelector("dialog");
   let game;
 
-  const printBoard = () => {
+  const drawBoard = () => {
     boardContainer.textContent = "";
     const board = game.getBoard();
 
     for (let i = 0; i < 9; i++) {
       const btn = document.createElement("button");
       btn.dataset.position = i;
-      btn.textContent = board[i];
-      btn.classList.add("cell");
+      btn.classList.add("cell", board[i]);
       boardContainer.appendChild(btn);
     }
   };
@@ -165,7 +164,7 @@ function displayController() {
   };
 
   const updateScreen = () => {
-    printBoard();
+    drawBoard();
 
     const player = game.getActivePlayer();
     currentPlayerText.textContent = `${player.getName()}'s turn`;
@@ -195,7 +194,6 @@ function displayController() {
   };
 
   const firstLoad = () => {
-    boardContainer.addEventListener("click", boardClickEventHandler);
     announcementDialog.showModal();
     form = document.querySelector("form");
     form.addEventListener("submit", (e) => {
@@ -205,16 +203,20 @@ function displayController() {
       const p2Name = document.querySelector("#p2-name").value;
       game = GameController(p1Name, p2Name);
 
+      const dialogCloseHandler = () => {
+        boardContainer.addEventListener("click", boardClickEventHandler);
+        game.resetGame();
+        updateScreen();
+      };
+
       const info = document.createElement("p");
       const newGameBtn = document.createElement("button");
       newGameBtn.textContent = "New Game!";
       newGameBtn.addEventListener("click", () => {
         announcementDialog.close();
-        boardContainer.addEventListener("click", boardClickEventHandler);
-        game.resetGame();
-        updateScreen();
       });
 
+      announcementDialog.addEventListener("close", dialogCloseHandler);
       announcementDialog.textContent = "";
       announcementDialog.append(info, newGameBtn);
       announcementDialog.close();
