@@ -43,7 +43,10 @@ function Player(name, mark) {
 
 function GameController(p1Name, p2Name) {
   const gameboard = Gameboard();
-  const players = [Player(p1Name, "X"), Player(p2Name, "O")];
+  const players = [
+    Player(p1Name || "Player1", "X"),
+    Player(p2Name || "Player2", "O"),
+  ];
   let activePlayer = players[0];
   let gameOver = false;
   let winner;
