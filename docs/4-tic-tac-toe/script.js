@@ -5,17 +5,23 @@ function Gameboard() {
   const getBoard = () => board;
 
   const addMark = (pos, mark) => {
-    if (pos > 8 || board[pos] !== " ") return;
+    if (pos > 8 || pos < 0 || board[pos] !== " ") return;
     board[pos] = mark;
     return ++markCount;
   };
 
   const isFull = () => markCount >= 9;
 
+  const resetBoard = () => {
+    board.fill(" ");
+    markCount = 0;
+  };
+
   return {
     getBoard,
     addMark,
     isFull,
+    resetBoard,
   };
 }
 
@@ -35,18 +41,22 @@ function Player(name, mark) {
   };
 }
 
-function GameController() {
-  const board = Gameboard();
-  const display = consoleDisplayController();
-
-  const players = [Player("Player1", "X"), Player("Player2", "O")];
+function GameController(p1Name, p2Name) {
+  const gameboard = Gameboard();
+  const players = [Player(p1Name, "X"), Player(p2Name, "O")];
   let activePlayer = players[0];
+  let gameOver = false;
+  let winner;
+
   const getActivePlayer = () => activePlayer;
+
   const switchActivePlayer = () =>
     (activePlayer = activePlayer === players[0] ? players[1] : players[0]);
 
-  const isWin = (board) => {
-    const winningPositions = [
+  const getWinner = () => winner;
+
+  const isWinningBoard = (board) => {
+    const winningPatterns = [
       [0, 1, 2],
       [3, 4, 5],
       [6, 7, 8],
@@ -57,7 +67,7 @@ function GameController() {
       [2, 4, 6],
     ];
     const mark = activePlayer.getMark();
-    return winningPositions.findIndex(
+    return winningPatterns.find(
       (pattern) =>
         board[pattern[0]] === mark &&
         board[pattern[1]] === mark &&
@@ -66,66 +76,154 @@ function GameController() {
   };
 
   const playRound = (pos) => {
-    if (!board.addMark(pos, activePlayer.getMark())) {
-      display.illegalMove();
-      return;
-    }
-    if (isWin(board.getBoard()) !== -1) {
-      display.printBoard(board.getBoard());
-      display.castWinner(activePlayer.getName());
+    if (gameOver) return;
+    // was invalid move
+    if (!gameboard.addMark(pos, activePlayer.getMark())) return;
+
+    const winningPattern = isWinningBoard(gameboard.getBoard());
+
+    if (winningPattern) {
+      gameOver = true;
       activePlayer.addWin();
+      winner = {
+        name: activePlayer.getName(),
+        pattern: winningPattern,
+      };
       return;
     }
-    if (board.isFull()) {
-      display.castTie();
+
+    if (gameboard.isFull()) {
+      gameOver = true;
+      winner = "tie";
       return;
     }
 
     switchActivePlayer();
-    console.log(
-      `It's ${activePlayer.getName()}(${activePlayer.getMark()}) turn. `,
-    );
-    display.printBoard(board.getBoard());
   };
 
-  display.printBoard(board.getBoard());
+  const resetGame = () => {
+    activePlayer = players[0];
+    gameboard.resetBoard();
+    gameOver = false;
+    winner = undefined;
+  };
+
+  const getScores = () => [
+    {
+      name: players[0].getName(),
+      score: players[0].getWins(),
+    },
+    {
+      name: players[1].getName(),
+      score: players[1].getWins(),
+    },
+  ];
 
   return {
-    getActivePlayer,
     playRound,
+    resetGame,
+    getActivePlayer,
+    getBoard: gameboard.getBoard,
+    getWinner,
+    getScores,
   };
 }
 
-function consoleDisplayController() {
-  const printBoard = (board) => {
-    let row = "";
-    for (let i = 0; i < board.length; i++) {
-      if ((i + 1) % 3 === 0) {
-        row += board[i];
-        console.log(row);
-        row = "";
-      } else {
-        row += board[i] + "|";
-      }
+function displayController() {
+  const boardContainer = document.querySelector(".board");
+  const currentPlayerText = document.querySelector(".player");
+  const announcementDialog = document.querySelector("dialog");
+  let game;
+
+  const printBoard = () => {
+    boardContainer.textContent = "";
+    const board = game.getBoard();
+
+    for (let i = 0; i < 9; i++) {
+      const btn = document.createElement("button");
+      btn.dataset.position = i;
+      btn.textContent = board[i];
+      btn.classList.add("cell");
+      boardContainer.appendChild(btn);
     }
   };
 
-  const castWinner = (playerName) => {
-    console.log(playerName, "wins!");
+  const colorWinningCells = (pattern) => {
+    document.querySelectorAll(".cell").forEach((cell) => {
+      if (pattern.includes(Number(cell.dataset.position)))
+        cell.classList.add("winner");
+    });
   };
 
-  const castTie = () => {
-    console.log("It's a tie!");
+  const updateScores = () => {
+    const scores = game.getScores();
+    const p1Element = document.getElementById("p1-score");
+    const p2Element = document.getElementById("p2-score");
+
+    p1Element.textContent = `${scores[0].name}: ${scores[0].score}`;
+    p2Element.textContent = `${scores[1].name}: ${scores[1].score}`;
   };
 
-  const illegalMove = () => {
-    console.log("That's illegal");
+  const updateScreen = () => {
+    printBoard();
+
+    const player = game.getActivePlayer();
+    currentPlayerText.textContent = `${player.getName()}'s turn`;
+
+    const winner = game.getWinner();
+    if (!winner) return;
+
+    // there is a winner or tie
+    boardContainer.removeEventListener("click", boardClickEventHandler);
+    const announcementText = document.querySelector("dialog p");
+    announcementDialog.showModal();
+    if (winner === "tie") {
+      announcementText.textContent = "It's a tie!";
+    } else {
+      announcementText.textContent = `${winner.name} wins!`;
+      colorWinningCells(winner.pattern);
+      updateScores();
+    }
   };
 
-  return {
-    printBoard,
-    castWinner,
-    castTie,
-    illegalMove,
+  const boardClickEventHandler = (e) => {
+    const position = e.target.dataset.position;
+    if (!position) return;
+
+    game.playRound(position);
+    updateScreen();
   };
+
+  const firstLoad = () => {
+    boardContainer.addEventListener("click", boardClickEventHandler);
+    announcementDialog.showModal();
+    form = document.querySelector("form");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const p1Name = document.querySelector("#p1-name").value;
+      const p2Name = document.querySelector("#p2-name").value;
+      game = GameController(p1Name, p2Name);
+
+      const info = document.createElement("p");
+      const newGameBtn = document.createElement("button");
+      newGameBtn.textContent = "New Game!";
+      newGameBtn.addEventListener("click", () => {
+        announcementDialog.close();
+        boardContainer.addEventListener("click", boardClickEventHandler);
+        game.resetGame();
+        updateScreen();
+      });
+
+      announcementDialog.textContent = "";
+      announcementDialog.append(info, newGameBtn);
+      announcementDialog.close();
+
+      updateScreen();
+    });
+  };
+
+  firstLoad();
 }
+
+displayController();
