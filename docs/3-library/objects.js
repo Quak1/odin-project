@@ -1,24 +1,26 @@
 const myLibrary = [];
-let id = 0;
 
-function Book(title, author, pages, read, id) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.id = id;
+class Book {
+  static bookCount = 0;
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.id = Book.bookCount++;
+  }
+
+  info() {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? "read" : "not read yet"}`;
+  }
+
+  infoArray() {
+    return [this.title, this.author, this.pages];
+  }
 }
 
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? "read" : "not read yet"}`;
-};
-
-Book.prototype.infoArray = function () {
-  return [this.title, this.author, this.pages];
-};
-
 function addBookToLibrary(title, author, pages, read = false) {
-  const newBook = new Book(title, author, pages, read, id++);
+  const newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
   addBookToTable(newBook);
 }
