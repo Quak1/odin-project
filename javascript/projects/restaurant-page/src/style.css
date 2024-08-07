@@ -1,0 +1,24 @@
+:root {
+    --brown: #4B382A;
+    --off-white: #F2F0E9;
+    --green: #1D4134;
+    --light-brown: #C2B2A3;
+    --gold: #B4975A;
+    --black: #111111;
+}
+
+html {
+    background-color: var(--brown);
+    color: var(--off-white);
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+}
+
+img {
+    width: 100%;
+}
+
+#content {
+    margin: 0 auto;
+    width: 700px;
+}
