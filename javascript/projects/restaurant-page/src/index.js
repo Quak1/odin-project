@@ -1,10 +1,6 @@
 import "./style.css";
-import Picture from "./restaurant.jpg";
+import home from "./home";
 
-console.log("Hello, World!");
-
-const pic = new Image();
-pic.src = Picture;
-
-const title = document.querySelector("h1");
-title.parentNode.insertBefore(pic, title.nextSibling);
+const contentDiv = document.getElementById("content");
+contentDiv.textContent = "";
+contentDiv.append(...home());

@@ -1,0 +1,48 @@
+{
+    "welcome": {
+        "title": "Welcome to Flavor Town",
+        "content": "Discover the taste of REAL FOOD in the heart of CITY. Our chefs use only the freshest ingredients to create unforgettable dishes that will delight your senses."
+    },
+    "why-us": {
+        "title": "Why Choose Us?",
+        "cards": [
+            {
+                "title": "Fresh Ingredients",
+                "content": "At our restaurant, we believe that the foundation of an exceptional dining experience starts with the quality of our ingredients. That’s why we are committed to sourcing our produce from local farms and purveyors who share our passion for freshness."
+            },
+            {
+                "title": "Authentic Recipes",
+                "content": "Our menu is a celebration of time-honored culinary traditions, meticulously crafted with a modern twist. We take pride in preserving the essence of traditional recipes while infusing them with innovative touches that reflect contemporary tastes."
+            },
+            {
+                "title": "Friendly Atmosphere",
+                "content": "We strive to create more than just a place to eat—we aim to offer a warm, inviting environment where you feel like part of our family."
+            }
+        ]
+    },
+    "reviews": {
+        "title": "Customer Reviews",
+        "cards": [
+            {
+                "content": "A must-visit restaurant in CITY. Their FOOD DISH is phenomenal!",
+                "author": "Yuki"
+            },
+            {
+                "content": "The best FOOD I’ve ever had! The ambiance was perfect, and the service was outstanding.",
+                "author": "Andy"
+            },
+            {
+                "content": " Fantastic experience! Fresh, local ingredients make the dishes stand out. The staff was warm and welcoming, and the house special was delicious. Can’t wait to return!",
+                "author": "Emily R."
+            },
+            {
+                "content": "Wonderful spot! Fresh, creative dishes and a warm atmosphere. The seafood risotto was superb. Great service and a pleasant evening overall!",
+                "author": "Mark T."
+            },
+            {
+                "content": "Good food and welcoming atmosphere. The signature burger was tasty but not outstanding. Service was friendly but slow. I’ll give it another try! ",
+                "author": "Anna C."
+            }
+        ]
+    }
+}
