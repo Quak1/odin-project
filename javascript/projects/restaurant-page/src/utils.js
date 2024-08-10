@@ -1,6 +1,3 @@
-import homeData from "./home.json";
-import Picture from "./restaurant.jpg";
-
 function makeCardsContainer(cards) {
   const container = document.createElement("div");
   container.classList.add("container");
@@ -27,11 +24,11 @@ function makeTextElement(text, tag) {
   return element;
 }
 
-function makeCardSection(data, name) {
+function makeCardSection(data, name, header = "h2") {
   const container = document.createElement("div");
   container.id = name;
 
-  const title = makeTextElement(data[name].title, "h2");
+  const title = makeTextElement(data[name].title, header);
   const cardsContainer = makeCardsContainer(data[name].cards);
 
   container.appendChild(title);
@@ -40,17 +37,4 @@ function makeCardSection(data, name) {
   return container;
 }
 
-export default function () {
-  const welcomeDiv = document.createElement("div");
-  welcomeDiv.id = "welcome";
-  const titleDiv = makeTextElement(homeData.welcome.title, "h1");
-  const textDiv = makeTextElement(homeData.welcome.content, "div");
-  const pic = new Image();
-  pic.src = Picture;
-  welcomeDiv.append(titleDiv, pic, textDiv);
-
-  const whyUsDiv = makeCardSection(homeData, "why-us");
-  const reviewsDiv = makeCardSection(homeData, "reviews");
-
-  return [welcomeDiv, whyUsDiv, reviewsDiv];
-}
+export { makeTextElement, makeCardsContainer, makeCardSection };

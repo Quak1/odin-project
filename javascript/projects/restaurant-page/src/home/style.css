@@ -1,0 +1,48 @@
+h1 {
+    font-size: 60px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+#content {
+    margin: 0 auto;
+    width: 700px;
+}
+
+#why-us .card {
+    background-color: var(--green);
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-top: 10px solid var(--gold);
+}
+
+#why-us .card div:first-child {
+    margin: 0 0 20px 30px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#reviews .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-bottom: 10px;
+}
+
+#reviews .card {
+    width: 300px;
+    height: fit-content;
+    background-color: var(--light-brown);
+    color: var(--black);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+#reviews .card>div:last-child {
+    text-align: right;
+}
