@@ -1,6 +1,6 @@
 import { makeTextElement, makeCardSection } from "../utils";
 import homeData from "./home.json";
-import Picture from "./restaurant.jpg";
+import Picture from "../assets/restaurant.jpg";
 import "./style.css";
 
 export default function () {

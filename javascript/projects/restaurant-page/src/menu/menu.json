@@ -4,7 +4,7 @@
         "cards": [
             {
                 "picture": {
-                    "src": "menu/cheeseburger",
+                    "src": "assets/cheeseburger",
                     "alt": "Cheesburger"
                 },
                 "name": "Classic Cheeseburger",
@@ -13,7 +13,7 @@
             },
             {
                 "picture": {
-                    "src": "menu/veggie_burger",
+                    "src": "assets/veggie_burger",
                     "alt": "Veggie Burger"
                 },
                 "name": "Veggie Burger",
@@ -22,7 +22,7 @@
             },
             {
                 "picture": {
-                    "src": "menu/margherita",
+                    "src": "assets/margherita",
                     "alt": "Margherita Pizza"
                 },
                 "name": "Margherita Pizza",
@@ -31,7 +31,7 @@
             },
             {
                 "picture": {
-                    "src": "menu/pepperoni",
+                    "src": "assets/pepperoni",
                     "alt": "Pepperoni Pizza"
                 },
                 "name": "Pepperoni Pizza",
@@ -40,7 +40,7 @@
             },
             {
                 "picture": {
-                    "src": "menu/veggie_pizza",
+                    "src": "assets/veggie_pizza",
                     "alt": "Veggie Supreme Pizza"
                 },
                 "name": "Veggie Supreme Pizza",
@@ -49,7 +49,7 @@
             },
             {
                 "picture": {
-                    "src": "menu/beef_taco",
+                    "src": "assets/beef_taco",
                     "alt": "Classic Beef Tacos"
                 },
                 "name": "Classic Beef Tacos",
@@ -58,7 +58,7 @@
             },
             {
                 "picture": {
-                    "src": "menu/veggie_taco",
+                    "src": "assets/veggie_taco",
                     "alt": "Vegetarian Tacos"
                 },
                 "name": "Vegetarian Tacos",
@@ -67,7 +67,7 @@
             },
             {
                 "picture": {
-                    "src": "menu/soft_drinks",
+                    "src": "assets/soft_drinks",
                     "alt": "Soft Drinks"
                 },
                 "name": "Soft Drinks",
@@ -76,7 +76,7 @@
             },
             {
                 "picture": {
-                    "src": "menu/lemonade",
+                    "src": "assets/lemonade",
                     "alt": "House Lemonade"
                 },
                 "name": "House Lemonade",
@@ -85,7 +85,7 @@
             },
             {
                 "picture": {
-                    "src": "menu/beer",
+                    "src": "assets/beer",
                     "alt": "Craft Beer"
                 },
                 "name": "Craft Beers",
