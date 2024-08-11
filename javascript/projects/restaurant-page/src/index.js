@@ -9,7 +9,16 @@ const homeBtn = document.getElementById("homeBtn");
 const menuBtn = document.getElementById("menuBtn");
 const aboutBtn = document.getElementById("aboutBtn");
 
-home(contentDiv);
-homeBtn.addEventListener("click", () => home(contentDiv));
-menuBtn.addEventListener("click", () => menu(contentDiv));
-aboutBtn.addEventListener("click", () => about(contentDiv));
+function clickHandler(btn, loader) {
+  homeBtn.classList.remove("mark");
+  menuBtn.classList.remove("mark");
+  aboutBtn.classList.remove("mark");
+  btn.classList.add("mark");
+  loader(contentDiv);
+}
+
+homeBtn.addEventListener("click", (e) => clickHandler(e.target, home));
+menuBtn.addEventListener("click", (e) => clickHandler(e.target, menu));
+aboutBtn.addEventListener("click", (e) => clickHandler(e.target, about));
+
+homeBtn.click();

@@ -17,3 +17,33 @@ html {
 img {
     width: 100%;
 }
+
+nav {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    gap: 30px;
+}
+
+nav>button {
+    background-color: var(--green);
+    color: var(--off-white);
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+}
+
+nav>button:active {
+    transform: translateY(2px);
+}
+
+nav>button:hover {
+    filter: brightness(0.9);
+    cursor: pointer;
+}
+
+nav>button.mark {
+    outline: 3px solid var(--gold)
+}
