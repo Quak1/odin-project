@@ -3,7 +3,7 @@ import homeData from "./home.json";
 import Picture from "../assets/restaurant.jpg";
 import "./style.css";
 
-export default function () {
+export default function (main) {
   const welcomeDiv = document.createElement("div");
   welcomeDiv.id = "welcome";
   const titleDiv = makeTextElement(homeData.welcome.title, "h1");
@@ -15,5 +15,6 @@ export default function () {
   const whyUsDiv = makeCardSection(homeData, "why-us");
   const reviewsDiv = makeCardSection(homeData, "reviews");
 
-  return [welcomeDiv, whyUsDiv, reviewsDiv];
+  main.textContent = "";
+  main.append(welcomeDiv, whyUsDiv, reviewsDiv);
 }

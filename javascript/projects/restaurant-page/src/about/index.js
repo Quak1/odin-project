@@ -1,7 +1,7 @@
 import { makeTextElement } from "../utils";
 import data from "./about.json";
 
-export default function () {
+export default function (main) {
   const title = makeTextElement(data.title, "h1");
   const content = [title];
 
@@ -12,5 +12,6 @@ export default function () {
     }
   }
 
-  return content;
+  main.textContent = "";
+  main.append(...content);
 }

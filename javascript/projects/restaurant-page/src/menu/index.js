@@ -2,8 +2,9 @@ import "./style.css";
 import data from "./menu.json";
 import { makeCardSection } from "../utils";
 
-export default function () {
+export default function (main) {
   const content = makeCardSection(data, "menu", "h1");
 
-  return [content];
+  main.textContent = "";
+  main.append(content);
 }
