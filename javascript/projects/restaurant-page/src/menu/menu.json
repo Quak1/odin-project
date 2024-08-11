@@ -1,0 +1,97 @@
+{
+    "menu": {
+        "title": "Menu",
+        "cards": [
+            {
+                "picture": {
+                    "src": "menu/cheeseburger",
+                    "alt": "Cheesburger"
+                },
+                "name": "Classic Cheeseburger",
+                "description": "Juicy beef patty, lettuce, tomato, pickles, and cheddar cheese, served with fries.",
+                "price": "$14"
+            },
+            {
+                "picture": {
+                    "src": "menu/veggie_burger",
+                    "alt": "Veggie Burger"
+                },
+                "name": "Veggie Burger",
+                "description": "Grilled plant-based patty with avocado, lettuce, tomato, and a spicy aioli, served with sweet potato fries.",
+                "price": "$15"
+            },
+            {
+                "picture": {
+                    "src": "menu/margherita",
+                    "alt": "Margherita Pizza"
+                },
+                "name": "Margherita Pizza",
+                "description": "Tomato sauce, fresh mozzarella, basil, and a drizzle of olive oil on a classic pizza crust.",
+                "price": "$13"
+            },
+            {
+                "picture": {
+                    "src": "menu/pepperoni",
+                    "alt": "Pepperoni Pizza"
+                },
+                "name": "Pepperoni Pizza",
+                "description": "Tomato sauce, mozzarella cheese, and generous slices of spicy pepperoni.",
+                "price": "$15"
+            },
+            {
+                "picture": {
+                    "src": "menu/veggie_pizza",
+                    "alt": "Veggie Supreme Pizza"
+                },
+                "name": "Veggie Supreme Pizza",
+                "description": "Tomato sauce, mozzarella cheese, bell peppers, mushrooms, olives, and onions.",
+                "price": "$14"
+            },
+            {
+                "picture": {
+                    "src": "menu/beef_taco",
+                    "alt": "Classic Beef Tacos"
+                },
+                "name": "Classic Beef Tacos",
+                "description": "Seasoned beef with onions, cilantro, and salsa",
+                "price": "$12"
+            },
+            {
+                "picture": {
+                    "src": "menu/veggie_taco",
+                    "alt": "Vegetarian Tacos"
+                },
+                "name": "Vegetarian Tacos",
+                "description": "Roasted vegetables, black beans, corn, and a zesty lime crema in soft tortillas.",
+                "price": "$12"
+            },
+            {
+                "picture": {
+                    "src": "menu/soft_drinks",
+                    "alt": "Soft Drinks"
+                },
+                "name": "Soft Drinks",
+                "description": "Coke, Diet Coke, Sprite, Iced Tea",
+                "price": "$3"
+            },
+            {
+                "picture": {
+                    "src": "menu/lemonade",
+                    "alt": "House Lemonade"
+                },
+                "name": "House Lemonade",
+                "description": "Freshly squeezed lemonade with a hint of mint.",
+                "price": "$4"
+            },
+            {
+                "picture": {
+                    "src": "menu/beer",
+                    "alt": "Craft Beer"
+                },
+                "name": "Craft Beers",
+                "description": "A selection of local craft beers, rotating regularly.",
+                "price": "$6 - $8"
+            }
+        ]
+    }
+}

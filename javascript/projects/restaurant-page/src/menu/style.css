@@ -1,0 +1,44 @@
+.card {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: auto auto 1fr;
+    height: 300px;
+    background-color: var(--off-white);
+    color: var(--black);
+    margin-bottom: 30px;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card div {
+    grid-row: 1/4;
+    height: 100%;
+    overflow: hidden;
+}
+
+.card div img {
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+    width: 100%;
+}
+
+.card>div:nth-child(2) {
+    grid-row: 1 / 2;
+    margin: 20px;
+    font-size: 50px;
+    font-weight: bold;
+    color: var(--gold);
+}
+
+.card>div:nth-child(3) {
+    margin: 0 20px;
+    grid-row: 2 / 3;
+}
+
+.card>div:nth-child(4) {
+    color: var(--green);
+    font-weight: bold;
+    text-align: right;
+    margin: 20px;
+    grid-row: 3 / 4;
+}

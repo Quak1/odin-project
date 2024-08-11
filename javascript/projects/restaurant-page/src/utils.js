@@ -6,10 +6,19 @@ function makeCardsContainer(cards) {
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
 
-    for (const entry of Object.values(card)) {
-      const div = document.createElement("div");
-      div.textContent = entry;
-      cardDiv.appendChild(div);
+    for (const key in card) {
+      if (key === "picture") {
+        const pic = new Image();
+        pic.src = require(`./${card.picture.src}.jpg`);
+        pic.alt = card.picture.alt;
+        const div = document.createElement("div");
+        div.appendChild(pic);
+        cardDiv.appendChild(div);
+      } else {
+        const div = document.createElement("div");
+        div.textContent = card[key];
+        cardDiv.appendChild(div);
+      }
     }
 
     container.appendChild(cardDiv);
