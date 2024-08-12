@@ -1,0 +1,113 @@
+html {
+    font-family: Roboto;
+    font-size: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.board {
+    display: grid;
+    grid-template: repeat(3, 200px) / repeat(3, 200px);
+    padding: 5px;
+    border-radius: 10px;
+    grid-gap: 5px;
+    background-color: black;
+}
+
+.cell {
+    height: 100%;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+
+}
+
+
+.cell.X {
+    background-image: url(assets/cross.svg);
+}
+
+.cell.O {
+    background-image: url(assets/circle.svg);
+}
+
+.cell:hover,
+dialog button:hover {
+    filter: brightness(0.95)
+}
+
+.cell:active,
+dialog button:active {
+    transform: translateY(2px);
+}
+
+.winner {
+    background-color: #a7ff8e;
+}
+
+.scores {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scores>div {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.scores>div>p {
+    margin: 0;
+}
+
+dialog {
+    text-align: center;
+    margin-top: 300px;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+form>div>div {
+    position: relative;
+}
+
+dialog input {
+    margin: 10px 0;
+    padding: 8px 10px;
+    border: solid 1px black;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+form label {
+    font-weight: 500;
+    font-size: 0.8rem;
+    user-select: none;
+    position: absolute;
+    left: 10px;
+    background-color: white;
+    padding: 0 2px;
+}
+
+
+
+dialog button {
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    outline: solid black 2px;
+    font-size: 1rem;
+    padding: 5px 15px
+}
+
+dialog p {
+    font-size: 2rem;
+}

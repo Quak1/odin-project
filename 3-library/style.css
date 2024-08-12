@@ -1,0 +1,142 @@
+html {
+    font-family: Roboto;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+#newBookBtn,
+form button:last-child {
+    margin-bottom: 20px;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 2px solid black;
+    background-color: white;
+}
+
+table {
+    margin: 0 auto;
+    padding: 5px;
+    width: 1000px;
+    border: 2px solid grey;
+}
+
+thead th:nth-child(1) {
+    width: 50%;
+}
+
+thead th:nth-child(2) {
+    width: 30%;
+}
+
+thead th:nth-child(3),
+thead th:nth-child(4),
+thead th:nth-child(5) {
+    width: 6%;
+}
+
+form div {
+    position: relative;
+}
+
+form input {
+    margin: 10px 0;
+    padding: 8px 10px;
+
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+form label {
+    font-weight: 500;
+    user-select: none;
+}
+
+#text-containers label {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+
+    opacity: 0.6;
+    transition: all 0.2s;
+}
+
+#text-containers input:focus+label,
+#text-containers input:not(:placeholder-shown)+label {
+    opacity: 1;
+    top: 2px;
+    font-size: 0.7rem;
+    background-color: white;
+    padding: 0 2px;
+}
+
+#checkbox {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+
+form div:last-child {
+    display: flex;
+    justify-content: end;
+}
+
+form button:last-child {
+    margin: 0;
+}
+
+form button:first-child {
+    background: none;
+    border: none;
+    font-size: 0.8rem;
+    margin-right: 10px;
+}
+
+.imgBtn {
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    border: solid grey 2px;
+}
+
+.deleteBtn {
+    background-image: url(assets/trash-can-outline.svg);
+    background-color: white;
+
+}
+
+.deleteBtn:hover {
+    background-color: #ddd;
+}
+
+.deleteBtn:active {
+    background-color: firebrick;
+    transform: translateY(2px);
+}
+
+.readBtn {
+    background-image: url(assets/check-bold.svg);
+    background-color: #dcffd5;
+}
+
+.readBtn.notread {
+    background-image: url(assets/close-thick.svg);
+    background-color: #ffd5d5;
+}
+
+
+.readBtn:hover {
+    filter: brightness(0.92);
+}
+
+.readBtn:active {
+    transform: translateY(1px);
+}
+
+.center {
+    text-align: center;
+}
