@@ -4,7 +4,8 @@
     "main": "index.js",
     "scripts": {
         "start": "webpack server --open",
-        "build": "webpack"
+        "build": "webpack",
+        "deploy": "gh-pages -d dist -e 5-restaurant-pag"
     },
     "author": "",
     "license": "ISC",
