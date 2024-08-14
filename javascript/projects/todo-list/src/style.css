@@ -2,7 +2,12 @@
     text-decoration: line-through;
 }
 
-.task {
+.task,
+.subtask {
     display: flex;
     align-items: center;
+}
+
+.subtask-container {
+    margin-left: 20px;
 }
