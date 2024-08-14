@@ -1,1 +1,4 @@
-console.log("Hello, World!");
+import { redraw } from "./UI";
+import "./style.css";
+
+redraw();

@@ -1,0 +1,8 @@
+.done>p {
+    text-decoration: line-through;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+}

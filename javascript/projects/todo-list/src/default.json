@@ -1,0 +1,36 @@
+[
+    {
+        "id": 0,
+        "title": "default",
+        "description": "",
+        "tasks": [
+            {
+                "id": 0,
+                "title": "First task",
+                "description": "A description for your first task",
+                "_priority": 3,
+                "done": false,
+                "checklist": [
+                    {
+                        "id": 0,
+                        "content": "first item",
+                        "done": false
+                    },
+                    {
+                        "id": 1,
+                        "content": "second item",
+                        "done": false
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "title": "Second task",
+                "description": "A description for your second task",
+                "_priority": 0,
+                "done": false,
+                "checklist": []
+            }
+        ]
+    }
+]
