@@ -27,6 +27,15 @@ function makeTextElement(text, tag) {
   return element;
 }
 
+function makeTaskBasicElements(text, handlers) {
+  const textElement = makeTextElement(text, "p");
+  const checkBtn = makeButton("check", handlers.check);
+  const deleteBtn = makeButton("delete", handlers.delete);
+  const editBtn = makeButton("edit", handlers.edit);
+
+  return [checkBtn, textElement, deleteBtn, editBtn];
+}
+
 function makeTaskContainer(task) {
   const container = document.createElement("div");
   container.classList.add("task-container");
@@ -39,22 +48,15 @@ function makeTaskContainer(task) {
   return container;
 }
 
-function makeTaskBasicElements(text, done, handlers) {
-  const textElement = makeTextElement(text, "p");
-  const checkBtn = makeButton("check", handlers.check);
-  const deleteBtn = makeButton("delete", handlers.delete);
-  const editBtn = makeButton("edit", handlers.edit);
-
-  return [checkBtn, textElement, deleteBtn, editBtn];
-}
-
 function makeMainTaskDiv(task) {
   const container = document.createElement("div");
   container.classList.add("task");
   if (task.done) container.classList.add("done");
 
-  const basics = makeTaskBasicElements(task.title, task.done, taskHandlers);
+  const basics = makeTaskBasicElements(task.title, taskHandlers);
   container.append(...basics);
+
+  container.addEventListener("click", taskHandlers.toggleDetails);
 
   return container;
 }
@@ -65,11 +67,7 @@ function makeSubTaskDiv(subtask) {
   if (subtask.done) container.classList.add("done");
   container.dataset.id = subtask.id;
 
-  const basics = makeTaskBasicElements(
-    subtask.content,
-    subtask.done,
-    subTaskHandlers,
-  );
+  const basics = makeTaskBasicElements(subtask.content, subTaskHandlers);
   container.append(...basics);
 
   return container;
@@ -85,5 +83,11 @@ function makeSubTaskContainer(subtasks) {
   container.append(...divs, addSubtaskBtn);
   return container;
 }
+
+const hideTasksBtn = document.getElementById("hideBtn");
+hideTasksBtn.addEventListener("click", taskHandlers.toggleCompleted);
+
+const cleanTasksBtn = document.getElementById("cleanBtn");
+cleanTasksBtn.addEventListener("click", taskHandlers.deleteCompleted);
 
 export { redraw };
