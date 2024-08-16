@@ -1,4 +1,4 @@
-import { redraw } from "./UI";
+import View from "./View";
 import "./style.css";
 
-redraw();
+View.drawAllProjects();

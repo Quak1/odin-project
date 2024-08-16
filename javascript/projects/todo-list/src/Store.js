@@ -14,7 +14,7 @@ class Store {
     return index;
   }
 
-  #getProject(projectId) {
+  getProject(projectId) {
     const index = this.#getProjectIndex(projectId);
     return this.store[index];
   }
@@ -35,9 +35,16 @@ class Store {
   }
 
   updateProject(id, content) {
-    const project = this.#getProject(id);
+    const project = this.getProject(id);
     project.update(content);
     this.#saveState();
+  }
+
+  getAllProjectNames() {
+    return this.store.map((project) => ({
+      title: project.title,
+      id: project.id,
+    }));
   }
 
   // TASKS
@@ -50,7 +57,7 @@ class Store {
   }
 
   addTask(projectId, task) {
-    const project = this.#getProject(projectId);
+    const project = this.getProject(projectId);
     project.addTask(task);
     this.#saveState();
   }

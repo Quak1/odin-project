@@ -32,5 +32,34 @@
                 "checklist": []
             }
         ]
+    },
+    {
+        "id": 1,
+        "title": "Some project",
+        "description": "This is my own personal project!",
+        "tasks": [
+            {
+                "id": 0,
+                "title": "My project First task",
+                "description": "A description for your first task",
+                "_priority": 2,
+                "done": false,
+                "checklist": [
+                    {
+                        "id": 0,
+                        "content": "first item",
+                        "done": true
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "title": "My projct Second task",
+                "description": "A description for your second task",
+                "_priority": 1,
+                "done": true,
+                "checklist": []
+            }
+        ]
     }
 ]
