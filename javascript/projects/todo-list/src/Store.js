@@ -1,4 +1,5 @@
 import Project from "./Project";
+import Task from "./Task";
 import defaultData from "./default.json";
 
 class Store {
@@ -23,9 +24,11 @@ class Store {
     localStorage.setItem("data", JSON.stringify(this.store));
   }
 
-  addProject(project) {
+  addProject(projectValues) {
+    const project = new Project(projectValues);
     this.store.push(project);
     this.#saveState();
+    return project;
   }
 
   deleteProject(id) {
@@ -48,7 +51,7 @@ class Store {
   }
 
   // TASKS
-  #getTask(id) {
+  getTask(id) {
     for (const project of this.store) {
       const task = project.getTask(id);
       if (task) return task;
@@ -57,52 +60,62 @@ class Store {
   }
 
   addTask(projectId, task) {
+    // todo handle project id -1
     const project = this.getProject(projectId);
-    project.addTask(task);
+    project.addTask(new Task(task));
     this.#saveState();
   }
 
   deleteTask(id) {
-    for (const project of this.store) {
-      if (project.deleteTask(id)) return true;
-    }
+    this.store.forEach((project) => {
+      project.deleteTask(id);
+    });
     this.#saveState();
   }
 
+  deleteDoneTasks() {
+    this.store.forEach((project) =>
+      project.tasks
+        .filter((task) => task.done)
+        .forEach((task) => this.deleteTask(project.id, task.id)),
+    );
+  }
+
   updateTask(id, content) {
-    const task = this.#getTask(id);
+    const task = this.getTask(id);
     task.update(content);
     this.#saveState();
   }
 
   toggleTask(id) {
-    const task = this.#getTask(id);
+    const task = this.getTask(id);
     task.toggleDone();
     this.#saveState();
   }
 
   // SUBTASKS
-  createSubTask(id, content) {
-    const task = this.#getTask(id);
-    task.addSubTask(content);
+  createSubtask(id, content) {
+    const task = this.getTask(id);
+    task.addSubtask(content);
     this.#saveState();
   }
 
-  deleteSubTask(taskId, subTaskId) {
-    const task = this.#getTask(taskId);
-    task.deleteSubTask(subTaskId);
+  deleteSubtask(taskId, subtaskId) {
+    const task = this.getTask(taskId);
+    task.deleteSubtask(subtaskId);
     this.#saveState();
   }
 
-  editSubTask(taskId, subTaskid, content) {
-    const task = this.#getTask(taskId);
-    task.editSubTask(subTaskid, content);
+  editSubtask(taskId, subtaskId, content) {
+    const task = this.getTask(taskId);
+    console.log({ taskId, subtaskId, content });
+    task.editSubtask(subtaskId, content);
     this.#saveState();
   }
 
-  toggleSubTask(taskId, subTaskid) {
-    const task = this.#getTask(taskId);
-    task.toggleSubTask(subTaskid);
+  toggleSubtask(taskId, subtaskid) {
+    const task = this.getTask(taskId);
+    task.toggleSubtask(subtaskid);
     this.#saveState();
   }
 }
@@ -111,4 +124,5 @@ if (!localStorage.getItem("data")) {
   localStorage.setItem("data", JSON.stringify(defaultData));
 }
 const store = new Store(JSON.parse(localStorage.getItem("data")));
+
 export default store;

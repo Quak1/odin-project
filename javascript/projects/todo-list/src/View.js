@@ -1,3 +1,5 @@
+import { differenceInCalendarDays, format, formatDistance } from "date-fns";
+import Handle from "./Handle";
 import store from "./Store";
 
 class Make {
@@ -31,42 +33,90 @@ class Make {
 }
 
 class View {
+  static activeProject = -1;
   static hideCompleted = false;
   static #tasksContainer = document.getElementById("tasks-container");
+  static sortState = "";
   static modal = document.querySelector("dialog");
-  static editProjectModal = document.getElementById("edit-project-dialog");
-  static editProjectTitle = document.getElementById("edit-project-title");
-  static editProjectDescription = document.getElementById(
-    "edit-project-description",
-  );
+  static editProject = {
+    modal: document.getElementById("edit-project-dialog"),
+    title: document.getElementById("edit-project-title"),
+    description: document.getElementById("edit-project-description"),
+    ghostBtn: document.querySelector("#edit-project-dialog button"),
+  };
+  static editTask = {
+    modal: document.getElementById("edit-task-dialog"),
+    title: document.getElementById("edit-task-title"),
+    description: document.getElementById("edit-task-description"),
+    priority: document.getElementById("edit-task-priority"),
+    dueDate: document.getElementById("edit-task-dueDate"),
+    ghostBtn: document.querySelector("#edit-task-dialog button"),
+  };
+  static editSubtask = {
+    modal: document.getElementById("edit-subtask-dialog"),
+    content: document.getElementById("edit-subtask-content"),
+    ghostBtn: document.querySelector("#edit-subtask-dialog button"),
+  };
 
-  static drawProject(project) {
-    View.#tasksContainer.textContent = "";
-    const tasks = project.tasks.map((task) => View.makeTaskContainer(task));
-    View.#tasksContainer.append(...tasks);
+  static showProject(project) {
+    this.changeActiveProject(project);
+    this.#tasksContainer.textContent = "";
+    const sorted = View.sortTasks(project.tasks);
+    console.log(sorted);
+    const tasks = sorted.map((task) => this.makeTaskContainer(task));
+    this.#tasksContainer.append(...tasks);
   }
 
-  static drawAllProjects() {
-    View.#tasksContainer.textContent = "";
-    View.changeActiveProjectName("All Projects");
-    for (const project of store.store) {
+  static showAllProjects(projects) {
+    this.#tasksContainer.textContent = "";
+    this.changeActiveProject({ title: "All Projects", id: 0 });
+    for (const project of projects) {
       const container = document.createElement("div");
       const titleDiv = Make.text(project.title, "h2");
-      const tasks = project.tasks.map((task) => View.makeTaskContainer(task));
-      container.append(titleDiv, ...tasks);
-      View.#tasksContainer.appendChild(container);
+      const tasks = View.sortTasks(project.tasks).map((task) =>
+        this.makeTaskContainer(task),
+      );
+      if (project.id === 0) container.append(...tasks);
+      else container.append(titleDiv, ...tasks);
+      this.#tasksContainer.appendChild(container);
+    }
+  }
+
+  static redrawCurrent() {
+    if (View.activeProject === 0) View.showAllProjects(store.store);
+    else {
+      const project = store.getProject(View.activeProject);
+      View.showProject(project);
+    }
+  }
+
+  static sortTasks(tasks) {
+    if (this.sortState === "") {
+      return tasks;
+    } else if (this.sortState === "increasing") {
+      return tasks.toSorted((a, b) => {
+        if (a.dueDate === "" || b.dueDate === "") return b.dueDate - a.dueDate;
+        return a.dueDate - b.dueDate;
+      });
+    } else if (this.sortState === "decreasing") {
+      return tasks.toSorted((a, b) => {
+        if (a.dueDate === "" || b.dueDate === "") return a.dueDate - b.dueDate;
+        return b.dueDate - a.dueDate;
+      });
     }
   }
 
   // Tasks
   static makeTaskContainer(task) {
     const container = Make.container("task-container");
-    if (task.done && View.hideCompleted) container.classList.add("hidden");
+    if (task.done && this.hideCompleted) container.classList.add("hidden");
     container.dataset.id = task.id;
 
-    const mainDiv = View.makeTaskDiv(task);
-    const subDiv = View.makeSubTaskContainer(task.checklist);
-    container.append(mainDiv, subDiv);
+    const mainDiv = this.makeTaskDiv(task);
+    const description = Make.text(task.description, "div");
+    const subDiv = this.makeSubtaskContainer(task.checklist);
+    subDiv.classList.add("hidden");
+    container.append(mainDiv, description, subDiv);
 
     return container;
   }
@@ -74,55 +124,116 @@ class View {
   static makeTaskDiv(task) {
     const container = Make.container("task");
     if (task.done) container.classList.add("done");
-
     container.dataset.priority = task.priority;
 
     const basics = Make.taskBasic(
       task.title,
-      Handle.doneTaskBtn,
-      Handle.deleteTaskBtn,
-      Handle.editTaskBtn,
+      Handle.taskDoneBtn,
+      Handle.taskDeleteBtn,
+      Handle.taskEditBtn,
     );
 
+    if (task.dueDate !== "") {
+      const diff = differenceInCalendarDays(task.dueDate, new Date());
+      let dueDate;
+      if (diff === 0) {
+        dueDate = "Today";
+      } else if (diff === 1) {
+        dueDate = "Tomorrow";
+      } else if (diff === -1) {
+        dueDate = "Yesterday";
+      } else if (diff < -1) {
+        dueDate = diff + " days ago";
+      } else if (diff <= 7) {
+        dueDate = "next " + format(task.dueDate, "EEEE");
+      } else {
+        dueDate = format(task.dueDate, "d MMM yyyy");
+      }
+      basics.splice(2, 0, dueDate);
+    }
+
     container.append(...basics);
-    container.addEventListener("click", Handle.toggleTaskDetails);
+    container.addEventListener("click", Handle.taskToggleDetailsClick);
 
     return container;
   }
 
-  static makeSubTaskContainer(subtasks) {
+  static makeSubtaskContainer(subtasks) {
     const container = Make.container("subtask-container");
 
-    const subTaskDivs = subtasks.map((subtask) => View.makeSubTaskDiv(subtask));
-    const addSubtaskBtn = Make.button("add subtask", Handle.addSubTaskBtn);
+    const subtaskDivs = subtasks.map((subtask) => this.makeSubtaskDiv(subtask));
+    const addSubtaskBtn = Make.button("add subtask", Handle.subtaskAddBtn);
 
-    container.append(...subTaskDivs, addSubtaskBtn);
+    container.append(...subtaskDivs, addSubtaskBtn);
     return container;
   }
 
-  static makeSubTaskDiv(subtask) {
+  static makeSubtaskDiv(subtask) {
     const container = Make.container("subtask");
     container.dataset.id = subtask.id;
     if (subtask.done) container.classList.add("done");
 
     const basics = Make.taskBasic(
       subtask.content,
-      Handle.doneSubTaskBtn,
-      Handle.deleteSubTaskBtn,
-      Handle.editSubTaskBtn,
+      Handle.subtaskToggleDoneBtn,
+      Handle.subtaskDeleteBtn,
+      Handle.subtaskEditBtn,
     );
     container.append(...basics);
 
     return container;
   }
 
+  static toggleTaskDetails(child) {
+    const taskContainer = child.closest(".task-container");
+    taskContainer
+      .querySelector(".subtask-container")
+      .classList.toggle("hidden");
+  }
+
+  static toggleSubtaskDone(child) {
+    const container = child.closest(".subtask");
+    container.classList.toggle("done");
+  }
+
+  static getTaskIdByNode(child) {
+    const id = child.closest(".task-container").dataset.id;
+    return Number(id);
+  }
+
+  static getSubtaskIdByNode(child) {
+    const taskId = this.getTaskIdByNode(child);
+    const subtaskId = Number(child.closest(".subtask").dataset.id);
+    return { taskId, subtaskId };
+  }
+
+  static deleteSubtaskContainer(child) {
+    const container = child.closest(".subtask");
+    container.remove();
+  }
+
+  static toggleHideCompleteTasks() {
+    const nodes = document.querySelectorAll(".task.done");
+    this.hideCompleted = !this.hideCompleted;
+    if (this.hideCompleted)
+      nodes.forEach((node) => node.parentNode.classList.add("hidden"));
+    else nodes.forEach((node) => node.parentNode.classList.remove("hidden"));
+  }
+
+  static deleteDoneTaskContainers() {
+    const nodes = document.querySelectorAll(".task.done");
+    nodes.forEach((node) => node.parentNode.remove());
+  }
+
   // Projects
   static makeProjectSelectModal(projects) {
     const projectBtns = [];
     for (const project of projects) {
+      if (project.id === 0) continue;
+
       const projectBtn = Make.button(
         project.title,
-        Handle.projectSelect(project.id),
+        Handle.projectSelectBtn(project.id),
       );
       const editBtn = Make.button("edit", Handle.projectEditBtn);
       editBtn.dataset.id = project.id;
@@ -142,24 +253,17 @@ class View {
     return container;
   }
 
-  static changeActiveProjectName(projectName) {
-    document.getElementById("active-project").textContent = projectName;
-  }
-
-  static makeProjectEditModal(project) {
-    View.editProjectTitle.value = project.title;
-    View.editProjectDescription.value = project.description;
-    View.editProjectModal.dataset.id = project.id;
-    View.editProjectModal.querySelector("button").value = project.id;
-    View.editProjectModal.showModal();
+  static changeActiveProject(project) {
+    document.getElementById("active-project").textContent = project.title;
+    this.activeProject = project.id;
   }
 
   static makeProjectDeleteConfirmContainer() {
-    const title = View.editProjectTitle.value;
-    const id = View.editProjectModal.querySelector("button").value;
+    const title = this.editProject.title.value;
+    const id = this.editProject.modal.querySelector("button").value;
 
     const text = Make.text(`Do you want to delete project "${title}"?`);
-    const cancelBtn = Make.button("cancel", () => View.modal.close());
+    const cancelBtn = Make.button("cancel", () => this.modal.close());
     const confirmBtn = Make.button("delete", Handle.projectDeleteConfirmBtn);
     confirmBtn.dataset.id = id;
 
@@ -170,150 +274,161 @@ class View {
   }
 
   static showProjectDeleteConfirmation() {
-    View.modal.textContent = "";
-    View.modal.append(this.makeProjectDeleteConfirmContainer());
-    View.modal.showModal();
+    this.modal.textContent = "";
+    this.modal.append(this.makeProjectDeleteConfirmContainer());
+    this.modal.showModal();
+  }
+
+  // Modals
+  static closeModal() {
+    this.modal.close();
+  }
+
+  static closeEditProjectModal() {
+    View.editProject.modal.close();
+  }
+
+  static showProjectListModal(projects) {
+    const container = this.makeProjectSelectModal(projects);
+    this.modal.textContent = "";
+    this.modal.append(container);
+    this.modal.showModal();
+  }
+
+  static #changeEventListener(target, event, oldFunction, newFunction) {
+    target.removeEventListener(event, oldFunction);
+    target.addEventListener(event, newFunction);
+  }
+
+  static showProjectEditModal(project) {
+    this.editProject.title.value = project.title;
+    this.editProject.description.value = project.description;
+    this.editProject.modal.dataset.id = project.id;
+    this.editProject.ghostBtn.textContent = "Delete";
+
+    this.#changeEventListener(
+      View.editProject.modal,
+      "submit",
+      Handle.projectAddSubmitForm,
+      Handle.projectEditSubmitForm,
+    );
+    this.#changeEventListener(
+      this.editProject.ghostBtn,
+      "click",
+      View.closeEditProjectModal,
+      Handle.projectDeleteBtn,
+    );
+
+    this.editProject.modal.showModal();
+  }
+
+  static showProjectAddModal() {
+    this.editProject.title.value = "";
+    this.editProject.description.value = "";
+    this.editProject.ghostBtn.textContent = "cancel";
+
+    this.#changeEventListener(
+      this.editProject.modal,
+      "submit",
+      Handle.projectEditSubmitForm,
+      Handle.projectAddSubmitForm,
+    );
+    this.#changeEventListener(
+      this.editProject.ghostBtn,
+      "click",
+      Handle.projectDeleteBtn,
+      this.closeEditProjectModal,
+    );
+
+    this.editProject.modal.showModal();
+  }
+
+  static showTaskEditModal(task) {
+    this.editTask.title.value = task.title;
+    this.editTask.description.value = task.description;
+    this.editTask.priority.value = task.priority;
+    this.editTask.dueDate.value = format(task.dueDate, "yyyy-MM-dd");
+    this.editTask.modal.dataset.id = task.id;
+
+    this.#changeEventListener(
+      this.editTask.modal,
+      "submit",
+      Handle.taskAddSubmitForm,
+      Handle.taskEditSubmitForm,
+    );
+
+    this.editTask.modal.showModal();
+  }
+
+  static showTaskAddModal() {
+    this.editTask.title.value = "";
+    this.editTask.description.value = "";
+    this.editTask.priority.value = "0";
+    this.editTask.dueDate.value = "";
+
+    this.#changeEventListener(
+      this.editTask.modal,
+      "submit",
+      Handle.taskEditSubmitForm,
+      Handle.taskAddSubmitForm,
+    );
+
+    this.editTask.modal.showModal();
+  }
+
+  static showSubtaskEditModal(taskId, subtask) {
+    this.editSubtask.content.value = subtask.content;
+    this.editSubtask.modal.dataset.subtaskId = subtask.id;
+    this.editSubtask.modal.dataset.taskId = taskId;
+
+    this.#changeEventListener(
+      this.editSubtask.modal,
+      "submit",
+      Handle.subtaskAddSubmitForm,
+      Handle.subtaskEditSubmitForm,
+    );
+
+    this.editSubtask.modal.showModal();
+  }
+
+  static showSubtaskAddModal(taskId) {
+    this.editSubtask.content.value = "";
+    this.editSubtask.modal.dataset.taskId = taskId;
+
+    this.#changeEventListener(
+      this.editSubtask.modal,
+      "submit",
+      Handle.subtaskEditSubmitForm,
+      Handle.subtaskAddSubmitForm,
+    );
+
+    this.editSubtask.modal.showModal();
   }
 }
 
-class Handle {
-  static doneTaskBtn(e) {
-    const container = e.target.parentElement.parentElement;
-    if (View.hideCompleted) container.classList.add("hidden");
-    container.firstChild.classList.toggle("done");
-
-    const taskId = Number(container.dataset.id);
-    store.toggleTask(taskId);
-  }
-
-  static deleteTask(taskContainer) {
-    const id = Number(taskContainer.dataset.id);
-    store.deleteTask(id);
-    taskContainer.remove();
-  }
-
-  static deleteTaskBtn(e) {
-    const container = e.target.parentElement.parentElement;
-    Handle.deleteTask(container);
-  }
-
-  static editTaskBtn(e) {
-    console.log("edit task");
-  }
-
-  static toggleTaskDetails(e) {
-    if (e.target.nodeName === "BUTTON") return;
-
-    const target = e.target.closest(".task");
-    target.nextSibling.classList.toggle("hidden");
-  }
-
-  static doneSubTaskBtn(e) {
-    const container = e.target.parentElement;
-    const subTaskId = Number(container.dataset.id);
-    const taskId = Number(e.target.closest(".task-container").dataset.id);
-    store.toggleSubTask(taskId, subTaskId);
-    container.classList.toggle("done");
-  }
-
-  static deleteSubTaskBtn(e) {
-    const container = e.target.parentElement;
-    const subTaskId = Number(container.dataset.id);
-    const taskId = Number(e.target.closest(".task-container").dataset.id);
-    store.deleteSubTask(taskId, subTaskId);
-    container.remove();
-  }
-
-  static editSubTaskBtn(e) {
-    console.log("edit subtask");
-  }
-
-  static addSubTaskBtn(e) {
-    console.log("add subtask");
-  }
-
-  static toggleHideCompletBtn() {
-    const nodes = document.querySelectorAll(".task.done");
-    View.hideCompleted = !View.hideCompleted;
-    if (View.hideCompleted)
-      nodes.forEach((node) => node.parentNode.classList.add("hidden"));
-    else nodes.forEach((node) => node.parentNode.classList.remove("hidden"));
-  }
-
-  static deleteCompleteBtn() {
-    const nodes = document.querySelectorAll(".task.done");
-    nodes.forEach((node) => deleteTask(node.parentNode));
-  }
-
-  static projectSelect(id) {
-    const project = store.getProject(id);
-    return function (e) {
-      View.drawProject(project);
-      View.changeActiveProjectName(project.title);
-      View.modal.close();
-    };
-  }
-
-  static projectShowAllBtn() {
-    View.drawAllProjects();
-    View.modal.close();
-  }
-
-  static projectSelectModal() {
-    const container = View.makeProjectSelectModal(store.getAllProjectNames());
-    View.modal.textContent = "";
-    View.modal.append(container);
-    View.modal.showModal();
-  }
-
-  static projectAddBtn() {
-    console.log("add project");
-  }
-
-  static projectEditBtn(e) {
-    const projectId = Number(e.target.dataset.id);
-    const project = store.getProject(projectId);
-    View.makeProjectEditModal(project);
-    View.modal.close();
-  }
-
-  static projectEditSubmit(e) {
-    e.preventDefault();
-
-    const title = View.editProjectTitle.value;
-    const description = View.editProjectDescription.value;
-    const id = Number(View.editProjectModal.dataset.id);
-
-    console.log({ title, description, id });
-    store.updateProject(id, { title, description });
-    View.drawAllProjects();
-    View.editProjectModal.close();
-  }
-
-  static projectDeleteBtn(e) {
-    View.editProjectModal.close();
-    View.showProjectDeleteConfirmation();
-  }
-
-  static projectDeleteConfirmBtn(e) {
-    const projectId = Number(e.target.value);
-    store.deleteProject(projectId);
-    View.drawAllProjects();
-    View.modal.close();
-  }
-}
+const sortBtn = document.getElementById("sortBtn");
+sortBtn.addEventListener("click", Handle.taskSortByDueDateBtn());
 
 const hideTasksBtn = document.getElementById("hideBtn");
-hideTasksBtn.addEventListener("click", Handle.toggleHideCompletBtn);
+hideTasksBtn.addEventListener("click", Handle.tasksToggleHideCompletBtn);
 
 const cleanTasksBtn = document.getElementById("cleanBtn");
-cleanTasksBtn.addEventListener("click", Handle.deleteCompleteBtn);
+cleanTasksBtn.addEventListener("click", Handle.tasksDeleteCompleteBtn);
+
+const newTaskBtn = document.getElementById("newBtn");
+newTaskBtn.addEventListener("click", Handle.taskNewBtn);
 
 const activeProject = document.getElementById("active-project");
-activeProject.addEventListener("click", Handle.projectSelectModal);
+activeProject.addEventListener("click", Handle.projectListBtn);
 
-View.editProjectModal.addEventListener("submit", Handle.projectEditSubmit);
 const deleteBtn = document.querySelector("#edit-project-dialog button");
 deleteBtn.addEventListener("click", Handle.projectDeleteBtn);
+
+View.editTask.ghostBtn.addEventListener("click", () =>
+  View.editTask.modal.close(),
+);
+View.editSubtask.ghostBtn.addEventListener("click", () =>
+  View.editSubtask.modal.close(),
+);
 
 export default View;

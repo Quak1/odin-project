@@ -3,11 +3,11 @@ import Task from "./Task";
 class Project {
   static count = 0;
 
-  constructor({ id, title, description, tasks }) {
-    this.id = id;
+  constructor({ title, description, tasks }) {
+    this.id = Project.count++;
     this.title = title;
     this.description = description;
-    this.tasks = tasks.map((task) => new Task(task));
+    this.tasks = tasks ? tasks.map((task) => new Task(task)) : [];
   }
 
   update({ title, description }) {

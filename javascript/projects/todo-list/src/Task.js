@@ -2,26 +2,39 @@ class Task {
   static count = 0;
 
   constructor({
-    id,
     title,
     description = "",
     priority = 0,
     _priority,
     done = false,
     checklist = [],
+    dueDate,
   }) {
-    this.id = id;
+    this.id = Task.count++;
     this.title = title;
     this.description = description;
     this.priority = priority ? priority : _priority;
     this.done = done;
-    this.checklist = checklist.map((subtask) => new SubTask(subtask));
+    this.checklist = checklist.map((subtask) => new Subtask(subtask));
+    this.#setDate(dueDate);
   }
 
-  update({ title, description, priority }) {
+  #setDate(dateString) {
+    if (!dateString) {
+      this.dueDate = "";
+    } else if (dateString.length === 10) {
+      // YYYY-MM-DD format
+      const [year, month, day] = dateString.split("-");
+      this.dueDate = new Date(year, month - 1, day);
+    } else {
+      this.dueDate = new Date(dateString);
+    }
+  }
+  update({ title, description, priority, dueDate }) {
     this.title = title;
     this.description = description;
     this.priority = priority;
+    this.#setDate(dueDate);
   }
 
   toggleDone() {
@@ -39,38 +52,38 @@ class Task {
     this._priority = val;
   }
 
-  addSubTask(content) {
-    this.checklist.push(new SubTask(content));
+  addSubtask(content) {
+    this.checklist.push(new Subtask({ content }));
   }
 
-  deleteSubTask(id) {
-    const index = this.#getSubTaskIndex(id);
+  deleteSubtask(id) {
+    const index = this.#getSubtaskIndex(id);
     if (index === -1) return;
     this.checklist.splice(index, 1);
   }
 
-  toggleSubTask(id) {
-    const index = this.#getSubTaskIndex(id);
+  toggleSubtask(id) {
+    const index = this.#getSubtaskIndex(id);
     if (index === -1) return;
     this.checklist[index].done = !this.checklist[index].done;
   }
 
-  updateSubTask(id, content) {
-    const index = this.#getSubTaskIndex(id);
+  editSubtask(id, content) {
+    const index = this.#getSubtaskIndex(id);
     if (index === -1) return;
     this.checklist[index].content = content;
   }
 
-  #getSubTaskIndex(id) {
+  #getSubtaskIndex(id) {
     return this.checklist.findIndex((entry) => entry.id === id);
   }
 }
 
-class SubTask {
+class Subtask {
   static count = 0;
 
-  constructor({ id, content, done = false }) {
-    this.id = id;
+  constructor({ content, done = false }) {
+    this.id = Subtask.count++;
     this.content = content;
     this.done = done;
   }

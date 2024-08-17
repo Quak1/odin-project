@@ -1,30 +1,30 @@
 [
     {
-        "id": 0,
+        "title": "Inbox",
+        "description": "",
+        "tasks": []
+    },
+    {
         "title": "default",
         "description": "",
         "tasks": [
             {
-                "id": 0,
                 "title": "First task",
                 "description": "A description for your first task",
                 "_priority": 3,
                 "done": false,
                 "checklist": [
                     {
-                        "id": 0,
                         "content": "first item",
                         "done": false
                     },
                     {
-                        "id": 1,
                         "content": "second item",
                         "done": false
                     }
                 ]
             },
             {
-                "id": 1,
                 "title": "Second task",
                 "description": "A description for your second task",
                 "_priority": 0,
@@ -34,26 +34,22 @@
         ]
     },
     {
-        "id": 1,
         "title": "Some project",
         "description": "This is my own personal project!",
         "tasks": [
             {
-                "id": 0,
                 "title": "My project First task",
                 "description": "A description for your first task",
                 "_priority": 2,
                 "done": false,
                 "checklist": [
                     {
-                        "id": 0,
                         "content": "first item",
                         "done": true
                     }
                 ]
             },
             {
-                "id": 1,
                 "title": "My projct Second task",
                 "description": "A description for your second task",
                 "_priority": 1,

@@ -12,6 +12,7 @@
         <h1 id="active-project">All Projects</h1>
         <div id="container">
             <div id="actions">
+                <button id="sortBtn">sort by due date</button>
                 <button id="hideBtn">hide complete</button>
                 <button id="cleanBtn">clean complete</button>
                 <button id="newBtn">new task</button>
@@ -21,6 +22,7 @@
     </div>
 
     <dialog></dialog>
+
     <dialog id="edit-project-dialog">
         <form method="dialog">
             <div>
@@ -32,6 +34,42 @@
                 <textarea name="description" id="edit-project-description"></textarea>
             </div>
             <button type="button">Delete</button>
+            <button type="submit">Save</button>
+        </form>
+    </dialog>
+
+    <dialog id="edit-task-dialog">
+        <form method="dialog">
+            <div>
+                <label for="edit-task-title">Title</label>
+                <input type="text" id="edit-task-title" name="title">
+            </div>
+            <div>
+                <label for="edit-task-description">Description</label>
+                <textarea name="description" id="edit-task-description"></textarea>
+            </div>
+            <select name="priority" id="edit-task-priority">
+                <option value="0">Priority</option>
+                <option value="1" selected>Low</option>
+                <option value="2">Normal</option>
+                <option value="3">High</option>
+            </select>
+            <div>
+                <label for="edit-task-dueDate">Due date</label>
+                <input type="date" id="edit-task-dueDate" name="dueDate">
+            </div>
+            <button type="button">Cancel</button>
+            <button type="submit">Save</button>
+        </form>
+    </dialog>
+
+    <dialog id="edit-subtask-dialog">
+        <form method="dialog">
+            <div>
+                <label for="edit-subtask-content">content</label>
+                <input type="text" id="edit-subtask-content" name="content">
+            </div>
+            <button type="button">Cancel</button>
             <button type="submit">Save</button>
         </form>
     </dialog>
