@@ -11,7 +11,8 @@ class Handle {
     store.toggleTask(taskId);
   }
 
-  static #deleteTaskByNode(taskContainer) {
+  static #deleteTaskByNode(node) {
+    const taskContainer = node.closest(".task-container");
     const id = Number(taskContainer.dataset.id);
     store.deleteTask(id);
     taskContainer.remove();
