@@ -347,7 +347,9 @@ class View {
     this.editTask.title.value = task.title;
     this.editTask.description.value = task.description;
     this.editTask.priority.value = task.priority;
-    this.editTask.dueDate.value = format(task.dueDate, "yyyy-MM-dd");
+    this.editTask.dueDate.value = task.dueDate
+      ? format(task.dueDate, "yyyy-MM-dd")
+      : "";
     this.editTask.modal.dataset.id = task.id;
 
     this.#changeEventListener(
