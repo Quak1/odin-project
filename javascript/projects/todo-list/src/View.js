@@ -1,4 +1,4 @@
-import { differenceInCalendarDays, format, formatDistance } from "date-fns";
+import { differenceInCalendarDays, format } from "date-fns";
 import Handle from "./Handle";
 import store from "./Store";
 
@@ -24,11 +24,20 @@ class Make {
 
   static taskBasic(text, handleDone, handleDelete, handleEdit) {
     const textElement = Make.text(text, "p");
-    const checkBtn = Make.button("check", handleDone);
-    const deleteBtn = Make.button("delete", handleDelete);
-    const editBtn = Make.button("edit", handleEdit);
 
-    return [checkBtn, textElement, deleteBtn, editBtn];
+    const checkBtn = Make.button("", handleDone);
+    checkBtn.classList.add("checkBtn");
+    const deleteBtn = Make.button("", handleDelete);
+    deleteBtn.classList.add("deleteBtn");
+    const editBtn = Make.button("", handleEdit);
+    editBtn.classList.add("editBtn");
+
+    const rightContainer = Make.container("right");
+    const btnContainer = Make.container("taskBtns");
+    btnContainer.append(editBtn, deleteBtn);
+    rightContainer.append(btnContainer);
+
+    return { text: textElement, checkBtn, rightContainer };
   }
 }
 
@@ -56,6 +65,12 @@ class View {
     modal: document.getElementById("edit-subtask-dialog"),
     content: document.getElementById("edit-subtask-content"),
     ghostBtn: document.querySelector("#edit-subtask-dialog button"),
+  };
+  static actionBtns = {
+    sort: document.getElementById("sortBtn"),
+    hideTasks: document.getElementById("hideBtn"),
+    cleanTasks: document.getElementById("cleanBtn"),
+    newTask: document.getElementById("newBtn"),
   };
 
   static showProject(project) {
@@ -114,6 +129,7 @@ class View {
 
     const mainDiv = this.makeTaskDiv(task);
     const description = Make.text(task.description, "div");
+    description.classList.add("description");
     const subDiv = this.makeSubtaskContainer(task.checklist);
     subDiv.classList.add("hidden");
     container.append(mainDiv, description, subDiv);
@@ -126,13 +142,14 @@ class View {
     if (task.done) container.classList.add("done");
     container.dataset.priority = task.priority;
 
-    const basics = Make.taskBasic(
+    const { text, checkBtn, rightContainer } = Make.taskBasic(
       task.title,
       Handle.taskDoneBtn,
       Handle.taskDeleteBtn,
       Handle.taskEditBtn,
     );
 
+    let dueDateText = Make.text("", "p");
     if (task.dueDate !== "") {
       const diff = differenceInCalendarDays(task.dueDate, new Date());
       let dueDate;
@@ -143,16 +160,18 @@ class View {
       } else if (diff === -1) {
         dueDate = "Yesterday";
       } else if (diff < -1) {
-        dueDate = diff + " days ago";
+        dueDate = Math.abs(diff) + " days ago";
       } else if (diff <= 7) {
         dueDate = "next " + format(task.dueDate, "EEEE");
       } else {
         dueDate = format(task.dueDate, "d MMM yyyy");
       }
-      basics.splice(2, 0, dueDate);
+      dueDateText.textContent = dueDate;
     }
 
-    container.append(...basics);
+    rightContainer.prepend(dueDateText);
+
+    container.append(checkBtn, text, rightContainer);
     container.addEventListener("click", Handle.taskToggleDetailsClick);
 
     return container;
@@ -173,13 +192,14 @@ class View {
     container.dataset.id = subtask.id;
     if (subtask.done) container.classList.add("done");
 
-    const basics = Make.taskBasic(
+    const { text, checkBtn, rightContainer } = Make.taskBasic(
       subtask.content,
       Handle.subtaskToggleDoneBtn,
       Handle.subtaskDeleteBtn,
       Handle.subtaskEditBtn,
     );
-    container.append(...basics);
+
+    container.append(checkBtn, text, rightContainer);
 
     return container;
   }
@@ -218,6 +238,7 @@ class View {
     if (this.hideCompleted)
       nodes.forEach((node) => node.parentNode.classList.add("hidden"));
     else nodes.forEach((node) => node.parentNode.classList.remove("hidden"));
+    this.actionBtns.hideTasks.classList.toggle("off");
   }
 
   static deleteDoneTaskContainers() {
@@ -408,17 +429,16 @@ class View {
   }
 }
 
-const sortBtn = document.getElementById("sortBtn");
-sortBtn.addEventListener("click", Handle.taskSortByDueDateBtn());
-
-const hideTasksBtn = document.getElementById("hideBtn");
-hideTasksBtn.addEventListener("click", Handle.tasksToggleHideCompletBtn);
-
-const cleanTasksBtn = document.getElementById("cleanBtn");
-cleanTasksBtn.addEventListener("click", Handle.tasksDeleteCompleteBtn);
-
-const newTaskBtn = document.getElementById("newBtn");
-newTaskBtn.addEventListener("click", Handle.taskNewBtn);
+View.actionBtns.sort.addEventListener("click", Handle.taskSortByDueDateBtn());
+View.actionBtns.hideTasks.addEventListener(
+  "click",
+  Handle.tasksToggleHideCompletBtn,
+);
+View.actionBtns.cleanTasks.addEventListener(
+  "click",
+  Handle.tasksDeleteCompleteBtn,
+);
+View.actionBtns.newTask.addEventListener("click", Handle.taskNewBtn);
 
 const activeProject = document.getElementById("active-project");
 activeProject.addEventListener("click", Handle.projectListBtn);

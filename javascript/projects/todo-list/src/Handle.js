@@ -208,6 +208,11 @@ class Handle {
     let state = 0;
     return function () {
       state = (state + 1) % 3;
+
+      View.actionBtns.sort.classList.remove("asc", "desc");
+      if (state === 1) View.actionBtns.sort.classList.add("asc");
+      else if (state === 2) View.actionBtns.sort.classList.add("desc");
+
       View.sortState = options[state];
       View.redrawCurrent();
     };

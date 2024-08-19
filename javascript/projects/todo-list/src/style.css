@@ -1,17 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap');
+
+:root {
+    --container-background: #001d3d;
+    --base-background: #000814;
+    --background: #003566;
+
+    --off-white: #e0e1dd;
+    --yellow: #ffd60a;
+    --accent: #ffc300;
+}
+
+body {
+    background: var(--base-background);
+    color: var(--off-white)
+}
+
+#content {
+    width: 600px;
+    margin: 0 auto;
+    background-color: var(--container-background);
+    border-radius: 10px;
+    padding: 20px;
+    font-family: "Roboto", sans-serif;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+p {
+    margin: 0
+}
+
+.done p {
+    filter: brightness(70%)
+}
+
 .done>p {
     text-decoration: line-through;
+}
+
+.hidden {
+    display: none;
 }
 
 .task,
 .subtask {
     display: flex;
     align-items: center;
+    position: relative;
+}
+
+.task {
+    background-color: var(--background);
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.task>p,
+.subtask p {
+    margin: 0 10px
+}
+
+.task-container .description {
+    font-size: 14px;
+    margin: 5px 10px;
+    filter: brightness(85%);
+
+}
+
+button.checkBtn {
+    flex-shrink: 0;
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+    border: solid 2px var(--off-white);
+    border-radius: 8px;
+}
+
+button.checkBtn:hover {
+    border-color: var(--accent);
+}
+
+.done button.checkBtn {
+    background: url("../assets/check-bold.svg") no-repeat center;
+    border-color: var(--accent);
+    filter: brightness(70%)
+}
+
+.done button.checkBtn:hover {
+    filter: none;
+}
+
+.right {
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.taskBtns {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--background);
+}
+
+.task:hover .taskBtns,
+.subtask:hover .taskBtns {
+    display: initial;
+}
+
+.taskBtns button {
+    border: none;
+    height: 25px;
+    width: 25px;
+    filter: brightness(60%);
+}
+
+.taskBtns button:hover {
+    filter: none;
+}
+
+button.editBtn {
+    background: url("../assets/pencil.svg") no-repeat center;
+}
+
+button.deleteBtn {
+    background: url("../assets/delete-outline.svg") no-repeat center;
 }
 
 .subtask-container {
     margin-left: 20px;
 }
 
-.hidden {
-    display: none;
+.subtask-container>button {
+    width: 100%;
+    text-align: right;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: var(--off-white);
+    background: url("../assets/sticker-plus-outline.svg") no-repeat;
+    background-color: var(--background);
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.subtask-container>button:hover {
+    filter: brightness(120%);
+}
+
+.subtask {
+    margin: 5px 0;
+}
+
+.subtask .taskBtns {
+    background-color: var(--container-background);
+    top: 1px;
+}
+
+#actions {
+    display: flex;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+#actions button {
+    height: 40px;
+    width: 40px;
+    background-color: var(--container-background);
+    filter: brightness(80%);
+    border: none;
+    margin: 0 5px;
+}
+
+#actions button:active {
+    transform: translateY(2px);
+}
+
+#actions button:hover {
+    filter: none;
+}
+
+button#sortBtn {
+    background: url("../assets/calendar.svg") no-repeat center;
+}
+
+button#sortBtn.asc {
+    background: url("../assets/sort-calendar-ascending.svg") no-repeat center;
+}
+
+button#sortBtn.desc {
+    background: url("../assets/sort-calendar-descending.svg") no-repeat center;
+}
+
+button#hideBtn {
+    background: url("../assets/eye-outline.svg") no-repeat center;
+}
+
+button#hideBtn.off {
+    background: url("../assets/eye-off-outline.svg") no-repeat center;
+}
+
+button#cleanBtn {
+    background: url("../assets/broom.svg") no-repeat center;
+}
+
+button#newBtn {
+    background: url("../assets/plus-thick.svg") no-repeat left;
+    width: 115px;
+    background-color: var(--background);
+    color: var(--off-white);
+    text-align: right;
+    padding-right: 5px;
+    margin: 0;
+    font-weight: 900;
+    font-size: 16px;
 }
