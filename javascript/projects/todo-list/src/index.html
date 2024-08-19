@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <dialog></dialog>
+    <dialog id="main-dialog"></dialog>
 
     <dialog id="edit-project-dialog">
         <form method="dialog">
@@ -31,10 +31,12 @@
             </div>
             <div>
                 <label for="edit-project-description">Description</label>
-                <textarea name="description" id="edit-project-description"></textarea>
+                <textarea name="description" id="edit-project-description" rows="6"></textarea>
             </div>
-            <button type="button">Delete</button>
-            <button type="submit">Save</button>
+            <div class="btns">
+                <button type="button">Delete</button>
+                <button type="submit">Save</button>
+            </div>
         </form>
     </dialog>
 
@@ -46,31 +48,39 @@
             </div>
             <div>
                 <label for="edit-task-description">Description</label>
-                <textarea name="description" id="edit-task-description"></textarea>
+                <textarea name="description" id="edit-task-description" rows="6"></textarea>
             </div>
-            <select name="priority" id="edit-task-priority">
-                <option value="0">Priority</option>
-                <option value="1" selected>Low</option>
-                <option value="2">Normal</option>
-                <option value="3">High</option>
-            </select>
+            <div>
+
+                <label for="edit-task-priority">Priority</label>
+                <select name="priority" id="edit-task-priority">
+                    <option value="0">Priority</option>
+                    <option value="1" selected>Low</option>
+                    <option value="2">Normal</option>
+                    <option value="3">High</option>
+                </select>
+            </div>
             <div>
                 <label for="edit-task-dueDate">Due date</label>
                 <input type="date" id="edit-task-dueDate" name="dueDate">
             </div>
-            <button type="button">Cancel</button>
-            <button type="submit">Save</button>
+            <div class="btns">
+                <button type="button">Cancel</button>
+                <button type="submit">Save</button>
+            </div>
         </form>
     </dialog>
 
     <dialog id="edit-subtask-dialog">
         <form method="dialog">
             <div>
-                <label for="edit-subtask-content">content</label>
+                <label for="edit-subtask-content">Content</label>
                 <input type="text" id="edit-subtask-content" name="content">
             </div>
-            <button type="button">Cancel</button>
-            <button type="submit">Save</button>
+            <div class="btns">
+                <button type="button">Cancel</button>
+                <button type="submit">Save</button>
+            </div>
         </form>
     </dialog>
 </body>

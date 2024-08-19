@@ -256,10 +256,13 @@ class View {
         project.title,
         Handle.projectSelectBtn(project.id),
       );
-      const editBtn = Make.button("edit", Handle.projectEditBtn);
+      const editBtn = Make.button("", Handle.projectEditBtn);
       editBtn.dataset.id = project.id;
+      editBtn.classList.add("edit");
+      editBtn.title = "edit project";
 
       const container = document.createElement("div");
+      container.classList.add("project");
       container.append(projectBtn, editBtn);
 
       projectBtns.push(container);
@@ -268,8 +271,10 @@ class View {
     const title = Make.text("Choose a project", "h2");
     const allButton = Make.button("All projects", Handle.projectShowAllBtn);
     const addProjectBtn = Make.button("add project", Handle.projectAddBtn);
+    addProjectBtn.classList.add("add");
 
     const container = document.createElement("div");
+    container.classList.add("projects");
     container.append(title, allButton, ...projectBtns, addProjectBtn);
     return container;
   }
@@ -283,13 +288,16 @@ class View {
     const title = this.editProject.title.value;
     const id = this.editProject.modal.querySelector("button").value;
 
-    const text = Make.text(`Do you want to delete project "${title}"?`);
+    const text = Make.text(`Do you want to delete project "${title}"?`, "p");
+    const btnContainer = Make.container("btns");
     const cancelBtn = Make.button("cancel", () => this.modal.close());
     const confirmBtn = Make.button("delete", Handle.projectDeleteConfirmBtn);
+    confirmBtn.type = "submit";
     confirmBtn.dataset.id = id;
+    btnContainer.append(cancelBtn, confirmBtn);
 
     const container = document.createElement("div");
-    container.append(text, confirmBtn, cancelBtn);
+    container.append(text, btnContainer);
 
     return container;
   }

@@ -12,7 +12,8 @@
 
 body {
     background: var(--base-background);
-    color: var(--off-white)
+    color: var(--off-white);
+    font-family: "Roboto", sans-serif;
 }
 
 #content {
@@ -21,7 +22,6 @@ body {
     background-color: var(--container-background);
     border-radius: 10px;
     padding: 20px;
-    font-family: "Roboto", sans-serif;
 }
 
 h1 {
@@ -222,4 +222,127 @@ button#newBtn {
     margin: 0;
     font-weight: 900;
     font-size: 16px;
+}
+
+dialog {
+    width: 300px;
+    margin-top: 300px;
+    background-color: var(--background);
+    color: var(--off-white);
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    padding-top: 0;
+}
+
+dialog h2 {
+    font-size: 30px;
+    margin: 0;
+    margin-top: 15px;
+    margin-bottom: 10px;
+
+}
+
+dialog::backdrop {
+    background-color: rgb(0, 0, 0, 0.8);
+}
+
+#main-dialog p {
+    font-size: 25px;
+    margin: 15px 0;
+}
+
+#main-dialog .projects button {
+    background: none;
+    border: none;
+    color: var(--off-white);
+    font-size: 25px;
+    margin: 5px 0;
+}
+
+
+#main-dialog .projects button:hover {
+    color: var(--yellow);
+}
+
+#main-dialog .projects button.add:hover {
+    color: var(--off-white);
+    filter: brightness(120%);
+}
+
+#main-dialog .projects button.add {
+    margin-top: 15px;
+    background: url("../assets/plus-thick.svg") no-repeat left;
+    padding-left: 27px;
+    font-size: 20px;
+    border: 1px solid var(--off-white);
+}
+
+#main-dialog .projects .project {
+    display: flex;
+    align-items: center;
+}
+
+#main-dialog .projects button.edit {
+    height: 25px;
+    width: 25px;
+    background: url("../assets/pencil.svg") no-repeat center;
+    filter: brightness(70%)
+}
+
+#main-dialog .projects button.edit:hover {
+    filter: none;
+}
+
+
+dialog form {
+    font-size: 20px;
+}
+
+dialog form div {
+    margin-top: 15px;
+}
+
+dialog form label {
+    display: block;
+    margin-bottom: 2px;
+}
+
+dialog form input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+dialog form textarea {
+    box-sizing: border-box;
+    width: 100%;
+    resize: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+dialog .btns {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+dialog .btns button {
+    font-size: 15px;
+    background: none;
+    border: none;
+    color: var(--off-white)
+}
+
+dialog .btns button[type=submit] {
+    background-color: var(--base-background);
+    font-size: 20px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-left: 5px;
 }
