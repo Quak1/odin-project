@@ -77,7 +77,7 @@ class Store {
     this.store.forEach((project) =>
       project.tasks
         .filter((task) => task.done)
-        .forEach((task) => this.deleteTask(project.id, task.id)),
+        .forEach((task) => this.deleteTask(task.id)),
     );
   }
 

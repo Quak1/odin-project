@@ -21,6 +21,7 @@ class Handle {
   static taskNewBtn(e) {
     View.showTaskAddModal();
   }
+
   static taskDeleteBtn(e) {
     const container = e.target.parentElement.parentElement;
     Handle.#deleteTaskByNode(container);
@@ -72,8 +73,13 @@ class Handle {
   }
 
   static tasksDeleteCompleteBtn() {
+    View.showCleanTasksConfirmation();
+  }
+
+  static tasksDeleteConfirmBtn() {
     store.deleteDoneTasks();
     View.deleteDoneTaskContainers();
+    View.closeModal();
   }
 
   static taskEditSubmitForm(e) {
@@ -197,7 +203,7 @@ class Handle {
   }
 
   static projectDeleteConfirmBtn(e) {
-    const projectId = Number(e.target.value);
+    const projectId = Number(e.target.dataset.id);
     store.deleteProject(projectId);
 
     View.showAllProjects(store.store);

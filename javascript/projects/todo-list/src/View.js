@@ -77,14 +77,14 @@ class View {
     this.changeActiveProject(project);
     this.#tasksContainer.textContent = "";
     const sorted = View.sortTasks(project.tasks);
-    console.log(sorted);
+    const description = Make.text(project.description, "p");
     const tasks = sorted.map((task) => this.makeTaskContainer(task));
-    this.#tasksContainer.append(...tasks);
+    this.#tasksContainer.append(description, ...tasks);
   }
 
   static showAllProjects(projects) {
     this.#tasksContainer.textContent = "";
-    this.changeActiveProject({ title: "All Projects", id: 0 });
+    this.changeActiveProject({ title: "All Projects", id: 0, description: "" });
     for (const project of projects) {
       const container = document.createElement("div");
       const titleDiv = Make.text(project.title, "h2");
@@ -281,12 +281,14 @@ class View {
 
   static changeActiveProject(project) {
     document.getElementById("active-project").textContent = project.title;
+    document.getElementById("project-description").textContent =
+      project.description;
     this.activeProject = project.id;
   }
 
   static makeProjectDeleteConfirmContainer() {
     const title = this.editProject.title.value;
-    const id = this.editProject.modal.querySelector("button").value;
+    const id = this.editProject.modal.dataset.id;
 
     const text = Make.text(`Do you want to delete project "${title}"?`, "p");
     const btnContainer = Make.container("btns");
@@ -434,6 +436,28 @@ class View {
     );
 
     this.editSubtask.modal.showModal();
+  }
+
+  static makeCleanTasksConfirmContainer() {
+    const text = Make.text("Do you want to delete all completed tasks?", "p");
+
+    const cancelBtn = Make.button("cancel", () => this.modal.close());
+    const confirmBtn = Make.button("delete", Handle.tasksDeleteConfirmBtn);
+    confirmBtn.type = "submit";
+
+    const btnContainer = Make.container("btns");
+    btnContainer.append(cancelBtn, confirmBtn);
+
+    const container = document.createElement("div");
+    container.append(text, btnContainer);
+
+    return container;
+  }
+
+  static showCleanTasksConfirmation() {
+    this.modal.textContent = "";
+    this.modal.append(this.makeCleanTasksConfirmContainer());
+    this.modal.showModal();
   }
 }
 
