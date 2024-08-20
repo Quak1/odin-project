@@ -77,9 +77,8 @@ class View {
     this.changeActiveProject(project);
     this.#tasksContainer.textContent = "";
     const sorted = View.sortTasks(project.tasks);
-    const description = Make.text(project.description, "p");
     const tasks = sorted.map((task) => this.makeTaskContainer(task));
-    this.#tasksContainer.append(description, ...tasks);
+    this.#tasksContainer.append(...tasks);
   }
 
   static showAllProjects(projects) {
