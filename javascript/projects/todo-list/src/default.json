@@ -1,60 +1,60 @@
 [
     {
+        "id": 0,
         "title": "Inbox",
-        "description": "",
-        "tasks": []
-    },
-    {
-        "title": "default",
         "description": "",
         "tasks": [
             {
+                "id": 0,
                 "title": "First task",
-                "description": "A description for your first task",
-                "_priority": 3,
+                "description": "",
+                "_priority": "0",
                 "done": false,
-                "checklist": [
-                    {
-                        "content": "first item",
-                        "done": false
-                    },
-                    {
-                        "content": "second item",
-                        "done": false
-                    }
-                ]
+                "checklist": [],
+                "dueDate": ""
             },
             {
+                "id": 1,
                 "title": "Second task",
-                "description": "A description for your second task",
-                "_priority": 0,
-                "done": false,
-                "checklist": []
+                "description": "",
+                "_priority": "0",
+                "done": true,
+                "checklist": [],
+                "dueDate": ""
             }
         ]
     },
     {
-        "title": "Some project",
-        "description": "This is my own personal project!",
+        "id": 1,
+        "title": "New Project",
+        "description": "Description for my new project",
         "tasks": [
             {
-                "title": "My project First task",
-                "description": "A description for your first task",
-                "_priority": 2,
+                "id": 6,
+                "title": "Low priority task",
+                "description": "",
+                "_priority": "1",
                 "done": false,
-                "checklist": [
-                    {
-                        "content": "first item",
-                        "done": true
-                    }
-                ]
+                "checklist": [],
+                "dueDate": ""
             },
             {
-                "title": "My projct Second task",
-                "description": "A description for your second task",
-                "_priority": 1,
-                "done": true,
-                "checklist": []
+                "id": 7,
+                "title": "Medium priority task",
+                "description": "A task description",
+                "_priority": "2",
+                "done": false,
+                "checklist": [],
+                "dueDate": ""
+            },
+            {
+                "id": 8,
+                "title": "High priority task",
+                "description": "",
+                "_priority": "3",
+                "done": false,
+                "checklist": [],
+                "dueDate": ""
             }
         ]
     }
