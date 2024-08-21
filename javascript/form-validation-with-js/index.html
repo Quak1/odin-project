@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form Validation with JavaScript</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="index.js" defer></script>
+</head>
+
+<body>
+    <form novalidate>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+            <span class="error">Email error message</span>
+        </div>
+        <div>
+            <label for="country">Country</label>
+            <select name="country" id="country" required>
+                <option value="">Select a country</option>
+                <option value="CA">Canada</option>
+                <option value="MX">Mexico</option>
+                <option value="US">United States</option>
+            </select>
+            <span class="error">Country error message</span>
+        </div>
+        <div>
+            <label for="zip">Zip code</label>
+            <input type="text" id="zip" required>
+            <span class="error">Zip code error message</span>
+        </div>
+        <div>
+            <label for="pwd">Password</label>
+            <input type="password" id="pwd" required>
+            <span class="error">Password error mesage</span>
+        </div>
+        <div>
+            <label for="pwd-confirm">Confirm password</label>
+            <input type="password" id="pwd-confirm" required>
+            <span class="error">Password confirm error message</span>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>

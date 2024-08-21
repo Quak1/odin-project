@@ -1,0 +1,62 @@
+body {
+    background-color: midnightblue;
+}
+
+
+form {
+    width: 300px;
+    margin: 0 auto;
+    background-color: cornsilk;
+    color: black;
+    font-size: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+form>div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+form input {
+    font-size: inherit;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+
+}
+
+form select {
+    font-size: inherit;
+}
+
+form button {
+    padding: 5px 20px;
+    font-size: 25px;
+    font-weight: 900;
+    color: white;
+    background-color: teal;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+form button:active {
+    transform: translateY(2px);
+}
+
+form ul {
+    margin: 0;
+}
+
+.error {
+    color: crimson;
+    display: none;
+    font-size: 16px;
+}
+
+.error.active {
+    display: initial;
+}
