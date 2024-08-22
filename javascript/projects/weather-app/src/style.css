@@ -1,0 +1,13 @@
+#hourly {
+    display: flex;
+}
+
+.weekDay {
+    display: flex;
+    justify-content: space-between;
+}
+
+img {
+    height: 100px;
+    width: 100px;
+}

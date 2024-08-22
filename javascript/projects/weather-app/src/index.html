@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather App</title>
+</head>
+
+<body>
+    <div class="container">
+        <form>
+            <div>
+                <label for="city-input">City</label>
+                <input type="text" id="city-input" name="city">
+            </div>
+            <button type="submit">Search</button>
+        </form>
+
+        <section id="weather">
+            <card id="weather-today">
+                <div id="now">
+                    <div>
+                        <p id="temperature"></p>
+                        <p id="city"></p>
+                        <p id="date"></p>
+                    </div>
+                    <div id="current-condition">
+                        <img>
+                        <p></p>
+                    </div>
+                </div>
+                <div id="hourly">
+                </div>
+            </card>
+            <card id="weather-week">
+            </card>
+        </section>
+    </div>
+
+
+</body>
+
+</html>
