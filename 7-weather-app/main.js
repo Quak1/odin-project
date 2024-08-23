@@ -1,1 +1,621 @@
-(()=>{var e={350:(e,t,i)=>{var o={"./clear-day.svg":554,"./clear-night.svg":422,"./cloudy.svg":236,"./fog.svg":996,"./hail.svg":134,"./partly-cloudy-day.svg":518,"./partly-cloudy-night.svg":338,"./rain-snow-showers-day.svg":745,"./rain-snow-showers-night.svg":805,"./rain-snow.svg":342,"./rain.svg":358,"./showers-day.svg":84,"./showers-night.svg":824,"./sleet.svg":377,"./snow-showers-day.svg":954,"./snow-showers-night.svg":310,"./snow.svg":389,"./thunder-rain.svg":301,"./thunder-showers-day.svg":357,"./thunder-showers-night.svg":569,"./thunder.svg":154,"./water.svg":129,"./wind.svg":969};function r(e){var t=n(e);return i(t)}function n(e){if(!i.o(o,e)){var t=new Error("Cannot find module '"+e+"'");throw t.code="MODULE_NOT_FOUND",t}return o[e]}r.keys=function(){return Object.keys(o)},r.resolve=n,e.exports=r,r.id=350},208:(e,t,i)=>{"use strict";i.d(t,{A:()=>p});var o=i(601),r=i.n(o),n=i(314),c=i.n(n)()(r());c.push([e.id,":root {\n    --main: #374151;\n    --gray: #9ca3af;\n}\n\nbody {\n    background-color: salmon;\n}\n\np {\n    margin: 0;\n}\n\n#container {\n    width: 700px;\n    margin: 0 auto;\n    font-family: sans-serif;\n    font-size: 18px;\n    font-weight: bold;\n    color: var(--main)\n}\n\nform {\n    margin: 20px 0;\n}\n\nform .search-city {\n    display: flex;\n    margin: 0 auto;\n    width: fit-content;\n}\n\nform label {\n    font-size: 22px;\n}\n\nform input[type=text],\nform button[type=submit] {\n    border: none;\n    border-radius: 5px;\n    padding: 5px 10px;\n    font-size: inherit;\n}\n\nform button[type=submit] {\n    margin-left: 10px;\n    color: white;\n    background-color: var(--main);\n    font-weight: 900;\n    cursor: pointer;\n}\n\nform button[type=submit]:active {\n    transform: translateY(2px);\n}\n\nform .toggle-temperature {\n    margin: 0 auto;\n    width: fit-content;\n    display: flex;\n    align-items: center;\n    margin-top: 15px;\n}\n\nform .toggle-temperature input {\n    display: none;\n}\n\n.toggle-btn {\n    --width: 70px;\n    margin-left: 10px;\n    display: inline-block;\n    width: var(--width);\n    height: calc(var(--width) / 2);\n    border-radius: var(--width);\n    cursor: pointer;\n    position: relative;\n    transition: 0.2s;\n    background-color: blue;\n}\n\n.toggle-btn::before {\n    position: absolute;\n    content: '°F';\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n    background-color: #fff;\n    width: calc(var(--width) / 2 * 0.8);\n    height: calc(var(--width) / 2 * 0.8);\n    border-radius: var(--width);\n    margin: calc(var(--width) * 0.05);\n    transition: 0.2s;\n}\n\n.toggle-temperature input:checked+.toggle-btn {\n    background-color: green;\n}\n\n.toggle-temperature input:checked+.toggle-btn::before {\n    content: '°C';\n    transform: translateX(calc(var(--width) / 2));\n}\n\n\n#weather-today,\n#weather-week {\n    background-color: white;\n    border-radius: 20px;\n    outline: solid 10px rgba(255, 255, 255, 0.3);\n}\n\n#weather-today {\n    padding: 50px;\n    margin-bottom: 50px;\n}\n\n#weather-today .now {\n    display: flex;\n    margin-bottom: 40px;\n    justify-content: space-between;\n    color: var(--gray)\n}\n\n\n#weather-today .info :first-child {\n    font-size: 60px;\n    font-weight: 900;\n    color: var(--main)\n}\n\n#weather-today .current-condition {\n    text-align: center;\n}\n\n#weather-today .current-condition img {\n    height: 100px;\n}\n\n#weather-today .hourly {\n    display: flex;\n    text-align: center;\n    justify-content: space-between;\n    font-size: 16px;\n}\n\n#weather-today .hourly p:first-child {\n    margin-bottom: 15px;\n    font-size: 18px;\n}\n\n#weather-today .hourly p:last-child {\n    color: var(--gray)\n}\n\n#weather-today .hourly img {\n    height: 50px;\n}\n\n#weather-week {\n    padding: 50px;\n    display: flex;\n    flex-direction: column;\n    gap: 20px;\n}\n\n.weekDay {\n    display: grid;\n    grid-template-columns: repeat(4, 1fr);\n}\n\n\n.weekDay :nth-child(2) {\n    justify-self: right;\n    display: flex;\n    align-items: center;\n    padding-right: 20px;\n}\n\n.weekDay :nth-child(3) {\n    justify-self: center;\n}\n\n.weekDay :nth-child(4) {\n    justify-self: right;\n}\n\n.weekDay img {\n    height: 30px;\n}\n\ndialog {\n    font-size: 25px;\n    font-family: sans-serif;\n    max-width: 700px;\n}\n",""]);const p=c},314:e=>{"use strict";e.exports=function(e){var t=[];return t.toString=function(){return this.map((function(t){var i="",o=void 0!==t[5];return t[4]&&(i+="@supports (".concat(t[4],") {")),t[2]&&(i+="@media ".concat(t[2]," {")),o&&(i+="@layer".concat(t[5].length>0?" ".concat(t[5]):""," {")),i+=e(t),o&&(i+="}"),t[2]&&(i+="}"),t[4]&&(i+="}"),i})).join("")},t.i=function(e,i,o,r,n){"string"==typeof e&&(e=[[null,e,void 0]]);var c={};if(o)for(var p=0;p<this.length;p++){var a=this[p][0];null!=a&&(c[a]=!0)}for(var d=0;d<e.length;d++){var l=[].concat(e[d]);o&&c[l[0]]||(void 0!==n&&(void 0===l[5]||(l[1]="@layer".concat(l[5].length>0?" ".concat(l[5]):""," {").concat(l[1],"}")),l[5]=n),i&&(l[2]?(l[1]="@media ".concat(l[2]," {").concat(l[1],"}"),l[2]=i):l[2]=i),r&&(l[4]?(l[1]="@supports (".concat(l[4],") {").concat(l[1],"}"),l[4]=r):l[4]="".concat(r)),t.push(l))}},t}},601:e=>{"use strict";e.exports=function(e){return e[1]}},72:e=>{"use strict";var t=[];function i(e){for(var i=-1,o=0;o<t.length;o++)if(t[o].identifier===e){i=o;break}return i}function o(e,o){for(var n={},c=[],p=0;p<e.length;p++){var a=e[p],d=o.base?a[0]+o.base:a[0],l=n[d]||0,m="".concat(d," ").concat(l);n[d]=l+1;var s=i(m),y={css:a[1],media:a[2],sourceMap:a[3],supports:a[4],layer:a[5]};if(-1!==s)t[s].references++,t[s].updater(y);else{var b=r(y,o);o.byIndex=p,t.splice(p,0,{identifier:m,updater:b,references:1})}c.push(m)}return c}function r(e,t){var i=t.domAPI(t);return i.update(e),function(t){if(t){if(t.css===e.css&&t.media===e.media&&t.sourceMap===e.sourceMap&&t.supports===e.supports&&t.layer===e.layer)return;i.update(e=t)}else i.remove()}}e.exports=function(e,r){var n=o(e=e||[],r=r||{});return function(e){e=e||[];for(var c=0;c<n.length;c++){var p=i(n[c]);t[p].references--}for(var a=o(e,r),d=0;d<n.length;d++){var l=i(n[d]);0===t[l].references&&(t[l].updater(),t.splice(l,1))}n=a}}},659:e=>{"use strict";var t={};e.exports=function(e,i){var o=function(e){if(void 0===t[e]){var i=document.querySelector(e);if(window.HTMLIFrameElement&&i instanceof window.HTMLIFrameElement)try{i=i.contentDocument.head}catch(e){i=null}t[e]=i}return t[e]}(e);if(!o)throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");o.appendChild(i)}},540:e=>{"use strict";e.exports=function(e){var t=document.createElement("style");return e.setAttributes(t,e.attributes),e.insert(t,e.options),t}},56:(e,t,i)=>{"use strict";e.exports=function(e){var t=i.nc;t&&e.setAttribute("nonce",t)}},825:e=>{"use strict";e.exports=function(e){if("undefined"==typeof document)return{update:function(){},remove:function(){}};var t=e.insertStyleElement(e);return{update:function(i){!function(e,t,i){var o="";i.supports&&(o+="@supports (".concat(i.supports,") {")),i.media&&(o+="@media ".concat(i.media," {"));var r=void 0!==i.layer;r&&(o+="@layer".concat(i.layer.length>0?" ".concat(i.layer):""," {")),o+=i.css,r&&(o+="}"),i.media&&(o+="}"),i.supports&&(o+="}");var n=i.sourceMap;n&&"undefined"!=typeof btoa&&(o+="\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(n))))," */")),t.styleTagTransform(o,e,t.options)}(t,e,i)},remove:function(){!function(e){if(null===e.parentNode)return!1;e.parentNode.removeChild(e)}(t)}}}},113:e=>{"use strict";e.exports=function(e,t){if(t.styleSheet)t.styleSheet.cssText=e;else{for(;t.firstChild;)t.removeChild(t.firstChild);t.appendChild(document.createTextNode(e))}}},554:(e,t,i)=>{"use strict";e.exports=i.p+"e6541ce84a82ea86deaf.svg"},422:(e,t,i)=>{"use strict";e.exports=i.p+"7228ebde1a1cbbabeed4.svg"},236:(e,t,i)=>{"use strict";e.exports=i.p+"bd65452b254265c4f761.svg"},996:(e,t,i)=>{"use strict";e.exports=i.p+"07bf93f0c95051aa29f1.svg"},134:(e,t,i)=>{"use strict";e.exports=i.p+"7716b874413ac673e7aa.svg"},518:(e,t,i)=>{"use strict";e.exports=i.p+"749d1251900ec2449417.svg"},338:(e,t,i)=>{"use strict";e.exports=i.p+"c0a8d00378e555b86fcf.svg"},745:(e,t,i)=>{"use strict";e.exports=i.p+"207b14093cc421b50195.svg"},805:(e,t,i)=>{"use strict";e.exports=i.p+"d20b1ffc3bb5091a3478.svg"},342:(e,t,i)=>{"use strict";e.exports=i.p+"30d0498eaffed5814744.svg"},358:(e,t,i)=>{"use strict";e.exports=i.p+"848651d20f3f58949d26.svg"},84:(e,t,i)=>{"use strict";e.exports=i.p+"99f737e43d74ac67225a.svg"},824:(e,t,i)=>{"use strict";e.exports=i.p+"391e6dd7e7c4056b3e07.svg"},377:(e,t,i)=>{"use strict";e.exports=i.p+"a791cdeb76b2a1c641a5.svg"},954:(e,t,i)=>{"use strict";e.exports=i.p+"9b361803bd2c718d208f.svg"},310:(e,t,i)=>{"use strict";e.exports=i.p+"a917b111f11bd1e967cf.svg"},389:(e,t,i)=>{"use strict";e.exports=i.p+"f8d40353e151c5c7cce0.svg"},301:(e,t,i)=>{"use strict";e.exports=i.p+"80f57ee23a7a1d38351e.svg"},357:(e,t,i)=>{"use strict";e.exports=i.p+"03133e2a54cdc1e8cf84.svg"},569:(e,t,i)=>{"use strict";e.exports=i.p+"430f208dd338964430c3.svg"},154:(e,t,i)=>{"use strict";e.exports=i.p+"31fc29a57119a2bd369f.svg"},129:(e,t,i)=>{"use strict";e.exports=i.p+"2807e2cf293d432ea09d.svg"},969:(e,t,i)=>{"use strict";e.exports=i.p+"e87b86c9cbeabdd90ce2.svg"}},t={};function i(o){var r=t[o];if(void 0!==r)return r.exports;var n=t[o]={id:o,exports:{}};return e[o](n,n.exports,i),n.exports}i.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return i.d(t,{a:t}),t},i.d=(e,t)=>{for(var o in t)i.o(t,o)&&!i.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:t[o]})},i.g=function(){if("object"==typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(e){if("object"==typeof window)return window}}(),i.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),(()=>{var e;i.g.importScripts&&(e=i.g.location+"");var t=i.g.document;if(!e&&t&&(t.currentScript&&"SCRIPT"===t.currentScript.tagName.toUpperCase()&&(e=t.currentScript.src),!e)){var o=t.getElementsByTagName("script");if(o.length)for(var r=o.length-1;r>-1&&(!e||!/^http(s?):/.test(e));)e=o[r--].src}if(!e)throw new Error("Automatic publicPath is not supported in this browser");e=e.replace(/#.*$/,"").replace(/\?.*$/,"").replace(/\/[^\/]+$/,"/"),i.p=e})(),i.nc=void 0,(()=>{"use strict";let e=!0;const t=function(){const e=i(350),t={};return e.keys().forEach((i=>{const o=i.substring(2,i.length-4);t[o]=e(i)})),t}(),o=document.querySelector("#weather-today .city"),r=document.querySelector("#weather-today .temperature"),n=document.querySelector("#weather-today .date"),c=document.querySelector(".current-condition img"),p=document.querySelector(".current-condition p"),a=document.querySelector("#weather-today .hourly"),d=document.getElementById("weather-week"),l=document.querySelector("dialog");let m;function s(e){m=(e.tzoffset<0?"":"+")+e.tzoffset,2===m.length&&(m=m[0]+"0"+m[1]),function({resolvedAddress:e,currentConditions:i,days:d}){var l;o.textContent=e,r.textContent=g(i.temp),n.textContent=(l=d[0].datetime,new Date(`${l} GMT${m}`).toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric",timeZone:m})),c.alt=`${i.conditions} icon`,c.src=t[i.icon],p.textContent=i.conditions,function([e,i],o){let r;const n=o+2;r=n>=24?[...i.hours.slice(n%24,(n+9)%24)]:n+9>24?[...e.hours.slice(n),...i.hours.slice(0,(n+9)%24)]:e.hours.slice(n,n+9),r=r.filter(((e,t)=>t%2==0));const c=r.map((e=>function(e){const i=b(g(e.temp),"p"),o=Number(e.datetime.substring(0,2)),r=b((o%12==0?12:o%12)+":00","p"),n=b(o>=12?"PM":"AM","p"),c=document.createElement("img");return c.alt=`${e.conditions} icon`,c.src=t[e.icon],u([i,c,r,n])}(e)));a.textContent="",a.append(...c)}(d,Number(i.datetime.slice(0,2)))}(e),function({days:e}){const i=e.slice(1,7).map((e=>function(e){const i=b(function(e){return new Date(`${e} GMT${m}`).toLocaleDateString("en-US",{weekday:"short",month:"short",day:"2-digit",timeZone:m})}(e.datetime),"p"),o=b(e.precipprob+"%","p"),r=b(`${e.tempmin}° / ${e.tempmax}°`,"p"),n=document.createElement("img");n.alt="Precipitation probability icon",n.src=t.water;const c=u([o,n]),p=document.createElement("img");return p.alt=`${e.conditions} icon`,p.src=t[e.icon],u([i,c,p,r],"weekDay")}(e)));d.textContent="",d.append(...i)}(e)}function y(e){l.textContent=e,l.showModal()}function b(e,t){const i=document.createElement(t);return i.textContent=e,i}function u(e,t="",i="div"){const o=document.createElement(i);return o.classList=t,o.append(...e),o}function g(t){return`${t} °${e?"C":"F"}`}const h=`include=current,hours,days&elements=${["conditions","icon","temp","datetime","precipprob","tempmin","tempmax"].join(",")}&contentType=json`,C=JSON.parse('{"queryCost":1,"latitude":34.0536,"longitude":-118.245,"resolvedAddress":"Los Angeles, CA, United States","address":"los angeles","timezone":"America/Los_Angeles","tzoffset":-7,"days":[{"datetime":"2024-08-22","tempmax":25.6,"tempmin":19.4,"temp":22.3,"precipprob":1,"conditions":"Clear","icon":"clear-day","hours":[{"datetime":"00:00:00","temp":21.3,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"01:00:00","temp":20.5,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"02:00:00","temp":20.2,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"03:00:00","temp":20.2,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"04:00:00","temp":19.6,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"05:00:00","temp":19.4,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"06:00:00","temp":19.8,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"07:00:00","temp":19.8,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"08:00:00","temp":21,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"09:00:00","temp":22.4,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"10:00:00","temp":24,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"11:00:00","temp":25,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":25.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":25.4,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":25.3,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"15:00:00","temp":25.3,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"16:00:00","temp":25.2,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"17:00:00","temp":25.6,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"18:00:00","temp":23.9,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"19:00:00","temp":22.8,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"20:00:00","temp":21.7,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":20.6,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":20,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":20,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"}]},{"datetime":"2024-08-23","tempmax":26.7,"tempmin":18.9,"temp":21.9,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-day","hours":[{"datetime":"00:00:00","temp":20,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"01:00:00","temp":20,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"02:00:00","temp":19.5,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"03:00:00","temp":19.5,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"04:00:00","temp":19.5,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"05:00:00","temp":18.9,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"06:00:00","temp":18.9,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"07:00:00","temp":19.5,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"08:00:00","temp":20.6,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"09:00:00","temp":21.2,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"10:00:00","temp":22.8,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"11:00:00","temp":24.5,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":25.6,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":26.7,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":26.7,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"15:00:00","temp":26.7,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"16:00:00","temp":26.2,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"17:00:00","temp":25,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"18:00:00","temp":23.4,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"19:00:00","temp":21.7,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"20:00:00","temp":20.6,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":19.5,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":18.9,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":18.9,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-night"}]},{"datetime":"2024-08-24","tempmax":26.7,"tempmin":17.8,"temp":21.2,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day","hours":[{"datetime":"00:00:00","temp":18.9,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"01:00:00","temp":18.4,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"02:00:00","temp":18.4,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"03:00:00","temp":18.4,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"04:00:00","temp":18.1,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"05:00:00","temp":17.8,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"06:00:00","temp":18.2,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"07:00:00","temp":18.5,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"08:00:00","temp":18.9,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"09:00:00","temp":20.4,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"10:00:00","temp":21.9,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"11:00:00","temp":23.4,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":24.5,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":25.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":26.7,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"15:00:00","temp":26,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"16:00:00","temp":25.2,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"17:00:00","temp":24.5,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"18:00:00","temp":23.2,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"19:00:00","temp":21.9,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"20:00:00","temp":20.6,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":20.2,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":19.9,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":19.5,"precipprob":0,"conditions":"Clear","icon":"clear-night"}]},{"datetime":"2024-08-25","tempmax":28.4,"tempmin":18.4,"temp":22.2,"precipprob":1,"conditions":"Clear","icon":"clear-day","hours":[{"datetime":"00:00:00","temp":19.3,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"01:00:00","temp":19.1,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"02:00:00","temp":18.9,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"03:00:00","temp":18.7,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"04:00:00","temp":18.6,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"05:00:00","temp":18.4,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"06:00:00","temp":18.9,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"07:00:00","temp":19.5,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"08:00:00","temp":20,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"09:00:00","temp":21.9,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"10:00:00","temp":23.7,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"11:00:00","temp":25.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":26.5,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":27.5,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":28.4,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"15:00:00","temp":27.8,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"16:00:00","temp":27.3,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"17:00:00","temp":26.7,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"18:00:00","temp":24,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"19:00:00","temp":22.4,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"20:00:00","temp":20.8,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":20.2,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":19.6,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":19,"precipprob":1,"conditions":"Clear","icon":"clear-night"}]},{"datetime":"2024-08-26","tempmax":29.4,"tempmin":17.6,"temp":22.3,"precipprob":0,"conditions":"Clear","icon":"clear-day","hours":[{"datetime":"00:00:00","temp":18.7,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"01:00:00","temp":18.4,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"02:00:00","temp":18.1,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"03:00:00","temp":17.9,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"04:00:00","temp":17.8,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"05:00:00","temp":17.6,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"06:00:00","temp":18.3,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"07:00:00","temp":18.9,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"08:00:00","temp":19.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"09:00:00","temp":21.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"10:00:00","temp":23.7,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"11:00:00","temp":25.7,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":26.9,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":28.2,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":29.4,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"15:00:00","temp":28.7,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"16:00:00","temp":28,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"17:00:00","temp":27.3,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"18:00:00","temp":25.4,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"19:00:00","temp":23.5,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"20:00:00","temp":21.6,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":20.9,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":20.2,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":19.5,"precipprob":0,"conditions":"Clear","icon":"clear-night"}]},{"datetime":"2024-08-27","tempmax":29.3,"tempmin":18.2,"temp":22.7,"precipprob":1,"conditions":"Clear","icon":"clear-day","hours":[{"datetime":"00:00:00","temp":19.3,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"01:00:00","temp":19.1,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"02:00:00","temp":18.9,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"03:00:00","temp":18.7,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"04:00:00","temp":18.4,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"05:00:00","temp":18.2,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"06:00:00","temp":18.8,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"07:00:00","temp":19.3,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"08:00:00","temp":19.9,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"09:00:00","temp":21.9,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"10:00:00","temp":24,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"11:00:00","temp":26,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":27.1,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":28.2,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":29.3,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"15:00:00","temp":28.7,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"16:00:00","temp":28.2,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"17:00:00","temp":27.6,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"18:00:00","temp":25.7,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"19:00:00","temp":23.8,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"20:00:00","temp":21.9,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":21.1,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":20.4,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":19.6,"precipprob":1,"conditions":"Clear","icon":"clear-night"}]},{"datetime":"2024-08-28","tempmax":28.2,"tempmin":17.6,"temp":21.8,"precipprob":1,"conditions":"Clear","icon":"clear-day","hours":[{"datetime":"00:00:00","temp":19.2,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"01:00:00","temp":18.9,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"02:00:00","temp":18.5,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"03:00:00","temp":18.2,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"04:00:00","temp":17.9,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"05:00:00","temp":17.6,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"06:00:00","temp":18.2,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"07:00:00","temp":18.8,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"08:00:00","temp":19.4,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"09:00:00","temp":21.3,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"10:00:00","temp":23.2,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"11:00:00","temp":25.1,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":26.1,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":27.2,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":28.2,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"15:00:00","temp":27.5,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"16:00:00","temp":26.7,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"17:00:00","temp":26,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"18:00:00","temp":24.2,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"19:00:00","temp":22.3,"precipprob":1,"conditions":"Clear","icon":"clear-day"},{"datetime":"20:00:00","temp":20.5,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":19.8,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":19.1,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":18.4,"precipprob":1,"conditions":"Clear","icon":"clear-night"}]},{"datetime":"2024-08-29","tempmax":27.5,"tempmin":17,"temp":21.2,"precipprob":3,"conditions":"Partially cloudy","icon":"partly-cloudy-day","hours":[{"datetime":"00:00:00","temp":18.1,"precipprob":1,"conditions":"Clear","icon":"clear-night"},{"datetime":"01:00:00","temp":17.8,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"02:00:00","temp":17.5,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"03:00:00","temp":17.3,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"04:00:00","temp":17.2,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"05:00:00","temp":17,"precipprob":1,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"06:00:00","temp":17.7,"precipprob":2,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"07:00:00","temp":18.3,"precipprob":2,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"08:00:00","temp":19,"precipprob":2,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"09:00:00","temp":20.7,"precipprob":2,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"10:00:00","temp":22.5,"precipprob":2,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"11:00:00","temp":24.2,"precipprob":2,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":25.3,"precipprob":2,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":26.4,"precipprob":2,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":27.5,"precipprob":2,"conditions":"Clear","icon":"clear-day"},{"datetime":"15:00:00","temp":26.8,"precipprob":2,"conditions":"Clear","icon":"clear-day"},{"datetime":"16:00:00","temp":26.1,"precipprob":2,"conditions":"Clear","icon":"clear-day"},{"datetime":"17:00:00","temp":25.4,"precipprob":2,"conditions":"Clear","icon":"clear-day"},{"datetime":"18:00:00","temp":23.7,"precipprob":3,"conditions":"Clear","icon":"clear-day"},{"datetime":"19:00:00","temp":22,"precipprob":3,"conditions":"Clear","icon":"clear-day"},{"datetime":"20:00:00","temp":20.3,"precipprob":3,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":19.7,"precipprob":3,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":19,"precipprob":3,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":18.4,"precipprob":3,"conditions":"Clear","icon":"clear-night"}]},{"datetime":"2024-08-30","tempmax":30.4,"tempmin":17.1,"temp":22.9,"precipprob":3.2,"conditions":"Clear","icon":"clear-day","hours":[{"datetime":"00:00:00","temp":18.1,"precipprob":3,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"01:00:00","temp":17.9,"precipprob":3,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"02:00:00","temp":17.6,"precipprob":3,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"03:00:00","temp":17.4,"precipprob":3,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"04:00:00","temp":17.3,"precipprob":3,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"05:00:00","temp":17.1,"precipprob":3,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"06:00:00","temp":17.7,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-night"},{"datetime":"07:00:00","temp":18.4,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"08:00:00","temp":19,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"09:00:00","temp":23.9,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"10:00:00","temp":25.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"11:00:00","temp":27.4,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":28.4,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":29.4,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":30.4,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"15:00:00","temp":29.8,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"16:00:00","temp":29.1,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"17:00:00","temp":28.5,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"18:00:00","temp":26.4,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"19:00:00","temp":24.2,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"20:00:00","temp":22.1,"precipprob":3.2,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":21.7,"precipprob":3.2,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":21.2,"precipprob":3.2,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":20.8,"precipprob":3.2,"conditions":"Clear","icon":"clear-night"}]},{"datetime":"2024-08-31","tempmax":30.5,"tempmin":19.9,"temp":24.3,"precipprob":3.2,"conditions":"Clear","icon":"clear-day","hours":[{"datetime":"00:00:00","temp":20.5,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"01:00:00","temp":20.2,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"02:00:00","temp":19.9,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"03:00:00","temp":19.9,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"04:00:00","temp":20,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"05:00:00","temp":20,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"06:00:00","temp":21.1,"precipprob":3.2,"conditions":"Clear","icon":"clear-night"},{"datetime":"07:00:00","temp":22.3,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"08:00:00","temp":23.4,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"09:00:00","temp":24.8,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"10:00:00","temp":26.2,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"11:00:00","temp":27.6,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":28.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":29.5,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":30.5,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"15:00:00","temp":30.2,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"16:00:00","temp":29.8,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"17:00:00","temp":29.5,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"18:00:00","temp":27.1,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"19:00:00","temp":24.7,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"20:00:00","temp":22.3,"precipprob":3.2,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":21.9,"precipprob":3.2,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":21.5,"precipprob":3.2,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":21.1,"precipprob":3.2,"conditions":"Clear","icon":"clear-night"}]},{"datetime":"2024-09-01","tempmax":30.5,"tempmin":20,"temp":24,"precipprob":0,"conditions":"Clear","icon":"clear-day","hours":[{"datetime":"00:00:00","temp":20.8,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"01:00:00","temp":20.4,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"02:00:00","temp":20.1,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"03:00:00","temp":20.1,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"04:00:00","temp":20,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"05:00:00","temp":20,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"06:00:00","temp":20.9,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"07:00:00","temp":21.8,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"08:00:00","temp":22.7,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"09:00:00","temp":24.3,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"10:00:00","temp":26,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"11:00:00","temp":27.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":28.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":29.5,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":30.5,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"15:00:00","temp":29.9,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"16:00:00","temp":29.2,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"17:00:00","temp":28.6,"precipprob":0,"conditions":"Overcast","icon":"cloudy"},{"datetime":"18:00:00","temp":26.4,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"19:00:00","temp":24.1,"precipprob":0,"conditions":"Partially cloudy","icon":"partly-cloudy-day"},{"datetime":"20:00:00","temp":21.9,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":21.4,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":20.8,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":20.3,"precipprob":0,"conditions":"Clear","icon":"clear-night"}]},{"datetime":"2024-09-02","tempmax":29.2,"tempmin":18.1,"temp":22.6,"precipprob":0,"conditions":"Clear","icon":"clear-day","hours":[{"datetime":"00:00:00","temp":20,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"01:00:00","temp":19.7,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"02:00:00","temp":19.4,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"03:00:00","temp":19,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"04:00:00","temp":18.5,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"05:00:00","temp":18.1,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"06:00:00","temp":19.2,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"07:00:00","temp":20.3,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"08:00:00","temp":21.4,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"09:00:00","temp":23.1,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"10:00:00","temp":24.7,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"11:00:00","temp":26.4,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":27.3,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":28.3,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":29.2,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"15:00:00","temp":28.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"16:00:00","temp":27.9,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"17:00:00","temp":27.3,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"18:00:00","temp":24.9,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"19:00:00","temp":22.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"20:00:00","temp":20.2,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":19.6,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":19,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":18.4,"precipprob":0,"conditions":"Clear","icon":"clear-night"}]},{"datetime":"2024-09-03","tempmax":26.7,"tempmin":17,"temp":20.7,"precipprob":0,"conditions":"Clear","icon":"clear-day","hours":[{"datetime":"00:00:00","temp":18.1,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"01:00:00","temp":17.8,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"02:00:00","temp":17.5,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"03:00:00","temp":17.3,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"04:00:00","temp":17.2,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"05:00:00","temp":17,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"06:00:00","temp":17.8,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"07:00:00","temp":18.7,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"08:00:00","temp":19.5,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"09:00:00","temp":20.9,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"10:00:00","temp":22.2,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"11:00:00","temp":23.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":24.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":25.7,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":26.7,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"15:00:00","temp":26.2,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"16:00:00","temp":25.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"17:00:00","temp":25.1,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"18:00:00","temp":23,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"19:00:00","temp":20.9,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"20:00:00","temp":18.8,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":18.2,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":17.6,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":17,"precipprob":0,"conditions":"Clear","icon":"clear-night"}]},{"datetime":"2024-09-04","tempmax":27.6,"tempmin":16.1,"temp":21,"precipprob":0,"conditions":"Clear","icon":"clear-day","hours":[{"datetime":"00:00:00","temp":16.7,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"01:00:00","temp":16.5,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"02:00:00","temp":16.2,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"03:00:00","temp":16.2,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"04:00:00","temp":16.1,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"05:00:00","temp":16.1,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"06:00:00","temp":17.2,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"07:00:00","temp":18.4,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"08:00:00","temp":19.5,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"09:00:00","temp":21.2,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"10:00:00","temp":22.8,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"11:00:00","temp":24.5,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":25.5,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":26.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":27.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"15:00:00","temp":27.3,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"16:00:00","temp":26.9,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"17:00:00","temp":26.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"18:00:00","temp":24.2,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"19:00:00","temp":21.9,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"20:00:00","temp":19.5,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":19,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":18.4,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":17.9,"precipprob":0,"conditions":"Clear","icon":"clear-night"}]},{"datetime":"2024-09-05","tempmax":28.6,"tempmin":16.8,"temp":21.8,"precipprob":3.2,"conditions":"Clear","icon":"clear-day","hours":[{"datetime":"00:00:00","temp":17.7,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"01:00:00","temp":17.4,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"02:00:00","temp":17.2,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"03:00:00","temp":17.1,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"04:00:00","temp":16.9,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"05:00:00","temp":16.8,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"06:00:00","temp":18,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"07:00:00","temp":19.1,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"08:00:00","temp":20.3,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"09:00:00","temp":22.1,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"10:00:00","temp":23.8,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"11:00:00","temp":25.6,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"12:00:00","temp":26.6,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"13:00:00","temp":27.6,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"14:00:00","temp":28.6,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"15:00:00","temp":28.3,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"16:00:00","temp":28.1,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"17:00:00","temp":27.8,"precipprob":3.2,"conditions":"Clear","icon":"clear-day"},{"datetime":"18:00:00","temp":25.2,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"19:00:00","temp":22.7,"precipprob":0,"conditions":"Clear","icon":"clear-day"},{"datetime":"20:00:00","temp":20.1,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"21:00:00","temp":19.6,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"22:00:00","temp":19,"precipprob":0,"conditions":"Clear","icon":"clear-night"},{"datetime":"23:00:00","temp":18.5,"precipprob":0,"conditions":"Clear","icon":"clear-night"}]}],"currentConditions":{"datetime":"16:20:00","temp":26.9,"precipprob":0,"conditions":"Clear","icon":"clear-day"}}');var f=i(72),v=i.n(f),x=i(825),w=i.n(x),P=i(659),S=i.n(P),k=i(56),E=i.n(k),T=i(540),A=i.n(T),$=i(113),j=i.n($),D=i(208),M={};M.styleTagTransform=j(),M.setAttributes=E(),M.insert=S().bind(null,"head"),M.domAPI=w(),M.insertStyleElement=A(),v()(D.A,M),D.A&&D.A.locals&&D.A.locals,s(C);const q=document.querySelector("form"),L=q.querySelector("input"),N=document.getElementById("toggle");async function z(t){try{y("Loading...");const i=e?"metric":"us",o=await async function(e,t){const i=await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${e}?key=2T88MSEVCVADNM8B6CEF2WYTU&unitGroup=${t}&${h}`);if(!i.ok)throw new Error(`Data couldn't be fetched with status code ${i.status}.`);return await i.json()}(t,i);s(o),L.value="",l.close()}catch(e){console.log(e),y("There was an error getting new data. "+e.message)}}q.addEventListener("submit",(async e=>{e.preventDefault(),z(L.value)})),N.addEventListener("click",(()=>{var t;t=N.checked,e=t;const i=document.querySelector("#weather-today .city");i&&z(i.textContent)}))})()})();
+(() => {
+  var t = {
+      350: (t, e, n) => {
+        var r = {
+          "./clear-day.svg": 554,
+          "./clear-night.svg": 422,
+          "./cloudy.svg": 236,
+          "./fog.svg": 996,
+          "./hail.svg": 134,
+          "./partly-cloudy-day.svg": 518,
+          "./partly-cloudy-night.svg": 338,
+          "./rain-snow-showers-day.svg": 745,
+          "./rain-snow-showers-night.svg": 805,
+          "./rain-snow.svg": 342,
+          "./rain.svg": 358,
+          "./showers-day.svg": 84,
+          "./showers-night.svg": 824,
+          "./sleet.svg": 377,
+          "./snow-showers-day.svg": 954,
+          "./snow-showers-night.svg": 310,
+          "./snow.svg": 389,
+          "./thunder-rain.svg": 301,
+          "./thunder-showers-day.svg": 357,
+          "./thunder-showers-night.svg": 569,
+          "./thunder.svg": 154,
+          "./water.svg": 129,
+          "./wind.svg": 969,
+        };
+        function o(t) {
+          var e = s(t);
+          return n(e);
+        }
+        function s(t) {
+          if (!n.o(r, t)) {
+            var e = new Error("Cannot find module '" + t + "'");
+            throw ((e.code = "MODULE_NOT_FOUND"), e);
+          }
+          return r[t];
+        }
+        (o.keys = function () {
+          return Object.keys(r);
+        }),
+          (o.resolve = s),
+          (t.exports = o),
+          (o.id = 350);
+      },
+      208: (t, e, n) => {
+        "use strict";
+        n.d(e, { A: () => a });
+        var r = n(601),
+          o = n.n(r),
+          s = n(314),
+          i = n.n(s)()(o());
+        i.push([
+          t.id,
+          ":root {\n    --main: #374151;\n    --gray: #9ca3af;\n}\n\nbody {\n    background-color: salmon;\n}\n\np {\n    margin: 0;\n}\n\n#container {\n    width: 700px;\n    margin: 0 auto;\n    font-family: sans-serif;\n    font-size: 18px;\n    font-weight: bold;\n    color: var(--main)\n}\n\nform {\n    margin: 20px 0;\n}\n\nform .search-city {\n    display: flex;\n    margin: 0 auto;\n    width: fit-content;\n}\n\nform label {\n    font-size: 22px;\n}\n\nform input[type=text],\nform button[type=submit] {\n    border: none;\n    border-radius: 5px;\n    padding: 5px 10px;\n    font-size: inherit;\n}\n\nform button[type=submit] {\n    margin-left: 10px;\n    color: white;\n    background-color: var(--main);\n    font-weight: 900;\n    cursor: pointer;\n}\n\nform button[type=submit]:active {\n    transform: translateY(2px);\n}\n\nform .toggle-temperature {\n    margin: 0 auto;\n    width: fit-content;\n    display: flex;\n    align-items: center;\n    margin-top: 15px;\n}\n\nform .toggle-temperature input {\n    display: none;\n}\n\n.toggle-btn {\n    --width: 70px;\n    margin-left: 10px;\n    display: inline-block;\n    width: var(--width);\n    height: calc(var(--width) / 2);\n    border-radius: var(--width);\n    cursor: pointer;\n    position: relative;\n    transition: 0.2s;\n    background-color: blue;\n}\n\n.toggle-btn::before {\n    position: absolute;\n    content: '°F';\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n    background-color: #fff;\n    width: calc(var(--width) / 2 * 0.8);\n    height: calc(var(--width) / 2 * 0.8);\n    border-radius: var(--width);\n    margin: calc(var(--width) * 0.05);\n    transition: 0.2s;\n}\n\n.toggle-temperature input:checked+.toggle-btn {\n    background-color: green;\n}\n\n.toggle-temperature input:checked+.toggle-btn::before {\n    content: '°C';\n    transform: translateX(calc(var(--width) / 2));\n}\n\n\n#weather-today,\n#weather-week {\n    background-color: white;\n    border-radius: 20px;\n    outline: solid 10px rgba(255, 255, 255, 0.3);\n}\n\n#weather-today {\n    padding: 50px;\n    margin-bottom: 50px;\n}\n\n#weather-today .now {\n    display: flex;\n    margin-bottom: 40px;\n    justify-content: space-between;\n    color: var(--gray)\n}\n\n\n#weather-today .info :first-child {\n    font-size: 60px;\n    font-weight: 900;\n    color: var(--main)\n}\n\n#weather-today .current-condition {\n    text-align: center;\n}\n\n#weather-today .current-condition img {\n    height: 100px;\n}\n\n#weather-today .hourly {\n    display: flex;\n    text-align: center;\n    justify-content: space-between;\n    font-size: 16px;\n}\n\n#weather-today .hourly p:first-child {\n    margin-bottom: 15px;\n    font-size: 18px;\n}\n\n#weather-today .hourly p:last-child {\n    color: var(--gray)\n}\n\n#weather-today .hourly img {\n    height: 50px;\n}\n\n#weather-week {\n    padding: 50px;\n    display: flex;\n    flex-direction: column;\n    gap: 20px;\n}\n\n.weekDay {\n    display: grid;\n    grid-template-columns: repeat(4, 1fr);\n}\n\n\n.weekDay :nth-child(2) {\n    justify-self: right;\n    display: flex;\n    align-items: center;\n    padding-right: 20px;\n}\n\n.weekDay :nth-child(3) {\n    justify-self: center;\n}\n\n.weekDay :nth-child(4) {\n    justify-self: right;\n}\n\n.weekDay img {\n    height: 30px;\n}\n\ndialog {\n    font-size: 25px;\n    font-family: sans-serif;\n    max-width: 700px;\n}\n",
+          "",
+        ]);
+        const a = i;
+      },
+      314: (t) => {
+        "use strict";
+        t.exports = function (t) {
+          var e = [];
+          return (
+            (e.toString = function () {
+              return this.map(function (e) {
+                var n = "",
+                  r = void 0 !== e[5];
+                return (
+                  e[4] && (n += "@supports (".concat(e[4], ") {")),
+                  e[2] && (n += "@media ".concat(e[2], " {")),
+                  r &&
+                    (n += "@layer".concat(
+                      e[5].length > 0 ? " ".concat(e[5]) : "",
+                      " {",
+                    )),
+                  (n += t(e)),
+                  r && (n += "}"),
+                  e[2] && (n += "}"),
+                  e[4] && (n += "}"),
+                  n
+                );
+              }).join("");
+            }),
+            (e.i = function (t, n, r, o, s) {
+              "string" == typeof t && (t = [[null, t, void 0]]);
+              var i = {};
+              if (r)
+                for (var a = 0; a < this.length; a++) {
+                  var c = this[a][0];
+                  null != c && (i[c] = !0);
+                }
+              for (var u = 0; u < t.length; u++) {
+                var d = [].concat(t[u]);
+                (r && i[d[0]]) ||
+                  (void 0 !== s &&
+                    (void 0 === d[5] ||
+                      (d[1] = "@layer"
+                        .concat(d[5].length > 0 ? " ".concat(d[5]) : "", " {")
+                        .concat(d[1], "}")),
+                    (d[5] = s)),
+                  n &&
+                    (d[2]
+                      ? ((d[1] = "@media "
+                          .concat(d[2], " {")
+                          .concat(d[1], "}")),
+                        (d[2] = n))
+                      : (d[2] = n)),
+                  o &&
+                    (d[4]
+                      ? ((d[1] = "@supports ("
+                          .concat(d[4], ") {")
+                          .concat(d[1], "}")),
+                        (d[4] = o))
+                      : (d[4] = "".concat(o))),
+                  e.push(d));
+              }
+            }),
+            e
+          );
+        };
+      },
+      601: (t) => {
+        "use strict";
+        t.exports = function (t) {
+          return t[1];
+        };
+      },
+      72: (t) => {
+        "use strict";
+        var e = [];
+        function n(t) {
+          for (var n = -1, r = 0; r < e.length; r++)
+            if (e[r].identifier === t) {
+              n = r;
+              break;
+            }
+          return n;
+        }
+        function r(t, r) {
+          for (var s = {}, i = [], a = 0; a < t.length; a++) {
+            var c = t[a],
+              u = r.base ? c[0] + r.base : c[0],
+              d = s[u] || 0,
+              p = "".concat(u, " ").concat(d);
+            s[u] = d + 1;
+            var l = n(p),
+              f = {
+                css: c[1],
+                media: c[2],
+                sourceMap: c[3],
+                supports: c[4],
+                layer: c[5],
+              };
+            if (-1 !== l) e[l].references++, e[l].updater(f);
+            else {
+              var g = o(f, r);
+              (r.byIndex = a),
+                e.splice(a, 0, { identifier: p, updater: g, references: 1 });
+            }
+            i.push(p);
+          }
+          return i;
+        }
+        function o(t, e) {
+          var n = e.domAPI(e);
+          return (
+            n.update(t),
+            function (e) {
+              if (e) {
+                if (
+                  e.css === t.css &&
+                  e.media === t.media &&
+                  e.sourceMap === t.sourceMap &&
+                  e.supports === t.supports &&
+                  e.layer === t.layer
+                )
+                  return;
+                n.update((t = e));
+              } else n.remove();
+            }
+          );
+        }
+        t.exports = function (t, o) {
+          var s = r((t = t || []), (o = o || {}));
+          return function (t) {
+            t = t || [];
+            for (var i = 0; i < s.length; i++) {
+              var a = n(s[i]);
+              e[a].references--;
+            }
+            for (var c = r(t, o), u = 0; u < s.length; u++) {
+              var d = n(s[u]);
+              0 === e[d].references && (e[d].updater(), e.splice(d, 1));
+            }
+            s = c;
+          };
+        };
+      },
+      659: (t) => {
+        "use strict";
+        var e = {};
+        t.exports = function (t, n) {
+          var r = (function (t) {
+            if (void 0 === e[t]) {
+              var n = document.querySelector(t);
+              if (
+                window.HTMLIFrameElement &&
+                n instanceof window.HTMLIFrameElement
+              )
+                try {
+                  n = n.contentDocument.head;
+                } catch (t) {
+                  n = null;
+                }
+              e[t] = n;
+            }
+            return e[t];
+          })(t);
+          if (!r)
+            throw new Error(
+              "Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.",
+            );
+          r.appendChild(n);
+        };
+      },
+      540: (t) => {
+        "use strict";
+        t.exports = function (t) {
+          var e = document.createElement("style");
+          return t.setAttributes(e, t.attributes), t.insert(e, t.options), e;
+        };
+      },
+      56: (t, e, n) => {
+        "use strict";
+        t.exports = function (t) {
+          var e = n.nc;
+          e && t.setAttribute("nonce", e);
+        };
+      },
+      825: (t) => {
+        "use strict";
+        t.exports = function (t) {
+          if ("undefined" == typeof document)
+            return { update: function () {}, remove: function () {} };
+          var e = t.insertStyleElement(t);
+          return {
+            update: function (n) {
+              !(function (t, e, n) {
+                var r = "";
+                n.supports && (r += "@supports (".concat(n.supports, ") {")),
+                  n.media && (r += "@media ".concat(n.media, " {"));
+                var o = void 0 !== n.layer;
+                o &&
+                  (r += "@layer".concat(
+                    n.layer.length > 0 ? " ".concat(n.layer) : "",
+                    " {",
+                  )),
+                  (r += n.css),
+                  o && (r += "}"),
+                  n.media && (r += "}"),
+                  n.supports && (r += "}");
+                var s = n.sourceMap;
+                s &&
+                  "undefined" != typeof btoa &&
+                  (r +=
+                    "\n/*# sourceMappingURL=data:application/json;base64,".concat(
+                      btoa(unescape(encodeURIComponent(JSON.stringify(s)))),
+                      " */",
+                    )),
+                  e.styleTagTransform(r, t, e.options);
+              })(e, t, n);
+            },
+            remove: function () {
+              !(function (t) {
+                if (null === t.parentNode) return !1;
+                t.parentNode.removeChild(t);
+              })(e);
+            },
+          };
+        };
+      },
+      113: (t) => {
+        "use strict";
+        t.exports = function (t, e) {
+          if (e.styleSheet) e.styleSheet.cssText = t;
+          else {
+            for (; e.firstChild; ) e.removeChild(e.firstChild);
+            e.appendChild(document.createTextNode(t));
+          }
+        };
+      },
+      554: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "e6541ce84a82ea86deaf.svg";
+      },
+      422: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "7228ebde1a1cbbabeed4.svg";
+      },
+      236: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "bd65452b254265c4f761.svg";
+      },
+      996: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "07bf93f0c95051aa29f1.svg";
+      },
+      134: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "7716b874413ac673e7aa.svg";
+      },
+      518: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "749d1251900ec2449417.svg";
+      },
+      338: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "c0a8d00378e555b86fcf.svg";
+      },
+      745: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "207b14093cc421b50195.svg";
+      },
+      805: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "d20b1ffc3bb5091a3478.svg";
+      },
+      342: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "30d0498eaffed5814744.svg";
+      },
+      358: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "848651d20f3f58949d26.svg";
+      },
+      84: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "99f737e43d74ac67225a.svg";
+      },
+      824: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "391e6dd7e7c4056b3e07.svg";
+      },
+      377: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "a791cdeb76b2a1c641a5.svg";
+      },
+      954: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "9b361803bd2c718d208f.svg";
+      },
+      310: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "a917b111f11bd1e967cf.svg";
+      },
+      389: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "f8d40353e151c5c7cce0.svg";
+      },
+      301: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "80f57ee23a7a1d38351e.svg";
+      },
+      357: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "03133e2a54cdc1e8cf84.svg";
+      },
+      569: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "430f208dd338964430c3.svg";
+      },
+      154: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "31fc29a57119a2bd369f.svg";
+      },
+      129: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "2807e2cf293d432ea09d.svg";
+      },
+      969: (t, e, n) => {
+        "use strict";
+        t.exports = n.p + "e87b86c9cbeabdd90ce2.svg";
+      },
+    },
+    e = {};
+  function n(r) {
+    var o = e[r];
+    if (void 0 !== o) return o.exports;
+    var s = (e[r] = { id: r, exports: {} });
+    return t[r](s, s.exports, n), s.exports;
+  }
+  (n.n = (t) => {
+    var e = t && t.__esModule ? () => t.default : () => t;
+    return n.d(e, { a: e }), e;
+  }),
+    (n.d = (t, e) => {
+      for (var r in e)
+        n.o(e, r) &&
+          !n.o(t, r) &&
+          Object.defineProperty(t, r, { enumerable: !0, get: e[r] });
+    }),
+    (n.g = (function () {
+      if ("object" == typeof globalThis) return globalThis;
+      try {
+        return this || new Function("return this")();
+      } catch (t) {
+        if ("object" == typeof window) return window;
+      }
+    })()),
+    (n.o = (t, e) => Object.prototype.hasOwnProperty.call(t, e)),
+    (() => {
+      var t;
+      n.g.importScripts && (t = n.g.location + "");
+      var e = n.g.document;
+      if (
+        !t &&
+        e &&
+        (e.currentScript &&
+          "SCRIPT" === e.currentScript.tagName.toUpperCase() &&
+          (t = e.currentScript.src),
+        !t)
+      ) {
+        var r = e.getElementsByTagName("script");
+        if (r.length)
+          for (var o = r.length - 1; o > -1 && (!t || !/^http(s?):/.test(t)); )
+            t = r[o--].src;
+      }
+      if (!t)
+        throw new Error(
+          "Automatic publicPath is not supported in this browser",
+        );
+      (t = t
+        .replace(/#.*$/, "")
+        .replace(/\?.*$/, "")
+        .replace(/\/[^\/]+$/, "/")),
+        (n.p = t);
+    })(),
+    (n.nc = void 0),
+    (() => {
+      "use strict";
+      let t = !0;
+      const e = (function () {
+          const t = n(350),
+            e = {};
+          return (
+            t.keys().forEach((n) => {
+              const r = n.substring(2, n.length - 4);
+              e[r] = t(n);
+            }),
+            e
+          );
+        })(),
+        r = document.querySelector("#weather-today .city"),
+        o = document.querySelector("#weather-today .temperature"),
+        s = document.querySelector("#weather-today .date"),
+        i = document.querySelector(".current-condition img"),
+        a = document.querySelector(".current-condition p"),
+        c = document.querySelector("#weather-today .hourly"),
+        u = document.getElementById("weather-week"),
+        d = document.querySelector("dialog");
+      let p;
+      function l(t) {
+        (p = (t.tzoffset < 0 ? "" : "+") + t.tzoffset),
+          2 === p.length && (p = p[0] + "0" + p[1]),
+          (function ({ resolvedAddress: t, currentConditions: n, days: u }) {
+            var d;
+            (r.textContent = t),
+              (o.textContent = v(n.temp)),
+              (s.textContent =
+                ((d = u[0].datetime),
+                new Date(`${d} GMT${p}`).toLocaleDateString("en-US", {
+                  weekday: "long",
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                  timeZone: p,
+                }))),
+              (i.alt = `${n.conditions} icon`),
+              (i.src = e[n.icon]),
+              (a.textContent = n.conditions),
+              (function ([t, n], r) {
+                let o;
+                const s = r + 2;
+                (o =
+                  s >= 24
+                    ? [...n.hours.slice(s % 24, (s + 9) % 24)]
+                    : s + 9 > 24
+                      ? [...t.hours.slice(s), ...n.hours.slice(0, (s + 9) % 24)]
+                      : t.hours.slice(s, s + 9)),
+                  (o = o.filter((t, e) => e % 2 == 0));
+                const i = o.map((t) =>
+                  (function (t) {
+                    const n = h(v(t.temp), "p"),
+                      r = Number(t.datetime.substring(0, 2)),
+                      o = h((r % 12 == 0 ? 12 : r % 12) + ":00", "p"),
+                      s = h(r >= 12 ? "PM" : "AM", "p"),
+                      i = document.createElement("img");
+                    return (
+                      (i.alt = `${t.conditions} icon`),
+                      (i.src = e[t.icon]),
+                      m([n, i, o, s])
+                    );
+                  })(t),
+                );
+                (c.textContent = ""), c.append(...i);
+              })(u, Number(n.datetime.slice(0, 2)));
+          })(t),
+          (function ({ days: t }) {
+            const n = t.slice(1, 7).map((t) =>
+              (function (t) {
+                const n = h(
+                    (function (t) {
+                      return new Date(`${t} GMT${p}`).toLocaleDateString(
+                        "en-US",
+                        {
+                          weekday: "short",
+                          month: "short",
+                          day: "2-digit",
+                          timeZone: p,
+                        },
+                      );
+                    })(t.datetime),
+                    "p",
+                  ),
+                  r = h(t.precipprob + "%", "p"),
+                  o = h(`${t.tempmin}° / ${t.tempmax}°`, "p"),
+                  s = document.createElement("img");
+                (s.alt = "Precipitation probability icon"), (s.src = e.water);
+                const i = m([r, s]),
+                  a = document.createElement("img");
+                return (
+                  (a.alt = `${t.conditions} icon`),
+                  (a.src = e[t.icon]),
+                  m([n, i, a, o], "weekDay")
+                );
+              })(t),
+            );
+            (u.textContent = ""), u.append(...n);
+          })(t);
+      }
+      function f(t) {
+        (d.textContent = t), d.showModal();
+      }
+      function g() {
+        d.close();
+      }
+      function h(t, e) {
+        const n = document.createElement(e);
+        return (n.textContent = t), n;
+      }
+      function m(t, e = "", n = "div") {
+        const r = document.createElement(n);
+        return (r.classList = e), r.append(...t), r;
+      }
+      function v(e) {
+        return `${e} °${t ? "C" : "F"}`;
+      }
+      const y =
+          "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline",
+        w = "2T88MSEVCVADNM8B6CEF2WYTU",
+        b = `include=current,hours,days&elements=${["conditions", "icon", "temp", "datetime", "precipprob", "tempmin", "tempmax"].join(",")}&contentType=json`;
+      async function x(t, e) {
+        const n = await fetch(`${y}/${t}?key=${w}&unitGroup=${e}&${b}`);
+        if (!n.ok)
+          throw new Error(
+            `Data couldn't be fetched with status code ${n.status}.`,
+          );
+        return await n.json();
+      }
+      var k = n(72),
+        S = n.n(k),
+        C = n(825),
+        E = n.n(C),
+        $ = n(659),
+        T = n.n($),
+        j = n(56),
+        D = n.n(j),
+        M = n(540),
+        A = n.n(M),
+        q = n(113),
+        L = n.n(q),
+        N = n(208),
+        z = {};
+      (z.styleTagTransform = L()),
+        (z.setAttributes = D()),
+        (z.insert = T().bind(null, "head")),
+        (z.domAPI = E()),
+        (z.insertStyleElement = A()),
+        S()(N.A, z),
+        N.A && N.A.locals && N.A.locals;
+      const I = document.querySelector("form"),
+        P = I.querySelector("input"),
+        O = document.getElementById("toggle");
+      async function U(e) {
+        try {
+          f("Loading...");
+          const n = t ? "metric" : "us";
+          l(await x(e, n)), (P.value = ""), g();
+        } catch (t) {
+          console.log(t),
+            f("There was an error getting new data. " + t.message);
+        }
+      }
+      I.addEventListener("submit", async (t) => {
+        t.preventDefault(), U(P.value);
+      }),
+        O.addEventListener("click", () => {
+          var e;
+          (e = O.checked), (t = e);
+          const n = document.querySelector("#weather-today .city");
+          n && U(n.textContent);
+        }),
+        f("Loading..."),
+        x("Paris", "metric")
+          .then((t) => l(t))
+          .then(g);
+    })();
+})();
+
