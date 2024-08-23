@@ -25,13 +25,13 @@ function render(data) {
 function drawToday({ resolvedAddress, currentConditions, days }) {
   cityElement.textContent = resolvedAddress;
   tempElement.textContent = formatTemp(currentConditions.temp);
-  dateElement.textContent = days[0].datetime;
+  dateElement.textContent = formateDateLong(days[0].datetime);
 
   iconElement.alt = `${currentConditions.conditions} icon`;
   iconElement.src = weatherIcons[currentConditions.icon];
   currentElement.textContent = currentConditions.conditions;
 
-  drawHours(days, 12);
+  drawHours(days, 22);
 }
 
 function drawHours([today, tomorrow], startHour) {
@@ -52,8 +52,10 @@ function drawHours([today, tomorrow], startHour) {
 
 function makeHour(hour) {
   const temp = makeTextElement(formatTemp(hour.temp), "p");
-  const time = makeTextElement(hour.datetime, "p");
-  const period = makeTextElement("AM/PM", "p");
+  const h = Number(hour.datetime.substring(0, 2));
+  const format12Hour = h % 12 === 0 ? 12 : h % 12;
+  const time = makeTextElement(format12Hour, "p");
+  const period = makeTextElement(h >= 12 ? "PM" : "AM", "p");
 
   const icon = document.createElement("img");
   icon.alt = `${hour.conditions} icon`;
@@ -69,7 +71,7 @@ function drawWeek({ days }) {
 }
 
 function makeDay(day) {
-  const date = makeTextElement(day.datetime, "p");
+  const date = makeTextElement(formatDateShort(day.datetime), "p");
   const precipitation = makeTextElement(day.precipprob, "p");
   const temps = makeTextElement(`${day.tempmin}° / ${day.tempmax}°`);
 
@@ -114,4 +116,22 @@ function importWeatherIcons() {
   return icons;
 }
 
+function formateDateLong(date) {
+  const d = new Date(date);
+  return d.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+function formatDateShort(date) {
+  const d = new Date(date);
+  return d.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "2-digit",
+  });
+}
 export { drawToday, render };
