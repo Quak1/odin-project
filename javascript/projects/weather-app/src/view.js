@@ -8,8 +8,11 @@ const currentElement = document.querySelector(".current-condition p");
 const hourlyElement = document.querySelector("#weather-today .hourly");
 const weekElement = document.getElementById("weather-week");
 const modal = document.querySelector("dialog");
+let tzoffset;
 
 function render(data) {
+  tzoffset = (data.tzoffset < 0 ? "" : "+") + data.tzoffset;
+  if (tzoffset.length === 2) tzoffset = tzoffset[0] + "0" + tzoffset[1];
   drawToday(data);
   drawWeek(data);
 }
@@ -23,10 +26,11 @@ function drawToday({ resolvedAddress, currentConditions, days }) {
   iconElement.src = weatherIcons[currentConditions.icon];
   currentElement.textContent = currentConditions.conditions;
 
-  drawHours(days, 12);
+  drawHours(days, Number(currentConditions.datetime.slice(0, 2)));
 }
 
 function drawHours([today, tomorrow], currentHour) {
+  console.log(currentHour);
   let hourData;
   const startHour = currentHour + 2;
 
@@ -123,21 +127,25 @@ function importWeatherIcons() {
 }
 
 function formateDateLong(date) {
-  const d = new Date(date);
+  const d = new Date(`${date} GMT${tzoffset}`);
+  console.log(date, tzoffset);
+  console.log(d);
   return d.toLocaleDateString("en-US", {
     weekday: "long",
     month: "long",
     day: "numeric",
     year: "numeric",
+    timeZone: tzoffset,
   });
 }
 
 function formatDateShort(date) {
-  const d = new Date(date);
+  const d = new Date(`${date} GMT${tzoffset}`);
   return d.toLocaleDateString("en-US", {
     weekday: "short",
     month: "short",
     day: "2-digit",
+    timeZone: tzoffset,
   });
 }
 
