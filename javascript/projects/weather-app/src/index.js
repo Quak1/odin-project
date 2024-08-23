@@ -6,10 +6,7 @@ import {
   closeModal,
 } from "./view";
 import { getWeather } from "./weather";
-import Data from "./los_angeles.json";
 import "./style.css";
-
-render(Data);
 
 const form = document.querySelector("form");
 const cityInput = form.querySelector("input");
@@ -41,3 +38,8 @@ async function loadNewData(city) {
     showModal("There was an error getting new data. " + e.message);
   }
 }
+
+showModal("Loading...");
+getWeather("Paris", "metric")
+  .then((data) => render(data))
+  .then(closeModal);
