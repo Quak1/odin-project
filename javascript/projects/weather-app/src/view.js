@@ -30,7 +30,6 @@ function drawToday({ resolvedAddress, currentConditions, days }) {
 }
 
 function drawHours([today, tomorrow], currentHour) {
-  console.log(currentHour);
   let hourData;
   const startHour = currentHour + 2;
 
@@ -128,8 +127,6 @@ function importWeatherIcons() {
 
 function formateDateLong(date) {
   const d = new Date(`${date} GMT${tzoffset}`);
-  console.log(date, tzoffset);
-  console.log(d);
   return d.toLocaleDateString("en-US", {
     weekday: "long",
     month: "long",
