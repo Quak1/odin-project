@@ -1,13 +1,197 @@
-#hourly {
+:root {
+    --main: #374151;
+    --gray: #9ca3af;
+}
+
+body {
+    background-color: salmon;
+}
+
+p {
+    margin: 0;
+}
+
+#container {
+    width: 700px;
+    margin: 0 auto;
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--main)
+}
+
+form {
+    margin: 20px 0;
+}
+
+form .search-city {
     display: flex;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+form label {
+    font-size: 22px;
+}
+
+form input[type=text],
+form button[type=submit] {
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: inherit;
+}
+
+form button[type=submit] {
+    margin-left: 10px;
+    color: white;
+    background-color: var(--main);
+    font-weight: 900;
+    cursor: pointer;
+}
+
+form button[type=submit]:active {
+    transform: translateY(2px);
+}
+
+form .toggle-temperature {
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+form .toggle-temperature input {
+    display: none;
+}
+
+.toggle-btn {
+    --width: 70px;
+    margin-left: 10px;
+    display: inline-block;
+    width: var(--width);
+    height: calc(var(--width) / 2);
+    border-radius: var(--width);
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    background-color: blue;
+}
+
+.toggle-btn::before {
+    position: absolute;
+    content: '°F';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #fff;
+    width: calc(var(--width) / 2 * 0.8);
+    height: calc(var(--width) / 2 * 0.8);
+    border-radius: var(--width);
+    margin: calc(var(--width) * 0.05);
+    transition: 0.2s;
+}
+
+.toggle-temperature input:checked+.toggle-btn {
+    background-color: green;
+}
+
+.toggle-temperature input:checked+.toggle-btn::before {
+    content: '°C';
+    transform: translateX(calc(var(--width) / 2));
+}
+
+
+#weather-today,
+#weather-week {
+    background-color: white;
+    border-radius: 20px;
+    outline: solid 10px rgba(255, 255, 255, 0.3);
+}
+
+#weather-today {
+    padding: 50px;
+    margin-bottom: 50px;
+}
+
+#weather-today .now {
+    display: flex;
+    margin-bottom: 40px;
+    justify-content: space-between;
+    color: var(--gray)
+}
+
+
+#weather-today .info :first-child {
+    font-size: 60px;
+    font-weight: 900;
+    color: var(--main)
+}
+
+#weather-today .current-condition {
+    text-align: center;
+}
+
+#weather-today .current-condition img {
+    height: 100px;
+}
+
+#weather-today .hourly {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+#weather-today .hourly p:first-child {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+#weather-today .hourly p:last-child {
+    color: var(--gray)
+}
+
+#weather-today .hourly img {
+    height: 50px;
+}
+
+#weather-week {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .weekDay {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 
-img {
-    height: 100px;
-    width: 100px;
+
+.weekDay :nth-child(2) {
+    justify-self: right;
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.weekDay :nth-child(3) {
+    justify-self: center;
+}
+
+.weekDay :nth-child(4) {
+    justify-self: right;
+}
+
+.weekDay img {
+    height: 30px;
+}
+
+dialog {
+    font-size: 25px;
+    font-family: sans-serif;
+    max-width: 700px;
 }

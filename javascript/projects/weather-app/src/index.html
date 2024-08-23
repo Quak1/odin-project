@@ -8,36 +8,45 @@
 </head>
 
 <body>
-    <div class="container">
+    <div id="container">
         <form>
-            <div>
-                <label for="city-input">City</label>
-                <input type="text" id="city-input" name="city">
+            <div class="search-city">
+                <div>
+                    <label for="city-input">City:</label>
+                    <input type="text" id="city-input" name="city">
+                </div>
+                <button type="submit">Search</button>
             </div>
-            <button type="submit">Search</button>
+            <div class="toggle-temperature">
+                <label for="toggle">Temperature scale:</label>
+                <input type="checkbox" id="toggle" checked>
+                <label for="toggle" class="toggle-btn"></label>
+            </div>
         </form>
 
         <section id="weather">
-            <card id="weather-today">
-                <div id="now">
-                    <div>
-                        <p id="temperature"></p>
-                        <p id="city"></p>
-                        <p id="date"></p>
+            <div id="weather-today">
+                <div class="now">
+                    <div class="info">
+                        <p class="temperature"></p>
+                        <p class="city"></p>
+                        <p class="date"></p>
                     </div>
-                    <div id="current-condition">
+                    <div class="current-condition">
                         <img>
                         <p></p>
                     </div>
                 </div>
-                <div id="hourly">
+                <div class="hourly">
                 </div>
-            </card>
-            <card id="weather-week">
-            </card>
+            </div>
+            <div id="weather-week">
+            </div>
         </section>
     </div>
-
+    <dialog>
+        <p>Loading...</p>
+    </dialog>
 
 </body>
 

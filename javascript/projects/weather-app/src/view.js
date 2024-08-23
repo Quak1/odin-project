@@ -1,21 +1,13 @@
-const form = document.querySelector("form");
-const cityInput = form.querySelector("input");
-const submitBtn = form.querySelector("form button");
-
-//form.addEventListener("submit", (e) => {
-//  e.preventDefault();
-//  getWeather(cityInput.value, "metric").then((data) => console.log(data));
-//  cityInput.value = "";
-//});
-
+let tempScaleCelsius = true;
 const weatherIcons = importWeatherIcons();
-const cityElement = document.getElementById("city");
-const tempElement = document.getElementById("temperature");
-const dateElement = document.getElementById("date");
-const iconElement = document.querySelector("#current-condition img");
-const currentElement = document.querySelector("#current-condition p");
-const hourlyElement = document.getElementById("hourly");
+const cityElement = document.querySelector("#weather-today .city");
+const tempElement = document.querySelector("#weather-today .temperature");
+const dateElement = document.querySelector("#weather-today .date");
+const iconElement = document.querySelector(".current-condition img");
+const currentElement = document.querySelector(".current-condition p");
+const hourlyElement = document.querySelector("#weather-today .hourly");
 const weekElement = document.getElementById("weather-week");
+const modal = document.querySelector("dialog");
 
 function render(data) {
   drawToday(data);
@@ -31,20 +23,25 @@ function drawToday({ resolvedAddress, currentConditions, days }) {
   iconElement.src = weatherIcons[currentConditions.icon];
   currentElement.textContent = currentConditions.conditions;
 
-  drawHours(days, 22);
+  drawHours(days, 12);
 }
 
-function drawHours([today, tomorrow], startHour) {
+function drawHours([today, tomorrow], currentHour) {
   let hourData;
-  if (startHour + 5 > 24) {
+  const startHour = currentHour + 2;
+
+  if (startHour >= 24) {
+    hourData = [...tomorrow.hours.slice(startHour % 24, (startHour + 9) % 24)];
+  } else if (startHour + 9 > 24) {
     hourData = [
       ...today.hours.slice(startHour),
-      ...tomorrow.hours.slice(0, (startHour + 5) % 24),
+      ...tomorrow.hours.slice(0, (startHour + 9) % 24),
     ];
   } else {
-    hourData = today.hours.slice(startHour, startHour + 5);
+    hourData = today.hours.slice(startHour, startHour + 9);
   }
 
+  hourData = hourData.filter((_, i) => i % 2 === 0);
   const hours = hourData.map((hour) => makeHour(hour));
   hourlyElement.textContent = "";
   hourlyElement.append(...hours);
@@ -54,7 +51,7 @@ function makeHour(hour) {
   const temp = makeTextElement(formatTemp(hour.temp), "p");
   const h = Number(hour.datetime.substring(0, 2));
   const format12Hour = h % 12 === 0 ? 12 : h % 12;
-  const time = makeTextElement(format12Hour, "p");
+  const time = makeTextElement(format12Hour + ":00", "p");
   const period = makeTextElement(h >= 12 ? "PM" : "AM", "p");
 
   const icon = document.createElement("img");
@@ -72,8 +69,8 @@ function drawWeek({ days }) {
 
 function makeDay(day) {
   const date = makeTextElement(formatDateShort(day.datetime), "p");
-  const precipitation = makeTextElement(day.precipprob, "p");
-  const temps = makeTextElement(`${day.tempmin}° / ${day.tempmax}°`);
+  const precipitation = makeTextElement(day.precipprob + "%", "p");
+  const temps = makeTextElement(`${day.tempmin}° / ${day.tempmax}°`, "p");
 
   const waterIcon = document.createElement("img");
   waterIcon.alt = "Precipitation probability icon";
@@ -85,6 +82,15 @@ function makeDay(day) {
   icon.src = weatherIcons[day.icon];
 
   return makeContainer([date, precipitationContainer, icon, temps], "weekDay");
+}
+
+function showModal(text) {
+  modal.textContent = text;
+  modal.showModal();
+}
+
+function closeModal() {
+  modal.close();
 }
 
 function makeTextElement(text, tag) {
@@ -100,8 +106,8 @@ function makeContainer(content, className = "", tag = "div") {
   return container;
 }
 
-function formatTemp(temp, metric = true) {
-  return `${temp}° ${metric ? "C" : "F"}`;
+function formatTemp(temp) {
+  return `${temp} °${tempScaleCelsius ? "C" : "F"}`;
 }
 
 function importWeatherIcons() {
@@ -134,4 +140,13 @@ function formatDateShort(date) {
     day: "2-digit",
   });
 }
-export { drawToday, render };
+
+function setTempCelsius(isCelcius) {
+  tempScaleCelsius = isCelcius;
+}
+
+function isTempCelsius() {
+  return tempScaleCelsius;
+}
+
+export { render, setTempCelsius, isTempCelsius, showModal, closeModal };
