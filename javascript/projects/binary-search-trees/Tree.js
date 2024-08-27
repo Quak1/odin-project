@@ -91,6 +91,57 @@ class Tree {
 
     return null;
   }
+
+  static #checkCallback(callback) {
+    if (typeof callback !== "function")
+      throw new Error("Calback funtion is required");
+  }
+  levelOrder(callback) {
+    Tree.#checkCallback(callback);
+
+    const queue = [this.root];
+
+    while (queue.length) {
+      let node = queue.shift();
+      if (!node) continue;
+      callback(node);
+      queue.push(node.left);
+      queue.push(node.right);
+    }
+  }
+
+  static #inOrder(node, callback) {
+    if (!node) return;
+    this.#inOrder(node.left, callback);
+    callback(node);
+    this.#inOrder(node.right, callback);
+  }
+  inOrder(callback) {
+    Tree.#checkCallback(callback);
+    Tree.#inOrder(this.root, callback);
+  }
+
+  static #preOrder(node, callback) {
+    if (!node) return;
+    callback(node);
+    this.#preOrder(node.left, callback);
+    this.#preOrder(node.right, callback);
+  }
+  preOrder(callback) {
+    Tree.#checkCallback(callback);
+    Tree.#preOrder(this.root, callback);
+  }
+
+  static #postOrder(node, callback) {
+    if (!node) return;
+    this.#postOrder(node.left, callback);
+    this.#postOrder(node.right, callback);
+    callback(node);
+  }
+  postOrder(callback) {
+    Tree.#checkCallback(callback);
+    Tree.#postOrder(this.root, callback);
+  }
 }
 
 export default Tree;

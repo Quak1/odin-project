@@ -17,3 +17,11 @@ Tree.prettyPrint(tree.root);
 console.log(tree.find(324));
 console.log(tree.find(5));
 console.log(tree.find(10000));
+
+tree.levelOrder((node) => console.log(node.data));
+console.log();
+tree.preOrder((node) => console.log(node.data));
+console.log();
+tree.inOrder((node) => console.log(node.data));
+console.log();
+tree.postOrder((node) => console.log(node.data));
