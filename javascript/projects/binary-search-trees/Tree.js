@@ -148,11 +148,15 @@ class Tree {
     Tree.#postOrder(this.root, callback);
   }
 
-  height(node) {
+  static height(node) {
     if (!node) return -1;
     const leftHeight = this.height(node.left);
     const rightHeight = this.height(node.right);
     return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  height(node) {
+    return Tree.height(node);
   }
 
   depth(targetNode) {
@@ -166,7 +170,30 @@ class Tree {
       else return depth - 1;
     }
 
-    return -1000;
+    return -1;
+  }
+
+  static #isBalanced(node) {
+    if (!node) return true;
+
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+    return (
+      Math.abs(leftHeight - rightHeight) <= 1 &&
+      this.#isBalanced(node.left) &&
+      this.#isBalanced(node.right)
+    );
+  }
+
+  isBalanced() {
+    return Tree.#isBalanced(this.root);
+  }
+
+  rebalance() {
+    const data = [];
+    const callback = (node) => data.push(node.data);
+    this.inOrder(callback);
+    this.root = Tree.#buildTree(data);
   }
 }
 

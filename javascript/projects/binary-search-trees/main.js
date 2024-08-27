@@ -27,6 +27,8 @@ console.log();
 tree.postOrder((node) => console.log(node.data));
 console.log();
 
+console.log("is balanced?", tree.isBalanced());
+
 console.log("height:", tree.height(tree.root));
 tree.insert(350);
 tree.insert(349);
@@ -35,8 +37,13 @@ tree.insert(347);
 tree.insert(346);
 Tree.prettyPrint(tree.root);
 
+console.log("is balanced?", tree.isBalanced());
+
 console.log("root height:", tree.height(tree.root));
 console.log("348 height:", tree.height(tree.find(348)));
 console.log("root depth", tree.depth(tree.root));
 console.log("9 depth", tree.depth(tree.find(9)));
 console.log("346 depth", tree.depth(tree.find(346)));
+
+tree.rebalance();
+Tree.prettyPrint(tree.root);
