@@ -2,6 +2,7 @@ class HashMap {
   static #primeNumber = 31;
   #buckets = Array(16).fill(null);
   #length = 0;
+  #loadFactor = 0.75;
 
   #hash(key) {
     let hashCode = 0;
@@ -35,9 +36,17 @@ class HashMap {
     return (this.#buckets[index] = value);
   }
 
+  #growBuckets() {
+    const data = this.entries();
+    this.#length = 0;
+    this.#buckets = Array(this.#buckets.length * 2).fill(null);
+    data.forEach(([key, value]) => this.set(key, value));
+  }
+
   set(key, value) {
     const hash = this.#hash(key);
     const bucket = this.#getBucketByHash(hash);
+
     if (!bucket) {
       this.#setBucket(hash, [{ key, value }]);
       this.#length++;
@@ -51,6 +60,9 @@ class HashMap {
     } else {
       bucket[index].value = value;
     }
+
+    if (this.#length > Math.floor(this.#loadFactor * this.#buckets.length))
+      this.#growBuckets();
   }
 
   #getByKey(key) {
@@ -113,6 +125,9 @@ class HashMap {
       const entries = bucket.map((entry) => [entry.key, entry.value]);
       return prev.concat(entries);
     }, []);
+  }
+  getBuckets() {
+    return this.#buckets;
   }
 }
 

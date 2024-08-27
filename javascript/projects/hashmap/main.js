@@ -14,6 +14,9 @@ test.set("ice cream", "white");
 test.set("jacket", "blue");
 test.set("kite", "pink");
 test.set("lion", "golden");
+test.set("moon", "silver");
+
+test.set("kite", "rainbow");
 
 console.log(test.keys());
 console.log(test.values());
@@ -25,3 +28,11 @@ test.remove("grape");
 test.remove("lion");
 console.log(test.has("grape"));
 console.log(test.keys());
+console.log(test.length());
+
+test.clear();
+console.log(test.entries());
+test.set("kite", "rainbow");
+console.log(test.entries());
+console.log(test.has("kite"));
+console.log(test.has("moon"));
