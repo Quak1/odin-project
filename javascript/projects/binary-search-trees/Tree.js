@@ -52,7 +52,7 @@ class Tree {
     }
 
     const newNode = new Node(value);
-    if (value < parent.value) parent.left = newNode;
+    if (value < parent.data) parent.left = newNode;
     else parent.right = newNode;
   }
 
@@ -96,6 +96,7 @@ class Tree {
     if (typeof callback !== "function")
       throw new Error("Calback funtion is required");
   }
+
   levelOrder(callback) {
     Tree.#checkCallback(callback);
 
@@ -104,6 +105,7 @@ class Tree {
     while (queue.length) {
       let node = queue.shift();
       if (!node) continue;
+
       callback(node);
       queue.push(node.left);
       queue.push(node.right);
@@ -116,6 +118,7 @@ class Tree {
     callback(node);
     this.#inOrder(node.right, callback);
   }
+
   inOrder(callback) {
     Tree.#checkCallback(callback);
     Tree.#inOrder(this.root, callback);
@@ -127,6 +130,7 @@ class Tree {
     this.#preOrder(node.left, callback);
     this.#preOrder(node.right, callback);
   }
+
   preOrder(callback) {
     Tree.#checkCallback(callback);
     Tree.#preOrder(this.root, callback);
@@ -138,9 +142,31 @@ class Tree {
     this.#postOrder(node.right, callback);
     callback(node);
   }
+
   postOrder(callback) {
     Tree.#checkCallback(callback);
     Tree.#postOrder(this.root, callback);
+  }
+
+  height(node) {
+    if (!node) return -1;
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  depth(targetNode) {
+    let node = this.root;
+    let depth = 0;
+
+    while (node) {
+      depth++;
+      if (targetNode.data < node.data) node = node.left;
+      else if (targetNode.data > node.data) node = node.right;
+      else return depth - 1;
+    }
+
+    return -1000;
   }
 }
 
