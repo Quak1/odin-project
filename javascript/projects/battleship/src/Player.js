@@ -31,7 +31,7 @@ class Player {
   #getRandomShip() {
     const row = Math.floor(Math.random() * 10);
     const col = Math.floor(Math.random() * 10);
-    const direction = Math.random < 0.5 ? "h" : "v";
+    const direction = Math.random() < 0.5 ? "h" : "v";
     return { row, col, direction };
   }
 }
