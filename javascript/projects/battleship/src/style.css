@@ -1,0 +1,42 @@
+body {
+    background-color: salmon;
+}
+
+.board {
+    --gap: 2px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    gap: var(--gap);
+}
+
+.row {
+    display: flex;
+    gap: var(--gap);
+}
+
+#enemyBoard .cell {
+    cursor: pointer;
+}
+
+.cell {
+    height: 50px;
+    width: 50px;
+    background-color: white;
+}
+
+.ship {
+    background-color: blue;
+}
+
+.hit {
+    background-color: yellow;
+}
+
+.ship.hit {
+    background-color: red;
+}
+
+.ship.sunk {
+    background-color: green;
+}
