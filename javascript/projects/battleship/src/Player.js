@@ -1,6 +1,7 @@
 import Gameboard from "./Gameboard";
 class Player {
   gameboard = new Gameboard();
+  isTurn = false;
 
   constructor(name = "Player") {
     this.name = name;
@@ -12,6 +13,7 @@ class Player {
 
   attack(player, row, col) {
     player.gameboard.receiveAttack(row, col);
+    this.isTurn = false;
   }
 
   setArmada(random = true) {
