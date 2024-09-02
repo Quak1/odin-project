@@ -1,4 +1,4 @@
-import { updateEnemyBoard, upadatePlayerBoard } from "./view";
+import { updateEnemyBoard, renderBoard, upadatePlayerBoard } from "./view";
 import Player from "./Player";
 
 const player1 = new Player();
@@ -12,8 +12,10 @@ function start() {
   player2.setArmada();
 
   player1.isTurn = true;
-  upadatePlayerBoard();
-  updateEnemyBoard();
+  renderBoard("playerBoard", player1);
+  upadatePlayerBoard(player1);
+  renderBoard("enemyBoard", player2, clickCellCallback);
+  updateEnemyBoard(player2);
 }
 
 function attack(attacker, receiver, row, col) {
@@ -34,4 +36,15 @@ function attackRandom(attacker, receiver) {
   attack(attacker, receiver, row, col);
 }
 
-export { start, attack, attackRandom, player1, player2 };
+function clickCellCallback(row, col) {
+  return function () {
+    if (!player1.isTurn) return;
+    attack(player1, player2, row, col);
+    updateEnemyBoard(player2);
+
+    attackRandom(player2, player1);
+    upadatePlayerBoard(player1);
+  };
+}
+
+export { start };

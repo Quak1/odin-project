@@ -1,5 +1,3 @@
-import { attack, attackRandom, player1, player2 } from "./game";
-
 const container = document.querySelector("container");
 const playerBoard = document.getElementById("playerBoard");
 const enemyBoard = document.getElementById("enemyBoard");
@@ -10,66 +8,50 @@ function makeElement(className, tag = "div") {
   return container;
 }
 
-function upadatePlayerBoard() {
-  const rows = player1.gameboard.board.map((row) => {
+function renderBoard(containerId, player, clickCallBack) {
+  const rows = player.gameboard.board.map((row, rowNum) => {
     const rowContainer = makeElement("row");
-    const cells = row.map(makePlayerCell);
+    const cells = row.map((_, colNum) => {
+      const cell = makeElement("cell");
+      if (clickCallBack)
+        cell.addEventListener("click", clickCallBack(rowNum, colNum), {
+          once: true,
+        });
+      return cell;
+    });
     rowContainer.append(...cells);
     return rowContainer;
   });
 
-  playerBoard.textContent = "";
-  playerBoard.append(...rows);
+  const container = document.getElementById(containerId);
+  container.textContent = "";
+  container.append(...rows);
 }
 
-function makePlayerCell(cell) {
-  const div = makeElement("cell");
-  if (cell) {
-    if (cell.ship) div.classList.add("ship");
-    if (cell.hit) div.classList.add("hit");
-    if (cell.ship && cell.ship.isSunk()) div.classList.add("sunk");
-  }
-
-  return div;
-}
-
-function updateEnemyBoard() {
-  const rows = player2.gameboard.board.map((row, rowNum) => {
-    const rowContainer = makeElement("row");
-    const cells = row.map(makeEnemyCell(rowNum));
-    rowContainer.append(...cells);
-    return rowContainer;
+function upadatePlayerBoard(player) {
+  playerBoard.querySelectorAll(".row").forEach((row, rowNum) => {
+    row.querySelectorAll(".cell").forEach((cellDiv, colNum) => {
+      const cell = player.gameboard.board[rowNum][colNum];
+      if (cell) {
+        if (cell.ship) cellDiv.classList.add("ship");
+        if (cell.hit) cellDiv.classList.add("hit");
+        if (cell.ship && cell.ship.isSunk()) cellDiv.classList.add("sunk");
+      }
+    });
   });
-
-  enemyBoard.textContent = "";
-  enemyBoard.append(...rows);
 }
 
-function makeEnemyCell(row) {
-  return function (cell, col) {
-    const btn = makeElement("cell", "button");
-    if (cell && cell.hit) {
-      btn.classList.add("hit");
-      if (cell.ship) btn.classList.add("ship");
-      if (cell.ship && cell.ship.isSunk()) btn.classList.add("sunk");
-      return btn;
-    }
-
-    btn.addEventListener(
-      "click",
-      () => {
-        if (!player1.isTurn) return;
-        attack(player1, player2, row, col);
-        updateEnemyBoard();
-
-        attackRandom(player2, player1);
-        upadatePlayerBoard();
-      },
-      { once: true },
-    );
-
-    return btn;
-  };
+function updateEnemyBoard(enemy) {
+  enemyBoard.querySelectorAll(".row").forEach((row, rowNum) => {
+    row.querySelectorAll(".cell").forEach((cellDiv, colNum) => {
+      const cell = enemy.gameboard.board[rowNum][colNum];
+      if (cell && cell.hit) {
+        cellDiv.classList.add("hit");
+        if (cell.ship) cellDiv.classList.add("ship");
+        if (cell.ship && cell.ship.isSunk()) cellDiv.classList.add("sunk");
+      }
+    });
+  });
 }
 
-export { upadatePlayerBoard, updateEnemyBoard };
+export { renderBoard, upadatePlayerBoard, updateEnemyBoard };
