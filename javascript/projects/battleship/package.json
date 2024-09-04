@@ -6,7 +6,7 @@
         "test": "jest",
         "start": "webpack serve --open --config webpack.dev.js",
         "build": "webpack --config webpack.prod.js",
-        "deploy": "gh-pages -d dist -e #-template"
+        "deploy": "npm run build && gh-pages -d dist -e 8-battleship"
     },
     "keywords": [],
     "author": "",
