@@ -1,17 +1,26 @@
-import { updateEnemyBoard, renderBoard, upadatePlayerBoard } from "./view";
+import {
+  renderBtnContainer,
+  updateEnemyBoard,
+  renderBoard,
+  upadatePlayerBoard,
+} from "./view";
 import Player from "./Player";
 
 const player1 = new Player();
 const player2 = new Player();
 
+let playersTurn;
+let isGameOver = false;
+
 const rows = player1.gameboard.board.length;
 const cols = player1.gameboard.board[0].length;
 
 function start() {
+  renderBtnContainer(startBtnCallback, randomArmadaBtnCallback);
+
   player1.setArmada();
   player2.setArmada();
 
-  player1.isTurn = true;
   renderBoard("playerBoard", player1);
   upadatePlayerBoard(player1);
   renderBoard("enemyBoard", player2, clickCellCallback);
@@ -20,7 +29,8 @@ function start() {
 
 function attack(attacker, receiver, row, col) {
   attacker.attack(receiver, row, col);
-  receiver.isTurn = true;
+  playersTurn = receiver;
+  if (receiver.gameboard.areAllShipSunk()) gameOver(attacker);
 }
 
 function attackRandom(attacker, receiver) {
@@ -38,7 +48,7 @@ function attackRandom(attacker, receiver) {
 
 function clickCellCallback(row, col) {
   return function () {
-    if (!player1.isTurn) return;
+    if (playersTurn !== player1 || isGameOver) return;
     attack(player1, player2, row, col);
     updateEnemyBoard(player2);
 
@@ -47,4 +57,18 @@ function clickCellCallback(row, col) {
   };
 }
 
-export { start };
+function startBtnCallback() {
+  playersTurn = player1;
+}
+
+function randomArmadaBtnCallback() {
+  player1.setArmada();
+  upadatePlayerBoard(player1);
+}
+
+function gameOver(winner) {
+  isGameOver = true;
+  alert(`${winner.name} is the Winner!`);
+}
+
+export { start, startBtnCallback, randomArmadaBtnCallback };

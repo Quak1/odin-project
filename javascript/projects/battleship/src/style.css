@@ -2,6 +2,11 @@ body {
     background-color: salmon;
 }
 
+.container {
+    margin: 0 auto;
+    width: fit-content;
+}
+
 .board {
     --gap: 2px;
     display: flex;

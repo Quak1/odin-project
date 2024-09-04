@@ -1,10 +1,10 @@
-const container = document.querySelector("container");
+const container = document.querySelector(".container");
 const playerBoard = document.getElementById("playerBoard");
 const enemyBoard = document.getElementById("enemyBoard");
 
 function makeElement(className, tag = "div") {
   const container = document.createElement(tag);
-  container.classList.add(className);
+  container.classList = className;
   return container;
 }
 
@@ -32,11 +32,13 @@ function upadatePlayerBoard(player) {
   playerBoard.querySelectorAll(".row").forEach((row, rowNum) => {
     row.querySelectorAll(".cell").forEach((cellDiv, colNum) => {
       const cell = player.gameboard.board[rowNum][colNum];
+      const classList = ["cell"];
       if (cell) {
-        if (cell.ship) cellDiv.classList.add("ship");
-        if (cell.hit) cellDiv.classList.add("hit");
-        if (cell.ship && cell.ship.isSunk()) cellDiv.classList.add("sunk");
+        if (cell.ship) classList.push("ship");
+        if (cell.hit) classList.push("hit");
+        if (cell.ship && cell.ship.isSunk()) classList.push("sunk");
       }
+      cellDiv.classList = classList.join(" ");
     });
   });
 }
@@ -45,13 +47,35 @@ function updateEnemyBoard(enemy) {
   enemyBoard.querySelectorAll(".row").forEach((row, rowNum) => {
     row.querySelectorAll(".cell").forEach((cellDiv, colNum) => {
       const cell = enemy.gameboard.board[rowNum][colNum];
+      const classList = ["cell"];
       if (cell && cell.hit) {
-        cellDiv.classList.add("hit");
-        if (cell.ship) cellDiv.classList.add("ship");
-        if (cell.ship && cell.ship.isSunk()) cellDiv.classList.add("sunk");
+        classList.push("hit");
+        if (cell.ship) classList.push("ship");
+        if (cell.ship && cell.ship.isSunk()) classList.push("sunk");
       }
+      cellDiv.classList = classList.join(" ");
     });
   });
 }
 
-export { renderBoard, upadatePlayerBoard, updateEnemyBoard };
+function renderBtnContainer(startBtnCallback, randomBtnCallback) {
+  const startBtn = makeElement("", "button");
+  startBtn.textContent = "Start";
+  startBtn.addEventListener("click", startBtnCallback);
+
+  const randomBtn = makeElement("", "button");
+  randomBtn.textContent = "Random Armada";
+  randomBtn.addEventListener("click", randomBtnCallback);
+
+  const btns = makeElement("btns");
+  btns.append(startBtn, randomBtn);
+
+  container.prepend(btns);
+}
+
+export {
+  renderBoard,
+  upadatePlayerBoard,
+  updateEnemyBoard,
+  renderBtnContainer,
+};
