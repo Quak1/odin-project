@@ -1,6 +1,11 @@
+import { newGameBtnCallback } from "./game";
+
 const container = document.querySelector(".container");
 const playerBoard = document.getElementById("playerBoard");
 const enemyBoard = document.getElementById("enemyBoard");
+const modal = document.querySelector("dialog");
+const modalBtn = document.querySelector("dialog button");
+modalBtn.addEventListener("click", newGameBtnCallback);
 
 function makeElement(className, tag = "div") {
   const container = document.createElement(tag);
@@ -25,6 +30,12 @@ function renderBoard(containerId, player, clickCallBack) {
 
   const container = document.getElementById(containerId);
   container.textContent = "";
+
+  if (clickCallBack) {
+    const cover = makeElement("cover");
+    container.append(cover);
+  }
+
   container.append(...rows);
 }
 
@@ -73,9 +84,46 @@ function renderBtnContainer(startBtnCallback, randomBtnCallback) {
   container.prepend(btns);
 }
 
+function showModal(winner) {
+  modal.querySelector("p").textContent = `${winner.name} is the winner!`;
+  modal.showModal();
+}
+
+function closeModal() {
+  modal.close();
+}
+
+function enableCover() {
+  document.querySelector("#enemyBoard .cover").classList.add("active");
+}
+
+function disableCover() {
+  document.querySelector("#enemyBoard .cover").classList.remove("active");
+}
+
+function removeBtns() {
+  document.querySelector(".btns").remove();
+}
+
+function renderNewGameBtn() {
+  const btn = makeElement("", "button");
+  btn.textContent = "New game";
+  btn.addEventListener("click", newGameBtnCallback);
+
+  const div = makeElement("btns");
+  div.append(btn);
+  container.prepend(div);
+}
+
 export {
   renderBoard,
   upadatePlayerBoard,
   updateEnemyBoard,
   renderBtnContainer,
+  showModal,
+  closeModal,
+  enableCover,
+  disableCover,
+  removeBtns,
+  renderNewGameBtn,
 };

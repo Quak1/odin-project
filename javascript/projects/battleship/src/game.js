@@ -3,11 +3,17 @@ import {
   updateEnemyBoard,
   renderBoard,
   upadatePlayerBoard,
+  showModal,
+  closeModal,
+  enableCover,
+  disableCover,
+  removeBtns,
+  renderNewGameBtn,
 } from "./view";
 import Player from "./Player";
 
 const player1 = new Player();
-const player2 = new Player();
+const player2 = new Player("Computer");
 
 let playersTurn;
 let isGameOver = false;
@@ -25,6 +31,8 @@ function start() {
   upadatePlayerBoard(player1);
   renderBoard("enemyBoard", player2, clickCellCallback);
   updateEnemyBoard(player2);
+
+  enableCover();
 }
 
 function attack(attacker, receiver, row, col) {
@@ -59,6 +67,8 @@ function clickCellCallback(row, col) {
 
 function startBtnCallback() {
   playersTurn = player1;
+  disableCover();
+  removeBtns();
 }
 
 function randomArmadaBtnCallback() {
@@ -68,7 +78,17 @@ function randomArmadaBtnCallback() {
 
 function gameOver(winner) {
   isGameOver = true;
-  alert(`${winner.name} is the Winner!`);
+  showModal(winner);
+  enableCover();
+  renderNewGameBtn();
 }
 
-export { start, startBtnCallback, randomArmadaBtnCallback };
+function newGameBtnCallback() {
+  removeBtns();
+  closeModal();
+  enableCover();
+  isGameOver = false;
+  start();
+}
+
+export { start, startBtnCallback, randomArmadaBtnCallback, newGameBtnCallback };

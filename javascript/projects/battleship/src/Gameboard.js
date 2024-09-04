@@ -60,13 +60,6 @@ class Gameboard {
   areAllShipSunk() {
     return this.ships.every((ship) => ship.isSunk());
   }
-
-  resetBoard() {
-    this.board = Array(10)
-      .fill(null)
-      .map(() => Array(10).fill(null));
-    this.ships = [];
-  }
 }
 
 export default Gameboard;

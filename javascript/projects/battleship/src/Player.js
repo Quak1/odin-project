@@ -15,7 +15,7 @@ class Player {
   }
 
   setArmada(random = true) {
-    this.gameboard.resetBoard();
+    this.gameboard = new Gameboard();
     const sizes = [5, 4, 3, 3, 2];
 
     if (random) {
