@@ -142,3 +142,33 @@ footer .wrapper .icons img {
 footer .wrapper>img {
   max-width: 550px;
 }
+
+@media (max-width: 900px) {
+
+  #about-me .img-container {
+    width: 300px;
+  }
+
+  #about-me .wrapper {
+    display: block;
+  }
+
+  #about-me .img-container {
+    float: left;
+    margin-right: 1em;
+    margin-bottom: 1em;
+  }
+
+  #about-me .card {
+    margin: 50px 30px;
+  }
+
+  footer .wrapper {
+    gap: 50px;
+  }
+
+  footer .wrapper>img {
+    width: 300px;
+    object-fit: cover;
+  }
+}
