@@ -72,11 +72,16 @@ h3 {
 #about-me .icons {
   display: flex;
   justify-content: right;
+  gap: 15px;
+}
+
+#about-me .icons img {
+  height: 25px;
 }
 
 #my-work .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
   grid-gap: 50px;
 }
 
@@ -88,7 +93,7 @@ h3 {
 
 #my-work .content {
   padding: 10px 20px;
-  font-size: 14px;
+  font-size: 0.8em;
 }
 
 #my-work .title-wrapper {
@@ -136,7 +141,7 @@ footer .wrapper p img {
 }
 
 footer .wrapper .icons img {
-  max-height: 30px;
+  height: 30px;
 }
 
 footer .wrapper>img {
@@ -144,16 +149,12 @@ footer .wrapper>img {
 }
 
 @media (max-width: 900px) {
-
-  #about-me .img-container {
-    width: 300px;
-  }
-
   #about-me .wrapper {
     display: block;
   }
 
   #about-me .img-container {
+    width: 300px;
     float: left;
     margin-right: 1em;
     margin-bottom: 1em;
@@ -163,12 +164,85 @@ footer .wrapper>img {
     margin: 50px 30px;
   }
 
+  #about-me .icons {
+    justify-content: center;
+  }
+
   footer .wrapper {
     gap: 50px;
   }
 
   footer .wrapper>img {
     width: 300px;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 24px;
+  }
+
+  .wrapper {
+    padding: 0 20px
+  }
+
+  #about-me .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #about-me .img-container {
+    margin: 0;
+    width: 90%;
+    height: 100%;
+  }
+
+  #about-me .img-container h1 {
+    line-height: 80px;
+    font-size: 2.7em;
+    text-align: left;
+    margin: 10px;
+    width: auto;
+  }
+
+  #about-me .card {
+    margin: 20px 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  #about-me .card h2 {
+    text-align: center;
+  }
+
+  #about-me .icons img,
+  footer .wrapper .icons img {
+    height: 70px;
+  }
+
+  #my-work .icons img {
+    height: 30px;
+  }
+
+  footer .wrapper {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  footer .wrapper>div {
+    padding: 0 20px
+  }
+
+  footer .icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  footer .wrapper>img {
+    max-width: none;
+    width: 100%;
     object-fit: cover;
   }
 }
