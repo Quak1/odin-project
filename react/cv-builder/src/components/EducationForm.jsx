@@ -24,22 +24,22 @@ export default function EducationForm({ entry, handleCancel, saveEntry }) {
       handleSubmit={handleSubmit}
       handleCancel={handleCancel}
     >
-      <label>
-        Course
-        <Input state={[course, setCourse]} required />
-      </label>
-      <label>
-        School
-        <Input state={[school, setSchool]} required />
-      </label>
-      <label>
-        From
-        <Input state={[from, setFrom]} type="date" required />
-      </label>
-      <label>
-        To
-        <Input state={[to, setTo]} type="date" required />
-      </label>
+      <div>
+        <Input id="course" state={[course, setCourse]} required />
+        <label htmlFor="course">Course</label>
+      </div>
+      <div>
+        <Input id="school" state={[school, setSchool]} required />
+        <label htmlFor="school">School</label>
+      </div>
+      <div>
+        <Input id="from" state={[from, setFrom]} type="date" required />
+        <label htmlFor="from">From</label>
+      </div>
+      <div>
+        <Input id="to" state={[to, setTo]} type="date" required />
+        <label htmlFor="to">To</label>
+      </div>
     </ModalForm>
   );
 }

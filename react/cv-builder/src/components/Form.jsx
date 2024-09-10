@@ -6,10 +6,12 @@ export default function Form({ title, children, handleSubmit, handleCancel }) {
       <h2>{title}</h2>
       <hr />
       {children}
-      <button type="button" onClick={handleCancel}>
-        Cancel
-      </button>
-      <button type="submit">Save</button>
+      <div className="buttons">
+        <button type="button" onClick={handleCancel}>
+          Cancel
+        </button>
+        <button type="submit">Save</button>
+      </div>
     </form>
   );
 }

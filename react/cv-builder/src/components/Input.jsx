@@ -1,18 +1,9 @@
-export default function Input({
-  state: [value, setValue],
-  type = "text",
-  required = false,
-}) {
+export default function Input({ state: [value, setValue], ...rest }) {
   const handleChange = (e) => {
     setValue(e.target.value);
   };
 
   return (
-    <input
-      type={type}
-      value={value}
-      onChange={handleChange}
-      required={required}
-    />
+    <input value={value} onChange={handleChange} placeholder="" {...rest} />
   );
 }

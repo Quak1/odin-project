@@ -1,3 +1,78 @@
+form {
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+form h2 {
+  margin: 0;
+}
+
+form>div {
+  position: relative;
+  margin: 20px 0;
+}
+
 form label {
-  display: block;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  opacity: 0.6;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: transform 0.2s;
+  user-select: none;
+  cursor: text;
+}
+
+form input:not(:placeholder-shown)+label,
+form input:focus+label,
+form textarea:not(:placeholder-shown)+label,
+form textarea:focus+label {
+  transform-origin: left top;
+  transform: translateY(-1.1em) scale(0.8);
+  opacity: 1;
+  padding-right: 2px;
+  background-color: white;
+  cursor: auto;
+}
+
+form input,
+form textarea {
+  padding: 10px;
+  font-size: inherit;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form textarea {
+  resize: none;
+  font-size: 0.8em;
+}
+
+form .buttons {
+  margin: 0;
+  margin-left: auto;
+  width: fit-content;
+}
+
+form button {
+  background-color: white;
+  border: solid 2px black;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+form button[type="button"] {
+  color: red;
+  border: none;
+  padding: 0;
+  margin: 0 20px;
+}
+
+form button:active {
+  transform: translateY(2px);
 }

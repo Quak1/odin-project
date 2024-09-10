@@ -33,29 +33,31 @@ export default function ExperienceForm({ entry, handleCancel, saveEntry }) {
       handleSubmit={handleSubmit}
       handleCancel={handleCancel}
     >
-      <label>
-        Job title
-        <Input state={[jobTitle, setJobTitle]} required />
-      </label>
-      <label>
-        Company
-        <Input state={[company, setCompany]} required />
-      </label>
-      <label>
-        From
-        <Input state={[from, setFrom]} type="date" required />
-      </label>
-      <label>
-        To
-        <Input state={[to, setTo]} type="date" required />
-      </label>
-      <label>
-        Description
+      <div>
+        <Input id="job-title" state={[jobTitle, setJobTitle]} required />
+        <label htmlFor="job-title">Job title</label>
+      </div>
+      <div>
+        <Input id="company" state={[company, setCompany]} required />
+        <label htmlFor="company">Company</label>
+      </div>
+      <div>
+        <Input id="from" state={[from, setFrom]} type="date" required />
+        <label htmlFor="from">From</label>
+      </div>
+      <div>
+        <Input id="to" state={[to, setTo]} type="date" required />
+        <label htmlFor="to">To</label>
+      </div>
+      <div>
         <textarea
+          id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          rows={7}
         />
-      </label>
+        <label htmlFor="description">Description</label>
+      </div>
     </ModalForm>
   );
 }

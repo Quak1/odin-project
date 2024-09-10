@@ -28,9 +28,12 @@ export default function ExperienceEntry({
       </p>
       {description && (
         <ul>
-          {description.split("\n").map((entry) => (
-            <li key={entry}>{entry}</li>
-          ))}
+          {description
+            .split("\n")
+            .filter((entry) => entry !== "")
+            .map((entry) => (
+              <li key={entry}>{entry}</li>
+            ))}
         </ul>
       )}
     </div>
