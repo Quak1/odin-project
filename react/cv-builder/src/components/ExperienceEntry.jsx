@@ -7,16 +7,21 @@ export default function ExperienceEntry({
   description,
   deleteEntry,
   openForm,
+  showEdit,
 }) {
   return (
     <div>
       <h3>{title}</h3>
-      <button type="button" onClick={() => openForm(id)}>
-        Edit
-      </button>
-      <button type="button" onClick={() => deleteEntry(id)}>
-        Delete
-      </button>
+      {showEdit && (
+        <>
+          <button type="button" onClick={() => openForm(id)}>
+            Edit
+          </button>
+          <button type="button" onClick={() => deleteEntry(id)}>
+            Delete
+          </button>
+        </>
+      )}
       <p>{company}</p>
       <p>
         {from} - {to}

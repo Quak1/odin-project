@@ -4,6 +4,7 @@ export default function EntriesDisplay({
   EntryComponent,
   deleteEntry,
   openForm,
+  showEdit,
 }) {
   return (
     <div>
@@ -14,9 +15,10 @@ export default function EntriesDisplay({
           {...entry}
           deleteEntry={deleteEntry}
           openForm={openForm}
+          showEdit={showEdit}
         />
       ))}
-      <button onClick={() => openForm("")}>+ Add</button>
+      {showEdit && <button onClick={() => openForm()}>+ Add</button>}
     </div>
   );
 }

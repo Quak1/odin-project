@@ -1,20 +1,20 @@
 import { useState } from "react";
 
 import data from "./assets/default.json";
-import Profile from "./components/Profile";
 import EntriesDisplay from "./components/EntriesDisplay";
+import ProfileEntry from "./components/ProfileEntry";
+import ProfileForm from "./components/ProfileForm";
 import EducationEntry from "./components/EducationEntry";
+import EducationForm from "./components/EducationForm";
 import ExperienceEntry from "./components/ExperienceEntry";
 import ExperienceForm from "./components/ExperienceForm";
-import EducationForm from "./components/EducationForm";
-import ProfileForm from "./components/ProfileForm";
 
 function App() {
   const [profileData, setProfileData] = useState(data.profile);
   const [experienceData, setExperienceData] = useState(data.experience);
   const [educationData, setEducationData] = useState(data.education);
-  const [activeForm, setActiveForm] = useState("");
-  const [activeId, setActiveId] = useState();
+  const [activeForm, setActiveForm] = useState({ type: "", id: null });
+  const [showEdit, setShowEdit] = useState(true);
 
   const callerByType = (type, fn) => {
     if (type === "profile") return fn(profileData, setProfileData);
@@ -43,23 +43,35 @@ function App() {
   }
 
   const openForm = (type) => {
-    return function (id) {
-      setActiveForm(type);
-      setActiveId(id);
+    return function (id = null) {
+      setActiveForm({ type, id });
     };
   };
 
-  console.log({ educationData });
+  const cancelForm = () => setActiveForm({ type: "", id: null });
+
+  const getEntry = (data) =>
+    activeForm.id ? data.find((entry) => entry.id === activeForm.id) : {};
+
+  console.log(activeForm, showEdit);
 
   return (
     <>
-      <Profile {...profileData} />
+      <button type="button" onClick={() => setShowEdit(!showEdit)}>
+        Toggle edit
+      </button>
+      <ProfileEntry
+        {...profileData[0]}
+        openForm={openForm("profile")}
+        showEdit={showEdit}
+      />
       <EntriesDisplay
         title="Experience"
         entries={experienceData}
         EntryComponent={ExperienceEntry}
         deleteEntry={callerByType("experience", deleteEntry)}
         openForm={openForm("experience")}
+        showEdit={showEdit}
       />
       <EntriesDisplay
         title="Education"
@@ -67,11 +79,30 @@ function App() {
         EntryComponent={EducationEntry}
         deleteEntry={callerByType("education", deleteEntry)}
         openForm={openForm("education")}
+        showEdit={showEdit}
       />
 
-      {activeForm === "profile" && <ProfileForm />}
-      {activeForm === "experience" && <ExperienceForm />}
-      {activeForm === "education" && <EducationForm />}
+      {activeForm.type === "profile" && (
+        <ProfileForm
+          handleCancel={cancelForm}
+          saveEntry={callerByType("profile", saveEntry)}
+          entry={callerByType("profile", getEntry)}
+        />
+      )}
+      {activeForm.type === "experience" && (
+        <ExperienceForm
+          handleCancel={cancelForm}
+          saveEntry={callerByType("experience", saveEntry)}
+          entry={callerByType("experience", getEntry)}
+        />
+      )}
+      {activeForm.type === "education" && (
+        <EducationForm
+          handleCancel={cancelForm}
+          saveEntry={callerByType("education", saveEntry)}
+          entry={callerByType("education", getEntry)}
+        />
+      )}
     </>
   );
 }

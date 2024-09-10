@@ -2,26 +2,26 @@ import { useState } from "react";
 import ModalForm from "./ModalForm";
 import Input from "./Input";
 
-export default function ProfileForm({ isOpen, handleCancel, saveEntry }) {
-  const [first, setFirst] = useState("");
-  const [last, setLast] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [aboutMe, setAboutMe] = useState("");
+export default function ProfileForm({ entry, handleCancel, saveEntry }) {
+  const [first, setFirst] = useState(entry.first);
+  const [last, setLast] = useState(entry.last);
+  const [phone, setPhone] = useState(entry.phone);
+  const [email, setEmail] = useState(entry.email);
+  const [aboutMe, setAboutMe] = useState(entry.aboutMe);
 
   function handleSubmit(e) {
     e.preventDefault();
-    saveEntry({ name: `${first} ${last}`, phone, email, aboutMe });
+    saveEntry({ id: entry.id, first, last, phone, email, aboutMe });
     setFirst("");
     setLast("");
     setPhone("");
     setEmail("");
     setAboutMe("");
+    handleCancel();
   }
 
   return (
     <ModalForm
-      isOpen={isOpen}
       title="Profile"
       handleSubmit={handleSubmit}
       handleCancel={handleCancel}

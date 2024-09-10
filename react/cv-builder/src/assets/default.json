@@ -1,10 +1,14 @@
 {
-    "profile": {
-        "name": "John Smith",
-        "phone": "(+12) 345 6789",
-        "email": "me@example.com",
-        "aboutMe": "Lorem ipsum odor amet, consectetuer adipiscing elit. Nascetur ullamcorper mattis aenean habitasse netus duis nam pulvinar. Accumsan porttitor inceptos nec aenean praesent fringilla amet hac nisl. Ex urna ex faucibus sit justo. Blandit praesent semper consequat odio euismod commodo pellentesque. Platea magnis nibh per sem dis cras nam. Tempus vestibulum ullamcorper placerat enim ridiculus."
-    },
+    "profile": [
+        {
+            "id": "0",
+            "first": "John",
+            "last": "Smith",
+            "phone": "(+12) 345 6789",
+            "email": "me@example.com",
+            "aboutMe": "Lorem ipsum odor amet, consectetuer adipiscing elit. Nascetur ullamcorper mattis aenean habitasse netus duis nam pulvinar. Accumsan porttitor inceptos nec aenean praesent fringilla amet hac nisl. Ex urna ex faucibus sit justo. Blandit praesent semper consequat odio euismod commodo pellentesque. Platea magnis nibh per sem dis cras nam. Tempus vestibulum ullamcorper placerat enim ridiculus."
+        }
+    ],
     "experience": [
         {
             "id": "0",

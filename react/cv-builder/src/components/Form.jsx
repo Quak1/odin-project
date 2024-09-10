@@ -1,3 +1,5 @@
+import "../styles/form.css";
+
 export default function Form({ title, children, handleSubmit, handleCancel }) {
   return (
     <form action="" onSubmit={handleSubmit}>

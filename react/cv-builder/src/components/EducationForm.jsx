@@ -1,24 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ModalForm from "./ModalForm";
 import Input from "./Input";
 
-export default function EducationForm({
-  isOpen,
-  entry,
-  handleCancel,
-  saveEntry,
-}) {
-  const [course, setCourse] = useState("");
-  const [school, setSchool] = useState("");
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
-
-  useEffect(() => {
-    setCourse(entry.course || "");
-    setSchool(entry.school || "");
-    setFrom(entry.from || "");
-    setTo(entry.to || "");
-  }, [entry]);
+export default function EducationForm({ entry, handleCancel, saveEntry }) {
+  const [course, setCourse] = useState(entry.course);
+  const [school, setSchool] = useState(entry.school);
+  const [from, setFrom] = useState(entry.from);
+  const [to, setTo] = useState(entry.to);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -27,11 +15,11 @@ export default function EducationForm({
     setSchool("");
     setFrom("");
     setTo("");
+    handleCancel();
   }
 
   return (
     <ModalForm
-      isOpen={isOpen}
       title="Education"
       handleSubmit={handleSubmit}
       handleCancel={handleCancel}
