@@ -55,8 +55,6 @@ function App() {
   const getEntry = (data) =>
     activeForm.id ? data.find((entry) => entry.id === activeForm.id) : {};
 
-  console.log(activeForm, showEdit);
-
   return (
     <>
       <button
