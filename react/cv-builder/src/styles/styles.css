@@ -1,0 +1,42 @@
+body {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ddd;
+}
+
+#root {
+  background-color: white;
+  padding: 20px;
+}
+
+#root>button {
+  margin-right: 0;
+  margin-left: auto;
+  display: block;
+  margin-top: 10px;
+}
+
+.space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.basic-button {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: solid 2px black;
+  font-size: inherit;
+  font-family: sans-serif;
+  padding: 5px 40px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.icon-button {
+  width: 25px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+}

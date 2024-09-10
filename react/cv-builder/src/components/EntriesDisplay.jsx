@@ -18,7 +18,11 @@ export default function EntriesDisplay({
           showEdit={showEdit}
         />
       ))}
-      {showEdit && <button onClick={() => openForm()}>+ Add</button>}
+      {showEdit && (
+        <button className="basic-button" onClick={() => openForm()}>
+          + Add
+        </button>
+      )}
     </div>
   );
 }

@@ -9,6 +9,8 @@ import EducationForm from "./components/EducationForm";
 import ExperienceEntry from "./components/ExperienceEntry";
 import ExperienceForm from "./components/ExperienceForm";
 
+import "./styles/styles.css";
+
 function App() {
   const [profileData, setProfileData] = useState(data.profile);
   const [experienceData, setExperienceData] = useState(data.experience);
@@ -57,7 +59,11 @@ function App() {
 
   return (
     <>
-      <button type="button" onClick={() => setShowEdit(!showEdit)}>
+      <button
+        className="basic-button"
+        type="button"
+        onClick={() => setShowEdit(!showEdit)}
+      >
         Toggle edit
       </button>
       <ProfileEntry

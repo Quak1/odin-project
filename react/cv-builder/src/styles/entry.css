@@ -1,16 +1,5 @@
-body {
-  background: salmon;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
 .container>button {
-  margin: 10px;
-  font-size: 20px;
-  padding: 5px 40px;
-  background-color: rgba(255, 255, 255, 0.5);
-  border: 2px solid black;
-  border-radius: 5px;
+  margin-top: 10px;
 }
 
 .entry {
@@ -50,12 +39,6 @@ body {
   height: calc(100% - 9px)
 }
 
-.entry .title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .entry .title h3 {
   margin: 0;
   padding: 0;
@@ -73,15 +56,6 @@ body {
 
 .entry ul {
   margin: 0
-}
-
-.entry .buttons button {
-  width: 25px;
-  padding: 0;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  margin-right: 5px;
 }
 
 .entry .buttons svg {

@@ -56,16 +56,6 @@ form .buttons {
   width: fit-content;
 }
 
-form button {
-  background-color: white;
-  border: solid 2px black;
-  font-size: inherit;
-  font-family: inherit;
-  padding: 10px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
 form button[type="button"] {
   color: red;
   border: none;
