@@ -1,3 +1,6 @@
+import Entry from "./Entry";
+import { formatDate } from "../date";
+
 export default function EducationEntry({
   id,
   course,
@@ -9,22 +12,17 @@ export default function EducationEntry({
   showEdit,
 }) {
   return (
-    <div>
-      <h3>{course}</h3>
-      {showEdit && (
-        <>
-          <button type="button" onClick={() => openForm(id)}>
-            Edit
-          </button>
-          <button type="button" onClick={() => deleteEntry(id)}>
-            Delete
-          </button>
-        </>
-      )}
+    <Entry
+      id={id}
+      title={course}
+      deleteEntry={deleteEntry}
+      openForm={openForm}
+      showEdit={showEdit}
+    >
       <p>{school}</p>
       <p>
-        {from} - {to}
+        {formatDate(from)} - {formatDate(to)}
       </p>
-    </div>
+    </Entry>
   );
 }

@@ -1,0 +1,89 @@
+body {
+  background: salmon;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.container>button {
+  margin: 10px;
+  font-size: 20px;
+  padding: 5px 40px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.entry {
+  position: relative;
+  padding-left: 20px;
+  --color: black;
+  --line-width: 3px;
+}
+
+.entry::before,
+.entry::after {
+  content: "";
+  display: block;
+  position: absolute;
+}
+
+.entry::before {
+  width: 7px;
+  height: 7px;
+  border: var(--line-width) solid var(--color);
+  background: white;
+  border-radius: 50%;
+  z-index: 1;
+  left: 0px;
+  top: 9px;
+}
+
+.entry::after {
+  width: var(--line-width);
+  height: 100%;
+  background: var(--color);
+  left: 5px;
+  top: 9px;
+}
+
+.entry:last-of-type::after {
+  height: calc(100% - 9px)
+}
+
+.entry .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.entry .title h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.entry p {
+  font-size: 0.9em;
+  opacity: 80%;
+  margin: 0
+}
+
+.entry:has(button:hover) {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.entry ul {
+  margin: 0
+}
+
+.entry .buttons button {
+  width: 25px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.entry .buttons svg {
+  fill: black
+}

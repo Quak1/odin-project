@@ -7,7 +7,7 @@ export default function EntriesDisplay({
   showEdit,
 }) {
   return (
-    <div>
+    <div className="container">
       <h2>{title}</h2>
       {entries.map((entry) => (
         <EntryComponent

@@ -1,3 +1,6 @@
+import Entry from "./Entry";
+import { formatDate } from "../date";
+
 export default function ExperienceEntry({
   id,
   title,
@@ -10,21 +13,15 @@ export default function ExperienceEntry({
   showEdit,
 }) {
   return (
-    <div>
-      <h3>{title}</h3>
-      {showEdit && (
-        <>
-          <button type="button" onClick={() => openForm(id)}>
-            Edit
-          </button>
-          <button type="button" onClick={() => deleteEntry(id)}>
-            Delete
-          </button>
-        </>
-      )}
-      <p>{company}</p>
+    <Entry
+      id={id}
+      title={title}
+      deleteEntry={deleteEntry}
+      openForm={openForm}
+      showEdit={showEdit}
+    >
       <p>
-        {from} - {to}
+        {company} | {formatDate(from)} - {formatDate(to)}
       </p>
       {description && (
         <ul>
@@ -36,6 +33,6 @@ export default function ExperienceEntry({
             ))}
         </ul>
       )}
-    </div>
+    </Entry>
   );
 }
