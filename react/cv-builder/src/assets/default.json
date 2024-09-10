@@ -1,0 +1,50 @@
+{
+    "profile": {
+        "name": "John Smith",
+        "phone": "(+12) 345 6789",
+        "email": "me@example.com",
+        "aboutMe": "Lorem ipsum odor amet, consectetuer adipiscing elit. Nascetur ullamcorper mattis aenean habitasse netus duis nam pulvinar. Accumsan porttitor inceptos nec aenean praesent fringilla amet hac nisl. Ex urna ex faucibus sit justo. Blandit praesent semper consequat odio euismod commodo pellentesque. Platea magnis nibh per sem dis cras nam. Tempus vestibulum ullamcorper placerat enim ridiculus."
+    },
+    "experience": [
+        {
+            "id": "0",
+            "title": "Physician",
+            "company": "Eden Lawn Service",
+            "from": "2020-01-01",
+            "to": "2024-01-01",
+            "description": "Lorem ipsum odor amet, consectetuer adipiscing elit.\nLeo risus maximus tempus dui dapibus maximus nisi aenean.\nMattis fringilla euismod sodales bibendum odio commodo a class neque."
+        },
+        {
+            "id": "1",
+            "title": "Prosthodontist",
+            "company": "McDuff",
+            "from": "2018-01-01",
+            "to": "2020-01-01",
+            "description": "Lorem ipsum odor amet, consectetuer adipiscing elit.\nFringilla pretium sagittis conubia eleifend proin conubia viverra tincidunt."
+        },
+        {
+            "id": "2",
+            "title": "Meeting and convention planner",
+            "company": "Bodega Club",
+            "from": "2016-01-01",
+            "to": "2018-01-01",
+            "description": "Lorem ipsum odor amet, consectetuer adipiscing elit.\nLitora facilisis aptent ac, himenaeos finibus cubilia.\nVitae nisi ornare ac; ante nostra curae."
+        }
+    ],
+    "education": [
+        {
+            "id": "0",
+            "course": "Computer Science",
+            "school": "ABC Community College",
+            "from": "2016-01-01",
+            "to": "2020-01-01"
+        },
+        {
+            "id": "1",
+            "course": "High School",
+            "school": "XYZ High School",
+            "from": "2013-01-01",
+            "to": "2016-01-01"
+        }
+    ]
+}
