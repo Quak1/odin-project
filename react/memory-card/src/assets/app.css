@@ -1,0 +1,16 @@
+:root {
+  --dark: #191919;
+  --white: white;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 20px;
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+}

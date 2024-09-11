@@ -1,0 +1,30 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#score-board {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+header button {
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+header button:active {
+  transform: translateY(3px);
+}
+
+header button:hover svg {
+  filter: drop-shadow(0 0 10px #fff);
+}
+
+header svg {
+  fill: var(--white);
+}
