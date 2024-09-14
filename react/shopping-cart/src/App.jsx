@@ -1,9 +1,19 @@
-function App() {
+import { Outlet } from "react-router-dom";
+import { useState } from "react";
+
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+
+const App = () => {
+  const [cart, setCart] = useState([]);
+
   return (
     <>
-      <h1>Hello, World!</h1>
+      <Navbar cartCount={cart.length} />
+      <Outlet />
+      <Footer />
     </>
   );
-}
+};
 
 export default App;
