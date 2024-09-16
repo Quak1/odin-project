@@ -10,10 +10,10 @@ const Home = () => {
           sed neque saepe velit, consequuntur adipisci perferendis ratione quo
           nesciunt! At animi illo, quos magnam delectus porro ex. Velit, iure.
         </p>
-        <Link to="/shop">Shop</Link>
+        <Link to="/store">Store</Link>
       </div>
       <div>
-        <img src="../../public/home.jpg" alt="Consumer electronics" />
+        <img src="/home.jpg" alt="Consumer electronics" />
       </div>
     </main>
   );

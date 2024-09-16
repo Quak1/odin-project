@@ -6,10 +6,10 @@ const Navbar = ({ cartCount }) => {
       <h3>Store</h3>
       <ul>
         <li>
-          <NavLink to="/home">Home</NavLink>
+          <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink to="/shop">Shop</NavLink>
+          <NavLink to="/store">Store</NavLink>
         </li>
         <li>
           <NavLink to="/cart">Cart {cartCount}</NavLink>
