@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Store from "./pages/Store";
 import ProductDetails from "./pages/ProductDetails";
 import NotFound from "./pages/NotFound";
+import Cart from "./pages/Cart";
 
 const routes = [
   {
@@ -21,6 +22,10 @@ const routes = [
       {
         path: "product/:id",
         element: <ProductDetails />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
       },
     ],
   },
