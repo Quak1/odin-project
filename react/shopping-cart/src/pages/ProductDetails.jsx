@@ -1,10 +1,14 @@
 import { useParams, useOutletContext } from "react-router-dom";
 import { formatPrice } from "../utils";
+import { useState } from "react";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { products } = useOutletContext();
+  const { products, addToCart } = useOutletContext();
+  const [quantity, setQuantity] = useState(1);
 
+  // TODO handle data still loading
+  if (products.length === 0) return "Loading...";
   const product = products.find((product) => product.id == id);
   if (!product) throw Error("Product not found");
 
@@ -29,8 +33,15 @@ const ProductDetails = () => {
         </div>
         <div>
           <label htmlFor="quantity">Quantity</label>
-          <input id="quantity" type="number" defaultValue="1" />
-          <button>Add to cart</button>
+          <input
+            id="quantity"
+            type="number"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+          />
+          <button onClick={() => addToCart(product, Number(quantity))}>
+            Add to cart
+          </button>
         </div>
       </div>
     </div>

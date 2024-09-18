@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Navbar = ({ cartCount }) => {
   return (
@@ -17,6 +18,10 @@ const Navbar = ({ cartCount }) => {
       </ul>
     </nav>
   );
+};
+
+Navbar.propTypes = {
+  cartCount: PropTypes.number.isRequired,
 };
 
 export default Navbar;

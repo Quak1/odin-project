@@ -1,29 +1,17 @@
 import { Link } from "react-router-dom";
+import { CATEGORIES } from "../utils";
 
 const StoreHeader = () => {
   return (
     <div>
       <ul>
+        {CATEGORIES.map(([category, name]) => (
+          <li key={category}>
+            <Link to={"/store/" + category}>{name}</Link>
+          </li>
+        ))}
         <li>
-          <Link to="tv">TV</Link>
-        </li>
-        <li>
-          <Link to="audio">Audio</Link>
-        </li>
-        <li>
-          <Link to="laptop">Laptop</Link>
-        </li>
-        <li>
-          <Link to="mobile">Mobile</Link>
-        </li>
-        <li>
-          <Link to="gaming">Gaming</Link>
-        </li>
-        <li>
-          <Link to="appliances">Appliances</Link>
-        </li>
-        <li>
-          <Link to="">Show all</Link>
+          <Link to="/store">Show all</Link>
         </li>
       </ul>
     </div>

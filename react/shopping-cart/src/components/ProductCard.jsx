@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import classes from "./ProductCard.module.css";
-import { formatPrice } from "../utils";
+import { formatPrice, Product } from "../utils";
+import PropTypes from "prop-types";
 
 const ProductCard = ({ product }) => {
+  const { addToCart } = useOutletContext();
+
   return (
     <article>
       <div className="container">
@@ -21,12 +24,16 @@ const ProductCard = ({ product }) => {
             <p>{formatPrice(product.price)}</p>
           </div>
           <div className="right">
-            <button>Add to cart</button>
+            <button onClick={() => addToCart(product, 1)}>Add to cart</button>
           </div>
         </div>
       </div>
     </article>
   );
+};
+
+ProductCard.propTypes = {
+  product: PropTypes.exact(Product),
 };
 
 export default ProductCard;

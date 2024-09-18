@@ -20,6 +20,10 @@ const routes = [
         element: <Store />,
       },
       {
+        path: "store/:category",
+        element: <Store />,
+      },
+      {
         path: "product/:id",
         element: <ProductDetails />,
       },

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
+import { getCartCount } from "./utils";
 import data from "./products.json";
 
 const App = () => {
@@ -23,7 +24,7 @@ const App = () => {
     let inCart = false;
 
     const newCart = cart.map((item) => {
-      if (item.id === productId) {
+      if (item.product.id === productId) {
         inCart = true;
         return {
           ...item,
@@ -40,10 +41,22 @@ const App = () => {
     setCart(cart.filter((entry) => entry.product.id !== productId));
   };
 
+  const emptyCart = () => {
+    setCart([]);
+  };
+
   return (
     <>
-      <Navbar cartCount={cart.length} />
-      <Outlet context={{ products, cart, addToCart, removeFromCart }} />
+      <Navbar cartCount={getCartCount(cart)} />
+      <Outlet
+        context={{
+          products,
+          cart,
+          addToCart,
+          removeFromCart,
+          emptyCart,
+        }}
+      />
       <Footer />
     </>
   );
