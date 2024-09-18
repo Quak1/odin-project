@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--size);
+  margin: 0 auto;
+  padding: 20px 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+  font-size: 50px;
+}
+
+.links {
+  composes: list from '../../styles.module.css';
+  display: flex;
+  align-items: center;
+}
+
+.links li {
+  display: inline-block;
+  margin-left: 20px;
+  font-size: 20px;
+  transition: transform 0.2s;
+  font-weight: bold;
+}
+
+.links li:hover {
+  transform: translateY(-2px);
+}
+
+.links a {
+  color: var(--dark);
+}
+
+.links span {
+  position: absolute;
+  background-color: var(--blue);
+  color: var(--white);
+  text-align: center;
+
+  font-size: 12px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  font-weight: 700;
+  right: -8px;
+}
+
+.links svg {
+  width: 25px;
+  height: auto;
+  vertical-align: middle;
+}
+
+.links li:last-child a {
+  position: relative;
+}

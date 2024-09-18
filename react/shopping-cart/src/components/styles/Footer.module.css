@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 50px;
+
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+.title {
+  font-size: 30px;
+  margin: 0;
+}
+
+.linkList {
+  composes: list from "../../styles.module.css";
+  display: flex;
+  gap: 15px;
+}
+
+.linkList a {
+  color: inherit;
+}
+
+.linkList a:hover {
+  text-decoration: underline;
+}
+
+.socials {
+  composes: linkList;
+}
+
+.socials a {
+  display: block;
+  line-height: 0;
+  border: solid 2px var(--white);
+  border-radius: 100%;
+  padding: 5px
+}
+
+.socials a:hover {
+  text-decoration: none;
+}
+
+.socials svg {
+  width: 30px;
+  fill: var(--white);
+}

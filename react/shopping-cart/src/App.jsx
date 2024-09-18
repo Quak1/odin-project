@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 
 import { getCartCount } from "./utils";
 import data from "./products.json";
+import "./styles.module.css";
 
 const App = () => {
   const [cart, setCart] = useState([]);

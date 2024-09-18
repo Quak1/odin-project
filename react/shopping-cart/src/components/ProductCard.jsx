@@ -1,5 +1,5 @@
 import { Link, useOutletContext } from "react-router-dom";
-import classes from "./ProductCard.module.css";
+import classes from "./styles/ProductCard.module.css";
 import { formatPrice, Product } from "../utils";
 import PropTypes from "prop-types";
 

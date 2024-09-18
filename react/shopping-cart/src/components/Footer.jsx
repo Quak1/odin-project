@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
+import styles from "./styles/Footer.module.css";
+import TwitterIcon from "./icons/TwitterIcon";
+import FacebookIcon from "./icons/FacebookIcon";
+import InstagramIcon from "./icons/InstagramIcon";
 
 const Footer = () => {
   return (
-    <footer>
-      <h3>Store</h3>
-      <ul>
+    <footer className={styles.container}>
+      <h3 className={styles.title}>Store</h3>
+      <ul className={styles.linkList}>
         <li>
           <Link to="#">Home</Link>
         </li>
@@ -25,15 +29,21 @@ const Footer = () => {
         </li>
       </ul>
 
-      <ul>
+      <ul className={styles.socials}>
         <li>
-          <Link to="#">Twitter icon</Link>
+          <Link to="#">
+            <TwitterIcon />
+          </Link>
         </li>
         <li>
-          <Link to="#">Facebook icon</Link>
+          <Link to="#">
+            <FacebookIcon />
+          </Link>
         </li>
         <li>
-          <Link to="#">Instagram icon</Link>
+          <Link to="#">
+            <InstagramIcon />
+          </Link>
         </li>
       </ul>
     </footer>
