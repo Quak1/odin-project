@@ -13,20 +13,12 @@ const Footer = () => {
           <Link to="#">Home</Link>
         </li>
         <li>
-          <Link to="#">Agent</Link>
-        </li>
-        <li>
           <Link to="#">About</Link>
         </li>
-        <li>
-          <Link to="#">Blog</Link>
-        </li>
-        <li>
-          <Link to="#">Contact</Link>
-        </li>
-        <li>
-          <Link to="#">Listing</Link>
-        </li>
+        <li>Discount codes:</li>
+        <li>DISC10</li>
+        <li>DISC15</li>
+        <li>DISC20</li>
       </ul>
 
       <ul className={styles.socials}>

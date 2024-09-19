@@ -5,7 +5,7 @@ import {
   getDiscountAmount,
   DISCOUNT_CODES,
 } from "../utils";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, Link } from "react-router-dom";
 
 import CartEntry from "../components/CartEntry";
 import styles from "./styles/Cart.module.css";
@@ -53,7 +53,7 @@ const Cart = () => {
             <CartEntry key={cartEntry.product.id} entry={cartEntry} />
           ))}
         </div>
-        <a href="/store">← Back to store</a>
+        <Link to="/store">← Back to store</Link>
       </div>
       <div className={styles.right}>
         <h2 className={styles.header}>Summary</h2>
