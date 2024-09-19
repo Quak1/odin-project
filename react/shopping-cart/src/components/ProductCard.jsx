@@ -17,7 +17,9 @@ const ProductCard = ({ product }) => {
       <div className={styles.bottom}>
         <div className={styles.left}>
           <p className={styles.info}>
-            <Link to={"../product/" + product.id}>{product.title}</Link>
+            <Link to={"../product/" + product.id}>
+              {product.title.slice(0, 90)}
+            </Link>
           </p>
           <p className={styles.price}>{formatPrice(product.price)}</p>
         </div>

@@ -11,5 +11,10 @@ export default defineConfig(({ command }) => {
     return {
       base: "/shopping-cart",
       plugins: [react()],
+      css: {
+        modules: {
+          generateScopedName: "[hash:base64:4]",
+        },
+      },
     };
 });
