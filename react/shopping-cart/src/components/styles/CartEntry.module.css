@@ -1,0 +1,40 @@
+.container {
+  display: grid;
+  grid-template-columns: 100px 1fr 100px 80px auto;
+  gap: 20px;
+  align-items: center;
+  --grey: #6c757d;
+}
+
+.image img {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.title p {
+  margin: 0;
+  color: var(--grey);
+}
+
+.title a {
+  color: var(--dark);
+  text-decoration: none;
+}
+
+.quantity {
+  font-size: 20px;
+}
+
+.container>button {
+  padding: 0;
+  color: var(--grey);
+  background: none;
+  border: none;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+}

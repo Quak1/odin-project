@@ -8,6 +8,7 @@ import {
 import { useOutletContext } from "react-router-dom";
 
 import CartEntry from "../components/CartEntry";
+import styles from "./styles/Cart.module.css";
 
 const Cart = () => {
   const [discount, setDiscount] = useState(0);
@@ -38,43 +39,52 @@ const Cart = () => {
   };
 
   return (
-    <div>
-      <div>
-        <div>
+    <div className={styles.container}>
+      <div className={styles.left}>
+        <div className={styles.header}>
           <h2>Shopping Cart</h2>
           <p>
             {itemCount} {itemCount === 1 ? "item" : "items"}
           </p>
         </div>
-        <div>
+        <hr />
+        <div className={styles.content}>
           {cart.map((cartEntry) => (
             <CartEntry key={cartEntry.product.id} entry={cartEntry} />
           ))}
         </div>
-        <a href="/store">Back to store</a>
+        <a href="/store">← Back to store</a>
       </div>
-      <div>
-        <h2>Summary</h2>
-        <div>
+      <div className={styles.right}>
+        <h2 className={styles.header}>Summary</h2>
+        <hr />
+        <div className={styles.priceEntry}>
           <p>Items ({itemCount}):</p>
           <p>{formatPrice(total)}</p>
-          {discount > 0 && <p>-{formatPrice(discountAmount)}</p>}
         </div>
-        <div>
+        {discount > 0 && (
+          <div className={styles.priceEntry}>
+            <p>Discount:</p>
+            <p>-{formatPrice(discountAmount)}</p>
+          </div>
+        )}
+        <div className={styles.priceEntry}>
           <p>Shipping: </p>
           <p>{formatPrice(shipping)}</p>
         </div>
-        <form onSubmit={handleSubmitDiscountCode}>
+        <form onSubmit={handleSubmitDiscountCode} className={styles.code}>
           <label htmlFor="discount-code">Discount Code:</label>
-          <input
-            type="text"
-            id="dicount-code"
-            value={discountCode}
-            onChange={(e) => setDiscountCode(e.target.value)}
-          />
-          <button type="submit">Enter</button>
+          <div className={styles.input}>
+            <input
+              type="text"
+              id="dicount-code"
+              value={discountCode}
+              onChange={(e) => setDiscountCode(e.target.value)}
+            />
+            <button type="submit">→</button>
+          </div>
         </form>
-        <div>
+        <div className={styles.priceEntry}>
           <p>Total price:</p>
           <p>{formatPrice(discountedPrice + shipping)}</p>
         </div>

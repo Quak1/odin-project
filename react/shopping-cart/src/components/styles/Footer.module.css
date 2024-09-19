@@ -4,6 +4,7 @@
   align-items: center;
   gap: 30px;
   padding: 50px;
+  margin-top: 20px;
 
   background-color: var(--dark);
   color: var(--white);

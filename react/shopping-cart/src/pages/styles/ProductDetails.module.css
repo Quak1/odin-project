@@ -1,0 +1,95 @@
+.container {
+  display: flex;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+  height: fit-content;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.left img {
+  width: 100%;
+}
+
+.right {
+  padding: 20px;
+  flex: 1;
+}
+
+.model {
+  font-size: 15px;
+  color: grey;
+}
+
+.title {
+  font-size: 30px;
+}
+
+.description {
+  font-size: 18px;
+  margin: 0;
+}
+
+.description li {
+  margin: 10px 0;
+}
+
+.details {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.details p:first-child {
+  color: var(--blue);
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.addToCart,
+.input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+}
+
+.addToCart {
+  gap: 30px;
+}
+
+.input {
+  max-width: 200px;
+}
+
+
+.addToCart label {
+  font-size: 13px;
+}
+
+.addToCart>button {
+  padding: 10px 20px;
+  background-color: var(--blue);
+  color: var(--white);
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: transform .2s, filter .2s;
+}
+
+.addToCart>button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.2);
+}

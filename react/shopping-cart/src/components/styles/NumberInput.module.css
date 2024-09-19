@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  align-items: center;
+
+  border: solid 2px black;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.container:focus-within {
+  border-color: var(--blue);
+}
+
+.input {
+  width: 100%;
+  appearance: textfield;
+  border: none;
+  padding: 4px 0;
+  font-size: inherit;
+  text-align: center;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.container button {
+  padding: 4px;
+  margin: 4px;
+
+  line-height: 0;
+  border: none;
+  border-radius: 5px;
+  background: none;
+  cursor: pointer;
+
+  transition: background-color .2s;
+}
+
+.container button:disabled svg {
+  fill: grey;
+}
+
+.container button:disabled:hover {
+  background: none;
+}
+
+.container button:hover {
+  background-color: #ecf2fd;
+}
+
+.container button svg {
+  fill: var(--blue);
+  width: 15px;
+}

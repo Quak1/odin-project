@@ -16,6 +16,10 @@ export function getCartCount(cart) {
   return cart.reduce((count, product) => count + product.amount, 0);
 }
 
+export function capitalizeFirst(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
 export const Product = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
