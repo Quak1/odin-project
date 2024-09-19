@@ -9,7 +9,7 @@ export default defineConfig(({ command }) => {
     };
   } else
     return {
-      base: "/shopping-cart",
+      //base: "/shopping-cart",
       plugins: [react()],
       css: {
         modules: {
