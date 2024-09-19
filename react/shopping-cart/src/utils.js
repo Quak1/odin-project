@@ -30,7 +30,9 @@ export const Product = {
   model: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
-  discount: PropTypes.number.isRequired,
+  discount: PropTypes.number,
+  popular: PropTypes.bool,
+  onSale: PropTypes.bool,
 };
 
 export const DISCOUNT_CODES = [
@@ -39,7 +41,7 @@ export const DISCOUNT_CODES = [
   { code: "DISC20", discount: 20 },
 ];
 
-export const PAGE_SIZE = 5;
+export const PAGE_SIZE = 20;
 
 export const CATEGORIES = [
   ["tv", "TV"],
@@ -47,5 +49,5 @@ export const CATEGORIES = [
   ["laptop", "Laptop"],
   ["mobile", "Mobile"],
   ["gaming", "Gaming"],
-  ["apliances", "Apliances"],
+  ["appliances", "Appliances"],
 ];

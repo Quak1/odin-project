@@ -16,6 +16,10 @@ const Store = () => {
   const [activeProducts, setActiveProducts] = useState([]);
   const [categoryCount, setCategoryCount] = useState();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [query]);
+
   const isValidCategory =
     category === undefined || CATEGORIES.some(([cat]) => cat === category);
   if (!isValidCategory) throw Error("Invalid store category");
@@ -27,7 +31,7 @@ const Store = () => {
       category === undefined
         ? products
         : products.filter((entry) => entry.category === category);
-    setCategoryCount(filteredProducts.length);
+    setCategoryCount(filteredProducts.length || 0);
     setActiveProducts(
       filteredProducts.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE),
     );
@@ -41,7 +45,7 @@ const Store = () => {
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-      <PageNavigator productCount={categoryCount} page={page} />
+      <PageNavigator productCount={categoryCount} page={page} />{" "}
     </main>
   );
 };

@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 import { getCartCount } from "./utils";
-import data from "./products.json";
 import "./styles.module.css";
 
 const App = () => {
@@ -13,11 +12,9 @@ const App = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    setProducts(data.products);
-    setCart([
-      { product: data.products[0], amount: 1 },
-      { product: data.products[1], amount: 2 },
-    ]);
+    fetch("https://fakestoreapi.in/api/products?limit=150")
+      .then((res) => res.json())
+      .then((data) => setProducts(data.products));
   }, []);
 
   const addToCart = (product, amount, replaceAmount = false) => {
@@ -49,15 +46,23 @@ const App = () => {
   return (
     <>
       <Navbar cartCount={getCartCount(cart)} />
-      <Outlet
-        context={{
-          products,
-          cart,
-          addToCart,
-          removeFromCart,
-          emptyCart,
-        }}
-      />
+      {products.length === 0 ? (
+        <p
+          style={{ textAlign: "center", fontSize: "30px", fontWeight: "bold" }}
+        >
+          Loading...
+        </p>
+      ) : (
+        <Outlet
+          context={{
+            products,
+            cart,
+            addToCart,
+            removeFromCart,
+            emptyCart,
+          }}
+        />
+      )}
       <Footer />
     </>
   );
