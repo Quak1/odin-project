@@ -1,31 +1,30 @@
 import { Link, useOutletContext } from "react-router-dom";
-import classes from "./styles/ProductCard.module.css";
+import styles from "./styles/ProductCard.module.css";
 import { formatPrice, Product } from "../utils";
 import PropTypes from "prop-types";
+import AddCartIcon from "../components/icons/AddCartIcon";
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useOutletContext();
 
   return (
-    <article>
-      <div className="container">
-        <div className="top">
-          <img
-            className={classes.image}
-            src={product.image}
-            alt={product.title}
-          />
+    <article className={styles.container}>
+      <div className={styles.top}>
+        <Link to={"../product/" + product.id}>
+          <img src={product.image} alt={product.title} />
+        </Link>
+      </div>
+      <div className={styles.bottom}>
+        <div className={styles.left}>
+          <p className={styles.info}>
+            <Link to={"../product/" + product.id}>{product.title}</Link>
+          </p>
+          <p className={styles.price}>{formatPrice(product.price)}</p>
         </div>
-        <div className="bottom">
-          <div className="left">
-            <p>
-              <Link to={"../product/" + product.id}>{product.title}</Link>
-            </p>
-            <p>{formatPrice(product.price)}</p>
-          </div>
-          <div className="right">
-            <button onClick={() => addToCart(product, 1)}>Add to cart</button>
-          </div>
+        <div className={styles.right}>
+          <button onClick={() => addToCart(product, 1)}>
+            <AddCartIcon />
+          </button>
         </div>
       </div>
     </article>

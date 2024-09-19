@@ -7,6 +7,8 @@ import ProductCard from "../components/ProductCard";
 import { PAGE_SIZE, CATEGORIES } from "../utils";
 import PageNavigator from "../components/PageNavigator";
 
+import styles from "./styles/Store.module.css";
+
 const Store = () => {
   const { category } = useParams();
   const { products } = useOutletContext();
@@ -32,13 +34,15 @@ const Store = () => {
   }, [page, category, products]);
 
   return (
-    <div>
+    <main className={styles.container}>
       <StoreHeader />
-      {activeProducts.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+      <div className={styles.grid}>
+        {activeProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
       <PageNavigator productCount={categoryCount} page={page} />
-    </div>
+    </main>
   );
 };
 
