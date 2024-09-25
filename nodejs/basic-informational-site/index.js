@@ -9,25 +9,26 @@ const server = http.createServer((req, res) => {
     req.url === "/" ? "index.html" : req.url,
   );
 
+  let code = 200;
+  let type = {
+    "Content-Type": "text/html",
+  };
+
   fs.readFile(filePath, { encoding: "utf-8" })
-    .then((content) => {
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(content);
-    })
     .catch((e) => {
-      if (e.code === "ENOENT")
+      if (e.code === "ENOENT") {
+        code = 404;
         return fs.readFile("./public/404.html", { encoding: "utf-8" });
-      else throw e;
-    })
-    .then((content) => {
-      if (content) {
-        res.writeHead(404, { "Content-Type": "text/html" });
-        res.end(content);
-      }
+      } else throw e;
     })
     .catch((e) => {
-      res.writeHead(500);
-      res.end(`There was a fatal error with code: ${e.code}\n`);
+      code = 500;
+      headers = undefined;
+      return `There was a fatal error with code: ${e.code}\n`;
+    })
+    .then((content) => {
+      res.writeHead(code, type);
+      res.end(content);
     });
 });
 
