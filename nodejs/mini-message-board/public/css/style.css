@@ -1,0 +1,82 @@
+:root {
+  --main: coral;
+  --off-white: #F2EFEA;
+  --blue: #4381C1;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+nav {
+  padding: 20px 0;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+nav li:last-child {
+  background-color: var(--blue);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  transition: transform .1s;
+}
+
+nav li:last-child:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+}
+
+.message-list li {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  border-radius: 5px;
+  padding: 10px 10px;
+}
+
+.message-list li:nth-child(even) {
+  background-color: var(--off-white);
+}
+
+.message-list .user {
+  color: var(--main);
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.message-list .info {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.message-list .info a {
+  color: var(--blue);
+}
