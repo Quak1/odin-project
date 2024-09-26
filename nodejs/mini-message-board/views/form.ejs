@@ -1,6 +1,6 @@
 <%- include("./partials/head") %>
 
-<main>
+<main class="new-message">
     <h1>
         <%= title %>
     </h1>
@@ -12,7 +12,8 @@
         </div>
         <div>
             <label for="message">Message:</label>
-            <input name="message" type="text" id="message" required>
+            <textarea name="message" type="text" id="message" required rows=5>
+            </textarea>
         </div>
         <button type="submit">Send</button>
     </form>

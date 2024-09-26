@@ -55,15 +55,25 @@ nav li:last-child:hover {
 }
 
 .message-list li {
+  margin-top: 10px;
   display: flex;
   gap: 10px;
   justify-content: space-between;
   border-radius: 5px;
-  padding: 10px 10px;
+  padding: 7px 10px;
+  background-color: white;
+}
+
+.message-list li:hover {
+  filter: brightness(0.95);
 }
 
 .message-list li:nth-child(even) {
   background-color: var(--off-white);
+}
+
+.message-list .message {
+  word-break: break-all;
 }
 
 .message-list .user {
@@ -79,4 +89,52 @@ nav li:last-child:hover {
 
 .message-list .info a {
   color: var(--blue);
+}
+
+.new-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.new-message form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+}
+
+.new-message label {
+  display: block;
+}
+
+.new-message input,
+.new-message textarea {
+  font-size: 0.8em;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  min-width: 300px;
+}
+
+.new-message textarea {
+  resize: none;
+}
+
+.new-message button[type="submit"] {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: var(--main);
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2em;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .1s;
+}
+
+.new-message button[type="submit"]:hover {
+  transform: translateY(3px);
 }

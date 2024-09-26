@@ -1,7 +1,7 @@
 const messages = require("../models/messages");
 
 const get = (req, res) => {
-  res.render("form", { title: "New message" });
+  res.render("form", { title: "Add new message" });
 };
 
 const postMessage = (req, res) => {
