@@ -1,0 +1,15 @@
+<%- include("./partials/head") %>
+
+<main>
+    <ul>
+        <% for (const message of messages) { %>
+        <li>
+            <p><%= message.user %></p>
+            <p><%= message.text %></p>
+            <p><%= message.added %></p>
+        </li>
+        <% } %>
+    </ul>
+</main>
+
+<%- include("./partials/footer") %>
