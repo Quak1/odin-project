@@ -41,6 +41,10 @@ nav ul {
   font-weight: bold;
 }
 
+nav li:first-child {
+  color: var(--blue);
+}
+
 nav li:last-child {
   background-color: var(--blue);
   color: white;
@@ -137,4 +141,35 @@ nav li:last-child:hover {
 
 .new-message button[type="submit"]:hover {
   transform: translateY(3px);
+}
+
+.details .card {
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+}
+
+.details .author {
+  color: var(--main);
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.details .text {
+  margin: 5px 0;
+  word-break: break-all;
+}
+
+.details .date {
+  text-align: right;
+}
+
+.error-page {
+  text-align: center;
+}
+
+.error-page a {
+  color: var(--blue);
+  text-decoration: underline;
+  font-size: 1.5em
 }

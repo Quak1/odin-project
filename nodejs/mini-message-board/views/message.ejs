@@ -1,7 +1,12 @@
 <%- include("./partials/head") %>
 
-<p><%= message.user %></p>
-<p><%= message.text %></p>
-<p><%= message.added %></p>
+<main class="details">
+    <h1>Message details</h1>
+    <div class="card">
+        <p class="author"><%= message.user %></p>
+        <p class="text"><%= message.text %></p>
+        <p class="date"><%= message.added %></p>
+    </div>
+</main>
 
 <%- include("./partials/footer") %>
