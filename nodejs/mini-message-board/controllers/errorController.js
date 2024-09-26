@@ -1,7 +1,7 @@
 const NotFoundError = require("../errors/NotFoundError");
 
 const error = (error, req, res, next) => {
-  console.error(error);
+  if (error.statusCode !== 404) console.error(error);
   res
     .status(error.statusCode || 500)
     .render("error", { title: error.message, message: error.message });
