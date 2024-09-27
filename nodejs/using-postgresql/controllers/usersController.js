@@ -1,13 +1,21 @@
-exports.usersGet = (req, res) => {
-  console.log("usernames will be logged here - wip");
-  res.send("usernames");
+const db = require("../db/queries");
+
+exports.usersGet = async (req, res) => {
+  const usernames = await db.getAllUsernames();
+  console.log("Usernames:", usernames);
+  res.send(
+    "<a href='/new'>new</a>" +
+      "Usernames: " +
+      usernames.map((user) => user.username).join(", "),
+  );
 };
 
 exports.usersNewGet = (req, res) => {
-  console.log("new username form will be shown");
-  res.send("username form");
+  res.render("createUsername");
 };
 
-exports.usersNewPost = (req, res) => {
-  console.log("username to be saved: ", req.body.username);
+exports.usersNewPost = async (req, res) => {
+  const { username } = req.body;
+  await db.insertUsername(username);
+  res.redirect("/");
 };
