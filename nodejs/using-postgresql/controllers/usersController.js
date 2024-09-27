@@ -1,7 +1,14 @@
 const db = require("../db/queries");
 
-exports.usersGet = async (req, res) => {
-  const usernames = await db.getAllUsernames();
+exports.usernamesGet = async (req, res) => {
+  const { search } = req.query;
+  let usernames = [];
+  if (search) {
+    usernames = await db.searchUsername(search);
+  } else {
+    usernames = await db.getAllUsernames();
+  }
+
   console.log("Usernames:", usernames);
   res.send(
     "<a href='/new'>new</a>" +
