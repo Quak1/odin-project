@@ -1,7 +1,11 @@
+const asyncHandler = require("express-async-handler");
 const messages = require("../models/messages");
 
-const get = (req, res) => {
-  res.render("index", { title: "Message board", messages: messages.getAll() });
-};
+const get = asyncHandler(async (req, res) => {
+  res.render("index", {
+    title: "Message board",
+    messages: await messages.getAll(),
+  });
+});
 
 module.exports = { get };
