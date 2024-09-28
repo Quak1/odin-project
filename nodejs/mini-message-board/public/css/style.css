@@ -80,10 +80,14 @@ nav li:last-child:hover {
   word-break: break-all;
 }
 
-.message-list .user {
+.author {
   color: var(--main);
-  font-size: 1.2em;
+  word-break: break-all;
   font-weight: bold;
+}
+
+.message-list .author {
+  font-size: 1.1em;
 }
 
 .message-list .info {
@@ -150,9 +154,7 @@ nav li:last-child:hover {
 }
 
 .details .author {
-  color: var(--main);
   font-size: 1.5em;
-  font-weight: bold;
 }
 
 .details .text {
@@ -172,4 +174,13 @@ nav li:last-child:hover {
   color: var(--blue);
   text-decoration: underline;
   font-size: 1.5em
+}
+
+.errors {
+  color: red;
+  margin-bottom: 20px;
+}
+
+.errors li {
+  list-style: initial;
 }
