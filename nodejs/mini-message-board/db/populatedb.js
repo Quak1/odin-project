@@ -19,7 +19,7 @@ VALUES
 
 async function main() {
   console.log("seeding...");
-  const client = new Client();
+  const client = new Client({ ssl: true });
   await client.connect();
   await client.query(SQL);
   await client.end();

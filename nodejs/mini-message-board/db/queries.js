@@ -1,7 +1,9 @@
 const { Pool } = require("pg");
 
 // db details are loaded from environment variables
-const pool = new Pool();
+const pool = new Pool({
+  ssl: true,
+});
 
 async function getAllMessages() {
   const { rows } = await pool.query(
