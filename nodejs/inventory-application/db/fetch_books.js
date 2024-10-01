@@ -3,7 +3,7 @@ const fs = require("node:fs");
 const GENRES = [
   "Fantasy",
   "Science Fiction",
-  "Mistery",
+  "Mystery",
   "Horror",
   "Historical Fiction",
   "Romance",
@@ -81,9 +81,8 @@ async function fetchGenres(genres = GENRES) {
   return await Promise.all(genres.map((genre) => fetchGenre(genre)));
 }
 
-async function makeFile() {
+async function makeFile(filename = "content.json") {
   const genres = await fetchGenres();
-  const filename = "content.json";
 
   fs.writeFile(filename, JSON.stringify(genres), (err) => {
     if (err) {
@@ -94,4 +93,5 @@ async function makeFile() {
   });
 }
 
+makeFile();
 module.exports = { fetchGenres, makeFile, GENRES };

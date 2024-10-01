@@ -1,16 +1,20 @@
 {
-  "name": "inventory-application",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "dotenv": "^16.4.5",
-    "pg": "^8.13.0"
-  }
+    "name": "inventory-application",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "dev": "node --watch app.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "dotenv": "^16.4.5",
+        "ejs": "^3.1.10",
+        "express": "^4.21.0",
+        "express-async-handler": "^1.2.0",
+        "express-validator": "^7.2.0",
+        "pg-promise": "^11.9.1"
+    }
 }
