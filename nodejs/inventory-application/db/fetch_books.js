@@ -77,8 +77,12 @@ async function fetchGenre(genre) {
   };
 }
 
+async function fetchGenres(genres = GENRES) {
+  return await Promise.all(genres.map((genre) => fetchGenre(genre)));
+}
+
 async function makeFile() {
-  const genres = await Promise.all(GENRES.map((genre) => fetchGenre(genre)));
+  const genres = await fetchGenres();
   const filename = "content.json";
 
   fs.writeFile(filename, JSON.stringify(genres), (err) => {
@@ -90,4 +94,4 @@ async function makeFile() {
   });
 }
 
-makeFile();
+module.exports = { fetchGenres, makeFile, GENRES };
