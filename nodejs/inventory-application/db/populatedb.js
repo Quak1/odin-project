@@ -40,6 +40,7 @@ async function main() {
     "title",
     "author",
     "year",
+    "rating",
     "pages",
     "cover_s",
     "cover_l",
@@ -60,7 +61,7 @@ async function main() {
     ["book_id", "genre_id"],
     "book_genre",
   );
-  db.none(bookGenreQuery);
+  await db.none(bookGenreQuery);
 
   db.$pool.end();
   console.log("done");
