@@ -1,0 +1,20 @@
+<%- include("./partials/head") %>
+
+<main>
+    <img src="<%= book.cover_l %>" alt="Cover for <%= book.title %>">
+    <ul>
+        <li>Title: <%= book.title %></li>
+        <li>Author: <a href="/authors/<%= book.author[1] %>"><%= book.author[0] %></a></li>
+        <li>Rating: <%= book.rating %></li>
+        <li>Description: <%= book.description %></li>
+        <li>Genres:
+            <% for (const genre of book.genres) { %>
+            <a href="/genre/<%= genre[0] %>"><%= genre[0] %></a>,
+            <% } %>
+        </li>
+        <li>Pages: <%= book.pages %></li>
+        <li>First published year: <%= book.year %></li>
+    </ul>
+</main>
+
+<%- include("./partials/footer") %>

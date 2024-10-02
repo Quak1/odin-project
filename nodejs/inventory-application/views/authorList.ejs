@@ -1,0 +1,17 @@
+<%- include("./partials/head") %>
+
+<main>
+    <h1><%= title %></h1>
+    <ul class="authorList">
+        <% for (const author of authors) { %>
+        <li class="author">
+            <a href="/authors/<%= author.id %>">
+                <p><%= author.author %></p>
+            </a>
+            <p>Books: <%= author.books %></p>
+        </li>
+        <% } %>
+    </ul>
+</main>
+
+<%- include("./partials/footer") %>

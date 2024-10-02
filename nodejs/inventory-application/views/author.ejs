@@ -1,0 +1,22 @@
+<%- include("./partials/head") %>
+
+<main>
+    <h1><%= author[0].author %></h1>
+    <h2>Books: <%= author.length %></h2>
+    <ul>
+        <% for (const book of author) { %>
+        <li>
+            <div>
+                <img src="<%= book.cover_l %>" alt="Cover for <%= book.title %>">
+                <a href="/books/<%= book.book_id %>">
+                    <p><%= book.title %></p>
+                </a>
+                <p><%= book.rating %></p>
+                <p><%= book.year %></p>
+            </div>
+        </li>
+        <% } %>
+    </ul>
+</main>
+
+<%- include("./partials/footer") %>

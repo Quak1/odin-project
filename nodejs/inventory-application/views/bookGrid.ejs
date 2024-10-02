@@ -1,0 +1,19 @@
+<%- include("./partials/head") %>
+
+<main>
+    <h1><%= title %></h1>
+    <div class="bookGrid">
+        <% for (const book of books) { %>
+        <div class="book">
+            <a href="/books/<%= book.id %>">
+                <img style="background-image: url(<%= book.cover_s %>)" src="<%= book.cover_l %>" />
+                <p><%= book.title %></p>
+            </a>
+            <p><%= book.author %></p>
+        </div>
+        <% } %>
+    </div>
+    <%- include("./partials/pageNavigation") %>
+</main>
+
+<%- include("./partials/footer") %>
