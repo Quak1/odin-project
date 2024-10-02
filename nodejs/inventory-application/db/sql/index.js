@@ -14,12 +14,12 @@ module.exports = {
   books: {
     getAll: sql("books/getAll.sql"),
     getById: sql("books/getById.sql"),
+    getByGenre: sql("books/getByGenre.sql"),
+    getCount: sql("books/getCount.sql"),
+    getCountByGenre: sql("books/getCountByGenre.sql"),
   },
   authors: {
     getAll: sql("authors/getAll.sql"),
     getById: sql("authors/getById.sql"),
-  },
-  genres: {
-    getBooks: sql("genres/getBooks.sql"),
   },
 };

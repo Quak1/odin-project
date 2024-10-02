@@ -10,4 +10,4 @@ FROM
 ORDER BY
     ${orderBy:name} ${order:raw} 
 LIMIT
-    ${pageSize} OFFSET ${offset}; 
+    ${pageSize} OFFSET ${offset};
