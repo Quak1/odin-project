@@ -1,0 +1,26 @@
+<%- include("./partials/head") %>
+
+<main>
+    <ol>
+        <% for (const genre of genres) { %>
+        <li>
+            <form action="/genres/<%= genre.id %>"
+                  method="post">
+                <input name="genre"
+                       type="text"
+                       value="<%= genre.genre %>">
+                <button type="submit">Save</button>
+                <button type="button">Delete</button>
+            </form>
+        </li>
+        <% } %>
+    </ol>
+    <form action="/genres"
+          method="post">
+        <input name="genre"
+               type="text">
+        <button type="submit">Add new genre</button>
+    </form>
+</main>
+
+<%- include("./partials/footer") %>

@@ -27,5 +27,6 @@ module.exports = {
   },
   genres: {
     getAll: sql("genres/getAll.sql"),
+    createGenre: sql("genres/createGenre.sql"),
   },
 };
