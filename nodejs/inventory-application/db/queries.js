@@ -4,24 +4,22 @@ const sql = require("./sql");
 const PAGE_SIZE = process.env.BOOKS_PAGE_SIZE;
 
 async function getAllBooks(page = 1, orderBy = "title", asc = true) {
-  const rows = await db.many(sql.books.getAll, {
+  return await db.many(sql.books.getAll, {
     orderBy,
     order: asc ? "ASC" : "DESC",
     pageSize: PAGE_SIZE,
     offset: (page - 1) * PAGE_SIZE,
   });
-  return rows;
 }
 
 async function getBooksByGenre(genre, page = 1, orderBy = "title", asc = true) {
-  const rows = await db.many(sql.books.getByGenre, {
+  return await db.many(sql.books.getByGenre, {
     genre,
     orderBy,
     order: asc ? "ASC" : "DESC",
     pageSize: PAGE_SIZE,
     offset: (page - 1) * PAGE_SIZE,
   });
-  return rows;
 }
 
 async function getBookById(id) {
@@ -37,15 +35,25 @@ async function getBookCountByGenre(genre) {
 }
 
 async function getAllAuthors(asc = true) {
-  const rows = await db.many(sql.authors.getAll, {
+  return await db.many(sql.authors.getAll, {
     order: asc ? "ASC" : "DESC",
   });
-  return rows;
 }
 
 async function getAuthorById(id) {
-  const row = await db.many(sql.authors.getById, { id });
-  return row;
+  return await db.many(sql.authors.getById, { id });
+}
+
+async function createBook(book) {
+  return await db.one(sql.books.createBook, { book });
+}
+
+async function updateBook(book) {
+  return await db.one(sql.books.updateBook, { book });
+}
+
+async function getAllGenres() {
+  return await db.many(sql.genres.getAll);
 }
 
 module.exports = {
@@ -56,4 +64,7 @@ module.exports = {
   getBookCountByGenre,
   getAllAuthors,
   getAuthorById,
+  createBook,
+  updateBook,
+  getAllGenres,
 };

@@ -7,6 +7,7 @@ SELECT
     books.rating,
     books.pages,
     books.cover_l,
+    books.cover_s,
     books.description
 FROM
     books

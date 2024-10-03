@@ -1,0 +1,87 @@
+<%- include("./partials/head") %>
+
+<main>
+    <h1><% title %></h1>
+    <form action=""
+          method="post">
+        <div>
+            <label for="title">Title:</label>
+            <input name="title"
+                   id="title"
+                   type="text"
+                   required
+                   value="<%= locals.book ? book.title : '' %>">
+        </div>
+        <div>
+            <label for="author">Author:</label>
+            <input name="author"
+                   id="author"
+                   type="text"
+                   value="<%= locals.book ? book.author[0] : '' %>">
+        </div>
+        <div>
+            <label for="year">Publication year:</label>
+            <input name="year"
+                   id="year"
+                   type="number"
+                   required
+                   value="<%= locals.book ? book.year : '' %>">
+        </div>
+        <div>
+            Genres:
+            <% for (const genre of genres) { %>
+            <input name="genre"
+                   id="genre-<%= genre.id %>"
+                   type="checkbox"
+                   value="<%= genre.id %>"
+                   <% if (locals.book && book.genres.some(([_, id]) => id == genre.id)) { %>
+                   <%= 'checked' %>
+                   <% } %>>
+            <label for="genre-<%= genre.id %>"><%= genre.genre %></label>
+            <% } %>
+        </div>
+        <div>
+            <label for="rating">Rating:</label>
+            <input name="rating"
+                   id="rating"
+                   type="number"
+                   step="0.01"
+                   max=5
+                   min=0
+                   value="<%= locals.book ? book.rating : '' %>">
+        </div>
+        <div>
+            <label for="pages">Pages:</label>
+            <input name="pages"
+                   id="pages"
+                   type="number"
+                   min=0
+                   required
+                   value="<%= locals.book ? book.pages : '' %>">
+        </div>
+        <div>
+            <label for="cover_l">Cover large:</label>
+            <input name="cover_l"
+                   id="cover_l"
+                   type="text"
+                   value="<%= locals.book ? book.cover_l : '' %>">
+        </div>
+        <div>
+            <label for="cover_s">Cover small:</label>
+            <input name="cover_s"
+                   id="cover_s"
+                   type="text"
+                   value="<%= locals.book ? book.cover_s : '' %>">
+        </div>
+        <div>
+            <label for="description">Description:</label>
+            <textarea name="description"
+                      id="description">
+                <%= locals.book ? book.description : ''%>
+            </textarea>
+        </div>
+        <button type="submit">Create book</button>
+    </form>
+</main>
+
+<%- include("./partials/footer") %>

@@ -53,8 +53,40 @@ const bookGet = asyncHandler(async (req, res) => {
   res.render("book", { title: `Book | ${book.title}`, book });
 });
 
+const createBookGet = asyncHandler(async (req, res) => {
+  const genres = await queries.getAllGenres();
+  res.render("editBook", { title: "Create book", genres });
+});
+
+const createBookPost = asyncHandler(async (req, res) => {
+  console.log("posted");
+  res.redirect("/");
+});
+
+const bookEditGet = asyncHandler(async (req, res) => {
+  const bookId = req.params.id;
+  if (isNaN(bookId)) throw Error("id must be a number");
+
+  const book = await queries.getBookById(bookId);
+  const genres = await queries.getAllGenres();
+  console.log(book);
+  res.render("editBook", { title: "Edit book", book, genres });
+});
+
+const bookEditPost = asyncHandler(async (req, res) => {
+  console.log("posted edit");
+  res.redirect("/");
+});
+
+const bookDelete = asyncHandler(async (req, res) => {});
+
 module.exports = {
   allBooksGet,
   booksByGenreGet,
   bookGet,
+  createBookGet,
+  createBookPost,
+  bookDelete,
+  bookEditGet,
+  bookEditPost,
 };
