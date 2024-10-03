@@ -23,6 +23,7 @@ module.exports = {
   authors: {
     getAll: sql("authors/getAll.sql"),
     getById: sql("authors/getById.sql"),
+    createAuthor: sql("authors/createAuthor.sql"),
   },
   genres: {
     getAll: sql("genres/getAll.sql"),

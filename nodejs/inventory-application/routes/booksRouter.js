@@ -4,14 +4,14 @@ const controller = require("../controllers/booksController");
 
 router.get("/", controller.getAllBooks);
 
-router.get("/create", controller.createBookGet);
-router.post("/create", controller.createBookPost);
+router.get("/create", controller.getCreateBook);
+router.post("/create", controller.postCreateBook);
 
-router.get("/:id/edit", controller.bookEditGet);
-router.post("/:id/edit", controller.bookEditPost);
+router.get("/:id/edit", controller.getEditBook);
+router.post("/:id/edit", controller.postEditBook);
 
-router.delete("/:id/delete", controller.bookDelete);
+router.delete("/:id/delete", controller.deleteBook);
 
-router.get("/:id", controller.bookGet);
+router.get("/:id", controller.getBook);
 
 module.exports = router;

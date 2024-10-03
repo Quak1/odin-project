@@ -45,7 +45,11 @@ async function getAuthorById(id) {
 }
 
 async function createBook(book) {
-  return await db.one(sql.books.createBook, { book });
+  return await db.task(async (t) => {
+    const { id: authorId } = await t.one(sql.authors.createAuthor, book);
+    book.author = authorId;
+    return await t.one(sql.books.createBook, book);
+  });
 }
 
 async function updateBook(book) {
