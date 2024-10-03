@@ -1,12 +1,23 @@
 <%- include("./partials/head") %>
 
 <main>
+    <p>Genres:</p>
+    <ul>
+        <li><a href="/books?genre=Fantasy">Fantasy</a></li>
+        <li><a href="/books?genre=Science Fiction">Science Fiction</a></li>
+        <li><a href="/books?genre=Mystery">Mystery</a></li>
+        <li><a href="/books?genre=Horror">Horror</a></li>
+        <li><a href="/books?genre=Historical Fiction">Historical Fiction</a></li>
+        <li><a href="/books?genre=Romance">Romance</a></li>
+    </ul>
+
     <h1><%= title %></h1>
     <div class="bookGrid">
         <% for (const book of books) { %>
         <div class="book">
             <a href="/books/<%= book.id %>">
-                <img style="background-image: url(<%= book.cover_s %>)" src="<%= book.cover_l %>" />
+                <img style="background-image: url(<%= book.cover_s %>)"
+                     src="<%= book.cover_l %>" />
                 <p><%= book.title %></p>
             </a>
             <p><%= book.author %></p>

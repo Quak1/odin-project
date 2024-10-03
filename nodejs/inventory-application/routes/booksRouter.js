@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/booksController");
 
-router.get("/", controller.allBooksGet);
+router.get("/", controller.getAllBooks);
 
 router.get("/create", controller.createBookGet);
 router.post("/create", controller.createBookPost);

@@ -20,32 +20,28 @@ const clipPage = (page, count) => {
   return { total, current };
 };
 
-const allBooksGet = [
+const getAllBooks = [
   handlePage,
   asyncHandler(async (req, res) => {
-    const { count } = await queries.getBookCount();
+    const genre = req.query.genre;
+
+    const { count } = genre
+      ? await queries.getBookCountByGenre(genre)
+      : await queries.getBookCount();
 
     const page = clipPage(req.query.page, count);
-    const books = await queries.getAllBooks(page.current);
 
-    res.render("bookGrid", { title: "Books", books, page });
+    const books = genre
+      ? await queries.getBooksByGenre(genre)
+      : await queries.getAllBooks(page.current);
+
+    const title = genre ? `${genre} Books` : "Books";
+
+    res.render("bookGrid", { title, books, page });
   }),
 ];
 
-const booksByGenreGet = [
-  handlePage,
-  asyncHandler(async (req, res) => {
-    const genre = req.params.genre;
-    const { count } = await queries.getBookCountByGenre(genre);
-
-    const page = clipPage(req.query.page, count);
-    const books = await queries.getBooksByGenre(genre, page.current);
-
-    res.render("bookGrid", { title: `${genre} Books`, books, page });
-  }),
-];
-
-const bookGet = asyncHandler(async (req, res) => {
+const getBook = asyncHandler(async (req, res) => {
   const bookId = req.params.id;
   if (isNaN(bookId)) throw Error("id must be a number");
 
@@ -53,17 +49,17 @@ const bookGet = asyncHandler(async (req, res) => {
   res.render("book", { title: `Book | ${book.title}`, book });
 });
 
-const createBookGet = asyncHandler(async (req, res) => {
+const getCreateBook = asyncHandler(async (req, res) => {
   const genres = await queries.getAllGenres();
   res.render("editBook", { title: "Create book", genres });
 });
 
-const createBookPost = asyncHandler(async (req, res) => {
+const postCreateBook = asyncHandler(async (req, res) => {
   console.log("posted");
   res.redirect("/");
 });
 
-const bookEditGet = asyncHandler(async (req, res) => {
+const getEditBook = asyncHandler(async (req, res) => {
   const bookId = req.params.id;
   if (isNaN(bookId)) throw Error("id must be a number");
 
@@ -73,20 +69,19 @@ const bookEditGet = asyncHandler(async (req, res) => {
   res.render("editBook", { title: "Edit book", book, genres });
 });
 
-const bookEditPost = asyncHandler(async (req, res) => {
+const postEditBook = asyncHandler(async (req, res) => {
   console.log("posted edit");
   res.redirect("/");
 });
 
-const bookDelete = asyncHandler(async (req, res) => {});
+const deleteBook = asyncHandler(async (req, res) => {});
 
 module.exports = {
-  allBooksGet,
-  booksByGenreGet,
-  bookGet,
-  createBookGet,
-  createBookPost,
-  bookDelete,
-  bookEditGet,
-  bookEditPost,
+  getAllBooks,
+  getBook,
+  getCreateBook,
+  postCreateBook,
+  getEditBook,
+  postEditBook,
+  deleteBook,
 };

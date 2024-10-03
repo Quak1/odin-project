@@ -11,8 +11,8 @@ SELECT
     books.description
 FROM
     books
-    JOIN book_genre ON books.id = book_id 
-    JOIN genres ON genres.id = genre_id
+    LEFT JOIN book_genre ON books.id = book_id 
+    LEFT JOIN genres ON genres.id = genre_id
     JOIN authors ON books.author = authors.id
 WHERE 
     books.id = ${id} 
