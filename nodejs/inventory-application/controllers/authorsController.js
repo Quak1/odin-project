@@ -1,22 +1,30 @@
 const asyncHandler = require("express-async-handler");
 const queries = require("../db/queries");
 
-const allAuthorsGet = asyncHandler(async (req, res) => {
+const getAllAuthors = asyncHandler(async (req, res) => {
   const authors = await queries.getAllAuthors();
-  console.log(authors);
   res.render("authorList", { title: "Authors", authors });
 });
 
-const authorGet = asyncHandler(async (req, res) => {
+const getAuthor = asyncHandler(async (req, res) => {
   const authorId = req.params.id;
   if (isNaN(authorId)) throw Error("Id is not a number");
 
   const author = await queries.getAuthorById(authorId);
-  console.log(author);
   res.render("author", { title: `Author | ${author.author}`, author });
 });
 
+const postUpdateAuthor = asyncHandler(async (req, res) => {
+  const { author } = req.body;
+  const { id } = req.params;
+
+  if (author) await queries.updateAuthor(id, author);
+
+  res.redirect(`/authors/${id}`);
+});
+
 module.exports = {
-  allAuthorsGet,
-  authorGet,
+  getAllAuthors,
+  getAuthor,
+  postUpdateAuthor,
 };

@@ -58,6 +58,10 @@ async function getAuthorById(id) {
   return await db.many(sql.authors.getById, { id });
 }
 
+async function updateAuthor(id, author) {
+  return await db.none(sql.genres.updateAuthor, { id, author });
+}
+
 // GENRES
 async function getAllGenres() {
   return await db.many(sql.genres.getAll);
@@ -81,6 +85,7 @@ module.exports = {
   updateBook,
   getAllAuthors,
   getAuthorById,
+  updateAuthor,
   getAllGenres,
   createGenre,
   updateGenre,
