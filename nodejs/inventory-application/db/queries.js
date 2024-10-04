@@ -35,24 +35,40 @@ async function getBookCountByGenre(genre) {
   return await db.one(sql.books.getCountByGenre, { genre });
 }
 
+async function updateBookGenres(bookId, genres, t) {
+  await t.none(sql.books.removeAllGenres, { bookId });
+  const bookGenres = typeof genres === "string" ? [genres] : genres;
+  const genreQueries = bookGenres.map((genreId) =>
+    t.none(sql.books.addGenre, { genreId, bookId }),
+  );
+  await t.batch(genreQueries);
+}
+
 async function createBook(book) {
   return await db.tx(async (t) => {
     const { id: authorId } = await t.one(sql.authors.createAuthor, book);
     book.author = authorId;
     const { id: bookId } = await t.one(sql.books.createBook, book);
-    const genreQueries = book.genre.map((genreId) =>
-      t.none(sql.books.addGenre, { genreId, bookId }),
-    );
-    await t.batch(genreQueries);
+    await updateBookGenres(bookId, book.genre, t);
     return bookId;
   });
 }
 
 async function updateBook(book) {
-  return await db.task(async (t) => {
+  return await db.tx(async (t) => {
     const { id: authorId } = await t.one(sql.authors.createAuthor, book);
     book.author = authorId;
-    return await t.one(sql.books.update, book);
+    const updatedBookId = await t.oneOrNone(sql.books.update, book);
+
+    if (!updatedBookId)
+      throw new Error(
+        "Can't have 2 books with the same title by the same author",
+      );
+
+    const bookId = updatedBookId.id;
+    await updateBookGenres(bookId, book.genre, t);
+
+    return bookId;
   });
 }
 

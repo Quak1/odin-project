@@ -1,2 +1,2 @@
-DELETE FROM books_genre
+DELETE FROM book_genre
 WHERE book_id = ${bookId};

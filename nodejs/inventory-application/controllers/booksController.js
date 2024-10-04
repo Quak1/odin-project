@@ -73,8 +73,13 @@ const getEditBook = asyncHandler(async (req, res) => {
 });
 
 const postEditBook = asyncHandler(async (req, res) => {
-  console.log("posted edit");
-  res.redirect("/");
+  const bookId = req.params.id;
+  if (isNaN(bookId)) throw Error("id must be a number");
+
+  const book = req.body;
+  book.id = bookId;
+  await queries.updateBook(book);
+  res.redirect("/books/" + bookId);
 });
 
 const deleteBook = asyncHandler(async (req, res) => {});

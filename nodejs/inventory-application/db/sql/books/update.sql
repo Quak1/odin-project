@@ -1,14 +1,21 @@
-WITH existing AS (
-    SELECT id
-    FROM books
-    WHERE title ILIKE ${title} AND author = ${author}
-),
-inserted AS (
-    INSERT INTO books
-        (title, author, year, rating, pages, cover_s, cover_l, description)
-    SELECT
-        ${title}, ${author}, ${year}, ${rating}, ${pages}, ${cover_s}, ${cover_l}, ${description}
-    WHERE NOT EXISTS (SELECT 1 FROM existing)
-    RETURNING id
-)
-SELECT COALESCE((SELECT id FROM existing), (SELECT id FROM inserted)) AS id;
+UPDATE books 
+SET 
+  title = ${title}, 
+  author = ${author}, 
+  year = ${year}, 
+  rating = ${rating}, 
+  pages = ${pages}, 
+  cover_s = ${cover_s}, 
+  cover_l = ${cover_l}, 
+  description = ${description} 
+WHERE 
+  id = ${id} 
+  AND NOT EXISTS (
+    SELECT 1 
+    FROM books as b 
+    WHERE 
+      b.title ILIKE ${title} 
+      AND b.author = ${author} 
+      AND b.id <> ${id}
+  ) 
+RETURNING id;
