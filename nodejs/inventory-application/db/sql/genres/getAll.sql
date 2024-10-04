@@ -2,4 +2,5 @@ SELECT
     id,
     genre
 FROM
-    genres;
+    genres
+ORDER BY genre;

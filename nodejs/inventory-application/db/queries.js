@@ -67,6 +67,10 @@ async function createGenre(genre) {
   return await db.one(sql.genres.createGenre, { genre });
 }
 
+async function updateGenre(id, genre) {
+  return await db.none(sql.genres.updateGenre, { genre, id });
+}
+
 module.exports = {
   getBookById,
   getAllBooks,
@@ -79,4 +83,5 @@ module.exports = {
   getAuthorById,
   getAllGenres,
   createGenre,
+  updateGenre,
 };

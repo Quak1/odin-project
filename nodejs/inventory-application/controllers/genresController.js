@@ -12,7 +12,17 @@ const postCreateGenre = asyncHandler(async (req, res) => {
   res.redirect("/genres");
 });
 
+const postUpdateGenre = asyncHandler(async (req, res) => {
+  const { genre } = req.body;
+  const { id } = req.params;
+
+  if (genre) await queries.updateGenre(id, genre);
+
+  res.redirect("/genres");
+});
+
 module.exports = {
   getGenres,
   postCreateGenre,
+  postUpdateGenre,
 };
