@@ -30,6 +30,7 @@ const getAllBooks = [
       : await queries.getBookCount();
 
     const page = clipPage(req.query.page, count);
+    const genres = await queries.getAllGenres();
 
     const books = genre
       ? await queries.getBooksByGenre(genre)
@@ -37,7 +38,7 @@ const getAllBooks = [
 
     const title = genre ? `${genre} Books` : "Books";
 
-    res.render("bookGrid", { title, books, page });
+    res.render("bookGrid", { title, books, page, genres });
   }),
 ];
 

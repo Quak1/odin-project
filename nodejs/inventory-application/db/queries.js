@@ -14,7 +14,7 @@ async function getAllBooks(page = 1, orderBy = "title", asc = true) {
 }
 
 async function getBooksByGenre(genre, page = 1, orderBy = "title", asc = true) {
-  return await db.many(sql.books.getByGenre, {
+  return await db.manyOrNone(sql.books.getByGenre, {
     genre,
     orderBy,
     order: asc ? "ASC" : "DESC",

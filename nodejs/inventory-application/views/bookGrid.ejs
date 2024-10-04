@@ -3,12 +3,9 @@
 <main>
     <p>Genres:</p>
     <ul>
-        <li><a href="/books?genre=Fantasy">Fantasy</a></li>
-        <li><a href="/books?genre=Science Fiction">Science Fiction</a></li>
-        <li><a href="/books?genre=Mystery">Mystery</a></li>
-        <li><a href="/books?genre=Horror">Horror</a></li>
-        <li><a href="/books?genre=Historical Fiction">Historical Fiction</a></li>
-        <li><a href="/books?genre=Romance">Romance</a></li>
+        <% for (const genre of genres) { %>
+        <li><a href="/books?genre=<%= genre.genre %>"><%= genre.genre %></a></li>
+        <% } %>
     </ul>
 
     <h1><%= title %></h1>
