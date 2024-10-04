@@ -10,6 +10,7 @@
 
     <h1><%= title %></h1>
     <div class="bookGrid">
+        <% if (books.length) { %>
         <% for (const book of books) { %>
         <div class="book">
             <a href="/books/<%= book.id %>">
@@ -19,9 +20,13 @@
             </a>
             <p><%= book.author %></p>
         </div>
+        <%- include("./partials/pageNavigation") %>
+        <% } %>
+
+        <% } else { %>
+        <h2>There are no books in this category!</h2>
         <% } %>
     </div>
-    <%- include("./partials/pageNavigation") %>
 </main>
 
 <%- include("./partials/footer") %>
