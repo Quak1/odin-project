@@ -6,4 +6,5 @@ WHERE
     SELECT id 
     FROM authors 
     WHERE author ILIKE ${author}
-  );
+  )
+RETURNING id;

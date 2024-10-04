@@ -4,6 +4,8 @@
     <img src="<%= book.cover_l %>"
          alt="Cover for <%= book.title %>">
     <a href="/books/<%= book.id %>/edit">Edit</a>
+    <button id="deleteBtn"
+            data-id="<%= book.id %>">Delete</button>
     <ul>
         <li>Title: <%= book.title %></li>
         <li>Author: <a href="
@@ -21,5 +23,11 @@
         </li>
     </ul>
 </main>
+
+<script>
+    const deleteBtn = document.getElementById("deleteBtn")
+    addDeleteFunction(deleteBtn, "book", () => location.replace("/books"),
+        "If this is the last book of an author they'll be removed.") 
+</script>
 
 <%- include("./partials/footer") %>

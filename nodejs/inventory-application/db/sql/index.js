@@ -19,6 +19,7 @@ module.exports = {
     getCountByGenre: sql("books/getCountByGenre.sql"),
     createBook: sql("books/createBook.sql"),
     update: sql("books/update.sql"),
+    delete: sql("books/delete.sql"),
     addGenre: sql("books/addGenre.sql"),
     removeAllGenres: sql("books/removeAllGenres.sql"),
   },

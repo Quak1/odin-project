@@ -82,7 +82,13 @@ const postEditBook = asyncHandler(async (req, res) => {
   res.redirect("/books/" + bookId);
 });
 
-const deleteBook = asyncHandler(async (req, res) => {});
+const deleteBook = asyncHandler(async (req, res) => {
+  const bookId = req.params.id;
+  if (isNaN(bookId)) throw Error("id must be a number");
+
+  await queries.deleteBook(bookId);
+  res.status(204).send();
+});
 
 module.exports = {
   getAllBooks,

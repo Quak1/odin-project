@@ -72,6 +72,10 @@ async function updateBook(book) {
   });
 }
 
+async function deleteBook(id) {
+  return await db.none(sql.books.delete, { id });
+}
+
 // AUTHORS
 async function getAllAuthors(asc = true) {
   return await db.many(sql.authors.getAll, {
@@ -116,6 +120,7 @@ module.exports = {
   getBookCountByGenre,
   createBook,
   updateBook,
+  deleteBook,
   getAllAuthors,
   getAuthorById,
   updateAuthor,

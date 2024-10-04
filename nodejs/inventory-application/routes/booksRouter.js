@@ -10,8 +10,7 @@ router.post("/create", controller.postCreateBook);
 router.get("/:id/edit", controller.getEditBook);
 router.post("/:id/edit", controller.postEditBook);
 
-router.delete("/:id/delete", controller.deleteBook);
-
+router.delete("/:id", controller.deleteBook);
 router.get("/:id", controller.getBook);
 
 module.exports = router;
