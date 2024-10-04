@@ -36,15 +36,24 @@ async function getBookCountByGenre(genre) {
 }
 
 async function createBook(book) {
-  return await db.task(async (t) => {
+  return await db.tx(async (t) => {
     const { id: authorId } = await t.one(sql.authors.createAuthor, book);
     book.author = authorId;
-    return await t.one(sql.books.createBook, book);
+    const { id: bookId } = await t.one(sql.books.createBook, book);
+    const genreQueries = book.genre.map((genreId) =>
+      t.none(sql.books.addGenre, { genreId, bookId }),
+    );
+    await t.batch(genreQueries);
+    return bookId;
   });
 }
 
 async function updateBook(book) {
-  return await db.one(sql.books.updateBook, { book });
+  return await db.task(async (t) => {
+    const { id: authorId } = await t.one(sql.authors.createAuthor, book);
+    book.author = authorId;
+    return await t.one(sql.books.update, book);
+  });
 }
 
 // AUTHORS

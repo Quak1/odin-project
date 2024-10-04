@@ -13,7 +13,7 @@
         </li>
         <li>Genres:
             <% for (const genre of book.genres) { %>
-            <a href="/genre/<%= genre[0] %>"><%= genre[0] %></a>
+            <a href="/books/?genre=<%= genre[0] %>"><%= genre[0] %></a>
             <% } %>
         </li>
         <li>Pages: <%= book.pages %></li>

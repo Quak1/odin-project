@@ -57,7 +57,8 @@ const getCreateBook = asyncHandler(async (req, res) => {
 
 const postCreateBook = asyncHandler(async (req, res) => {
   const book = req.body;
-  const { id } = await queries.createBook(book);
+  console.log(book);
+  const id = await queries.createBook(book);
   res.redirect("/books/" + id);
 });
 

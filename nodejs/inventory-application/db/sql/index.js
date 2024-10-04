@@ -18,7 +18,9 @@ module.exports = {
     getCount: sql("books/getCount.sql"),
     getCountByGenre: sql("books/getCountByGenre.sql"),
     createBook: sql("books/createBook.sql"),
-    updateBook: sql("books/upateBook.sql"),
+    update: sql("books/update.sql"),
+    addGenre: sql("books/addGenre.sql"),
+    removeAllGenres: sql("books/removeAllGenres.sql"),
   },
   authors: {
     getAll: sql("authors/getAll.sql"),
