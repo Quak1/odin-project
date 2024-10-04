@@ -7,6 +7,7 @@ const GENRES = [
   "Horror",
   "Historical Fiction",
   "Romance",
+  "Non Fiction",
 ];
 const BOOKS_PER_GENRE = 20;
 const API = "https://openlibrary.org";
@@ -22,6 +23,7 @@ const FIELDS =
     "ratings_average",
     "editions",
     "editions.cover_i",
+    "editions.title",
   ].join(",");
 
 function getQuery(genre, language = "eng", year_from = "2000", year_to = "*") {
@@ -49,12 +51,13 @@ function makeBook(book, editionEntry) {
   const cover = `${COVER_BASE}/${book.editions.docs[0].cover_i}-`;
   const description =
     editionEntry.description || "This book doesn't have a description";
+  const ratings = book.ratings_average ? book.ratings_average.toFixed(2) : null;
 
   return {
-    title: book.title,
+    title: book.editions.docs[0].title,
     author: book.author_name[0],
     year: book.first_publish_year,
-    rating: book.ratings_average.toFixed(2),
+    rating: ratings,
     pages: book.number_of_pages_median,
     cover_s: cover + "S.jpg",
     cover_l: cover + "L.jpg",
