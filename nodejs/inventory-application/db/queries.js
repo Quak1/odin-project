@@ -100,6 +100,10 @@ async function updateGenre(id, genre) {
   return await db.none(sql.genres.updateGenre, { genre, id });
 }
 
+async function deleteGenre(id) {
+  return await db.none(sql.genres.delete, { id });
+}
+
 module.exports = {
   getBookById,
   getAllBooks,
@@ -114,4 +118,5 @@ module.exports = {
   getAllGenres,
   createGenre,
   updateGenre,
+  deleteGenre,
 };

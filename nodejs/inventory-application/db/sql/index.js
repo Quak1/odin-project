@@ -32,5 +32,6 @@ module.exports = {
     getAll: sql("genres/getAll.sql"),
     createGenre: sql("genres/createGenre.sql"),
     updateGenre: sql("genres/updateGenre.sql"),
+    delete: sql("genres/delete.sql"),
   },
 };

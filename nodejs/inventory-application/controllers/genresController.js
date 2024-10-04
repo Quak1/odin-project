@@ -21,8 +21,15 @@ const postUpdateGenre = asyncHandler(async (req, res) => {
   res.redirect("/genres");
 });
 
+const deleteGenre = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  await queries.deleteGenre(id);
+  res.status(204).send();
+});
+
 module.exports = {
   getGenres,
   postCreateGenre,
   postUpdateGenre,
+  deleteGenre,
 };
