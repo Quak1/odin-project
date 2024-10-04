@@ -14,5 +14,3 @@ This action cannot be undone.`,
     }
   });
 }
-
-console.log("loaded");

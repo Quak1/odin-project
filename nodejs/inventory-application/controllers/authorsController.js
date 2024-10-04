@@ -20,7 +20,7 @@ const postUpdateAuthor = asyncHandler(async (req, res) => {
 
   if (author) await queries.updateAuthor(id, author);
 
-  res.redirect(`/authors/${id}`);
+  res.status(200).send();
 });
 
 const deleteAuthor = asyncHandler(async (req, res) => {

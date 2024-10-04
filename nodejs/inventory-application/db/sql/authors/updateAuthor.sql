@@ -7,4 +7,3 @@ WHERE
     FROM authors 
     WHERE author ILIKE ${author}
   )
-RETURNING id;

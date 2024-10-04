@@ -5,6 +5,9 @@
     <button id="deleteBtn"
             data-id="<%= author[0].author_id %>"
             type="button">Delete</button>
+    <button id="editBtn"
+            data-id="<%= author[0].author_id %>"
+            type="button">Edit name</button>
     <h2>Books: <%= author.length %></h2>
     <ul>
         <% for (const book of author) { %>
@@ -26,6 +29,19 @@
 <script>
     const deleteBtn = document.getElementById("deleteBtn")
     addDeleteFunction(deleteBtn, "author", () => location.replace("/books"), "This will remove all books related to this author.")
+
+    const editBtn = document.getElementById("editBtn")
+    const id = editBtn.dataset.id;
+    editBtn.addEventListener("click", async () => {
+        const newName = prompt("Write a new name for this author:", "<%= author[0].author %>")
+        const res = await fetch(`/authors/${id}`, {
+            method: "POST",
+            body: JSON.stringify({author: newName}),
+            headers: {"Content-Type": "application/json"},
+        });
+        if (res.ok) location.reload()
+        else alert(`Failed to edit author.`);
+    });
 </script>
 
 <%- include("./partials/footer") %>

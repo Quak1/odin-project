@@ -57,7 +57,6 @@ const getCreateBook = asyncHandler(async (req, res) => {
 
 const postCreateBook = asyncHandler(async (req, res) => {
   const book = req.body;
-  console.log(book);
   const id = await queries.createBook(book);
   res.redirect("/books/" + id);
 });
@@ -68,7 +67,6 @@ const getEditBook = asyncHandler(async (req, res) => {
 
   const book = await queries.getBookById(bookId);
   const genres = await queries.getAllGenres();
-  console.log(book);
   res.render("editBook", { title: "Edit book", book, genres });
 });
 
