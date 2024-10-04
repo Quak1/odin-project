@@ -23,8 +23,15 @@ const postUpdateAuthor = asyncHandler(async (req, res) => {
   res.redirect(`/authors/${id}`);
 });
 
+const deleteAuthor = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  await queries.deleteAuthor(id);
+  res.redirect("/authors");
+});
+
 module.exports = {
   getAllAuthors,
   getAuthor,
   postUpdateAuthor,
+  deleteAuthor,
 };

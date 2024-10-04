@@ -2,12 +2,16 @@
 
 <main>
     <h1><%= author[0].author %></h1>
+    <button id="deleteBtn"
+            data-id="<%= author[0].author_id %>"
+            type="button">Delete</button>
     <h2>Books: <%= author.length %></h2>
     <ul>
         <% for (const book of author) { %>
         <li>
             <div>
-                <img src="<%= book.cover_l %>" alt="Cover for <%= book.title %>">
+                <img src="<%= book.cover_l %>"
+                     alt="Cover for <%= book.title %>">
                 <a href="/books/<%= book.book_id %>">
                     <p><%= book.title %></p>
                 </a>
@@ -18,5 +22,10 @@
         <% } %>
     </ul>
 </main>
+
+<script>
+    const deleteBtn = document.getElementById("deleteBtn")
+    addDeleteFunction(deleteBtn, "author", () => location.replace("/books"), "This will remove all books related to this author.")
+</script>
 
 <%- include("./partials/footer") %>

@@ -84,7 +84,11 @@ async function getAuthorById(id) {
 }
 
 async function updateAuthor(id, author) {
-  return await db.none(sql.genres.updateAuthor, { id, author });
+  return await db.none(sql.authors.updateAuthor, { id, author });
+}
+
+async function deleteAuthor(id) {
+  return await db.none(sql.authors.delete, { id });
 }
 
 // GENRES
@@ -115,6 +119,7 @@ module.exports = {
   getAllAuthors,
   getAuthorById,
   updateAuthor,
+  deleteAuthor,
   getAllGenres,
   createGenre,
   updateGenre,

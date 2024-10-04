@@ -27,6 +27,7 @@ module.exports = {
     getById: sql("authors/getById.sql"),
     createAuthor: sql("authors/createAuthor.sql"),
     updateAuthor: sql("authors/updateAuthor.sql"),
+    delete: sql("authors/delete.sql"),
   },
   genres: {
     getAll: sql("genres/getAll.sql"),
