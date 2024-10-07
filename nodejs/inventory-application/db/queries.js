@@ -14,7 +14,9 @@ async function getAllBooks(page = 1, orderBy = "title", asc = true) {
 }
 
 async function getBooksByGenre(genre, page = 1, orderBy = "title", asc = true) {
-  return await db.manyOrNone(sql.books.getByGenre, {
+  const query =
+    genre === "Other" ? sql.books.getBooksWithoutGenre : sql.books.getByGenre;
+  return await db.manyOrNone(query, {
     genre,
     orderBy,
     order: asc ? "ASC" : "DESC",
@@ -32,7 +34,11 @@ async function getBookCount() {
 }
 
 async function getBookCountByGenre(genre) {
-  return await db.one(sql.books.getCountByGenre, { genre });
+  const query =
+    genre === "Other"
+      ? sql.books.getCountWihoutGenre
+      : sql.books.getCountByGenre;
+  return await db.one(query, { genre });
 }
 
 async function updateBookGenres(bookId, genres, t) {
