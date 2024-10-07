@@ -10,22 +10,28 @@
                    id="title"
                    type="text"
                    required
-                   value="<%= locals.book ? book.title : '' %>">
+                   value="<%= locals?.formData?.title || '' %>">
+            <label for="title"
+                   class="error"><%= locals?.errors?.title?.msg %></label>
         </div>
         <div>
             <label for="author">Author:</label>
             <input name="author"
                    id="author"
                    type="text"
-                   value="<%= locals.book ? book.author[0] : '' %>">
+                   required
+                   value="<%= locals?.formData?.author || '' %>">
+            <label for="author"
+                   class="error"><%= locals?.errors?.author?.msg %></label>
         </div>
         <div>
             <label for="year">Publication year:</label>
             <input name="year"
                    id="year"
                    type="number"
-                   required
-                   value="<%= locals.book ? book.year : '' %>">
+                   value="<%= locals?.formData?.year || '' %>">
+            <label for="year"
+                   class="error"><%= locals?.errors?.year?.msg %></label>
         </div>
         <div>
             Genres:
@@ -34,7 +40,7 @@
                    id="genre-<%= genre.id %>"
                    type="checkbox"
                    value="<%= genre.id %>"
-                   <% if (locals.book && book.genres.some(([_, id]) => id == genre.id)) { %>
+                   <% if (locals?.formData?.genres?.some(([_, id]) => id == genre.id)) { %>
                    <%= 'checked' %>
                    <% } %>>
             <label for="genre-<%= genre.id %>"><%= genre.genre %></label>
@@ -48,7 +54,9 @@
                    step="0.01"
                    max=5
                    min=0
-                   value="<%= locals.book ? book.rating : '' %>">
+                   value="<%= locals?.formData?.rating || '' %>">
+            <label for="rating"
+                   class="error"><%= locals?.errors?.rating?.msg %></label>
         </div>
         <div>
             <label for="pages">Pages:</label>
@@ -56,29 +64,34 @@
                    id="pages"
                    type="number"
                    min=0
-                   required
-                   value="<%= locals.book ? book.pages : '' %>">
+                   value="<%= locals?.formData?.pages || '' %>">
+            <label for="pages"
+                   class="error"><%= locals?.errors?.pages?.msg %></label>
         </div>
         <div>
             <label for="cover_l">Cover large:</label>
             <input name="cover_l"
                    id="cover_l"
                    type="text"
-                   value="<%= locals.book ? book.cover_l : '' %>">
+                   value="<%= locals?.formData?.cover_l || '' %>">
+            <label for="cover_l"
+                   class="error"><%= locals?.errors?.cover_l?.msg %></label>
         </div>
         <div>
             <label for="cover_s">Cover small:</label>
             <input name="cover_s"
                    id="cover_s"
                    type="text"
-                   value="<%= locals.book ? book.cover_s : '' %>">
+                   value="<%= locals?.formData?.cover_s || '' %>">
+            <label for="cover_s"
+                   class="error"><%= locals?.errors?.cover_s?.msg %></label>
         </div>
         <div>
             <label for="description">Description:</label>
             <textarea name="description"
-                      id="description">
-                <%= locals.book ? book.description : ''%>
-            </textarea>
+                      id="description"><%= locals?.formData?.description || ''%></textarea>
+            <label for="description"
+                   class="error"><%= locals?.errors?.description?.msg %></label>
         </div>
         <button type="submit">Create book</button>
     </form>
