@@ -7,24 +7,37 @@
             <form action="/genres/<%= genre.id %>"
                   method="post">
                 <input name="genre"
+                       id="genre-<%= genre.id %>"
                        type="text"
                        value="<%= genre.genre %>">
                 <button type="submit">Save</button>
                 <button class="deleteBtn"
                         data-id="<%= genre.id %>"
                         type="button">Delete</button>
+                <% if (locals.errors?.[genre.id]) { %>
+                <label for="genre-<%= genre.id %>">
+                    <%= errors[genre.id].msg %>
+                </label>
+                <% } %>
             </form>
         </li>
         <% } %>
     </ol>
-    <% if (isEmpty) { %>
+
+    <% if (genres.length === 0) { %>
     <p>There are no existing genres. Make a new one!</p>
     <% } %>
+
     <form action="/genres"
           method="post">
         <input name="genre"
+               id="genre"
+               value="<%= locals.formData?.genre %>"
                type="text">
         <button type="submit">Add new genre</button>
+        <% if (locals.errors?.genre) { %>
+        <label for="genre"><%= errors.genre.msg %></label>
+        <% } %>
     </form>
 </main>
 
