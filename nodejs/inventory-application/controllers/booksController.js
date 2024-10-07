@@ -77,7 +77,14 @@ const getAllBooks = [
 
     const title = genre ? `${genre} Books` : "Books";
 
-    res.render("bookGrid", { title, books, page, genres, isMain: !genre });
+    res.render("bookGrid", {
+      title,
+      books,
+      page,
+      genres,
+      genre,
+      isMain: !genre,
+    });
   }),
 ];
 
