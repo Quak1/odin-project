@@ -1,17 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const queries = require("../db/queries");
+const NotFoundError = require("../errors/NotFoundError");
 
+const pageParser = require("../middleware/pageParser");
 const PAGE_SIZE = process.env.BOOKS_PAGE_SIZE;
-
-const handlePage = (req, res, next) => {
-  const page = req.query.page;
-
-  if (!page || page == 0) req.query.page = 1;
-  else if (parseInt(page) == page && page > 0) req.query.page = Number(page);
-  else throw Error("page must be a positive integer");
-
-  next();
-};
 
 const clipPage = (page, count) => {
   const total = Math.ceil(count / PAGE_SIZE);
@@ -21,7 +13,7 @@ const clipPage = (page, count) => {
 };
 
 const getAllBooks = [
-  handlePage,
+  pageParser,
   asyncHandler(async (req, res) => {
     const genre = req.query.genre;
 
@@ -44,9 +36,9 @@ const getAllBooks = [
 
 const getBook = asyncHandler(async (req, res) => {
   const bookId = req.params.id;
-  if (isNaN(bookId)) throw Error("id must be a number");
 
   const book = await queries.getBookById(bookId);
+  if (!book) throw new NotFoundError();
   res.render("book", { title: `Book | ${book.title}`, book });
 });
 
@@ -63,7 +55,6 @@ const postCreateBook = asyncHandler(async (req, res) => {
 
 const getEditBook = asyncHandler(async (req, res) => {
   const bookId = req.params.id;
-  if (isNaN(bookId)) throw Error("id must be a number");
 
   const book = await queries.getBookById(bookId);
   const genres = await queries.getAllGenres();
@@ -72,7 +63,6 @@ const getEditBook = asyncHandler(async (req, res) => {
 
 const postEditBook = asyncHandler(async (req, res) => {
   const bookId = req.params.id;
-  if (isNaN(bookId)) throw Error("id must be a number");
 
   const book = req.body;
   book.id = bookId;
@@ -82,7 +72,6 @@ const postEditBook = asyncHandler(async (req, res) => {
 
 const deleteBook = asyncHandler(async (req, res) => {
   const bookId = req.params.id;
-  if (isNaN(bookId)) throw Error("id must be a number");
 
   await queries.deleteBook(bookId);
   res.status(204).send();

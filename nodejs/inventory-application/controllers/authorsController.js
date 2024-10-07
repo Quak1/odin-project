@@ -8,7 +8,6 @@ const getAllAuthors = asyncHandler(async (req, res) => {
 
 const getAuthor = asyncHandler(async (req, res) => {
   const authorId = req.params.id;
-  if (isNaN(authorId)) throw Error("Id is not a number");
 
   const author = await queries.getAuthorById(authorId);
   res.render("author", { title: `Author | ${author.author}`, author });
