@@ -23,8 +23,10 @@
         <% } %>
         <%- include("./partials/pageNavigation") %>
 
+        <% } else if (locals.isMain) { %>
+        <p>There are no books. Add the first one <a href="/books/create">here!</a></p>
         <% } else { %>
-        <h2>There are no books in this category!</h2>
+        <p>There are no books for this genre.</p>
         <% } %>
     </div>
 </main>

@@ -17,6 +17,9 @@
         </li>
         <% } %>
     </ol>
+    <% if (isEmpty) { %>
+    <p>There are no existing genres. Make a new one!</p>
+    <% } %>
     <form action="/genres"
           method="post">
         <input name="genre"

@@ -5,7 +5,7 @@ const PAGE_SIZE = process.env.BOOKS_PAGE_SIZE;
 
 // BOOKS
 async function getAllBooks(page = 1, orderBy = "title", asc = true) {
-  return await db.many(sql.books.getAll, {
+  return await db.manyOrNone(sql.books.getAll, {
     orderBy,
     order: asc ? "ASC" : "DESC",
     pageSize: PAGE_SIZE,
@@ -78,13 +78,13 @@ async function deleteBook(id) {
 
 // AUTHORS
 async function getAllAuthors(asc = true) {
-  return await db.many(sql.authors.getAll, {
+  return await db.manyOrNone(sql.authors.getAll, {
     order: asc ? "ASC" : "DESC",
   });
 }
 
 async function getAuthorById(id) {
-  return await db.many(sql.authors.getById, { id });
+  return await db.manyOrNone(sql.authors.getById, { id });
 }
 
 async function updateAuthor(id, author) {
@@ -97,7 +97,7 @@ async function deleteAuthor(id) {
 
 // GENRES
 async function getAllGenres() {
-  return await db.many(sql.genres.getAll);
+  return await db.manyOrNone(sql.genres.getAll);
 }
 
 async function createGenre(genre) {

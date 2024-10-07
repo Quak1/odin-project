@@ -2,6 +2,11 @@
 
 <main>
     <h1><%= title %></h1>
+
+    <% if (isEmpty) { %>
+    <p>There are no authors! Add a new book to create an author.</p>
+    <% } %>
+
     <ul class="authorList">
         <% for (const author of authors) { %>
         <li class="author">

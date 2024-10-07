@@ -6,7 +6,7 @@ const pageParser = require("../middleware/pageParser");
 const PAGE_SIZE = process.env.BOOKS_PAGE_SIZE;
 
 const clipPage = (page, count) => {
-  const total = Math.ceil(count / PAGE_SIZE);
+  const total = Math.ceil(count / PAGE_SIZE) || 1;
   const current = page > total ? total : page;
 
   return { total, current };
@@ -30,7 +30,7 @@ const getAllBooks = [
 
     const title = genre ? `${genre} Books` : "Books";
 
-    res.render("bookGrid", { title, books, page, genres });
+    res.render("bookGrid", { title, books, page, genres, isMain: !genre });
   }),
 ];
 

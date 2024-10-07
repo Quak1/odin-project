@@ -1,15 +1,22 @@
 const asyncHandler = require("express-async-handler");
 const queries = require("../db/queries");
 
+const NotFoundError = require("../errors/NotFoundError");
+
 const getAllAuthors = asyncHandler(async (req, res) => {
   const authors = await queries.getAllAuthors();
-  res.render("authorList", { title: "Authors", authors });
+  res.render("authorList", {
+    title: "Authors",
+    authors,
+    isEmpty: authors.length === 0,
+  });
 });
 
 const getAuthor = asyncHandler(async (req, res) => {
   const authorId = req.params.id;
 
   const author = await queries.getAuthorById(authorId);
+  if (author.length === 0) throw new NotFoundError();
   res.render("author", { title: `Author | ${author.author}`, author });
 });
 

@@ -3,7 +3,11 @@ const queries = require("../db/queries");
 
 const getGenres = asyncHandler(async (req, res) => {
   const genres = await queries.getAllGenres();
-  res.render("genres", { title: "Genres", genres });
+  res.render("genres", {
+    title: "Genres",
+    genres,
+    isEmpty: genres.length === 0,
+  });
 });
 
 const postCreateGenre = asyncHandler(async (req, res) => {
