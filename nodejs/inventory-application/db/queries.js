@@ -88,7 +88,7 @@ async function getAuthorById(id) {
 }
 
 async function updateAuthor(id, author) {
-  return await db.none(sql.authors.updateAuthor, { id, author });
+  return await db.oneOrNone(sql.authors.updateAuthor, { id, author });
 }
 
 async function deleteAuthor(id) {

@@ -39,8 +39,13 @@
             body: JSON.stringify({author: newName}),
             headers: {"Content-Type": "application/json"},
         });
+
         if (res.ok) location.reload()
-        else alert(`Failed to edit author.`);
+        else {
+            const info = await res.json()
+            const errors = info.errors.map(error => error.msg).join("\n")
+            alert(`Failed to edit author.\n` + errors);
+        }
     });
 </script>
 

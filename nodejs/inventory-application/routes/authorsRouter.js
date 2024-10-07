@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const controller = require("../controllers/authorsController");
 
-const idParser = require("../middleware/idParser");
+const controller = require("../controllers/authorsController");
+const idValidator = require("../middleware/idValidator");
 
 router.get("/", controller.getAllAuthors);
-router.get("/:id", idParser, controller.getAuthor);
-router.post("/:id", idParser, express.json(), controller.postUpdateAuthor);
-router.delete("/:id", idParser, controller.deleteAuthor);
+
+router.get("/:id", idValidator, controller.getAuthor);
+router.post("/:id", idValidator, express.json(), controller.postUpdateAuthor);
+router.delete("/:id", idValidator, controller.deleteAuthor);
 
 module.exports = router;
