@@ -4,6 +4,7 @@
   --accent: #2869ff;
   --white: #ffffff;
   --red: #800E13;
+  --width: 1000px;
 }
 
 body {
@@ -23,7 +24,7 @@ a {
 }
 
 main {
-  max-width: 1000px;
+  max-width: var(--width);
   margin: 0 auto;
 }
 
@@ -249,4 +250,32 @@ li {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
+}
+
+/* Nav Bar */
+nav {
+  display: flex;
+  margin: 15px auto;
+  max-width: var(--width);
+  justify-content: space-evenly;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+nav a {
+  text-decoration: underline;
+
+}
+
+/* error page */
+.error-page {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  text-align: center;
+}
+
+.error-page a {
+  text-decoration: underline;
 }
