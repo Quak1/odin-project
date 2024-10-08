@@ -1,9 +1,12 @@
 SELECT
     books.id,
-    title,
+    books.title,
     authors.author,
-    cover_s,
-    cover_l
+    authors.id AS author_id,
+    books.cover_s,
+    books.year,
+    books.pages,
+    books.rating
 FROM
     books
     JOIN authors ON authors.id = books.author

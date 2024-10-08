@@ -1,9 +1,12 @@
 SELECT
-    authors.author,
     books.id,
     books.title,
+    authors.author,
+    authors.id AS author_id,
     books.cover_s,
-    books.cover_l
+    books.year,
+    books.pages,
+    books.rating
 FROM
     books
     JOIN book_genre ON books.id = book_id 

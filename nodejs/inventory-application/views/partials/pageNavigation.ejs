@@ -1,20 +1,28 @@
-<ul>
+<ul class="pageNavigation">
     <% if (page.current > 1) { %>
-    <li><a href="?genre=<%= locals.genre %>&page=<%= page.current - 1%>">&lt; Prev</a>
+    <li>
+        <a class="button"
+           href="?genre=<%= locals.genre %>&page=<%= page.current - 1%>">
+            &lt; Prev
+        </a>
     </li>
     <% } else { %>
-    <li>&lt; Prev</li>
+    <li class="disabled">&lt; Prev</li>
     <% } %>
 
     <% for (let i = 1; i <= page.total; i++) { %>
     <li><a href="?genre=<%= locals.genre %>&page=<%= i %>"
-           class="<%= page.current === i ? 'active' : ''%>"><%= i %></a></li>
+           class="number <%= page.current === i ? 'active' : ''%>"><%= i %></a></li>
     <% } %>
 
     <% if (page.current < page.total) { %>
-    <li><a href="?genre=<%= locals.genre %>&page=<%= page.current + 1%>">Next &gt;</a>
+    <li>
+        <a class="button"
+           href="?genre=<%= locals.genre %>&page=<%= page.current + 1%>">
+            Next &gt;
+        </a>
     </li>
     <% } else { %>
-    <li>Next &gt;</li>
+    <li class="disabled">Next &gt;</li>
     <% } %>
 </ul>

@@ -1,0 +1,121 @@
+:root {
+  --background: #101827;
+  --main: #1d283c;
+  --accent: #2869ff;
+  --white: #ffffff;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--white);
+  font-family: sans-serif;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+li {
+  list-style: none;
+}
+
+li a {
+  text-decoration: none;
+}
+
+.bookGrid {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookGrid .gridHeader {
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.bookGrid .gridHeader:hover {
+  background-color: transparent;
+}
+
+.bookRow {
+  display: grid;
+  grid-template-columns: 0.5fr 5fr 2fr 1fr 1fr 1fr;
+  gap: 5px;
+  padding: 2px 0;
+  align-items: center;
+  border-top: solid 1px var(--main);
+}
+
+.bookRow:hover {
+  background-color: var(--main);
+}
+
+.bookGrid .bookRow:last-of-type {
+  border-bottom: solid 1px var(--main);
+}
+
+.bookRow a {
+  width: fit-content;
+}
+
+.bookRow :nth-last-child(-n+3) {
+  justify-self: center;
+}
+
+.bookRow .bookCover {
+  width: 100%;
+  aspect-ratio: 2/3;
+  line-height: 0;
+}
+
+.bookRow img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pageNavigation {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-weight: bold;
+  margin: 30px auto;
+}
+
+.pageNavigation .button {
+  padding: 5px 15px;
+  border: 2px solid var(--accent);
+  border-radius: 50px;
+}
+
+.pageNavigation .number {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.pageNavigation .number.active {
+  color: var(--accent);
+  border-bottom: 2px solid;
+}
+
+.pageNavigation .button:hover,
+.pageNavigation .number:hover {
+  background-color: var(--accent);
+  color: var(--white)
+}
+
+.pageNavigation .disabled {
+  filter: brightness(0.5);
+}

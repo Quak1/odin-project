@@ -11,15 +11,26 @@
 
     <h1><%= title %></h1>
     <div class="bookGrid">
+        <div class="gridHeader bookRow">
+            <div></div>
+            <p>Title</p>
+            <p>Author</p>
+            <p>Year</p>
+            <p>Pages</p>
+            <p>Rating</p>
+        </div>
         <% if (books.length) { %>
         <% for (const book of books) { %>
-        <div class="book">
-            <a href="/books/<%= book.id %>">
-                <img style="background-image: url(<%= book.cover_s %>)"
-                     src="<%= book.cover_l %>" />
-                <p><%= book.title %></p>
+        <div class="bookRow">
+            <a href="/books/<%= book.id %>"
+               class="bookCover">
+                <img src="<%= book.cover_s %>" />
             </a>
-            <p><%= book.author %></p>
+            <a href="/books/<%= book.id %>"><%= book.title %></a>
+            <a href="/authors/<%= book.author_id %>"><%= book.author %></a>
+            <p><%= book.year %></p>
+            <p><%= book.pages %></p>
+            <p><%= book.rating %></p>
         </div>
         <% } %>
         <%- include("./partials/pageNavigation") %>
