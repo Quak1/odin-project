@@ -13,7 +13,9 @@
             <a href="/authors/<%= author.id %>">
                 <p><%= author.author %></p>
             </a>
-            <p>Books: <%= author.books %></p>
+            <p>
+                <%= author.books %> <%= author.books == 1 ? "book" : "books" %>
+            </p>
         </li>
         <% } %>
     </ul>

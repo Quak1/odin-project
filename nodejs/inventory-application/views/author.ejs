@@ -2,24 +2,34 @@
 
 <main>
     <h1><%= author[0].author %></h1>
-    <button id="deleteBtn"
-            data-id="<%= author[0].author_id %>"
-            type="button">Delete</button>
-    <button id="editBtn"
-            data-id="<%= author[0].author_id %>"
-            type="button">Edit name</button>
+
+    <div class="authorButtons">
+        <button id="deleteBtn"
+                data-id="<%= author[0].author_id %>"
+                type="button">Delete author</button>
+        <button id="editBtn"
+                data-id="<%= author[0].author_id %>"
+                type="button">Change author's name</button>
+    </div>
+
     <h2>Books: <%= author.length %></h2>
-    <ul>
+    <ul class="authorBooks">
         <% for (const book of author) { %>
         <li>
-            <div>
-                <img src="<%= book.cover_l %>"
-                     alt="Cover for <%= book.title %>">
+            <div class="bookCover">
                 <a href="/books/<%= book.book_id %>">
-                    <p><%= book.title %></p>
+                    <img src="<%= book.cover_l %>"
+                         alt="Cover for <%= book.title %>">
                 </a>
-                <p><%= book.rating %></p>
-                <p><%= book.year %></p>
+            </div>
+            <div class="info">
+                <p>
+                    <a href="/books/<%= book.book_id %>">
+                        <%= book.title %>
+                    </a>
+                </p>
+                <p>Year: <%= book.year %></p>
+                <p>Rating: <%= book.rating %></p>
             </div>
         </li>
         <% } %>
@@ -28,7 +38,7 @@
 
 <script>
     const deleteBtn = document.getElementById("deleteBtn")
-    addDeleteFunction(deleteBtn, "author", () => location.replace("/books"), "This will remove all books related to this author.")
+    addDeleteFunction(deleteBtn, "author", () => location.replace("/books"), "This action will remove all books related to this author.")
 
     const editBtn = document.getElementById("editBtn")
     const id = editBtn.dataset.id;
