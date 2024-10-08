@@ -1,27 +1,54 @@
 <%- include("./partials/head") %>
 
-<main>
-    <img src="<%= book.cover_l %>"
-         alt="Cover for <%= book.title %>">
-    <a href="/books/<%= book.id %>/edit">Edit</a>
-    <button id="deleteBtn"
-            data-id="<%= book.id %>">Delete</button>
-    <ul>
-        <li>Title: <%= book.title %></li>
-        <li>Author: <a href="
-       /authors/<%= book.author[1] %>"><%= book.author[0] %></a></li>
-        <li>Rating: <%= book.rating %></li>
-        <li>Description: <%= book.description %>
-        </li>
-        <li>Genres:
+<main class="book">
+    <div class="left">
+        <img src="<%= book.cover_l %>"
+             alt="Cover for <%= book.title %>">
+    </div>
+
+    <div class="right">
+        <h1 class="title"><%= book.title %></h1>
+
+        <p class="author">by: <a href="/authors/<%= book.author[1] %>">
+                <%= book.author[0] %>
+            </a>
+        </p>
+
+        <div class="buttons">
+            <button id="deleteBtn"
+                    class="actionButton"
+                    data-id="<%= book.id %>">Delete book</button>
+            <a class="actionButton"
+               href="/books/<%= book.id %>/edit">Edit book</a>
+        </div>
+
+        <div class="genres">Genres:
             <% for (const genre of book.genres) { %>
+            <% if (genre[0]) { %>
             <a href="/books/?genre=<%= genre[0] %>"><%= genre[0] %></a>
             <% } %>
-        </li>
-        <li>Pages: <%= book.pages %></li>
-        <li>First published year: <%= book.year %>
-        </li>
-    </ul>
+            <% } %>
+        </div>
+
+        <div class="info">
+            <div class="entry">
+                <p>Rating</p>
+                <p><%= book.rating %></p>
+            </div>
+            <div class="entry">
+                <p>Pages</p>
+                <p><%= book.pages %></p>
+            </div>
+            <div class="entry">
+                <p>Publiction year</p>
+                <p><%= book.year %></p>
+            </div>
+        </div>
+
+        <p class="description">
+            <%= book.description %>
+        </p>
+    </div>
 </main>
 
 <script>

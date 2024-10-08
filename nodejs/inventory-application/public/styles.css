@@ -19,6 +19,7 @@ p {
 
 a {
   color: inherit;
+  text-decoration: none;
 }
 
 main {
@@ -35,8 +36,85 @@ li {
   list-style: none;
 }
 
-li a {
-  text-decoration: none;
+.actionButton {
+  background-color: var(--accent);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid var(--white);
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .1s;
+}
+
+.actionButton:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.2);
+}
+
+#deleteBtn {
+  background-color: var(--red);
+}
+
+/* Book page */
+.book {
+  display: flex;
+  gap: 15px;
+  font-size: 18px;
+}
+
+.book img {
+  width: 300px;
+}
+
+.book .right>div {
+  margin: 20px 0;
+}
+
+.book h1 {
+  margin: 0;
+}
+
+.book .author a {
+  text-decoration: underline;
+}
+
+.book .buttons a {
+  display: inline-block;
+}
+
+.book .genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+
+.book .genres a {
+  background-color: var(--main);
+  padding: 5px 10px;
+}
+
+.book .info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+
+.book .info .entry {
+  border: 2px solid var(--main);
+  padding: 5px;
+}
+
+.book .info .entry :first-child {
+  opacity: 0.8;
+  font-size: 0.8em;
+}
+
+.book .description {
+  font-size: 16px;
 }
 
 /* Book list view */
@@ -146,27 +224,6 @@ li a {
 }
 
 /* Author page */
-.authorButtons button {
-  background-color: var(--accent);
-  color: var(--white);
-  padding: 10px 20px;
-  border-radius: 10px;
-  border: 2px solid var(--white);
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform .1s;
-}
-
-.authorButtons button:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.2);
-}
-
-.authorButtons #deleteBtn {
-  background-color: var(--red);
-}
-
 .authorBooks {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
