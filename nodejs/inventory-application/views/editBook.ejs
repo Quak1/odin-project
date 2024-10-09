@@ -99,6 +99,7 @@
                    class="error"><%= locals?.errors?.description?.msg %></label>
         </div>
 
+        <% if (!locals.new) { %>
         <div class="formElement">
             <label for="adminPwd">Admin password:</label>
             <input name="adminPwd"
@@ -107,9 +108,10 @@
             <label for="adminPwd"
                    class="error"><%= locals?.errors?.adminPwd?.msg %></label>
         </div>
+        <% } %>
 
         <button class="actionButton"
-                type="submit"><%= title %></button>
+                type="submit"><%= locals.new ? "Create book" : "Edit book" %></button>
     </form>
 </main>
 

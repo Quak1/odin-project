@@ -70,6 +70,10 @@ li {
   width: 300px;
 }
 
+.book .right {
+  width: 100%;
+}
+
 .book .right>div {
   margin: 20px 0;
 }
@@ -353,7 +357,7 @@ nav a {
   font-size: 18px;
 }
 
-.editBook .formElement>label {
+.editBook .formElement>label:not(.error) {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 2px;

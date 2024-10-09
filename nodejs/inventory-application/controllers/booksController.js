@@ -125,7 +125,7 @@ const renderEditBook = async (res, locals) => {
 };
 
 const getCreateBook = asyncHandler(async (req, res) => {
-  await renderEditBook(res);
+  await renderEditBook(res, { new: true });
 });
 
 const postCreateBook = [
@@ -134,6 +134,7 @@ const postCreateBook = [
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       await renderEditBook(res, {
+        new: true,
         formData: req.body,
         errors: errors.mapped(),
       });
