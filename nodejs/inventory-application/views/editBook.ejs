@@ -42,7 +42,7 @@
                            id="genre-<%= genre.id %>"
                            type="checkbox"
                            value="<%= genre.id %>"
-                           <% if (locals?.formData?.genres?.some(([_, id]) => id == genre.id)) { %>
+                           <% if (locals?.formData?.genre?.some((id) => id == genre.id)) { %>
                            <%= 'checked' %>
                            <% } %>>
                     <label for="genre-<%= genre.id %>"><%= genre.genre %></label>

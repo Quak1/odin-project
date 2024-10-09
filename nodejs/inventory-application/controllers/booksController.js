@@ -4,7 +4,11 @@ const { body, query, validationResult } = require("express-validator");
 const queries = require("../db/queries");
 const NotFoundError = require("../errors/NotFoundError");
 
-const adminPasswordValidator = require("../middleware/adminPasswordValidator");
+const {
+  adminPasswordValidator,
+  adminPasswordErrorHandler,
+} = require("../middleware/adminPasswordValidator");
+
 const currentYear = new Date().getFullYear();
 const bookValidator = [
   (req, res, next) => {
@@ -150,8 +154,9 @@ const getEditBook = asyncHandler(async (req, res) => {
   const book = await queries.getBookById(bookId);
   if (!book) throw new NotFoundError();
   book.author = book.author[0];
-  const genres = await queries.getAllGenres();
-  res.render("editBook", { title: "Edit book", formData: book, genres });
+  book.genre = book.genres.map((genre) => genre[1]);
+
+  await renderEditBook(res, { title: "Edit book", formData: book });
 });
 
 const postEditBook = [
@@ -176,10 +181,8 @@ const postEditBook = [
 
 const deleteBook = [
   adminPasswordValidator,
+  adminPasswordErrorHandler,
   asyncHandler(async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) return res.status(400).send(errors);
-
     const bookId = req.params.id;
     await queries.deleteBook(bookId);
     res.status(204).send();
