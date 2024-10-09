@@ -54,7 +54,7 @@ li {
   filter: brightness(1.2);
 }
 
-#deleteBtn {
+.deleteBtn {
   background-color: var(--red);
 }
 
@@ -278,4 +278,49 @@ nav a {
 
 .error-page a {
   text-decoration: underline;
+}
+
+/* genres page */
+.genrePage {
+  max-width: var(--width);
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.genrePage ol {
+  margin: 0;
+  padding: 0;
+}
+
+.genrePage li {
+  margin-bottom: 10px;
+}
+
+.genrePage li form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.genrePage .actionButton {
+  padding: 5px 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.genrePage input {
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.genrePage label {
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }

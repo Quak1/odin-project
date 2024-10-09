@@ -1,6 +1,7 @@
 <%- include("./partials/head") %>
 
-<main>
+<main class="genrePage">
+    <h1>Genres</h1>
     <ol>
         <% for (const genre of genres) { %>
         <li>
@@ -10,8 +11,9 @@
                        id="genre-<%= genre.id %>"
                        type="text"
                        value="<%= genre.genre %>">
-                <button type="submit">Save</button>
-                <button class="deleteBtn"
+                <button type="submit"
+                        class="actionButton">Save</button>
+                <button class="actionButton deleteBtn"
                         data-id="<%= genre.id %>"
                         type="button">Delete</button>
                 <% if (locals.errors?.[genre.id]) { %>
@@ -30,11 +32,13 @@
 
     <form action="/genres"
           method="post">
+        <label for="genre">Add genre</label>
         <input name="genre"
                id="genre"
                value="<%= locals.formData?.genre %>"
                type="text">
-        <button type="submit">Add new genre</button>
+        <button type="submit"
+                class="actionButton">Add new genre</button>
         <% if (locals.errors?.genre) { %>
         <label for="genre"><%= errors.genre.msg %></label>
         <% } %>

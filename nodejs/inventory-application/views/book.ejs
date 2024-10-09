@@ -15,8 +15,7 @@
         </p>
 
         <div class="buttons">
-            <button id="deleteBtn"
-                    class="actionButton"
+            <button class="deleteBtn actionButton"
                     data-id="<%= book.id %>">Delete book</button>
             <a class="actionButton"
                href="/books/<%= book.id %>/edit">Edit book</a>
@@ -52,7 +51,7 @@
 </main>
 
 <script>
-    const deleteBtn = document.getElementById("deleteBtn")
+    const deleteBtn = document.querySelector(".deleteBtn")
     addDeleteFunction(deleteBtn, "book", () => location.replace("/books"),
         "If this is the last book of an author they'll be removed.") 
 </script>
