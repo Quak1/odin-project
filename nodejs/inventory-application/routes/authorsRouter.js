@@ -7,7 +7,7 @@ const idValidator = require("../middleware/idValidator");
 router.get("/", controller.getAllAuthors);
 
 router.get("/:id", idValidator, controller.getAuthor);
-router.post("/:id", idValidator, express.json(), controller.postUpdateAuthor);
+router.post("/:id", idValidator, controller.postUpdateAuthor);
 router.delete("/:id", idValidator, controller.deleteAuthor);
 
 module.exports = router;

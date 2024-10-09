@@ -4,6 +4,7 @@ const { body, validationResult } = require("express-validator");
 const queries = require("../db/queries");
 const NotFoundError = require("../errors/NotFoundError");
 
+const adminPasswordValidator = require("../middleware/adminPasswordValidator");
 const authorValidator = body("author")
   .trim()
   .isLength({ min: 1, max: 100 })
@@ -29,6 +30,7 @@ const getAuthor = asyncHandler(async (req, res) => {
 
 const postUpdateAuthor = [
   authorValidator,
+  adminPasswordValidator,
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(400).send(errors);
@@ -46,11 +48,17 @@ const postUpdateAuthor = [
   }),
 ];
 
-const deleteAuthor = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  await queries.deleteAuthor(id);
-  res.status(204).send();
-});
+const deleteAuthor = [
+  adminPasswordValidator,
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).send(errors);
+
+    const { id } = req.params;
+    await queries.deleteAuthor(id);
+    res.status(204).send();
+  }),
+];
 
 module.exports = {
   getAllAuthors,
