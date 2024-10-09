@@ -2,7 +2,7 @@
     <% if (page.current > 1) { %>
     <li>
         <a class="button"
-           href="?genre=<%= locals.genre %>&page=<%= page.current - 1%>">
+           href="?page=<%= page.current - 1%>">
             &lt; Prev
         </a>
     </li>
@@ -11,14 +11,14 @@
     <% } %>
 
     <% for (let i = 1; i <= page.total; i++) { %>
-    <li><a href="?genre=<%= locals.genre %>&page=<%= i %>"
+    <li><a href="?page=<%= i %>"
            class="number <%= page.current === i ? 'active' : ''%>"><%= i %></a></li>
     <% } %>
 
     <% if (page.current < page.total) { %>
     <li>
         <a class="button"
-           href="?genre=<%= locals.genre %>&page=<%= page.current + 1%>">
+           href="?page=<%= page.current + 1%>">
             Next &gt;
         </a>
     </li>

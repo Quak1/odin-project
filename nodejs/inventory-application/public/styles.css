@@ -374,3 +374,12 @@ nav a {
   font-size: 16px;
   font-weight: normal;
 }
+
+#booksFilter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+  justify-content: end;
+  margin: 10px 0;
+}

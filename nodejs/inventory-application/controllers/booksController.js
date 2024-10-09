@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const { body, validationResult } = require("express-validator");
+const { body, query, validationResult } = require("express-validator");
 
 const queries = require("../db/queries");
 const NotFoundError = require("../errors/NotFoundError");
@@ -49,6 +49,13 @@ const bookValidator = [
   body("genre").toArray(),
 ];
 
+const sortOptionsValidator = [
+  query("orderBy")
+    .optional({ values: "falsy" })
+    .isIn(["title", "author", "year", "pages", "rating"]),
+  query("ordeer").optional({ values: "falsy" }).isIn(["ASC", "DESC"]),
+];
+
 const pageParser = require("../middleware/pageParser");
 const PAGE_SIZE = process.env.BOOKS_PAGE_SIZE;
 
@@ -61,8 +68,13 @@ const clipPage = (page, count) => {
 
 const getAllBooks = [
   pageParser,
+  sortOptionsValidator,
   asyncHandler(async (req, res) => {
-    const genre = req.query.genre;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.redirect("/");
+
+    const { genre, orderBy, order } = req.query;
+    const asc = !order || order === "ASC";
 
     const { count } = genre
       ? await queries.getBookCountByGenre(genre)
@@ -72,8 +84,8 @@ const getAllBooks = [
     const genres = await queries.getAllGenres();
 
     const books = genre
-      ? await queries.getBooksByGenre(genre, page.current)
-      : await queries.getAllBooks(page.current);
+      ? await queries.getBooksByGenre(genre, page.current, orderBy, asc)
+      : await queries.getAllBooks(page.current, orderBy, asc);
 
     const title = genre ? `${genre} Books` : "Books";
 
