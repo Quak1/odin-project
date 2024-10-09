@@ -8,7 +8,7 @@ const {
 } = require("./db");
 const sql = require("./sql");
 
-const data = JSON.parse(fs.readFileSync("./db/content.json", "utf8"));
+const data = JSON.parse(fs.readFileSync("./content.json", "utf8"));
 const books = data.map((genre) => genre.books).flat();
 
 async function insertRows(data, table, column, properties = [column]) {

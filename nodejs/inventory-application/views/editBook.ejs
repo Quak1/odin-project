@@ -20,7 +20,7 @@
                    id="author"
                    type="text"
                    required
-                   value="<%= locals?.formData?.author || '' %>">
+                   value="<%= locals?.formData?.author[0] || '' %>">
             <label for="author"
                    class="error"><%= locals?.errors?.author?.msg %></label>
         </div>

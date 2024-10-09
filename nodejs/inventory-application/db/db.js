@@ -9,7 +9,7 @@ const connectionDetails = {
   database: process.env.PGDATABASE,
   user: process.env.PGUSER,
   password: process.env.PGPASSWORD,
-  ssl: false,
+  ssl: process.env.NODE_ENV === "production",
 };
 
 const db = pgp(connectionDetails);
