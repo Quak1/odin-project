@@ -39,7 +39,7 @@
 
 <script>
     const deleteBtn = document.querySelector(".deleteBtn")
-    addDeleteFunction(deleteBtn, "author", () => location.replace("/books"), "This action will remove all books related to this author.")
+    addDeleteFunction(deleteBtn, "author", () => location.replace("/authors"), "This action will remove all books related to this author.")
 
     const editBtn = document.getElementById("editBtn")
     const id = editBtn.dataset.id;

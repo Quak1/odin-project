@@ -20,7 +20,7 @@
                    id="author"
                    type="text"
                    required
-                   value="<%= locals?.formData?.author[0] || '' %>">
+                   value="<%= locals?.formData?.author || '' %>">
             <label for="author"
                    class="error"><%= locals?.errors?.author?.msg %></label>
         </div>
@@ -98,6 +98,16 @@
             <label for="description"
                    class="error"><%= locals?.errors?.description?.msg %></label>
         </div>
+
+        <div class="formElement">
+            <label for="adminPwd">Admin password:</label>
+            <input name="adminPwd"
+                   id="adminPwd"
+                   type="password">
+            <label for="adminPwd"
+                   class="error"><%= locals?.errors?.adminPwd?.msg %></label>
+        </div>
+
         <button class="actionButton"
                 type="submit"><%= title %></button>
     </form>
