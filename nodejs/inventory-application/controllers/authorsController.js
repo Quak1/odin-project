@@ -24,7 +24,7 @@ const getAuthor = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const author = await queries.getAuthorById(id);
   if (author.length === 0) throw new NotFoundError();
-  res.render("author", { title: `Author | ${author.author}`, author });
+  res.render("author", { title: `Author | ${author[0].author}`, author });
 });
 
 const postUpdateAuthor = [

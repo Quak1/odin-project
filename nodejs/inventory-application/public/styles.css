@@ -12,6 +12,7 @@ body {
   color: var(--white);
   font-family: sans-serif;
   margin: 0;
+  padding: 0 20px;
 }
 
 p {
@@ -284,7 +285,6 @@ nav a {
 .genrePage {
   max-width: var(--width);
   margin: 0 auto;
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -323,4 +323,54 @@ nav a {
   font-weight: bold;
   margin-top: 30px;
   margin-bottom: 10px;
+}
+
+/* edit|new book */
+.editBook {
+  max-width: var(--width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.editBook form {
+  width: 90%;
+}
+
+.editBook .formElement {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.editBook .formElement input {
+  padding: 3px 8px;
+  font-size: 18px;
+}
+
+.editBook .formElement>label {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.editBook textarea {
+  resize: vertical;
+}
+
+.editBook .genres {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.editBook .actionButton {
+  font-size: 24px;
+}
+
+.editBook label.error {
+  color: red;
+  font-size: 16px;
+  font-weight: normal;
 }

@@ -1,10 +1,10 @@
 <%- include("./partials/head") %>
 
-<main>
+<main class="editBook">
     <h1><% title %></h1>
     <form action=""
           method="post">
-        <div>
+        <div class="formElement">
             <label for="title">Title:</label>
             <input name="title"
                    id="title"
@@ -14,7 +14,7 @@
             <label for="title"
                    class="error"><%= locals?.errors?.title?.msg %></label>
         </div>
-        <div>
+        <div class="formElement">
             <label for="author">Author:</label>
             <input name="author"
                    id="author"
@@ -24,7 +24,7 @@
             <label for="author"
                    class="error"><%= locals?.errors?.author?.msg %></label>
         </div>
-        <div>
+        <div class="formElement">
             <label for="year">Publication year:</label>
             <input name="year"
                    id="year"
@@ -33,20 +33,24 @@
             <label for="year"
                    class="error"><%= locals?.errors?.year?.msg %></label>
         </div>
-        <div>
-            Genres:
-            <% for (const genre of genres) { %>
-            <input name="genre"
-                   id="genre-<%= genre.id %>"
-                   type="checkbox"
-                   value="<%= genre.id %>"
-                   <% if (locals?.formData?.genres?.some(([_, id]) => id == genre.id)) { %>
-                   <%= 'checked' %>
-                   <% } %>>
-            <label for="genre-<%= genre.id %>"><%= genre.genre %></label>
-            <% } %>
+        <div class="formElement">
+            <label for="">Genres:</label>
+            <div class="genres">
+                <% for (const genre of genres) { %>
+                <div class="genre">
+                    <input name="genre"
+                           id="genre-<%= genre.id %>"
+                           type="checkbox"
+                           value="<%= genre.id %>"
+                           <% if (locals?.formData?.genres?.some(([_, id]) => id == genre.id)) { %>
+                           <%= 'checked' %>
+                           <% } %>>
+                    <label for="genre-<%= genre.id %>"><%= genre.genre %></label>
+                </div>
+                <% } %>
+            </div>
         </div>
-        <div>
+        <div class="formElement">
             <label for="rating">Rating:</label>
             <input name="rating"
                    id="rating"
@@ -58,7 +62,7 @@
             <label for="rating"
                    class="error"><%= locals?.errors?.rating?.msg %></label>
         </div>
-        <div>
+        <div class="formElement">
             <label for="pages">Pages:</label>
             <input name="pages"
                    id="pages"
@@ -68,7 +72,7 @@
             <label for="pages"
                    class="error"><%= locals?.errors?.pages?.msg %></label>
         </div>
-        <div>
+        <div class="formElement">
             <label for="cover_l">Cover large:</label>
             <input name="cover_l"
                    id="cover_l"
@@ -77,7 +81,7 @@
             <label for="cover_l"
                    class="error"><%= locals?.errors?.cover_l?.msg %></label>
         </div>
-        <div>
+        <div class="formElement">
             <label for="cover_s">Cover small:</label>
             <input name="cover_s"
                    id="cover_s"
@@ -86,14 +90,16 @@
             <label for="cover_s"
                    class="error"><%= locals?.errors?.cover_s?.msg %></label>
         </div>
-        <div>
+        <div class="formElement">
             <label for="description">Description:</label>
             <textarea name="description"
+                      rows="10"
                       id="description"><%= locals?.formData?.description || ''%></textarea>
             <label for="description"
                    class="error"><%= locals?.errors?.description?.msg %></label>
         </div>
-        <button type="submit">Create book</button>
+        <button class="actionButton"
+                type="submit"><%= title %></button>
     </form>
 </main>
 
