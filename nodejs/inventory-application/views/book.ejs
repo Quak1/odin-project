@@ -2,8 +2,13 @@
 
 <main class="book">
     <div class="left">
+        <% if (book.cover_l) { %>
         <img src="<%= book.cover_l %>"
              alt="Cover for <%= book.title %>">
+        <% } else { %>
+        <img src="https://placehold.co/300x450?text=Book cover"
+             alt="Cover for <%= book.title %>">
+        <% } %>
     </div>
 
     <div class="right">
