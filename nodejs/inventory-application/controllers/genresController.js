@@ -2,6 +2,10 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
 const queries = require("../db/queries");
+const {
+  adminPasswordErrorHandler,
+  adminPasswordValidator,
+} = require("../middleware/adminPasswordValidator");
 
 const genreValidator = body("genre")
   .trim()
@@ -41,13 +45,14 @@ const postCreateGenre = [
 
 const postUpdateGenre = [
   genreValidator,
+  adminPasswordValidator,
   asyncHandler(async (req, res) => {
     const { id } = req.params;
 
     const errors = validationResult(req);
     if (!errors.isEmpty())
       return await renderGenres(res, {
-        errors: { [id]: errors.mapped().genre },
+        errors: { [id]: errors.mapped() },
       });
 
     const { genre } = req.body;
@@ -56,11 +61,15 @@ const postUpdateGenre = [
   }),
 ];
 
-const deleteGenre = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  await queries.deleteGenre(id);
-  res.status(204).send();
-});
+const deleteGenre = [
+  adminPasswordValidator,
+  adminPasswordErrorHandler,
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    await queries.deleteGenre(id);
+    res.status(204).send();
+  }),
+];
 
 module.exports = {
   getGenres,

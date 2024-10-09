@@ -299,10 +299,14 @@ nav a {
   margin-bottom: 10px;
 }
 
-.genrePage li form {
+.genrePage li .genreEdit {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.genrePage .error {
+  display: block;
 }
 
 .genrePage .actionButton {
@@ -317,7 +321,7 @@ nav a {
   border-radius: 10px;
 }
 
-.genrePage label {
+.genrePage #genre-label {
   display: block;
   font-size: 28px;
   font-weight: bold;
@@ -369,7 +373,7 @@ nav a {
   font-size: 24px;
 }
 
-.editBook label.error {
+label.error {
   color: red;
   font-size: 16px;
   font-weight: normal;

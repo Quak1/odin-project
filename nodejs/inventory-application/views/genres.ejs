@@ -7,18 +7,25 @@
         <li>
             <form action="/genres/<%= genre.id %>"
                   method="post">
-                <input name="genre"
-                       id="genre-<%= genre.id %>"
-                       type="text"
-                       value="<%= genre.genre %>">
-                <button type="submit"
-                        class="actionButton">Save</button>
-                <button class="actionButton deleteBtn"
-                        data-id="<%= genre.id %>"
-                        type="button">Delete</button>
+                <div class="genreEdit">
+                    <input name="genre"
+                           id="genre-<%= genre.id %>"
+                           type="text"
+                           value="<%= genre.genre %>">
+                    <button type="submit"
+                            class="actionButton">Save</button>
+                    <button class="actionButton deleteBtn"
+                            data-id="<%= genre.id %>"
+                            type="button">Delete</button>
+                </div>
                 <% if (locals.errors?.[genre.id]) { %>
-                <label for="genre-<%= genre.id %>">
-                    <%= errors[genre.id].msg %>
+                <label class="error"
+                       for="genre-<%= genre.id %>">
+                    <%= errors[genre.id].genre?.msg %>
+                </label>
+                <label for="genre-<%= genre.id %>"
+                       class="error">
+                    <%= errors[genre.id].adminPwd?.msg %>
                 </label>
                 <% } %>
             </form>
@@ -31,16 +38,19 @@
     <% } %>
 
     <form action="/genres"
+          id="newGenre"
           method="post">
-        <label for="genre">Add genre</label>
+        <label id="genre-label"
+               for="genre">Add genre</label>
         <input name="genre"
                id="genre"
                value="<%= locals.formData?.genre %>"
                type="text">
         <button type="submit"
                 class="actionButton">Add new genre</button>
-        <% if (locals.errors?.genre) { %>
-        <label for="genre"><%= errors.genre.msg %></label>
+        <% if (locals.errors) { %>
+        <label for="genre"
+               class="error"><%= errors.genre?.msg %></label>
         <% } %>
     </form>
 </main>
@@ -48,6 +58,16 @@
 <script>
     document.querySelectorAll(".deleteBtn").forEach((btn) => {
         addDeleteFunction(btn, "genre", () => location.reload())
+    })
+
+    const handleFormSubmit = (e) => {
+        const adminPwd = prompt("Enter admin password:")
+        e.formData.set("adminPwd", adminPwd)
+    }
+
+    document.querySelectorAll("form").forEach(form => {
+        if (form.id === "newGenre") return;
+        form.addEventListener("formdata", handleFormSubmit)
     })
 </script>
 
