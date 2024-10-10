@@ -2,12 +2,12 @@ require("dotenv").config();
 const express = require("express");
 
 const app = express();
-app.set("view engine", "ejs");
+app.set("view engine", "pug");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.send("Hello, world!");
+  res.render("index", { title: "Hello world" });
 });
 
 const PORT = process.env.PORT || 3000;
