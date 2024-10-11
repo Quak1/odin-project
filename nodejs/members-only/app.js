@@ -6,6 +6,7 @@ const pgSession = require("connect-pg-simple")(expressSession);
 
 const userRoutes = require("./routes/userRoutes");
 const messagesRouter = require("./routes/messagesRoutes");
+const errorController = require("./controllers/errorController");
 
 // App setup
 const app = express();
@@ -38,6 +39,10 @@ app.use(passport.session());
 app.use("/", messagesRouter);
 app.use("/", userRoutes);
 
+app.use(errorController.notFound);
+app.use(errorController.error);
+
+// start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
