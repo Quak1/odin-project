@@ -1,10 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  form(method="post") 
-    label(for="code") Enter the passcode:
-    if errors
-      label(for="code")= errors.code.msg
-    input#code(type="text", name="code")
-    button Join
+  main#form
+    h1= title
+    form(method="post") 
+      section
+        label(for="code") Enter the passcode:
+        input#code(type="text", name="code")
+        if errors
+          label.error(for="code")= errors.code.msg
+      button Join

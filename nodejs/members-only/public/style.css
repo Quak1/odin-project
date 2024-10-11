@@ -127,8 +127,66 @@ nav .extra li:hover {
 }
 
 /* main forms */
+#form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-/* errors */
+#form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+}
+
+#form section {
+  width: 100%;
+}
+
+#form label {
+  display: block;
+}
+
+#form input,
+#form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 0.8em;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  min-width: 300px;
+}
+
+#form textarea {
+  resize: none;
+}
+
+#form button {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: var(--main);
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2em;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .1s;
+}
+
+#form button:hover {
+  transform: translateY(-3px);
+}
+
+#form .error {
+  color: red;
+  font-size: 1rem;
+}
+
+/* error page */
 .error-page {
   text-align: center;
 }
@@ -137,13 +195,4 @@ nav .extra li:hover {
   color: var(--blue);
   text-decoration: underline;
   font-size: 1.5em
-}
-
-.errors {
-  color: red;
-  margin-bottom: 20px;
-}
-
-.errors li {
-  list-style: initial;
 }

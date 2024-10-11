@@ -1,29 +1,30 @@
 extends layout
 
 block content
-  h1= title
-  form(method="post") 
-    section
-      label(for="title") Title:
-      input#firstName(
-        type="text",
-        name="title",
-        minLength="3",
-        maxLength="100",
-        value=formData ? formData.title : "",
-        required
-      )
-      if errors && errors.title
-        label.error(for="title")= errors.title.msg
-    section
-      label(for="content") Content:
-      input#firstName(
-        type="text",
-        name="content",
-        maxLength="300",
-        value=formData ? formData.content : "",
-        required
-      )
-      if errors && errors.content
-        label.error(for="content")= errors.content.msg
-    button Send message
+  main#form
+    h1= title
+    form(method="post") 
+      section
+        label(for="title") Title:
+        input#firstName(
+          type="text",
+          name="title",
+          minLength="3",
+          maxLength="100",
+          value=formData ? formData.title : "",
+          required
+        )
+        if errors && errors.title
+          label.error(for="title")= errors.title.msg
+      section
+        label(for="content") Content:
+        textarea#firstName(
+          name="content",
+          maxLength="300",
+          rows="5",
+          value=formData ? formData.content : "",
+          required
+        )
+        if errors && errors.content
+          label.error(for="content")= errors.content.msg
+      button Send message
