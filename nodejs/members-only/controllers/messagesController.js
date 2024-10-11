@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const { body, validationResult } = require("express-validator");
+const { body, param, validationResult } = require("express-validator");
 const queries = require("../db/queries");
 
 const newMessageValidatior = [
@@ -42,4 +42,20 @@ const createMessatePost = [
   }),
 ];
 
-module.exports = { allMessagesGet, createMessateGet, createMessatePost };
+const deleteMessage = [
+  param("id").isNumeric({ no_symbols: true }),
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty() || !req.user.is_admin) return res.redirect("/");
+
+    await queries.deleteMessage(req.params.id);
+    return res.redirect("/");
+  }),
+];
+
+module.exports = {
+  allMessagesGet,
+  createMessateGet,
+  createMessatePost,
+  deleteMessage,
+};

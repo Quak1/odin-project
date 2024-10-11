@@ -8,6 +8,7 @@ const pool = new Pool({
 async function getAllMessages() {
   const { rows } = await pool.query(`
 SELECT
+  messages.id,
   title,
   content,
   TO_CHAR(added, 'YYYY-MM-DD HH24:MI') as added,
@@ -74,6 +75,17 @@ INSERT INTO messages (user_id, title, content)
 VALUES ($1, $2, $3)`,
     [userId, title, content],
   );
+  return rows;
+}
+
+async function deleteMessage(id) {
+  const { rows } = await pool.query(
+    `
+DELETE FROM messages
+WHERE id = $1;`,
+    [id],
+  );
+  return rows;
 }
 
 module.exports = {
@@ -85,4 +97,5 @@ module.exports = {
   setAsMember,
   setAsAdmin,
   createMessage,
+  deleteMessage,
 };
