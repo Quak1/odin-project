@@ -52,7 +52,7 @@ const signupPost = [
       await queries.createUser(req.body);
     });
 
-    res.redirect("/");
+    res.redirect("/login");
   }),
 ];
 
