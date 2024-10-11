@@ -5,6 +5,7 @@ const passport = require("passport");
 const pgSession = require("connect-pg-simple")(expressSession);
 
 const userRoutes = require("./routes/userRoutes");
+const messagesRouter = require("./routes/messagesRoutes");
 
 // App setup
 const app = express();
@@ -34,9 +35,11 @@ require("./config/passport");
 app.use(passport.session());
 
 // Routes
-app.get("/", (req, res) => {
-  res.render("index", { title: "Hello world" });
+app.use("/", (req, res, next) => {
+  console.log(req.user);
+  next();
 });
+app.use("/", messagesRouter);
 app.use("/", userRoutes);
 
 const PORT = process.env.PORT || 3000;

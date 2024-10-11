@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  each message in messages
+    .message
+      p= message.title
+      p= message.content
+      if user && (user.is_member || user.is_admin)
+        p= message.username
+        p= message.added

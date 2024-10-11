@@ -3,7 +3,8 @@ extends layout
 block content
   h1= title
   form(method="post") 
-    section
+    if errors
+      p.error= errors
     section
       label(for="username") Username:
       input#username(
@@ -14,8 +15,6 @@ block content
         value=formData ? formData.username : "",
         required
       )
-      if errors && errors.username
-        label.error(for="username")= errors.username.msg
     section
       label(for="pwd") Password:
       input#pwd(
@@ -25,6 +24,4 @@ block content
         value=formData ? formData.password : "",
         required
       )
-      if errors && errors.password
-        label.error(for="pwd")= errors.username.msg
     button(type="submit") Sign up

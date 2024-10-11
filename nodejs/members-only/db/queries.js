@@ -10,7 +10,7 @@ async function getAllMessages() {
 SELECT
   title,
   content,
-  TO_CHAR(added, 'YYYY-MM-DD HH24:MI') as added
+  TO_CHAR(added, 'YYYY-MM-DD HH24:MI') as added,
   CONCAT (first_name, ' ', last_name) as full_name,
   username
 FROM 
@@ -67,6 +67,15 @@ RETURNING id`,
   return rows;
 }
 
+async function createMessage(userId, title, content) {
+  const { rows } = await pool.query(
+    `
+INSERT INTO messages (user_id, title, content)
+VALUES ($1, $2, $3)`,
+    [userId, title, content],
+  );
+}
+
 module.exports = {
   pool,
   getAllMessages,
@@ -75,4 +84,5 @@ module.exports = {
   createUser,
   setAsMember,
   setAsAdmin,
+  createMessage,
 };

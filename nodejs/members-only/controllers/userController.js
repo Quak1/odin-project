@@ -1,9 +1,8 @@
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
-const { body, validationResult } = require("express-validator");
-
-const queries = require("../db/queries");
 const passport = require("passport");
+const { body, validationResult } = require("express-validator");
+const queries = require("../db/queries");
 
 const signUpValidator = [
   body("username")
@@ -13,7 +12,7 @@ const signUpValidator = [
     .isAlphanumeric()
     .withMessage("Usarname may only contain letters and numbers.")
     .custom(async (username) => {
-      const user = await queries.getUserByUsername(username);
+      const user = await queries.getUserPassword(username);
       if (user) {
         throw new Error("Username already in use");
       }
@@ -32,9 +31,9 @@ const signUpValidator = [
     .withMessage("Last name must be between 1 and 100 characters."),
 ];
 
-const signupGet = asyncHandler((req, res) => {
+const signupGet = (req, res) => {
   res.render("signup", { title: "Sign up" });
-});
+};
 
 const signupPost = [
   signUpValidator,
@@ -57,22 +56,68 @@ const signupPost = [
   }),
 ];
 
-const loginGet = asyncHandler((req, res) => {
-  res.render("login", { title: "Log in" });
-});
+const loginGet = (req, res) => {
+  res.render("login", { title: "Log in", errors: req.session.messages });
+};
 
 const loginPost = passport.authenticate("local", {
   failureRedirect: "/login",
-  successRedirect: "/secret",
+  successRedirect: "/",
   failureMessage: true,
 });
 
-const logoutPost = asyncHandler((req, res) => {});
+const logoutGet = (req, res) => {
+  req.logout((error) => {
+    if (error) throw error;
+    res.redirect("/");
+  });
+};
+
+const joinPasscodeHelper = async (req, res, title, query) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty())
+    return res.render("join", {
+      title,
+      errors: errors.mapped(),
+    });
+
+  await query(req.user.id);
+  res.redirect("/");
+};
+
+const memberGet = (req, res) => {
+  console.log(req.user);
+  res.render("join", { title: "Join members" });
+};
+
+const memberPost = [
+  body("code")
+    .equals(process.env.MEMBER_PASSCODE)
+    .withMessage("Wrong passcode"),
+  asyncHandler(async (req, res) => {
+    await joinPasscodeHelper(req, res, "Join members", queries.setAsMember);
+  }),
+];
+
+const adminGet = (req, res) => {
+  res.render("join", { title: "Join admins" });
+};
+
+const adminPost = [
+  body("code").equals(process.env.ADMIN_PASSCODE).withMessage("Wrong passcode"),
+  asyncHandler(async (req, res) => {
+    await joinPasscodeHelper(req, res, "Join admins", queries.setAsAdmin);
+  }),
+];
 
 module.exports = {
   signupGet,
   signupPost,
   loginGet,
   loginPost,
-  logoutPost,
+  logoutGet,
+  memberGet,
+  memberPost,
+  adminGet,
+  adminPost,
 };
