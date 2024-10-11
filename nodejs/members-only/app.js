@@ -35,10 +35,6 @@ require("./config/passport");
 app.use(passport.session());
 
 // Routes
-app.use("/", (req, res, next) => {
-  console.log(req.user);
-  next();
-});
 app.use("/", messagesRouter);
 app.use("/", userRoutes);
 

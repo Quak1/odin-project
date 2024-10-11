@@ -86,7 +86,6 @@ const joinPasscodeHelper = async (req, res, title, query) => {
 };
 
 const memberGet = (req, res) => {
-  console.log(req.user);
   res.render("join", { title: "Join members" });
 };
 
