@@ -3,25 +3,24 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
 const queries = require("../db/queries");
+const passport = require("passport");
 
-const usernameValidator = body("username")
-  .trim()
-  .isLength({ min: 2, max: 50 })
-  .withMessage("Username must be between 2 and 50 characters.")
-  .isAlphanumeric()
-  .withMessage("Usarname may only contain letters and numbers.")
-  .custom(async (username) => {
-    const user = await queries.getUserByUsername(username);
-    if (user) {
-      throw new Error("Username already in use");
-    }
-  });
-const passwordValidator = body("password")
-  .isLength({ min: 3 })
-  .withMessage("Password must be at least 3 characters long.");
 const signUpValidator = [
-  usernameValidator,
-  passwordValidator,
+  body("username")
+    .trim()
+    .isLength({ min: 2, max: 50 })
+    .withMessage("Username must be between 2 and 50 characters.")
+    .isAlphanumeric()
+    .withMessage("Usarname may only contain letters and numbers.")
+    .custom(async (username) => {
+      const user = await queries.getUserByUsername(username);
+      if (user) {
+        throw new Error("Username already in use");
+      }
+    }),
+  body("password")
+    .isLength({ min: 3 })
+    .withMessage("Password must be at least 3 characters long."),
   body("passwordConfirmation")
     .custom((value, { req }) => value === req.body.password)
     .withMessage("Password and password confirmation don't match."),
@@ -58,9 +57,15 @@ const signupPost = [
   }),
 ];
 
-const loginGet = asyncHandler((req, res) => {});
+const loginGet = asyncHandler((req, res) => {
+  res.render("login", { title: "Log in" });
+});
 
-const loginPost = asyncHandler((req, res) => {});
+const loginPost = passport.authenticate("local", {
+  failureRedirect: "/login",
+  successRedirect: "/secret",
+  failureMessage: true,
+});
 
 const logoutPost = asyncHandler((req, res) => {});
 
