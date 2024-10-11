@@ -1,13 +1,14 @@
 extends layout
 
 block content
-  each message in messages
-    .message
-      p= message.title
-      p= message.content
-      if user && (user.is_member || user.is_admin)
-        p= message.username
-        p= message.added
-      if user && (user.is_admin)
-        form(action=`/message/${message.id}/delete`, method="post") 
-          button.deleteBtn Delete
+  main.messageList
+    each message in messages
+      .message
+        p.title= message.title
+        p.content= message.content
+        if user && (user.is_member || user.is_admin)
+          .info
+            p @#{ message.username } | #{ message.added }
+            if user && (user.is_admin)
+              form(action=`/message/${message.id}/delete`, method="post") 
+                button.deleteBtn Delete

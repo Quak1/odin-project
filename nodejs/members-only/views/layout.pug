@@ -6,14 +6,22 @@ html
     link(href="/style.css", rel="stylesheet")
     title= title
   body
-    nav: ul
-      li: a(href="/") Messages
-      if (!user)
-        li: a(href="/signup") Sign up
-        li: a(href="/login") Log in
-      else
-        li: a(href="/message") New message
-        li: a(href="/logout") Log out
-        li: a(href="/join_member") Become a member
-        li: a(href="/join_admin") Become an admin
-    block content
+    nav
+      ul.main
+        li: a(href="/") Messages
+        if (user)
+          li: a(href="/message") New message
+        else
+          li: a(href="/login") Log in
+          li: a(href="/signup") Sign up
+      ul.extra
+        if (user && (!user.is_member && !user.is_admin))
+          li: a(href="/join_member") Become a member
+          | |
+        if (user && !user.is_admin)
+          li: a(href="/join_admin") Become an admin
+          | |
+        if (user)
+          li: a(href="/logout") Log out
+    main
+      block content

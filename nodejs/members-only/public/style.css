@@ -1,0 +1,149 @@
+:root {
+  --main: coral;
+  --off-white: #F2EFEA;
+  --blue: #4381C1;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+nav {
+  padding: 20px 0;
+}
+
+nav .main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+nav .main li:first-child {
+  color: var(--blue);
+}
+
+nav .main li:last-child {
+  background-color: var(--blue);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  transition: transform .1s;
+}
+
+nav .main li:last-child:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+}
+
+nav .extra {
+  margin-top: 5px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-weight: bold;
+  gap: 5px;
+}
+
+nav .extra li {
+  transition: transform .1s;
+}
+
+nav .extra li:hover {
+  transform: translateY(-2px);
+}
+
+/* main page */
+.messageList .message {
+  margin-top: 10px;
+  border-radius: 5px;
+  padding: 7px 10px;
+  background-color: white;
+}
+
+.messageList .message:first-child {
+  margin-top: 0;
+}
+
+.messageList .message:hover {
+  filter: brightness(0.95);
+}
+
+.messageList .message:nth-child(even) {
+  background-color: var(--off-white);
+}
+
+.message .title {
+  color: var(--main);
+  font-size: 1.3rem;
+  word-break: break-all;
+  font-weight: bold;
+}
+
+.message .content {
+  word-break: break-all;
+}
+
+.message .info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.message button {
+  background-color: white;
+  border: 3px solid var(--blue);
+  border-radius: 5px;
+  color: var(--blue);
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.message button:hover {
+  transform: translateY(-2px);
+}
+
+/* main forms */
+
+/* errors */
+.error-page {
+  text-align: center;
+}
+
+.error-page a {
+  color: var(--blue);
+  text-decoration: underline;
+  font-size: 1.5em
+}
+
+.errors {
+  color: red;
+  margin-bottom: 20px;
+}
+
+.errors li {
+  list-style: initial;
+}
