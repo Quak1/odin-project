@@ -2,7 +2,7 @@ const { Pool } = require("pg");
 
 // db details are loaded from environment variables
 const pool = new Pool({
-  ssl: process.env.NODE_ENV === "development",
+  ssl: process.env.NODE_ENV === "production",
 });
 
 async function getAllMessages() {
