@@ -34,7 +34,7 @@ CREATE INDEX "IDX_session_expire" ON "session" ("expire");
 
 async function main() {
   console.log("seeding...");
-  const client = new Client({ ssl: false });
+  const client = new Client({ ssl: process.env.NODE_ENV === "production" });
   await client.connect();
   await client.query(SQL);
   await client.end();
