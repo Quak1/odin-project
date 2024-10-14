@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  main#error-page
+    h1 #{error.statusCode} #{error.message}
+    p: a(href="/") Go back home!
+
