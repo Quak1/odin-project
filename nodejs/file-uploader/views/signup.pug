@@ -4,8 +4,6 @@ block content
   main#form
     h1= title
     form(method="post") 
-      if errors && errors.passwordConfirmation
-        label.error(for="pwdConfirm")= errors.passwordConfirmation.msg
       section
         label(for="username") Username:
         input#username(
@@ -29,6 +27,8 @@ block content
         )
         if errors && errors.password
           label.error(for="pwd")= errors.username.msg
+        if errors && errors.passwordConfirmation
+          label.error(for="pwdConfirm")= errors.passwordConfirmation.msg
       section
         label(for="pwdConfirm") Password confirmation:
         input#pwdConfirm(
