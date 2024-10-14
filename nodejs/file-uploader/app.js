@@ -6,6 +6,13 @@ app.set("view engine", "pug");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+// Session setup
+const sessionConfig = require("./config/session");
+const passport = require("./config/passport");
+app.use(sessionConfig);
+app.use(passport.session());
+
+// Routes
 app.get("/", (req, res) => res.send("Hello world!"));
 
 // start server
