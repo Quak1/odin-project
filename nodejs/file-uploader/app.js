@@ -1,5 +1,6 @@
 const express = require("express");
 
+const errorController = require("./controllers/errorController");
 const authRouter = require("./routes/authRouter");
 
 // App setup
@@ -17,6 +18,9 @@ app.use(passport.session());
 // Routes
 app.get("/", (req, res) => res.send("Hello world!"));
 app.use("/", authRouter);
+
+app.use(errorController.notFound);
+app.use(errorController.error);
 
 // start server
 const PORT = process.env.PORT || 3000;
