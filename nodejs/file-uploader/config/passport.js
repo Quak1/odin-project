@@ -1,5 +1,6 @@
 const passport = require("passport");
 const localStrategy = require("./localStrategy");
+const queries = require("../db/queries");
 
 passport.use(localStrategy);
 

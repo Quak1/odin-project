@@ -1,5 +1,7 @@
 const express = require("express");
 
+const authRouter = require("./routes/authRouter");
+
 // App setup
 const app = express();
 app.set("view engine", "pug");
@@ -14,6 +16,7 @@ app.use(passport.session());
 
 // Routes
 app.get("/", (req, res) => res.send("Hello world!"));
+app.use("/", authRouter);
 
 // start server
 const PORT = process.env.PORT || 3000;
