@@ -31,9 +31,32 @@ async function createUser({ username, password }) {
   });
 }
 
+async function saveFile(owner, filename, location, sizeInBytes) {
+  return await prisma.file.create({
+    data: {
+      owner: { connect: { id: owner } },
+      filename,
+      location,
+      sizeInBytes,
+    },
+  });
+}
+
+async function getFiles(owner) {
+  return await prisma.file.findMany({
+    where: {
+      owner: {
+        id: owner,
+      },
+    },
+  });
+}
+
 module.exports = {
   prismaClient: prisma,
   getUserById,
   getUserPassword,
   createUser,
+  saveFile,
+  getFiles,
 };
