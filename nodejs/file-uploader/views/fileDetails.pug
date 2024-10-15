@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  p Name: #{file.filename}
+  p File size: #{file.size}
+  p Created: #{file.created}
+  p: a(href=file.location) Download
+  button#delete Delete file
+  
+  script.
+    document.getElementById("delete").addEventListener("click", async () => {
+      if (confirm("Are you sure you want to delete this file?")) {
+        const res = await fetch("/file/#{file.id}", {
+          method: "DELETE"
+        })
+        if (!res.ok) alert("There was an error deleting this file")
+        else window.location.replace("/folder")
+      }
+    })

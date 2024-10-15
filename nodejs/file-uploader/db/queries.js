@@ -52,6 +52,18 @@ async function getFiles(owner) {
   });
 }
 
+async function getFileById(id) {
+  return await prisma.file.findUnique({
+    where: { id },
+  });
+}
+
+async function deleteFileById(userId, fileId) {
+  return await prisma.file.deleteMany({
+    where: { id: fileId, ownerId: userId },
+  });
+}
+
 module.exports = {
   prismaClient: prisma,
   getUserById,
@@ -59,4 +71,6 @@ module.exports = {
   createUser,
   saveFile,
   getFiles,
+  getFileById,
+  deleteFileById,
 };

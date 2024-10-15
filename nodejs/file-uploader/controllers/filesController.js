@@ -1,4 +1,4 @@
-const asynHandler = require("express-async-handler");
+const asyncHandler = require("express-async-handler");
 const queries = require("../db/queries");
 const upload = require("../config/multer");
 
@@ -13,7 +13,7 @@ const fileGet = (req, res) => {
 
 const filePost = [
   upload.single("file"),
-  asynHandler(async (req, res) => {
+  asyncHandler(async (req, res) => {
     await queries.saveFile(
       req.user.id,
       req.file.originalname,
@@ -26,7 +26,37 @@ const filePost = [
   multerError,
 ];
 
+const formatSize = (bytes) => {
+  const sizes = ["Bytes", "KB", "MB"];
+  const index = Math.floor(Math.log(bytes) / Math.log(1024));
+  const formattedSize = (bytes / Math.pow(1024, index)).toFixed(2);
+
+  return `${formattedSize} ${sizes[index]}`;
+};
+
+const formatDate = (date) =>
+  date.toLocaleDateString("ja-JP", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+
+const fileDetailsGet = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const file = await queries.getFileById(id);
+  file.size = formatSize(file.sizeInBytes);
+  file.created = formatDate(file.createdAt);
+  res.render("fileDetails", { title: `File | ${file.filename}`, file });
+});
+
+const fileDelete = asyncHandler(async (req, res) => {
+  await queries.deleteFileById(req.user.id, req.params.id);
+  res.status(200).send("/");
+});
+
 module.exports = {
   fileGet,
   filePost,
+  fileDetailsGet,
+  fileDelete,
 };
