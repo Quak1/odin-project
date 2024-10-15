@@ -2,12 +2,15 @@ const express = require("express");
 
 const errorController = require("./controllers/errorController");
 const authRouter = require("./routes/authRouter");
+const filesRouter = require("./routes/filesRouter");
+const flash = require("./middleware/flash");
 
 // App setup
 const app = express();
 app.set("view engine", "pug");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(flash());
 
 // Session setup
 const sessionConfig = require("./config/session");
@@ -17,6 +20,7 @@ app.use(passport.session());
 
 // Routes
 app.get("/", (req, res) => res.send("Hello world!"));
+app.use("/file", filesRouter);
 app.use("/", authRouter);
 
 app.use(errorController.notFound);
