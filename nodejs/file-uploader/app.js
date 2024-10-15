@@ -3,6 +3,7 @@ const express = require("express");
 const errorController = require("./controllers/errorController");
 const authRouter = require("./routes/authRouter");
 const filesRouter = require("./routes/filesRouter");
+const folderRouter = require("./routes/folderRouter");
 const flash = require("./middleware/flash");
 
 // App setup
@@ -19,8 +20,9 @@ app.use(sessionConfig);
 app.use(passport.session());
 
 // Routes
-app.get("/", (req, res) => res.send("Hello world!"));
+app.get("/", (req, res) => res.redirect("/folder"));
 app.use("/file", filesRouter);
+app.use("/folder", folderRouter);
 app.use("/", authRouter);
 
 app.use(errorController.notFound);

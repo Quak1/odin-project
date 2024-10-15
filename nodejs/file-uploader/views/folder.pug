@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  if files.length === 0
+    h1 There are no files
+  else
+    ul 
+      each file in files 
+        li: a(href=`/file/${file.id}`)= file.filename
