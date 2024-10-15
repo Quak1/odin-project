@@ -24,8 +24,8 @@ model User {
 model File {
     id          String    @id @default(uuid())
     filename    String
-    user        User      @relation(fields: [userId], references: [id])
-    userId      Int
+    owner       User      @relation(fields: [ownerId], references: [id])
+    ownerId     Int
     folder      Folder?   @relation(fields: [folderId], references: [id])
     folderId    String?
     location    String
@@ -37,8 +37,8 @@ model File {
 model Folder {
     id          String    @id @default(uuid())
     name        String
-    user        User      @relation(fields: [userId], references: [id])
-    userId      Int
+    owner       User      @relation(fields: [ownerId], references: [id])
+    ownerId     Int
     File        File[]
     createdAt   DateTime  @default(now())
     sharedUntil DateTime?
