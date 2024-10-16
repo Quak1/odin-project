@@ -3,6 +3,7 @@ const queries = require("../db/queries");
 const upload = require("../config/multer");
 const NotFoundError = require("../errors/NotFoundError");
 const UnauthorizedError = require("../errors/UnauthorizedError");
+const { formatSize, formatDate } = require("../utils");
 
 const { multerError } = require("../controllers/errorController");
 
@@ -28,21 +29,6 @@ const filePost = [
   }),
   multerError,
 ];
-
-const formatSize = (bytes) => {
-  const sizes = ["Bytes", "KB", "MB"];
-  const index = Math.floor(Math.log(bytes) / Math.log(1024));
-  const formattedSize = (bytes / Math.pow(1024, index)).toFixed(2);
-
-  return `${formattedSize} ${sizes[index]}`;
-};
-
-const formatDate = (date) =>
-  date.toLocaleDateString("ja-JP", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
 
 const fileDetailsGet = asyncHandler(async (req, res) => {
   const { id } = req.params;

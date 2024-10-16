@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const queries = require("../db/queries");
 const NotFoundError = require("../errors/NotFoundError");
 const UnauthorizedError = require("../errors/UnauthorizedError");
+const { formatSize, formatDate } = require("../utils");
 
 const folderDetailsGet = asyncHandler(async (req, res) => {
   const userId = req.user.id;
@@ -12,6 +13,12 @@ const folderDetailsGet = asyncHandler(async (req, res) => {
     queries.getUserFolders(userId, folderId),
     queries.getFolderById(folderId),
   ]);
+
+  folders.map((folder) => (folder.created = formatDate(folder.createdAt)));
+  files.map((file) => {
+    file.created = formatDate(file.createdAt);
+    file.size = formatSize(file.sizeInBytes);
+  });
 
   if (!folder) throw new NotFoundError();
   if (folder.ownerId && userId !== folder.ownerId)
