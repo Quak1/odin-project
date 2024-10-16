@@ -42,7 +42,7 @@ async function saveFile(owner, filename, location, sizeInBytes) {
   });
 }
 
-async function getFiles(owner) {
+async function getUserFiles(owner) {
   return await prisma.file.findMany({
     where: {
       owner: {
@@ -64,13 +64,52 @@ async function deleteFileById(userId, fileId) {
   });
 }
 
+async function createFolder(ownerId, name, parentId = null) {
+  return await prisma.folder.create({
+    data: {
+      ownerId,
+      name,
+      parentId,
+    },
+  });
+}
+
+async function getUserFolders(ownerId) {
+  return await prisma.folder.findMany({
+    where: { ownerId },
+  });
+}
+async function getFolderById(id) {
+  return await prisma.folder.findUnique({
+    where: { id },
+  });
+}
+
+async function renameFolder(id, newName) {
+  return await prisma.folder.update({
+    where: { id },
+    data: { name: newName },
+  });
+}
+
+async function deleteFolder(ownerId, folderId) {
+  return await prisma.folder.deleteMany({
+    where: { id: folderId, ownerId },
+  });
+}
+
 module.exports = {
   prismaClient: prisma,
   getUserById,
   getUserPassword,
   createUser,
   saveFile,
-  getFiles,
+  getUserFiles,
   getFileById,
   deleteFileById,
+  createFolder,
+  getUserFolders,
+  getFolderById,
+  renameFolder,
+  deleteFolder,
 };

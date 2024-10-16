@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const queries = require("../db/queries");
 
 const rootGet = asyncHandler(async (req, res) => {
-  const files = await queries.getFiles(req.user.id);
+  const files = await queries.getUserFiles(req.user.id);
   res.render("folder", { title: "Files", files });
 });
 
