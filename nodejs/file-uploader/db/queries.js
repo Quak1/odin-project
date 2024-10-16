@@ -74,9 +74,9 @@ async function createFolder(ownerId, name, parentId = null) {
   });
 }
 
-async function getUserFolders(ownerId) {
+async function getUserFolders(ownerId, parentId = null) {
   return await prisma.folder.findMany({
-    where: { ownerId },
+    where: { ownerId, parentId },
   });
 }
 async function getFolderById(id) {

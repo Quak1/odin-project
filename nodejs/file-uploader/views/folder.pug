@@ -1,6 +1,14 @@
 extends layout
 
 block content
+  a(href="/folder/create") create folder
+  if folders.length === 0
+    h1 There are no Folders
+  else
+    ul 
+      each folder in folders 
+        li: a(href=`/folder/${folder.id}`)= folder.name
+
   if files.length === 0
     h1 There are no files
   else

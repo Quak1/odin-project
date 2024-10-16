@@ -1,0 +1,6 @@
+form(action="/folder/create", method="post", ) 
+  each error in errors 
+    p= error
+  label(for="name") Folder name:
+  input(type="text" id="name" name="name")
+  button Submit
