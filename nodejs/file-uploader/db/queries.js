@@ -42,13 +42,9 @@ async function saveFile(owner, filename, location, sizeInBytes) {
   });
 }
 
-async function getUserFiles(owner) {
+async function getUserFiles(ownerId, folderId = null) {
   return await prisma.file.findMany({
-    where: {
-      owner: {
-        id: owner,
-      },
-    },
+    where: { ownerId, folderId },
   });
 }
 

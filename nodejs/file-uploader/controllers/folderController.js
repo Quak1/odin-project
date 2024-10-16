@@ -1,10 +1,12 @@
 const asyncHandler = require("express-async-handler");
 const queries = require("../db/queries");
 
-const rootGet = asyncHandler(async (req, res) => {
+const folderDetailsGet = asyncHandler(async (req, res) => {
   const userId = req.user.id;
-  const files = await queries.getUserFiles(userId);
-  const folders = await queries.getUserFolders(userId);
+  const folderId = req.params.id || null;
+
+  const files = await queries.getUserFiles(userId, folderId);
+  const folders = await queries.getUserFolders(userId, folderId);
   res.render("folder", { title: "Files", files, folders });
 });
 
@@ -34,7 +36,7 @@ const folderDelete = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  rootGet,
+  folderDetailsGet,
   newFolderGet,
   newFolderPost,
   folderRenamePost,
