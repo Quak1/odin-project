@@ -1,7 +1,7 @@
-form(action=`/folder/${folder.id}`, method="post", ) 
+form(action="", method="post", ) 
   if errors
     each error in errors 
       p= error
-  label(for="name") New folder name:
-  input(type="text" id="name" name="name")
+  label(for="newName") New folder name:
+  input(type="text" id="newName" name="name")
   button Save
