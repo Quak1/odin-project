@@ -2,6 +2,11 @@ form(action="", method="post", )
   if errors
     each error in errors 
       p= error
-  label(for="newName") New folder name:
-  input(type="text" id="newName" name="name")
-  button Save
+
+  section
+    label(for="newName") New folder name:
+    input(type="text" id="newName" name="name")
+
+  section
+    button(type="reset") Cancel
+    button Save

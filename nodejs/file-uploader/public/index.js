@@ -30,3 +30,9 @@ document.querySelectorAll(".deleteBtn").forEach((button) =>
     }
   }),
 );
+
+document.querySelectorAll("form button[type='reset']").forEach((button) => {
+  button.addEventListener("click", async () => {
+    button.closest("dialog").close();
+  });
+});
