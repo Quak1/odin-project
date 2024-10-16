@@ -1,0 +1,7 @@
+form(action=`/folder/${folder.id}`, method="post", ) 
+  if errors
+    each error in errors 
+      p= error
+  label(for="name") New folder name:
+  input(type="text" id="name" name="name")
+  button Save

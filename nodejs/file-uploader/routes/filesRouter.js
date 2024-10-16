@@ -5,7 +5,6 @@ const controller = require("../controllers/filesController");
 const { isAuth } = require("./isAuth");
 
 router.use(isAuth);
-router.get("/", controller.fileGet);
 router.post("/", controller.filePost);
 router.get("/:id", controller.fileDetailsGet);
 router.delete("/:id", controller.fileDelete);

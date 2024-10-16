@@ -3,11 +3,12 @@ const queries = require("../db/queries");
 
 const folderDetailsGet = asyncHandler(async (req, res) => {
   const userId = req.user.id;
-  const folderId = req.params.id || null;
+  const folderId = req.params.id;
 
   const files = await queries.getUserFiles(userId, folderId);
   const folders = await queries.getUserFolders(userId, folderId);
-  res.render("folder", { title: "Files", files, folders });
+  const folder = await queries.getFolderById(folderId);
+  res.render("folder", { title: "Files", files, folders, folder });
 });
 
 const newFolderGet = (req, res) => {
@@ -18,7 +19,8 @@ const newFolderGet = (req, res) => {
 };
 
 const newFolderPost = asyncHandler(async (req, res) => {
-  await queries.createFolder(req.user.id, req.body.name);
+  const { id } = req.params;
+  await queries.createFolder(req.user.id, req.body.name, id);
   res.redirect("back");
 });
 
@@ -27,7 +29,7 @@ const folderRenamePost = asyncHandler(async (req, res) => {
   const { name } = req.body;
 
   const folder = await queries.renameFolder(id, name);
-  res.status(200).send();
+  res.redirect("back");
 });
 
 const folderDelete = asyncHandler(async (req, res) => {
