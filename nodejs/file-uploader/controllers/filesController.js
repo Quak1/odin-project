@@ -16,12 +16,13 @@ const filePost = [
   asyncHandler(async (req, res) => {
     await queries.saveFile(
       req.user.id,
+      req.body.folderId,
       req.file.originalname,
       req.file.path,
       req.file.size,
     );
 
-    res.redirect("/");
+    res.redirect("back");
   }),
   multerError,
 ];

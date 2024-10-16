@@ -31,10 +31,11 @@ async function createUser({ username, password }) {
   });
 }
 
-async function saveFile(owner, filename, location, sizeInBytes) {
+async function saveFile(owner, folderId, filename, location, sizeInBytes) {
   return await prisma.file.create({
     data: {
       owner: { connect: { id: owner } },
+      folder: folderId ? { connect: { id: folderId } } : undefined,
       filename,
       location,
       sizeInBytes,
@@ -60,7 +61,7 @@ async function deleteFileById(userId, fileId) {
   });
 }
 
-async function createFolder(ownerId, name, parentId = null) {
+async function createFolder(ownerId, name, parentId) {
   return await prisma.folder.create({
     data: {
       ownerId,
@@ -70,12 +71,13 @@ async function createFolder(ownerId, name, parentId = null) {
   });
 }
 
-async function getUserFolders(ownerId, parentId = null) {
+async function getUserFolders(ownerId, parentId) {
   return await prisma.folder.findMany({
     where: { ownerId, parentId },
   });
 }
 async function getFolderById(id) {
+  if (!id) return {};
   return await prisma.folder.findUnique({
     where: { id },
   });
