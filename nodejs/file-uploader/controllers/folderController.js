@@ -1,13 +1,23 @@
 const asyncHandler = require("express-async-handler");
 const queries = require("../db/queries");
+const NotFoundError = require("../errors/NotFoundError");
+const UnauthorizedError = require("../errors/UnauthorizedError");
 
 const folderDetailsGet = asyncHandler(async (req, res) => {
   const userId = req.user.id;
   const folderId = req.params.id;
 
-  const files = await queries.getUserFiles(userId, folderId);
-  const folders = await queries.getUserFolders(userId, folderId);
-  const folder = await queries.getFolderById(folderId);
+  const [files, folders, folder] = await Promise.all([
+    queries.getUserFiles(userId, folderId),
+    queries.getUserFolders(userId, folderId),
+    queries.getFolderById(folderId),
+  ]);
+
+  if (!folder) throw new NotFoundError();
+  if (folder.ownerId && userId !== folder.ownerId)
+    throw new UnauthorizedError(
+      "You do not have permission to view this folder.",
+    );
   res.render("folder", { title: "Files", files, folders, folder });
 });
 

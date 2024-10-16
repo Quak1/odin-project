@@ -1,6 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const queries = require("../db/queries");
 const upload = require("../config/multer");
+const NotFoundError = require("../errors/NotFoundError");
+const UnauthorizedError = require("../errors/UnauthorizedError");
 
 const { multerError } = require("../controllers/errorController");
 
@@ -45,6 +47,10 @@ const formatDate = (date) =>
 const fileDetailsGet = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const file = await queries.getFileById(id);
+
+  if (!file) throw new NotFoundError();
+  if (file.ownerId !== req.user.id) throw new UnauthorizedError();
+
   file.size = formatSize(file.sizeInBytes);
   file.created = formatDate(file.createdAt);
   res.render("fileDetails", { title: `File | ${file.filename}`, file });
