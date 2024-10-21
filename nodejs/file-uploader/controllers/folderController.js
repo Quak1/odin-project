@@ -39,7 +39,7 @@ const newFolderGet = (req, res) => {
 const newFolderPost = asyncHandler(async (req, res) => {
   const { id } = req.params;
   await queries.createFolder(req.user.id, req.body.name, id);
-  res.redirect("back");
+  res.redirect(req.get("Referrer") || "/");
 });
 
 const folderRenamePost = asyncHandler(async (req, res) => {
@@ -47,7 +47,7 @@ const folderRenamePost = asyncHandler(async (req, res) => {
   const { name } = req.body;
 
   const folder = await queries.renameFolder(id, name);
-  res.redirect("back");
+  res.redirect(req.get("Referrer") || "/");
 });
 
 const folderDelete = asyncHandler(async (req, res) => {

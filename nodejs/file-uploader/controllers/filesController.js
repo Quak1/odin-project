@@ -25,7 +25,7 @@ const filePost = [
       req.file.size,
     );
 
-    res.redirect("back");
+    res.redirect(req.get("Referrer") || "/");
   }),
   multerError,
 ];
