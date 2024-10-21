@@ -7,6 +7,6 @@ form(action=`/folder/create/${folder.id || ""}`, method="post", )
     label(for="name") Folder name:
     input(type="text" id="name" name="name")
 
-  section 
+  section.buttons
     button(type="reset") Cancel
     button Submit

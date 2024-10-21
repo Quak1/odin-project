@@ -100,6 +100,10 @@ nav ul {
   font-weight: bold;
 }
 
+nav a {
+  text-decoration: underline;
+}
+
 #fileDetails>p>span {
   font-weight: bold;
 }
@@ -114,4 +118,46 @@ nav ul {
 
 #fileDetails a {
   text-decoration: underline;
+}
+
+form label {
+  display: block;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+form input {
+  font-size: inherit;
+  padding: 3px 5px;
+}
+
+form section {
+  margin-top: 15px;
+}
+
+form section:first-of-type {
+  margin-top: 0;
+}
+
+form .buttons button {
+  font-size: 18px;
+}
+
+form .buttons {
+  float: right;
+}
+
+form section p {
+  font-size: 14px;
+  color: #757575;
+}
+
+input[type="file"] {
+  max-width: 500px;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
