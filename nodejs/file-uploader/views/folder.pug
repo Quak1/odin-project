@@ -10,9 +10,13 @@ block content
   script(src="/index.js", defer)
 
   #filesHeader
-    div 
+    div.name 
       if folder.id
         h1= folder.name
+        if folder.parent 
+          p: a(href=`/folder/${folder.parent.id}`) Go back to #{folder.parent.name}
+        else 
+          p: a(href=`/folder`) Go back Home
     #folderButtons.buttons
       button#createFolderBtn()
         +svg-folder-plus

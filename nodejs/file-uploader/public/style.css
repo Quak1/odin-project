@@ -39,6 +39,12 @@ a {
   margin: 0;
 }
 
+#filesHeader .name a {
+  font-size: 14px;
+  text-decoration: underline;
+  color: #757575;
+}
+
 #folderButtons {
   justify-self: end;
 }
@@ -48,10 +54,7 @@ a {
   grid-template-columns: 5fr 1fr 0.8fr 0.8fr;
   gap: 10px;
   align-items: center;
-}
-
-.row:not(:first-child) {
-  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 .row:not(:first-child):hover {

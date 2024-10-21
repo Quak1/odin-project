@@ -25,6 +25,7 @@ const folderDetailsGet = asyncHandler(async (req, res) => {
     throw new UnauthorizedError(
       "You do not have permission to view this folder.",
     );
+
   res.render("folder", { title: "Files", files, folders, folder });
 });
 

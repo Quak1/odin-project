@@ -4,6 +4,14 @@ include icons/delete
 block content
   script(src="/index.js", defer)
 
+  
+  #filesHeader
+    div.name 
+      if file.folder
+        p: a(href=`/folder/${file.folder.id}`) Go back to #{file.folder.name}
+      else 
+        p: a(href=`/folder`) Go back Home
+
   section#fileDetails
     p 
       span Name:

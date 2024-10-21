@@ -53,6 +53,7 @@ async function getUserFiles(ownerId, folderId = null) {
 async function getFileById(id) {
   return await prisma.file.findUnique({
     where: { id },
+    include: { folder: true },
   });
 }
 
@@ -83,6 +84,7 @@ async function getFolderById(id) {
   if (!id) return {};
   return await prisma.folder.findUnique({
     where: { id },
+    include: { parent: true },
   });
 }
 
