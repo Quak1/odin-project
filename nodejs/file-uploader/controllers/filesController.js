@@ -7,13 +7,6 @@ const { formatSize, formatDate } = require("../utils");
 
 const { multerError } = require("../controllers/errorController");
 
-const fileGet = (req, res) => {
-  res.render("fileUpload", {
-    title: "Upload file",
-    errors: req.flash("errors"),
-  });
-};
-
 const filePost = [
   upload.single("file"),
   asyncHandler(async (req, res) => {
@@ -48,7 +41,6 @@ const fileDelete = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  fileGet,
   filePost,
   fileDetailsGet,
   fileDelete,

@@ -29,13 +29,6 @@ const folderDetailsGet = asyncHandler(async (req, res) => {
   res.render("folder", { title: "Files", files, folders, folder });
 });
 
-const newFolderGet = (req, res) => {
-  res.render("folderCreate", {
-    title: "Create new folder",
-    errors: req.flash("errors"),
-  });
-};
-
 const newFolderPost = asyncHandler(async (req, res) => {
   const { id } = req.params;
   await queries.createFolder(req.user.id, req.body.name, id);
@@ -57,7 +50,6 @@ const folderDelete = asyncHandler(async (req, res) => {
 
 module.exports = {
   folderDetailsGet,
-  newFolderGet,
   newFolderPost,
   folderRenamePost,
   folderDelete,
