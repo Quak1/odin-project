@@ -1,28 +1,50 @@
 extends partials/layout
+include icons/folder
+include icons/file
+include icons/delete
+include icons/pencil
+include icons/folder-plus
+include icons/upload
 
 block content
   script(src="/index.js", defer)
-  button#createFolderBtn create folder
-  button#uploadBtn upload file
-  
-  if folder.id
-    h1= folder.name
-  if folders.length === 0
-    h2 There are no Folders
-  else
-    ul 
-      each folder in folders 
-        li
-          a(href=`/folder/${folder.id}`)= folder.name
-          button.deleteBtn(data-id=folder.id, data-type="folder") Delete
-          button.editFolderBtn(data-id=folder.id, data-name=folder.name) Edit folder
 
-  if files.length === 0
-    h2 There are no files
-  else
-    ul 
+  #filesHeader
+    if folder.id
+      h1= folder.name
+    #folderButtons.buttons
+      button#createFolderBtn(title="Create folder")
+        +svg-folder-plus
+      button#uploadBtn(title="Upload file")
+        +svg-upload
+
+  #files
+    .row 
+      p Name 
+      p Created 
+      p Size 
+      p Actions
+    if folders.length > 0
+      each folder in folders 
+        .folderRow.row
+          a(href=`/folder/${folder.id}`)
+            +svg-folder 
+            span= folder.name
+          p= folder.created
+          p --
+          .buttons
+            button.deleteBtn(data-id=folder.id, data-type="folder", title="Delete")
+              +svg-delete
+            button.editFolderBtn(data-id=folder.id, data-name=folder.name, title="Edit")
+              +svg-pencil
+    if files.length > 0
       each file in files 
-        li: a(href=`/file/${file.id}`)= file.filename
+        .fileRow.row 
+          a(href=`/file/${file.id}`)
+            +svg-file
+            span= file.filename
+          p= file.created
+          p= file.size
 
   dialog#newFolderForm: include partials/folderForm
   dialog#uploadFileForm: include partials/fileForm
