@@ -1,11 +1,7 @@
 form(action=`/folder/create/${folder.id || ""}`, method="post", ) 
-  if errors
-    each error in errors 
-      p= error
-
   section 
     label(for="name") Folder name:
-    input(type="text" id="name" name="name")
+    input(type="text" id="name" name="name" required)
 
   section.buttons
     button(type="reset") Cancel

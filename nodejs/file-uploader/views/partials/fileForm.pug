@@ -1,8 +1,4 @@
 form(action="/file", method="post", enctype="multipart/form-data") 
-  if error
-    each error in errors 
-      p= error
-
   input(type="hidden", name="folderId", value=folder.id)
 
   section

@@ -164,3 +164,21 @@ input[type="file"] {
   flex-direction: column;
   align-items: center;
 }
+
+.alert {
+  display: flex;
+  gap: 10px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  border: 1px solid black;
+  border-top: 4px solid #f44336;
+  width: fit-content;
+  background: white;
+  border-radius: 5px;
+}
+
+.alert span {
+  cursor: pointer;
+}

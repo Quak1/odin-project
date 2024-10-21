@@ -56,3 +56,10 @@ block content
   dialog#newFolderForm: include partials/folderForm
   dialog#uploadFileForm: include partials/fileForm
   dialog#editFolderForm: include partials/folderEditForm
+
+  if errors.length
+    .alert 
+      div 
+        each error in errors 
+          p= error
+      span.closeBtn(onclick="this.parentElement.style.display='none';") &times;

@@ -1,3 +1,5 @@
+const { validationResult } = require("express-validator");
+
 const NotFoundError = require("../errors/NotFoundError");
 
 const error = (error, req, res, next) => {
@@ -30,8 +32,19 @@ const multerError = (error, req, res, next) => {
   res.redirect("/file");
 };
 
+const flashValidationErrors = (req, res, next) => {
+  const result = validationResult(req);
+  if (result.isEmpty()) {
+    return next();
+  }
+
+  result.array().forEach((e) => req.flash("errors", e.msg));
+  res.redirect(req.get("Referrer") || "/");
+};
+
 module.exports = {
   error,
   notFound,
   multerError,
+  flashValidationErrors,
 };

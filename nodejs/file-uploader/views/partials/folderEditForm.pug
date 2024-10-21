@@ -1,11 +1,7 @@
 form(action="", method="post", ) 
-  if errors
-    each error in errors 
-      p= error
-
   section
     label(for="newName") New folder name:
-    input(type="text" id="newName" name="name")
+    input(type="text" id="newName" name="name" required)
 
   section.buttons
     button(type="reset") Cancel
