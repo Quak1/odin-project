@@ -10,13 +10,16 @@ block content
   script(src="/index.js", defer)
 
   #filesHeader
-    if folder.id
-      h1= folder.name
+    div 
+      if folder.id
+        h1= folder.name
     #folderButtons.buttons
-      button#createFolderBtn(title="Create folder")
+      button#createFolderBtn()
         +svg-folder-plus
-      button#uploadBtn(title="Upload file")
+        | New folder
+      button#uploadBtn()
         +svg-upload
+        | Upload
 
   #files
     .row 

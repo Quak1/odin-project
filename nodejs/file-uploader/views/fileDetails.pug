@@ -1,10 +1,22 @@
 extends partials/layout
+include icons/delete
 
 block content
   script(src="/index.js", defer)
 
-  p Name: #{file.filename}
-  p File size: #{file.size}
-  p Created: #{file.created}
-  p: a(href=file.location) Download
-  button.deleteBtn(data-id=file.id, data-type="file") Delete file
+  section#fileDetails
+    p 
+      span Name:
+      |  #{file.filename}
+    p 
+      span File size: 
+      |  #{file.size}
+    p 
+      span Created: 
+      |  #{file.created}
+    p 
+      span: a(href=file.location) Download
+    .buttons
+      button.deleteBtn(data-id=file.id, data-type="file")
+        +svg-delete
+        | Delete file

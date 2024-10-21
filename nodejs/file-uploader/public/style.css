@@ -31,7 +31,16 @@ a {
 
 #filesHeader {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#filesHeader h1 {
+  margin: 0;
+}
+
+#folderButtons {
+  justify-self: end;
 }
 
 .row {
@@ -56,20 +65,26 @@ a {
 .row a {
   display: flex;
   padding: 15px;
+  overflow: hidden;
 }
 
 .row a span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   padding-left: 15px;
 }
 
 .buttons button {
+  display: inline-flex;
+  align-items: center;
   padding: 5px;
   margin-right: 5px;
   border: 1px solid black;
   border-radius: 5px;
-  line-height: 0;
   background: none;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .buttons button:last-child {
@@ -83,4 +98,20 @@ nav ul {
   margin: 20px 0;
   font-size: 28px;
   font-weight: bold;
+}
+
+#fileDetails>p>span {
+  font-weight: bold;
+}
+
+#fileDetails p {
+  margin: 8px 0;
+}
+
+#fileDetails p:first-child {
+  font-size: 20px;
+}
+
+#fileDetails a {
+  text-decoration: underline;
 }
