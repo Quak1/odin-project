@@ -27,7 +27,7 @@ const filePost = [
     const { data: existingFiles, error: existingFilesError } =
       await supabase.storage.from(bucket).list(username);
 
-    const nextNumber = existingFiles.length
+    const nextNumber = existingFiles?.length
       ? Math.max(
           ...existingFiles
             .map((file) => {
