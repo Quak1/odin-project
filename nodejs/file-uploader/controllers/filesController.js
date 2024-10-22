@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const supabase = require("../config/supabase");
+const { supabase, bucket } = require("../config/supabase");
 const queries = require("../db/queries");
 const upload = require("../config/multer");
 const NotFoundError = require("../errors/NotFoundError");
@@ -25,7 +25,7 @@ const filePost = [
 
     // TODO Error handling
     const { data: existingFiles, error: existingFilesError } =
-      await supabase.storage.from("file-uploader").list(username);
+      await supabase.storage.from(bucket).list(username);
 
     const nextNumber = existingFiles.length
       ? Math.max(
@@ -44,7 +44,7 @@ const filePost = [
         : `${baseFilename} (${nextNumber}).${extension}`;
 
     const { data, error } = await supabase.storage
-      .from("file-uploader")
+      .from(bucket)
       .upload(`/${username}/${filename}`, file.buffer, {
         contentType: file.mimetype,
       });
@@ -82,14 +82,17 @@ const fileDownloadGet = asyncHandler(async (req, res) => {
   if (file.ownerId !== req.user.id) throw new UnauthorizedError();
 
   const { data } = await supabase.storage
-    .from("file-uploader")
+    .from(bucket)
     .createSignedUrl(file.location, 30, { download: true });
 
   res.redirect(data.signedUrl);
 });
 
 const fileDelete = asyncHandler(async (req, res) => {
-  await queries.deleteFileById(req.user.id, req.params.id);
+  const { id: fileId } = req.params;
+  const file = await queries.getFileById(fileId);
+  await supabase.storage.from(bucket).remove([file.location]);
+  await queries.deleteFileById(req.user.id, fileId);
   res.status(200).send("/");
 });
 

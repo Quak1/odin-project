@@ -5,4 +5,6 @@ const supabase = createClient(
   process.env.SUPABASE_KEY,
 );
 
-module.exports = supabase;
+const bucket = "file-uploader";
+
+module.exports = { bucket, supabase };
