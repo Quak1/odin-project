@@ -23,7 +23,7 @@ block content
       span Created: 
       |  #{file.created}
     p 
-      span: a(href=file.location) Download
+      span: a(href=`/file/${file.id}/download`) Download
     .buttons
       button.deleteBtn(data-id=file.id, data-type="file")
         +svg-delete
