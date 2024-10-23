@@ -12,3 +12,6 @@ module.exports.formatDate = (date) =>
     month: "2-digit",
     day: "2-digit",
   });
+
+module.exports.escapeRegex = (string) =>
+  string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

@@ -21,7 +21,7 @@ const notFound = (req, res, next) => {
   throw new NotFoundError();
 };
 
-const multerError = (error, req, res, next) => {
+const handleMulterError = (error, req, res, next) => {
   if (error.code === "LIMIT_FILE_SIZE")
     req.flash("errors", "File exceeds size limit");
   else {
@@ -29,7 +29,7 @@ const multerError = (error, req, res, next) => {
     req.flash("errors", "There was an error uploading the file");
   }
 
-  res.redirect("/file");
+  res.redirect(req.get("Referrer") || "/");
 };
 
 const flashValidationErrors = (req, res, next) => {
@@ -45,6 +45,6 @@ const flashValidationErrors = (req, res, next) => {
 module.exports = {
   error,
   notFound,
-  multerError,
+  handleMulterError,
   flashValidationErrors,
 };
