@@ -26,7 +26,6 @@ li {
 
 a {
   color: inherit;
-  text-decoration: none;
 }
 
 #filesHeader {
@@ -41,7 +40,6 @@ a {
 
 #filesHeader .name a {
   font-size: 14px;
-  text-decoration: underline;
   color: #757575;
 }
 
@@ -69,6 +67,7 @@ a {
   display: flex;
   padding: 15px;
   overflow: hidden;
+  text-decoration: none;
 }
 
 .row a span {
@@ -103,10 +102,6 @@ nav ul {
   font-weight: bold;
 }
 
-nav a {
-  text-decoration: underline;
-}
-
 #fileDetails>p>span {
   font-weight: bold;
 }
@@ -117,10 +112,6 @@ nav a {
 
 #fileDetails p:first-child {
   font-size: 20px;
-}
-
-#fileDetails a {
-  text-decoration: underline;
 }
 
 form label {
@@ -181,4 +172,10 @@ input[type="file"] {
 
 .alert span {
   cursor: pointer;
+}
+
+#error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
