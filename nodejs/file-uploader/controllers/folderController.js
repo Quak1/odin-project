@@ -69,7 +69,15 @@ const folderRenamePost = [
 ];
 
 const folderDelete = asyncHandler(async (req, res) => {
-  await queries.deleteFolder(req.user.id, req.params.id);
+  const user = req.user;
+  const folderId = req.params.id;
+
+  const folder = queries.getFolderById(folderId);
+  if (!folder) throw new NotFoundError();
+  if (folder.ownerId && user.id !== folder.ownerId)
+    throw new UnauthorizedError();
+
+  await queries.deleteFolder(user, folderId);
   res.status(200).send();
 });
 

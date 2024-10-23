@@ -1,8 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
+const { getAllSubFolders } = require("@prisma/client/sql");
 const { escapeRegex } = require("../utils");
 const SupabaseError = require("../errors/SupabaseError");
-const NotFoundError = require("../errors/NotFoundError");
-const UnauthorizedError = require("../errors/UnauthorizedError");
 
 const { supabase, bucket } = require("../config/supabase");
 const prisma = new PrismaClient();
@@ -45,7 +44,7 @@ async function saveFile(owner, file, folderId) {
   );
 
   const { data: existingFiles, error: existingFilesError } =
-    await supabase.storage.from(bucket).list(username);
+    await supabase.storage.from(bucket).list(`${username}/${folderId}`);
   if (existingFilesError) throw new SupabaseError(existingFilesError);
 
   const nextNumber = existingFiles?.length
@@ -63,7 +62,7 @@ async function saveFile(owner, file, folderId) {
 
   const { data, error } = await supabase.storage
     .from(bucket)
-    .upload(`/${username}/${filename}`, file.buffer, {
+    .upload(`/${username}/${folderId}/${filename}`, file.buffer, {
       contentType: file.mimetype,
     });
   if (error) throw new SupabaseError(error);
@@ -142,10 +141,31 @@ async function renameFolder(id, newName) {
   });
 }
 
-async function deleteFolder(ownerId, folderId) {
-  return await prisma.folder.deleteMany({
-    where: { id: folderId, ownerId },
+async function deleteFolder(owner, folderId) {
+  const subfolders = await prisma.$queryRawTyped(getAllSubFolders(folderId));
+  const files = await Promise.all(
+    subfolders.map((folder) =>
+      supabase.storage.from(bucket).list(`${owner.username}/${folder.id}`),
+    ),
+  );
+  const locations = subfolders
+    .map((folder, i) =>
+      files[i].data.map(
+        (file) => `${owner.username}/${folder.id}/${file.name}`,
+      ),
+    )
+    .flat();
+
+  if (locations.length) {
+    const { error } = await supabase.storage.from(bucket).remove(locations);
+    if (error) throw new SupabaseError(error);
+  }
+
+  const res = await prisma.folder.delete({
+    where: { id: folderId, ownerId: owner.id },
   });
+
+  return res;
 }
 
 module.exports = {
