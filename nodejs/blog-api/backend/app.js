@@ -6,6 +6,7 @@ const usersRouter = require("./routes/usersRouter");
 // App setup
 const app = express();
 app.use(express.json());
+require("./config/passport");
 
 // Routes
 app.get("/", (req, res) => res.sendStatus(200));
