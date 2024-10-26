@@ -1,46 +1,23 @@
-const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 
+const {
+  usernameValidator,
+  passwordValidator,
+  passwordConfirmValidator,
+  handleValidationErrors,
+} = require("./validators");
 const queries = require("../prisma/queries");
 
-const usernameValidator = () =>
-  body("username")
-    .trim()
-    .toLowerCase()
-    .isLength({ min: 3, max: 50 })
-    .withMessage("Username must be between 3 and 50 characters.")
-    .isAlphanumeric()
-    .withMessage("Username can only contain letters or numbers.")
-    .custom(async (username) => {
-      const user = await queries.getUserByUsername(username);
-      if (user) {
-        throw new Error("Username already in use");
-      }
-    });
-
-const passwordValidator = (field = "password") =>
-  body(field)
-    .isLength({ min: 5 })
-    .withMessage("Password must be at leats 5 characters long.");
-
-const passwordConfirmValidator = (
-  field = "passwordConfirmation",
-  compare = "password",
-) =>
-  passwordValidator(field)
-    .custom((value, { req }) => value === req.body[compare])
-    .withMessage("Password and password confirmation don't match.");
-
-const handleValidationErrors = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty())
-    return res.status(400).json({ errors: errors.mapped() });
-  else next();
-};
+const newUsernameValidator = usernameValidator().custom(async (username) => {
+  const user = await queries.getUserByUsername(username);
+  if (user) {
+    throw new Error("Username already in use");
+  }
+});
 
 const createUser = [
-  usernameValidator(),
+  newUsernameValidator,
   passwordValidator(),
   passwordConfirmValidator(),
   handleValidationErrors,
