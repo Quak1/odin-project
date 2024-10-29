@@ -3,6 +3,7 @@ const express = require("express");
 
 const usersRouter = require("./routes/usersRouter");
 const postsRouter = require("./routes/postsRouter");
+const tagsRouter = require("./routes/tagsRouter");
 
 // App setup
 const app = express();
@@ -13,6 +14,7 @@ require("./config/passport");
 app.get("/", (req, res) => res.sendStatus(200));
 app.use("/users", usersRouter);
 app.use("/posts", postsRouter);
+app.use("/tags", tagsRouter);
 
 // start server
 const PORT = process.env.PORT || 3000;

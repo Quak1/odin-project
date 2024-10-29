@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+const { name } = require("../config/jwtStrategy");
 const prisma = new PrismaClient();
 
 // users
@@ -141,6 +142,19 @@ async function deleteComment(id) {
   });
 }
 
+// TAGS
+async function getTags() {
+  return await prisma.tag.findMany();
+}
+
+async function getPostsByTag(tag) {
+  return await prisma.post.findMany({
+    where: { published: true, tags: { some: { name: tag } } },
+    omit: { content: true },
+    include: { tags: true, _count: { select: { comments: true } } },
+  });
+}
+
 module.exports = {
   createUser,
   getAllUsers,
@@ -160,4 +174,6 @@ module.exports = {
   getPostComments,
   getCommentById,
   deleteComment,
+  getTags,
+  getPostsByTag,
 };
