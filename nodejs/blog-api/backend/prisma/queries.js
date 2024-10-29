@@ -1,6 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+// users
 async function createUser(username, password) {
   return await prisma.user.create({ data: { username, password } });
 }
@@ -62,6 +63,54 @@ async function deleteUserById(id) {
   });
 }
 
+// POSTS
+const connectTags = (name) => ({ where: { name }, create: { name } });
+async function createPost(userId, post) {
+  return await prisma.post.create({
+    data: {
+      ...post,
+      user: { connect: { id: userId } },
+      tags: {
+        connectOrCreate: post.tags.map(connectTags),
+      },
+    },
+  });
+}
+
+async function getAllPublishedPosts() {
+  return await prisma.post.findMany({
+    where: { published: true },
+    omit: { content: true },
+    include: { tags: true, _count: { select: { comments: true } } },
+  });
+}
+
+async function getPostById(id) {
+  return await prisma.post.findUnique({
+    where: { id },
+    include: { tags: true, comments: true },
+  });
+}
+
+async function updatePost(id, post) {
+  return await prisma.post.update({
+    where: { id },
+    data: {
+      ...post,
+      tags: {
+        set: [],
+        connectOrCreate: post.tags.map(connectTags),
+      },
+    },
+  });
+}
+
+async function deletePost(id) {
+  return await prisma.post.delete({
+    where: { id },
+  });
+}
+
 module.exports = {
   createUser,
   getAllUsers,
@@ -72,4 +121,9 @@ module.exports = {
   updateUserUsername,
   updateUserPassword,
   deleteUserById,
+  createPost,
+  getAllPublishedPosts,
+  getPostById,
+  updatePost,
+  deletePost,
 };

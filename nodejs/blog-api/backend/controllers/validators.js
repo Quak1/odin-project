@@ -30,9 +30,31 @@ const passwordConfirmValidator = (
     .custom((value, { req }) => value === req.body[compare])
     .withMessage("Password and password confirmation don't match.");
 
+const postValidator = [
+  body("title")
+    .trim()
+    .isLength({ min: 3, max: 255 })
+    .withMessage("Title must be between 3 and 255 characters."),
+  body("content")
+    .trim()
+    .isLength({ min: 20 })
+    .withMessage("Post content must be at least 20 characters."),
+  body("headerPicture")
+    .isURL()
+    .withMessage("Header picture must be a valid URL.")
+    .optional(),
+  body("tags")
+    .isArray()
+    .withMessage("Tags must be formated as an array of strings.")
+    .optional()
+    .default([]),
+  body("published").isBoolean().withMessage("Published must be a boolean."),
+];
+
 module.exports = {
   handleValidationErrors,
   usernameValidator,
   passwordValidator,
   passwordConfirmValidator,
+  postValidator,
 };
