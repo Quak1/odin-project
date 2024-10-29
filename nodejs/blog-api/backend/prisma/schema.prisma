@@ -28,7 +28,7 @@ model Post {
     userId        String
     title         String
     content       String
-    headerPicture String
+    headerPicture String?
     createdAt     DateTime  @default(now())
     updatedAt     DateTime  @updatedAt
     published     Boolean   @default(false)
