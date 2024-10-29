@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 
+const { UnauthorizedError, NotFoundError } = require("../errors");
 const { postValidator, handleValidationErrors } = require("./validators");
 const queries = require("../prisma/queries");
 
@@ -7,14 +8,13 @@ const createPost = [
   postValidator,
   handleValidationErrors,
   asyncHandler(async (req, res) => {
-    // TODO auto create tags
     const post = await queries.createPost(req.user.id, req.body);
     res.json(post);
   }),
 ];
 
 const getAllPosts = asyncHandler(async (req, res) => {
-  // TODO pagination
+  // TODO pagination and filter
   const posts = await queries.getAllPublishedPosts();
   res.json(posts);
 });
@@ -22,10 +22,8 @@ const getAllPosts = asyncHandler(async (req, res) => {
 const getPostById = asyncHandler(async (req, res) => {
   const post = await queries.getPostById(req.params.id);
 
-  if (!post) return res.sendStatus(404);
-  if (post.userId !== req.user.id)
-    // TODO unauthorized
-    return res.sendStatus(404);
+  if (!post) throw new NotFoundError();
+  if (post.userId !== req.user.id) throw new UnauthorizedError();
 
   res.json(post);
 });
@@ -33,10 +31,7 @@ const getPostById = asyncHandler(async (req, res) => {
 const getPublishedPost = asyncHandler(async (req, res) => {
   const post = await queries.getPostById(req.params.id);
 
-  if (!post) return res.sendStatus(404);
-  if (post.published === false)
-    // TODO unauthorized
-    return res.sendStatus(404);
+  if (!post || !post.published) throw new NotFoundError();
 
   res.json(post);
 });
@@ -49,8 +44,8 @@ const updatePost = [
     const userId = req.user.id;
     const post = await queries.getPostById(postId);
 
-    if (!post) return res.sendStatus(404); // TODO not found
-    if (userId !== post.userId) return res.sendStatus(403); // TODO unauthorized error
+    if (!post) throw new NotFoundError();
+    if (userId !== post.userId) throw new UnauthorizedError();
 
     const updated = await queries.updatePost(postId, req.body);
     res.json(updated);
@@ -62,8 +57,8 @@ const deletePost = asyncHandler(async (req, res) => {
   const userId = req.user.id;
   const post = await queries.getPostById(postId);
 
-  if (!post) return res.sendStatus(404); // TODO not found
-  if (userId !== post.userId) return res.sendStatus(403); // TODO unauthorized error
+  if (!post) return res.sendStatus(204);
+  if (userId !== post.userId) throw new UnauthorizedError();
 
   await queries.deletePost(postId);
   res.sendStatus(204);

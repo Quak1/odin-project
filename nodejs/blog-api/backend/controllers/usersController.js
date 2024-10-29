@@ -6,15 +6,14 @@ const {
   passwordValidator,
   passwordConfirmValidator,
   handleValidationErrors,
+  newUsernameValidator,
 } = require("./validators");
 const queries = require("../prisma/queries");
-
-const newUsernameValidator = usernameValidator().custom(async (username) => {
-  const user = await queries.getUserByUsername(username);
-  if (user) {
-    throw new Error("Username already in use");
-  }
-});
+const {
+  NotFoundError,
+  UnauthorizedError,
+  ValidationError,
+} = require("../errors");
 
 const createUser = [
   newUsernameValidator,
@@ -35,6 +34,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
 
 const getUserById = asyncHandler(async (req, res) => {
   const user = await queries.getUserById(req.params.id);
+  if (!user) throw new NotFoundError();
   res.json(user);
 });
 
@@ -64,18 +64,16 @@ const updatePassword = [
   handleValidationErrors,
   asyncHandler(async (req, res) => {
     const { currentPassword, newPassword } = req.body;
-    // TODO return to req.user.username after auth is implemented
-    const user = await queries.getUserByUsername(req.body.username);
-    if (!user) throw new Error();
+    const user = await queries.getUserByUsername(req.user.username);
+
+    if (!user) throw new UnauthorizedError();
     if (!(await bcrypt.compare(currentPassword, user.password)))
-      return res.status(403).json({
-        errors: {
-          currentPassword: { msg: "Current password is incorrect." },
-        },
-      });
+      throw new ValidationError([
+        { path: "currentPassword", msg: "Current password is incorrect." },
+      ]);
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-    await queries.updateUserPassword(req.params.id, hashedPassword);
+    await queries.updateUserPassword(user.id, hashedPassword);
     res.json({ message: "Password updated successfully." });
   }),
 ];

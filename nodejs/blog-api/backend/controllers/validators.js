@@ -1,10 +1,10 @@
 const { body } = require("express-validator");
 const { validationResult } = require("express-validator");
+const { ValidationError } = require("../errors");
 
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
-  if (!errors.isEmpty())
-    return res.status(400).json({ errors: errors.mapped() });
+  if (!errors.isEmpty()) throw new ValidationError(errors.array());
   else next();
 };
 
@@ -16,6 +16,13 @@ const usernameValidator = () =>
     .withMessage("Username must be between 3 and 50 characters.")
     .isAlphanumeric()
     .withMessage("Username can only contain letters or numbers.");
+
+const newUsernameValidator = usernameValidator().custom(async (username) => {
+  const user = await queries.getUserByUsername(username);
+  if (user) {
+    throw new Error("Username already in use");
+  }
+});
 
 const passwordValidator = (field = "password") =>
   body(field)
@@ -60,6 +67,7 @@ const commentValidator = body("content")
 module.exports = {
   handleValidationErrors,
   usernameValidator,
+  newUsernameValidator,
   passwordValidator,
   passwordConfirmValidator,
   postValidator,
