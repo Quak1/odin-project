@@ -51,10 +51,17 @@ const postValidator = [
   body("published").isBoolean().withMessage("Published must be a boolean."),
 ];
 
+const commentValidator = body("content")
+  .isString()
+  .withMessage("Message content must be a string.")
+  .isLength({ max: 300 })
+  .withMessage("Message length must be at most 300 characters.");
+
 module.exports = {
   handleValidationErrors,
   usernameValidator,
   passwordValidator,
   passwordConfirmValidator,
   postValidator,
+  commentValidator,
 };

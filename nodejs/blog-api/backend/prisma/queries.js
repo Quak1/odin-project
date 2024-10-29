@@ -111,6 +111,36 @@ async function deletePost(id) {
   });
 }
 
+// COMMENTS
+async function postComment(postId, userId, content) {
+  return await prisma.comment.create({
+    data: {
+      user: { connect: { id: userId } },
+      post: { connect: { id: postId } },
+      content,
+    },
+  });
+}
+
+async function getPostComments(postId) {
+  return await prisma.comment.findMany({
+    where: { postId },
+  });
+}
+
+async function getCommentById(id) {
+  return await prisma.comment.findUnique({
+    where: { id },
+    include: { post: { select: { userId: true } } },
+  });
+}
+
+async function deleteComment(id) {
+  return await prisma.comment.delete({
+    where: { id },
+  });
+}
+
 module.exports = {
   createUser,
   getAllUsers,
@@ -126,4 +156,8 @@ module.exports = {
   getPostById,
   updatePost,
   deletePost,
+  postComment,
+  getPostComments,
+  getCommentById,
+  deleteComment,
 };
