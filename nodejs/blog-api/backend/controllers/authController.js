@@ -32,21 +32,6 @@ const login = [
   },
 ];
 
-const validJWT = passport.authenticate("jwt", {
-  session: false,
-  failWithError: true,
-});
-
-const authorized = [
-  validJWT,
-  (req, res, next) => {
-    if (req.params.id !== req.user.id) res.sendStatus(403);
-    else next();
-  },
-];
-
 module.exports = {
   login,
-  validJWT,
-  authorized,
 };

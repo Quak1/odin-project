@@ -1,8 +1,17 @@
 const express = require("express");
 
 const controller = require("../controllers/usersController");
-const { authorized, login } = require("../controllers/auth");
+const { login } = require("../controllers/authController");
+const { validateJWT } = require("../controllers/middleware");
 const router = express.Router();
+
+const authorized = [
+  validateJWT,
+  (req, res, next) => {
+    if (req.params.id !== req.user.id) res.sendStatus(403);
+    else next();
+  },
+];
 
 router.post("/", controller.createUser);
 router.get("/", controller.getAllUsers);

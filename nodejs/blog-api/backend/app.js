@@ -4,6 +4,7 @@ const express = require("express");
 const usersRouter = require("./routes/usersRouter");
 const postsRouter = require("./routes/postsRouter");
 const tagsRouter = require("./routes/tagsRouter");
+const { errorHandler } = require("./controllers/middleware");
 
 // App setup
 const app = express();
@@ -15,6 +16,8 @@ app.get("/", (req, res) => res.sendStatus(200));
 app.use("/users", usersRouter);
 app.use("/posts", postsRouter);
 app.use("/tags", tagsRouter);
+
+app.use(errorHandler);
 
 // start server
 const PORT = process.env.PORT || 3000;

@@ -1,16 +1,16 @@
 const express = require("express");
 
 const controller = require("../controllers/postsController");
-const { validJWT } = require("../controllers/auth");
+const { validateJWT } = require("../controllers/middleware");
 const commentsRouter = require("./commentsRouter");
 const router = express.Router();
 
-router.post("/", validJWT, controller.createPost);
+router.post("/", validateJWT, controller.createPost);
 router.get("/", controller.getAllPosts);
-router.get("/:id", validJWT, controller.getPostById);
+router.get("/:id", validateJWT, controller.getPostById);
 router.get("/:id/public", controller.getPublishedPost);
-router.put("/:id", validJWT, controller.updatePost);
-router.delete("/:id", validJWT, controller.deletePost);
+router.put("/:id", validateJWT, controller.updatePost);
+router.delete("/:id", validateJWT, controller.deletePost);
 router.use("/:id/comments", commentsRouter);
 
 module.exports = router;
