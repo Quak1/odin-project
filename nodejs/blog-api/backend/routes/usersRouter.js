@@ -3,12 +3,13 @@ const express = require("express");
 const controller = require("../controllers/usersController");
 const { login } = require("../controllers/authController");
 const { validateJWT } = require("../controllers/middleware");
+const { UnauthorizedError } = require("../errors");
 const router = express.Router();
 
 const authorized = [
   validateJWT,
   (req, res, next) => {
-    if (req.params.id !== req.user.id) res.sendStatus(403);
+    if (req.params.id !== req.user.id) throw new UnauthorizedError();
     else next();
   },
 ];
