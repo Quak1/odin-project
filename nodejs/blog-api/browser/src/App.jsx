@@ -1,7 +1,9 @@
+import Browser from "./pages/Browser";
+
 function App() {
   return (
     <>
-      <h1>Hello, World!</h1>
+      <Browser />
     </>
   );
 }
