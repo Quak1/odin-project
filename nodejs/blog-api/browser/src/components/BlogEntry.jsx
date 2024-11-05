@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const BlogEntry = ({ entry }) => {
   const commentCount = entry._count.comments;
@@ -10,7 +11,9 @@ const BlogEntry = ({ entry }) => {
         <img src={entry.headerPicture} alt="" />
       </div>
       <div>
-        <p>{entry.title}</p>
+        <p>
+          <Link to={`/posts/${entry.id}`}>{entry.title}</Link>
+        </p>
         <p>
           by {entry.user.username} •{" "}
           {isUpdated
@@ -25,9 +28,9 @@ const BlogEntry = ({ entry }) => {
             {" "}
             | tags:
             {entry.tags.map((tag) => (
-              <a href={tag.id} key={tag.id}>
+              <Link to={`/tags/${tag.name}`} key={tag.id}>
                 {tag.name}
-              </a>
+              </Link>
             ))}
           </span>
         </p>

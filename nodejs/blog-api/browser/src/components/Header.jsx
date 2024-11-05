@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useToken from "../hooks/useToken";
 
 const Header = () => {
@@ -5,7 +6,9 @@ const Header = () => {
 
   return (
     <nav>
-      <p>Blog</p>
+      <p>
+        <Link to="/">Blog</Link>
+      </p>
       <ul>{token ? <li>Logout</li> : <li>Login</li>}</ul>
     </nav>
   );
