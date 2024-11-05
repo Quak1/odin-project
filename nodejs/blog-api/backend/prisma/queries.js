@@ -81,8 +81,12 @@ async function createPost(userId, post) {
 async function getAllPublishedPosts() {
   return await prisma.post.findMany({
     where: { published: true },
-    omit: { content: true },
-    include: { tags: true, _count: { select: { comments: true } } },
+    omit: { content: true, published: true, userId: true },
+    include: {
+      tags: true,
+      _count: { select: { comments: true } },
+      user: { select: { id: true, username: true } },
+    },
   });
 }
 

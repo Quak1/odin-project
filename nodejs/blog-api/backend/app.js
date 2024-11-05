@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 
 const usersRouter = require("./routes/usersRouter");
 const postsRouter = require("./routes/postsRouter");
@@ -10,6 +11,7 @@ const { errorHandler } = require("./controllers/middleware");
 const app = express();
 app.use(express.json());
 require("./config/passport");
+app.use(cors());
 
 // Routes
 app.get("/", (req, res) => res.sendStatus(200));
