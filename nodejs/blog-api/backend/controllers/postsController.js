@@ -23,15 +23,8 @@ const getPostById = asyncHandler(async (req, res) => {
   const post = await queries.getPostById(req.params.id);
 
   if (!post) throw new NotFoundError();
-  if (post.userId !== req.user.id) throw new UnauthorizedError();
-
-  res.json(post);
-});
-
-const getPublishedPost = asyncHandler(async (req, res) => {
-  const post = await queries.getPostById(req.params.id);
-
-  if (!post || !post.published) throw new NotFoundError();
+  if (!post.published && post.user.id !== req.user?.id)
+    throw new NotFoundError();
 
   res.json(post);
 });
@@ -45,7 +38,7 @@ const updatePost = [
     const post = await queries.getPostById(postId);
 
     if (!post) throw new NotFoundError();
-    if (userId !== post.userId) throw new UnauthorizedError();
+    if (userId !== post.user.id) throw new UnauthorizedError();
 
     const updated = await queries.updatePost(postId, req.body);
     res.json(updated);
@@ -58,7 +51,7 @@ const deletePost = asyncHandler(async (req, res) => {
   const post = await queries.getPostById(postId);
 
   if (!post) return res.sendStatus(204);
-  if (userId !== post.userId) throw new UnauthorizedError();
+  if (userId !== post.user.id) throw new UnauthorizedError();
 
   await queries.deletePost(postId);
   res.sendStatus(204);
@@ -68,7 +61,6 @@ module.exports = {
   createPost,
   getAllPosts,
   getPostById,
-  getPublishedPost,
   updatePost,
   deletePost,
 };

@@ -93,7 +93,15 @@ async function getAllPublishedPosts() {
 async function getPostById(id) {
   return await prisma.post.findUnique({
     where: { id },
-    include: { tags: true, comments: true },
+    omit: { userId: true },
+    include: {
+      tags: true,
+      comments: {
+        omit: { userId: true, postId: true },
+        include: { user: { select: { id: true, username: true } } },
+      },
+      user: { select: { id: true, username: true } },
+    },
   });
 }
 
@@ -154,8 +162,12 @@ async function getTags() {
 async function getPostsByTag(tag) {
   return await prisma.post.findMany({
     where: { published: true, tags: { some: { name: tag } } },
-    omit: { content: true },
-    include: { tags: true, _count: { select: { comments: true } } },
+    omit: { content: true, published: true, userId: true },
+    include: {
+      tags: true,
+      _count: { select: { comments: true } },
+      user: { select: { id: true, username: true } },
+    },
   });
 }
 

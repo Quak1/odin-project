@@ -5,6 +5,14 @@ const validateJWT = passport.authenticate("jwt", {
   failWithError: true,
 });
 
+const validateJwtOrNext = (req, res, next) => {
+  passport.authenticate("jwt", { session: false }, (err, user, info) => {
+    if (err) return next(err);
+    if (!user) return next();
+    req.login(user, next);
+  })(req, res, next);
+};
+
 const errorHandler = (error, req, res, next) => {
   if (!error.statusCode && error.status !== 401) {
     console.error(error);
@@ -27,4 +35,5 @@ const errorHandler = (error, req, res, next) => {
 module.exports = {
   validateJWT,
   errorHandler,
+  validateJwtOrNext,
 };
