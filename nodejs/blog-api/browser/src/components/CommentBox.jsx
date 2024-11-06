@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
-import useToken from "../hooks/useToken";
+import { useOutletContext } from "react-router-dom";
 
 const CommentBox = ({ postId, addComment }) => {
   const {
@@ -10,9 +10,15 @@ const CommentBox = ({ postId, addComment }) => {
     formState: { errors },
     reset,
   } = useForm();
-  const { token } = useToken();
+  const { user } = useOutletContext();
 
   async function onSubmit(data) {
+    if (!user)
+      return setError("content", {
+        type: "custom",
+        message: "You need to log in.",
+      });
+
     try {
       const api = `${import.meta.env.VITE_BACKEND_URL}/posts/${postId}/comments`;
       const res = await fetch(api, {
@@ -20,7 +26,7 @@ const CommentBox = ({ postId, addComment }) => {
         body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${user?.token}`,
         },
       });
 

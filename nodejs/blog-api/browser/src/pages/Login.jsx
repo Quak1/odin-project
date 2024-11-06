@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import useToken from "../hooks/useToken";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect } from "react";
 
 const Login = () => {
@@ -12,11 +11,11 @@ const Login = () => {
     formState: { errors },
     reset,
   } = useForm();
-  const { setToken, token } = useToken();
+  const { user, login } = useOutletContext();
 
   useEffect(() => {
-    if (token) navigate("/");
-  }, [token, navigate]);
+    if (user) navigate("/");
+  }, [user, navigate]);
 
   async function onSubmit(formData) {
     try {
@@ -37,8 +36,7 @@ const Login = () => {
             setError(key, { type: "custom", message: value });
           });
       } else {
-        setToken(data.token);
-        location.reload();
+        login(data);
       }
     } catch (error) {
       setError("content", { type: "custom", message: error.message });

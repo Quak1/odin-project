@@ -1,18 +1,16 @@
 import { Link } from "react-router-dom";
-import useToken from "../hooks/useToken";
+import PropTypes from "prop-types";
 
-const Header = () => {
-  const { token, removeToken } = useToken();
-
+const Header = ({ user, logout }) => {
   return (
     <nav>
       <p>
         <Link to="/">Blog</Link>
       </p>
       <ul>
-        {token ? (
+        {user ? (
           <li>
-            <button onClick={removeToken}>Log out</button>
+            <button onClick={logout}>Log out</button>
           </li>
         ) : (
           <li>
@@ -22,6 +20,11 @@ const Header = () => {
       </ul>
     </nav>
   );
+};
+
+Header.propTypes = {
+  user: PropTypes.object,
+  logout: PropTypes.func,
 };
 
 export default Header;

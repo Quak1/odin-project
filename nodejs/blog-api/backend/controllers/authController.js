@@ -25,7 +25,7 @@ const login = [
           const body = { id: user.id, username: user.username };
           const token = jwt.sign({ user: body }, process.env.JWT_SECRET);
 
-          return res.json({ token });
+          return res.json({ token, ...body });
         });
       } catch (error) {
         return next(error);
