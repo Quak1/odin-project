@@ -3,7 +3,6 @@ const LocalStrategy = require("passport-local");
 const queries = require("../prisma/queries");
 
 module.exports = new LocalStrategy(async (username, password, done) => {
-  console.log("local strat");
   try {
     const user = await queries.getUserByUsername(username);
     if (!user)

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import Comment from "../components/Comment";
+import CommentSection from "../components/CommentSection";
 
 const Post = () => {
   const { postId } = useParams();
@@ -28,14 +28,7 @@ const Post = () => {
         </p>
         <div>{post.content}</div>
       </main>
-      <div>
-        <h2>Comments ({post.comments.length})</h2>
-        <div>
-          {post.comments.map((comment) => (
-            <Comment key={comment.id} comment={comment} />
-          ))}
-        </div>
-      </div>
+      <CommentSection comments={post.comments} postId={post.id} />
     </div>
   ) : (
     "Loading..."
