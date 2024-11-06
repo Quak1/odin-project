@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import CommentSection from "../components/CommentSection";
+import { API_URL } from "../config/constant";
 
 const Post = () => {
   const { postId } = useParams();
   const [post, setPost] = useState();
 
   useEffect(() => {
-    const url = `http://localhost:3000/posts/${postId}`;
+    const url = `${API_URL}/posts/${postId}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {

@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { useOutletContext } from "react-router-dom";
 
+import { API_URL } from "../config/constant";
+
 const CommentBox = ({ postId, addComment }) => {
   const {
     register,
@@ -20,7 +22,7 @@ const CommentBox = ({ postId, addComment }) => {
       });
 
     try {
-      const api = `${import.meta.env.VITE_BACKEND_URL}/posts/${postId}/comments`;
+      const api = `${API_URL}/posts/${postId}/comments`;
       const res = await fetch(api, {
         method: "POST",
         body: JSON.stringify(data),

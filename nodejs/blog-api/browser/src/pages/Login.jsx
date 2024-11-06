@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect } from "react";
 
+import { API_URL } from "../config/constant";
+
 const Login = () => {
   const navigate = useNavigate();
   const {
@@ -19,7 +21,7 @@ const Login = () => {
 
   async function onSubmit(formData) {
     try {
-      const api = `${import.meta.env.VITE_BACKEND_URL}/users/login`;
+      const api = `${API_URL}/users/login`;
       const res = await fetch(api, {
         method: "POST",
         body: JSON.stringify(formData),

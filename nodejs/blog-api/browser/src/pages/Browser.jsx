@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import BlogEntry from "../components/BlogEntry";
+import { API_URL } from "../config/constant";
 
 const Browser = () => {
   const { tag } = useParams();
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    const API = "http://localhost:3000";
-    const url = tag ? `${API}/tags/${tag}/posts` : `${API}/posts`;
+    const url = tag ? `${API_URL}/tags/${tag}/posts` : `${API_URL}/posts`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setEntries(data.length ? data : null));
