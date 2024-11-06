@@ -2,14 +2,17 @@ import PropTypes from "prop-types";
 
 import Comment from "./Comment";
 import CommentBox from "./CommentBox";
+import { useState } from "react";
 
-const CommentSection = ({ postId, comments }) => {
-  console.log({ comments });
+const CommentSection = ({ postId, comments: postComments }) => {
+  const [comments, setComments] = useState(postComments);
+
+  const addComment = (comment) => setComments([comment, ...comments]);
 
   return (
     <div>
       <h2>Comments s({comments.length})</h2>
-      <CommentBox postId={postId} />
+      <CommentBox postId={postId} addComment={addComment} />
       <div>
         {comments.map((comment) => (
           <Comment key={comment.id} comment={comment} />
@@ -26,6 +29,7 @@ CommentSection.propTypes = {
       id: PropTypes.string,
       content: PropTypes.string,
       createdAt: PropTypes.string,
+      postId: PropTypes.string,
       user: PropTypes.exact({
         id: PropTypes.string,
         username: PropTypes.string,

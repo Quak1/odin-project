@@ -1,5 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
-const { name } = require("../config/jwtStrategy");
+const { name, pass } = require("../config/jwtStrategy");
 const prisma = new PrismaClient();
 
 // users
@@ -97,7 +97,7 @@ async function getPostById(id) {
     include: {
       tags: true,
       comments: {
-        omit: { userId: true, postId: true },
+        omit: { userId: true },
         include: { user: { select: { id: true, username: true } } },
       },
       user: { select: { id: true, username: true } },
@@ -132,6 +132,8 @@ async function postComment(postId, userId, content) {
       post: { connect: { id: postId } },
       content,
     },
+    omit: { userId },
+    include: { user: { omit: { password: true } } },
   });
 }
 

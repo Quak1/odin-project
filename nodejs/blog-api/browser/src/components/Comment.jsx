@@ -14,6 +14,7 @@ Comment.propTypes = {
     id: PropTypes.string,
     content: PropTypes.string,
     createdAt: PropTypes.string,
+    postId: PropTypes.string,
     user: PropTypes.exact({
       id: PropTypes.string,
       username: PropTypes.string,

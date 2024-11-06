@@ -1,22 +1,27 @@
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
+import useToken from "../hooks/useToken";
 
-const CommentBox = ({ postId }) => {
+const CommentBox = ({ postId, addComment }) => {
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
+    reset,
   } = useForm();
+  const { token } = useToken();
 
   async function onSubmit(data) {
-    console.log(data);
     try {
       const api = `${import.meta.env.VITE_BACKEND_URL}/posts/${postId}/comments`;
       const res = await fetch(api, {
         method: "POST",
         body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (res.status === 401)
@@ -29,6 +34,10 @@ const CommentBox = ({ postId }) => {
           Object.entries(data.errors).forEach(([key, value]) =>
             setError(key, { type: "custom", message: value }),
           );
+      } else {
+        const comment = await res.json();
+        addComment(comment);
+        reset();
       }
     } catch (error) {
       setError("content", { type: "custom", message: error.message });
@@ -56,6 +65,7 @@ const CommentBox = ({ postId }) => {
 
 CommentBox.propTypes = {
   postId: PropTypes.string,
+  addComment: PropTypes.func,
 };
 
 export default CommentBox;
