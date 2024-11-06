@@ -1,6 +1,8 @@
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 
+const { LoginError } = require("../errors");
+
 const {
   usernameValidator,
   passwordValidator,
@@ -14,7 +16,7 @@ const login = [
   async (req, res, next) => {
     passport.authenticate("local", async (err, user, info) => {
       try {
-        if (!user && info) return next(new Error(info.message));
+        if (!user && info) return next(new LoginError(info.message));
         if (err || !user) return next(new Error());
 
         req.login(user, { session: false }, async (error) => {

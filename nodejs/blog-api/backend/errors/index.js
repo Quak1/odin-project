@@ -24,8 +24,17 @@ class ValidationError extends Error {
   }
 }
 
+class LoginError extends Error {
+  constructor(msg) {
+    super(msg || "The username or password you entered is incorrect");
+    this.statusCode = 401;
+    this.name = "LoginError";
+  }
+}
+
 module.exports = {
   NotFoundError,
   UnauthorizedError,
   ValidationError,
+  LoginError,
 };

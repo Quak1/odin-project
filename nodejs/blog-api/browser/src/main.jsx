@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Browser from "./pages/Browser.jsx";
 import Post from "./pages/Post.jsx";
+import Login from "./pages/Login.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "posts/:postId",
         element: <Post />,
+      },
+      {
+        path: "login",
+        element: <Login />,
       },
     ],
   },

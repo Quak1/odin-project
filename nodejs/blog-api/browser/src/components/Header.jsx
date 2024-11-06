@@ -9,7 +9,15 @@ const Header = () => {
       <p>
         <Link to="/">Blog</Link>
       </p>
-      <ul>{token ? <li>Logout</li> : <li>Login</li>}</ul>
+      <ul>
+        {token ? (
+          <li>Logout</li>
+        ) : (
+          <li>
+            <Link to="/login">Log in</Link>
+          </li>
+        )}
+      </ul>
     </nav>
   );
 };
