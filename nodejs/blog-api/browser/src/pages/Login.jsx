@@ -38,6 +38,7 @@ const Login = () => {
           });
       } else {
         setToken(data.token);
+        location.reload();
       }
     } catch (error) {
       setError("content", { type: "custom", message: error.message });

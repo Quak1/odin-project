@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import useToken from "../hooks/useToken";
 
 const Header = () => {
-  const { token } = useToken();
+  const { token, removeToken } = useToken();
 
   return (
     <nav>
@@ -11,7 +11,9 @@ const Header = () => {
       </p>
       <ul>
         {token ? (
-          <li>Logout</li>
+          <li>
+            <button onClick={removeToken}>Log out</button>
+          </li>
         ) : (
           <li>
             <Link to="/login">Log in</Link>
