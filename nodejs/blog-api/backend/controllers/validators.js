@@ -1,6 +1,7 @@
 const { body } = require("express-validator");
 const { validationResult } = require("express-validator");
 const { ValidationError } = require("../errors");
+const { getUserByUsername } = require("../prisma/queries");
 
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
@@ -18,7 +19,7 @@ const usernameValidator = () =>
     .withMessage("Username can only contain letters or numbers.");
 
 const newUsernameValidator = usernameValidator().custom(async (username) => {
-  const user = await queries.getUserByUsername(username);
+  const user = await getUserByUsername(username);
   if (user) {
     throw new Error("Username already in use");
   }
