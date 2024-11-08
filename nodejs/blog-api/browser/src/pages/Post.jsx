@@ -29,7 +29,11 @@ const Post = () => {
         </p>
         <div>{post.content}</div>
       </main>
-      <CommentSection comments={post.comments} postId={post.id} />
+      <CommentSection
+        comments={post.comments}
+        postId={post.id}
+        ownerId={post.user.id}
+      />
     </div>
   ) : (
     "Loading..."
