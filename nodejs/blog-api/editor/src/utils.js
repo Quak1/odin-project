@@ -25,4 +25,24 @@ const getUserPosts = async (user) => {
   }
 };
 
-export { getUserInfo, setUserInfo, clearUserInfo, API_URL, getUserPosts };
+const deletePost = async (postId, user) => {
+  try {
+    const url = `${API_URL}/posts/${postId}`;
+    const res = await fetch(url, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${user.token}` },
+    });
+    return res;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export {
+  getUserInfo,
+  setUserInfo,
+  clearUserInfo,
+  API_URL,
+  getUserPosts,
+  deletePost,
+};
