@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import CommentSection from "../components/CommentSection";
 import { API_URL } from "../config/constant";
 import styled from "styled-components";
+import Tags from "../components/Tags";
 
 const PostContainer = styled.main`
   h1 {
@@ -19,6 +20,9 @@ const PostInfo = styled.p`
   color: #6f6f6f;
   margin-top: 0;
   margin-bottom: 10px;
+  a {
+    text-decoration: none;
+  }
 `;
 
 const Content = styled.div`
@@ -50,8 +54,18 @@ const Post = () => {
         <img src={post.headerPicture} alt="" />
         <h1>{post.title}</h1>
         <PostInfo>
-          by <Link to={post.user.id}>{post.user.username}</Link> • published{" "}
-          {createdAt}
+          <span>
+            by <Link to={post.user.id}>{post.user.username}</Link>
+          </span>
+          <span> • published {createdAt}</span>
+          {post.tags.length && (
+            <>
+              <span> • Tags: </span>
+              <span>
+                <Tags tags={post.tags} />
+              </span>
+            </>
+          )}
         </PostInfo>
         <Content>{post.content}</Content>
       </PostContainer>

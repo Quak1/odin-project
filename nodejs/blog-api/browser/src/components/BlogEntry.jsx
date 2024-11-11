@@ -5,6 +5,8 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import styled from "styled-components";
 dayjs.extend(relativeTime);
 
+import Tags from "./Tags";
+
 const formatDate = (dateString) => dayjs(dateString).fromNow();
 
 const Container = styled.article`
@@ -46,13 +48,6 @@ const Thumbnail = styled.div`
   }
 `;
 
-const Tag = styled.span`
-  border: 1px solid ${(props) => props.theme.accent};
-  margin-right: 3px;
-  padding: 0 5px;
-  border-radius: 5px;
-`;
-
 const BlogEntry = ({ entry }) => {
   const commentCount = entry._count.comments;
   const createdAt = formatDate(entry.createdAt);
@@ -81,11 +76,7 @@ const BlogEntry = ({ entry }) => {
           </span>
           <span>
             {" | "}
-            {entry.tags.map((tag) => (
-              <Tag key={tag.id}>
-                <Link to={`/tags/${tag.name}`}>{tag.name}</Link>
-              </Tag>
-            ))}
+            <Tags tags={entry.tags} />
           </span>
         </p>
       </BlogInfo>
