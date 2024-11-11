@@ -1,8 +1,15 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
+
+const formatDate = (dateString) => dayjs(dateString).fromNow();
 
 const BlogEntry = ({ entry }) => {
   const commentCount = entry._count.comments;
+  const createdAt = formatDate(entry.createdAt);
+  const updatedAt = formatDate(entry.updatedAt);
   const isUpdated = entry.createdAt !== entry.updatedAt;
 
   return (
@@ -17,8 +24,8 @@ const BlogEntry = ({ entry }) => {
         <p>
           by {entry.user.username} •{" "}
           {isUpdated
-            ? `${entry.createdAt} (updated on ${entry.updatedAt})`
-            : `${entry.createdAt}`}
+            ? `${createdAt} (updated on ${updatedAt})`
+            : `${createdAt}`}
         </p>
         <p>
           <span>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import dayjs from "dayjs";
 
 import CommentSection from "../components/CommentSection";
 import { API_URL } from "../config/constant";
@@ -7,6 +8,8 @@ import { API_URL } from "../config/constant";
 const Post = () => {
   const { postId } = useParams();
   const [post, setPost] = useState();
+  const createdAt = dayjs(post?.createdAt).format("dddd, MMMM D, YYYY h:mm A");
+  const updatedAt = dayjs(post?.updatedAt).format("YYYY-MM-DD");
 
   useEffect(() => {
     const url = `${API_URL}/posts/${postId}`;
@@ -25,7 +28,7 @@ const Post = () => {
         <h1>{post.title}</h1>
         <p>
           by <Link to={post.user.id}>{post.user.username}</Link> • published{" "}
-          {post.createdAt}
+          {createdAt}
         </p>
         <div>{post.content}</div>
       </main>
