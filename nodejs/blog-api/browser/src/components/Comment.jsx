@@ -3,6 +3,40 @@ import { useOutletContext } from "react-router-dom";
 import dayjs from "dayjs";
 
 import { API_URL } from "../config/constant";
+import styled from "styled-components";
+
+const CommentContainer = styled.div`
+  border: 1px solid ${(p) => p.theme.gray};
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px 15px;
+
+  p {
+    margin: 0;
+  }
+  p:first-child {
+    color: ${(p) => p.theme.main};
+    font-weight: bold;
+    font-size: 14px;
+  }
+  p:nth-child(2) {
+    font-size: 16px;
+    color: black;
+  }
+`;
+
+const DeleteButton = styled.button`
+  text-decoration: underline;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+`;
+
+const Content = styled.p``;
 
 const Comment = ({ ownerId, removeComment, comment }) => {
   const { user } = useOutletContext();
@@ -22,18 +56,18 @@ const Comment = ({ ownerId, removeComment, comment }) => {
   };
 
   return (
-    <div>
+    <CommentContainer>
       <p>
         {comment.user.username} • <span>{createdAt}</span>
         {user && (user.id === comment.user.id || user.id === ownerId) && (
           <>
             {" "}
-            • <button onClick={deleteComment}>Delete</button>
+            • <DeleteButton onClick={deleteComment}>Delete</DeleteButton>
           </>
         )}
       </p>
       <p>{comment.content}</p>
-    </div>
+    </CommentContainer>
   );
 };
 

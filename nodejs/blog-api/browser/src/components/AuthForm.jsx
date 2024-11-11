@@ -1,5 +1,40 @@
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
+import styled from "styled-components";
+import SButton from "./SubmitButton";
+
+const Error = styled.label`
+  color: red;
+`;
+
+const Label = styled.label`
+  display: block;
+  color: ${(props) => props.theme.main};
+  font-weight: bold;
+  font-size: 18px;
+`;
+
+const Form = styled.form`
+  width: 100%;
+
+  div {
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 2px solid ${(props) => props.theme.gray};
+    font-size: inherit;
+  }
+`;
+
+const SubmitButton = styled(SButton)`
+  width: 100%;
+`;
 
 const AuthForm = ({ title, fields, callback, apiUrl }) => {
   const {
@@ -36,21 +71,23 @@ const AuthForm = ({ title, fields, callback, apiUrl }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {errors.root && <p>{errors.root.message}</p>}
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      {errors.root && <Error>{errors.root.message}</Error>}
       {fields.map((entry) => (
         <div key={entry.name}>
-          <label htmlFor={entry.id}>{entry.name}</label>
+          <Label htmlFor={entry.id}>{entry.name}</Label>
           <input
             id={entry.id}
             type={entry.type}
             {...register(entry.id, { required: `${entry.name} is required.` })}
           />
-          {errors[entry.id] && <p>{errors[entry.id].message}</p>}
+          {errors[entry.id] && (
+            <Error htmlFor={entry.id}>{errors[entry.id].message}</Error>
+          )}
         </div>
       ))}
-      <button type="submit">{title}</button>
-    </form>
+      <SubmitButton type="submit">{title}</SubmitButton>
+    </Form>
   );
 };
 

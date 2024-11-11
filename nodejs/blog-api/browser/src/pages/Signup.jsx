@@ -3,6 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 
 import AuthForm from "../components/AuthForm";
 import { API_URL } from "../config/constant";
+import Container from "../components/FormPageContainer";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -13,8 +14,8 @@ const Signup = () => {
   }, [user, navigate]);
 
   return (
-    <div>
-      <h1>Log in</h1>
+    <Container>
+      <h1>Sign up</h1>
       <AuthForm
         title="Sign up"
         apiUrl={`${API_URL}/users`}
@@ -29,7 +30,7 @@ const Signup = () => {
           },
         ]}
       />
-    </div>
+    </Container>
   );
 };
 

@@ -3,6 +3,27 @@ import { useForm } from "react-hook-form";
 import { useOutletContext } from "react-router-dom";
 
 import { API_URL } from "../config/constant";
+import styled from "styled-components";
+import SubmitButton from "./SubmitButton";
+
+const TextArea = styled.textarea`
+  box-sizing: border-box;
+  font-family: inherit;
+  width: 100%;
+  border-radius: 5px;
+  border: 2px solid ${(props) => props.theme.gray};
+  padding: 10px 15px;
+  font-size: 16px;
+  resize: vertical;
+  margin-bottom: 5px;
+`;
+
+const Errors = styled.div`
+  color: red;
+  p {
+    margin: 0;
+  }
+`;
 
 const CommentBox = ({ postId, addComment }) => {
   const {
@@ -54,9 +75,9 @@ const CommentBox = ({ postId, addComment }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="content">Comment:</label>
-      <textarea
+      <TextArea
         id="content"
+        placeholder="Make a comment!"
         {...register("content", {
           required: "Comment content is required.",
           maxLength: {
@@ -64,9 +85,9 @@ const CommentBox = ({ postId, addComment }) => {
             message: "Comment max length: 300 characters.",
           },
         })}
-      ></textarea>
-      {errors.content && <p>{errors.content.message}</p>}
-      <button type="submit">Submit</button>
+      ></TextArea>
+      <Errors>{errors.content && <p>{errors.content.message}</p>}</Errors>
+      <SubmitButton type="submit">Submit</SubmitButton>
     </form>
   );
 };

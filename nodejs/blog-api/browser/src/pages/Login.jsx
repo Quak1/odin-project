@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import AuthForm from "../components/AuthForm";
 import { API_URL } from "../config/constant";
+import Container from "../components/FormPageContainer";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const Login = () => {
   }, [user, navigate]);
 
   return (
-    <div>
+    <Container>
       <h1>Log in</h1>
       <AuthForm
         title="Log in"
@@ -24,7 +25,7 @@ const Login = () => {
           { id: "password", name: "Password", type: "password" },
         ]}
       />
-    </div>
+    </Container>
   );
 };
 

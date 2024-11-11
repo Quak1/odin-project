@@ -1,20 +1,26 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
+import styled from "styled-components";
 
 import Comment from "./Comment";
 import CommentBox from "./CommentBox";
-import { useState } from "react";
+
+const Container = styled.div`
+  h2 {
+    margin-bottom: 0;
+  }
+`;
 
 const CommentSection = ({ postId, ownerId, comments: postComments }) => {
   const [comments, setComments] = useState(postComments);
 
   const addComment = (comment) => setComments([comment, ...comments]);
   const removeComment = (commentId) => {
-    console.log(commentId);
     setComments(comments.filter((comment) => commentId !== comment.id));
   };
 
   return (
-    <div>
+    <Container>
       <h2>Comments ({comments.length})</h2>
       <CommentBox postId={postId} addComment={addComment} />
       <div>
@@ -27,7 +33,7 @@ const CommentSection = ({ postId, ownerId, comments: postComments }) => {
           />
         ))}
       </div>
-    </div>
+    </Container>
   );
 };
 

@@ -17,6 +17,7 @@ const Browser = () => {
 
   return (
     <div>
+      {tag && <h1>Posts by tag: {tag}</h1>}
       {!entries
         ? "There are no posts for this tag."
         : !entries.length
