@@ -5,11 +5,15 @@ import { useState } from "react";
 import { getUserInfo, clearUserInfo, setUserInfo } from "./utils";
 import styled, { ThemeProvider } from "styled-components";
 
-const Container = styled.main`
+const Container = styled.div`
+  background-color: ${(props) => props.theme.gray};
+  height: 100vh;
+`;
+
+const Inner = styled.div`
   max-width: 800px;
   margin: 0 auto;
   font-family: sans-serif;
-
   a {
     color: inherit;
   }
@@ -37,12 +41,14 @@ function App() {
   };
 
   return (
-    <Container>
-      <ThemeProvider theme={theme}>
-        <Header logout={logout} user={user} />
-        <Outlet context={{ user, login }} />
-      </ThemeProvider>
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <Inner>
+          <Header logout={logout} user={user} />
+          <Outlet context={{ user, login }} />
+        </Inner>
+      </Container>
+    </ThemeProvider>
   );
 }
 

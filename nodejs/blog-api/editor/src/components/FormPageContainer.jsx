@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Container = styled.div`
+const FormPageContainer = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -12,4 +12,4 @@ const Container = styled.div`
   }
 `;
 
-export default Container;
+export default FormPageContainer;

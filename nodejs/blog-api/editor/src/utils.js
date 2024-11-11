@@ -13,4 +13,16 @@ const clearUserInfo = () => {
   localStorage.removeItem(KEY);
 };
 
-export { getUserInfo, setUserInfo, clearUserInfo, API_URL };
+const getUserPosts = async (user) => {
+  try {
+    const url = `${API_URL}/users/${user.id}/posts`;
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${user.token}` },
+    });
+    return await res.json();
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export { getUserInfo, setUserInfo, clearUserInfo, API_URL, getUserPosts };

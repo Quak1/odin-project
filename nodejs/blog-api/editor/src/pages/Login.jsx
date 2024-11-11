@@ -2,7 +2,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect } from "react";
 
 import AuthForm from "../components/AuthForm";
-import { API_URL } from "../config/constant";
+import { API_URL } from "../utils";
 import Container from "../components/FormPageContainer";
 
 const Login = () => {

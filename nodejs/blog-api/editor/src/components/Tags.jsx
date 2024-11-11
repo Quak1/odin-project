@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Tag = styled.span`
@@ -9,11 +8,7 @@ const Tag = styled.span`
 `;
 
 const Tags = ({ tags }) => {
-  return tags.map((tag) => (
-    <Tag key={tag.id}>
-      <Link to={`/tags/${tag.name}`}>{tag.name}</Link>
-    </Tag>
-  ));
+  return tags.map((tag) => <Tag key={tag.id}>{tag.name}</Tag>);
 };
 
 export default Tags;

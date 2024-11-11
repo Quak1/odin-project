@@ -1,28 +1,27 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
-import BlogEntry from "../components/BlogEntry";
-import { API_URL } from "../config/constant";
+import PostEntry from "../components/PostEntry";
+import { getUserPosts } from "../utils";
 
 const Browser = () => {
-  const { tag } = useParams();
-  const [entries, setEntries] = useState([]);
+  const [entries, setEntries] = useState(null);
+  const navigate = useNavigate();
+  const { user } = useOutletContext();
 
   useEffect(() => {
-    const url = tag ? `${API_URL}/tags/${tag}/posts` : `${API_URL}/posts`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setEntries(data.length ? data : null));
-  }, [tag]);
+    if (!user) navigate("/login");
+    else
+      getUserPosts(user).then((data) => setEntries(data?.length ? data : null));
+  }, [user, navigate]);
 
   return (
     <div>
-      {tag && <h1>Posts by tag: {tag}</h1>}
       {!entries
-        ? "There are no posts for this tag."
+        ? "Loading..."
         : !entries.length
-          ? "Loading..."
-          : entries.map((entry) => <BlogEntry key={entry.id} entry={entry} />)}
+          ? "You have no posts."
+          : entries.map((entry) => <PostEntry key={entry.id} entry={entry} />)}
     </div>
   );
 };

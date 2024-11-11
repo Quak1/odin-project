@@ -41,7 +41,7 @@ const Header = ({ user, logout }) => {
   return (
     <Nav>
       <p>
-        <Link to="/">Blog</Link>
+        <Link to="/">Post Editor</Link>
       </p>
       <ul>
         {user ? (
