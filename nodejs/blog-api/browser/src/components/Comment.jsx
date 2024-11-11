@@ -36,8 +36,6 @@ const DeleteButton = styled.button`
   cursor: pointer;
 `;
 
-const Content = styled.p``;
-
 const Comment = ({ ownerId, removeComment, comment }) => {
   const { user } = useOutletContext();
   const createdAt = dayjs(comment.createdAt).format("MMM D YYYY");

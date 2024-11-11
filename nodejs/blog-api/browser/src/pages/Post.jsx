@@ -34,7 +34,6 @@ const Post = () => {
   const updatedAt = dayjs(post?.updatedAt).format("YYYY-MM-DD");
   if (!post.headerPicture) post.headerPicture = "https://placehold.co/800x500";
 
-  console.log(post);
   useEffect(() => {
     const url = `${API_URL}/posts/${postId}`;
     fetch(url)
