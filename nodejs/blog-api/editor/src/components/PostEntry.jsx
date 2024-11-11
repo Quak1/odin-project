@@ -56,7 +56,7 @@ const Actions = styled.div`
   text-align: center;
 `;
 
-const PostEntry = ({ entry }) => {
+const PostEntry = ({ entry, onDelete }) => {
   const commentCount = entry._count.comments;
   const createdAt = formatDate(entry.createdAt);
   const updatedAt = formatDate(entry.updatedAt);
@@ -84,7 +84,7 @@ const PostEntry = ({ entry }) => {
         <Actions>
           <button>{entry.published ? "Unpublish" : "Publish"}</button>
           <Link to={`/editor/${entry.id}`}>Edit</Link>
-          <button>delete</button>
+          <button onClick={onDelete}>delete</button>
         </Actions>
       </Interior>
     </Container>
@@ -112,6 +112,7 @@ PostEntry.propTypes = {
       username: PropTypes.string,
     }),
   }),
+  onDelete: PropTypes.func,
 };
 
 export default PostEntry;
