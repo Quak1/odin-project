@@ -13,6 +13,17 @@ const PostContainer = styled.main`
     margin: 0;
     color: ${(props) => props.theme.main};
   }
+
+  #imgContainer {
+    width: 800px;
+    height: 500px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const PostInfo = styled.p`
@@ -29,6 +40,9 @@ const Content = styled.div`
   font-size: 18px;
   padding: 10px 5px;
   border-bottom: 1px solid #c4c4c4;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  hyphens: auto;
 `;
 
 const Post = () => {
@@ -48,10 +62,13 @@ const Post = () => {
       .then((data) => setPost(data));
   }, [postId]);
 
+  console.log(post.content);
   return post.title ? (
     <div>
       <PostContainer>
-        <img src={post.headerPicture} alt="" />
+        <div id="imgContainer">
+          <img src={post.headerPicture} alt="" />
+        </div>
         <h1>{post.title}</h1>
         <PostInfo>
           <span>
