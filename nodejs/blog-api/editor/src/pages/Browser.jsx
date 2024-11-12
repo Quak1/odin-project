@@ -3,6 +3,26 @@ import { useNavigate, useOutletContext, Link } from "react-router-dom";
 
 import PostEntry from "../components/PostEntry";
 import { deletePost, getUserPosts, togglePostPublication } from "../utils";
+import styled from "styled-components";
+
+const NewPostButton = styled(Link)`
+  background-color: ${(props) => props.theme.accent};
+  color: ${(props) => props.theme.main};
+  padding: 5px 10px;
+  font-size: 24px;
+  display: block;
+  width: fit-content;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: transform 0.05s;
+
+  &:hover {
+    transform: translateY(-4px);
+    outline: 2px solid black;
+  }
+`;
 
 const Browser = () => {
   const [entries, setEntries] = useState(null);
@@ -43,7 +63,7 @@ const Browser = () => {
 
   return (
     <div>
-      <Link to="/new">New post!</Link>
+      <NewPostButton to="/new">New post!</NewPostButton>
       {!entries
         ? "Loading..."
         : !entries.length

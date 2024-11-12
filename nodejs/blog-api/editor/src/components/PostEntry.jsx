@@ -54,6 +54,25 @@ const Actions = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
+  gap: 5px;
+`;
+
+const Action = styled(Link)`
+  font-size: 14px;
+  font-weight: bold;
+  font-family: inherit;
+  background-color: ${(props) => props.theme.accent};
+  border-radius: 5px;
+  padding: 2px 5px;
+  text-decoration: none;
+  transition: transform 0.05s;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2px);
+    outline: 1px solid black;
+  }
 `;
 
 const PostEntry = ({ entry, onDelete, handleTogglePublication }) => {
@@ -82,11 +101,13 @@ const PostEntry = ({ entry, onDelete, handleTogglePublication }) => {
           </p>
         </PostInfo>
         <Actions>
-          <button onClick={handleTogglePublication}>
+          <Action as="button" onClick={handleTogglePublication}>
             {entry.published ? "Unpublish" : "Publish"}
-          </button>
-          <Link to={`/editor/${entry.id}`}>Edit</Link>
-          <button onClick={onDelete}>delete</button>
+          </Action>
+          <Action to={`/editor/${entry.id}`}>Edit</Action>
+          <Action as="button" onClick={onDelete}>
+            Delete
+          </Action>
         </Actions>
       </Interior>
     </Container>
