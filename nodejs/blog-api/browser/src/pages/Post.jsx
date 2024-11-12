@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 
 import CommentSection from "../components/CommentSection";
@@ -46,24 +46,12 @@ const Content = styled.div`
 `;
 
 const Post = () => {
-  const { postId } = useParams();
-  const [post, setPost] = useState({});
+  const post = useLoaderData();
   const createdAt = dayjs(post?.createdAt).format("dddd, MMMM D, YYYY h:mm A");
   const updatedAt = dayjs(post?.updatedAt).format("YYYY-MM-DD");
   if (!post.headerPicture) post.headerPicture = "https://placehold.co/800x500";
 
-  useEffect(() => {
-    const url = `${API_URL}/posts/${postId}`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        return data;
-      })
-      .then((data) => setPost(data));
-  }, [postId]);
-
-  console.log(post.content);
-  return post.title ? (
+  return (
     <div>
       <PostContainer>
         <div id="imgContainer">
@@ -92,8 +80,6 @@ const Post = () => {
         ownerId={post.user.id}
       />
     </div>
-  ) : (
-    "Loading..."
   );
 };
 
