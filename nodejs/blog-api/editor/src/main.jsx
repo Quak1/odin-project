@@ -7,6 +7,7 @@ import Browser from "./pages/Browser.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import NewPost from "./pages/NewPost.jsx";
+import EditPost from "./pages/EditPost.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "new",
         element: <NewPost />,
+      },
+      {
+        path: "editor/:postId",
+        element: <EditPost />,
       },
     ],
   },

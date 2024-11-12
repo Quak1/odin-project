@@ -58,7 +58,11 @@ const PostForm = ({ callback, apiUrl, fetchConfig, post }) => {
     setError,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      published: post && post.published,
+    },
+  });
 
   async function onSubmit(formData) {
     formData.tags = formData.tags
@@ -98,7 +102,7 @@ const PostForm = ({ callback, apiUrl, fetchConfig, post }) => {
         <input
           id="title"
           type="text"
-          value={post && post.title}
+          defaultValue={post && post.title}
           {...register("title", { required: "Title is required." })}
         />
         {errors.title && <Error htmlFor="title">{errors.title.message}</Error>}
@@ -108,10 +112,8 @@ const PostForm = ({ callback, apiUrl, fetchConfig, post }) => {
         <input
           id="headerPicture"
           type="text"
-          value={post && post.headerPicture}
-          {...register("headerPicture", {
-            required: "Header picture is required.",
-          })}
+          defaultValue={post && post.headerPicture}
+          {...register("headerPicture")}
         />
         {errors.headerPicture && (
           <Error htmlFor="headerPicture">{errors.headerPicture.message}</Error>
@@ -122,7 +124,7 @@ const PostForm = ({ callback, apiUrl, fetchConfig, post }) => {
         <input
           id="tags"
           type="text"
-          value={post && post.tags}
+          defaultValue={post && post.tags.map((tag) => tag.name)}
           {...register("tags", { required: "Tags is required." })}
         />
         {errors.tags && <Error htmlFor="tags">{errors.tags.message}</Error>}
@@ -132,7 +134,7 @@ const PostForm = ({ callback, apiUrl, fetchConfig, post }) => {
         <textarea
           id="content"
           type="text"
-          value={post && post.content}
+          defaultValue={post && post.content}
           rows="15"
           {...register("content", { required: "Content is required." })}
         />
@@ -142,12 +144,7 @@ const PostForm = ({ callback, apiUrl, fetchConfig, post }) => {
       </div>
       <div>
         <Label htmlFor="published">Publish?</Label>
-        <input
-          id="published"
-          type="checkbox"
-          value={post && post.published}
-          {...register("published")}
-        />
+        <input id="published" type="checkbox" {...register("published")} />
         {errors.published && (
           <Error htmlFor="published">{errors.published.message}</Error>
         )}
@@ -181,13 +178,13 @@ PostForm.propTypes = {
     comments: PropTypes.arrayOf(
       PropTypes.exact({
         id: PropTypes.string,
+        postId: PropTypes.string,
+        content: PropTypes.string,
+        createdAt: PropTypes.string,
         user: PropTypes.exact({
           id: PropTypes.string,
           username: PropTypes.string,
         }),
-        postId: PropTypes.string,
-        content: PropTypes.string,
-        createdAt: PropTypes.string,
       }),
     ),
     user: PropTypes.exact({
