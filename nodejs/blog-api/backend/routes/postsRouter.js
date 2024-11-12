@@ -10,6 +10,11 @@ router.get("/", controller.getAllPosts);
 router.get("/:id", validateJwtOrNext, controller.getPostById);
 router.put("/:id", validateJWT, controller.updatePost);
 router.delete("/:id", validateJWT, controller.deletePost);
+router.patch(
+  "/:id/togglePublication",
+  validateJWT,
+  controller.togglePostPublication,
+);
 router.use("/:id/comments", commentsRouter);
 
 module.exports = router;

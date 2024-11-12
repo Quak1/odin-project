@@ -118,6 +118,13 @@ async function updatePost(id, post) {
   });
 }
 
+async function togglePostPublication(id, isPublished) {
+  return await prisma.post.update({
+    where: { id },
+    data: { published: !isPublished },
+  });
+}
+
 async function deletePost(id) {
   return await prisma.post.delete({
     where: { id },
@@ -188,6 +195,7 @@ module.exports = {
   getPostById,
   updatePost,
   deletePost,
+  togglePostPublication,
   postComment,
   getPostComments,
   getCommentById,

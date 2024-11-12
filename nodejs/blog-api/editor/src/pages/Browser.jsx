@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useOutletContext, Link } from "react-router-dom";
 
 import PostEntry from "../components/PostEntry";
-import { deletePost, getUserPosts } from "../utils";
+import { deletePost, getUserPosts, togglePostPublication } from "../utils";
 
 const Browser = () => {
   const [entries, setEntries] = useState(null);
@@ -24,6 +24,23 @@ const Browser = () => {
     setEntries(entries.filter((e) => entry.id !== e.id));
   };
 
+  const handleTogglePublication = (entry) => async () => {
+    const prefix = entry.published ? "un" : "";
+    const msg = `Are you sure you want to ${prefix}publish post with title: "${entry.title}"?`;
+    if (!confirm(msg)) return;
+
+    const res = await togglePostPublication(entry.id, user);
+    if (!res.ok)
+      return alert(`There was an error ${prefix}publishing this post`);
+
+    const newEntries = entries.map((oldEntry) =>
+      oldEntry.id !== entry.id
+        ? oldEntry
+        : { ...oldEntry, published: !oldEntry.published },
+    );
+    setEntries(newEntries);
+  };
+
   return (
     <div>
       <Link to="/new">New post!</Link>
@@ -36,6 +53,7 @@ const Browser = () => {
                 key={entry.id}
                 entry={entry}
                 onDelete={handleDelete(entry)}
+                handleTogglePublication={handleTogglePublication(entry)}
               />
             ))}
     </div>

@@ -57,10 +57,23 @@ const deletePost = asyncHandler(async (req, res) => {
   res.sendStatus(204);
 });
 
+const togglePostPublication = asyncHandler(async (req, res) => {
+  const postId = req.params.id;
+  const userId = req.user.id;
+  const post = await queries.getPostById(postId);
+
+  if (!post) return res.sendStatus(204);
+  if (userId !== post.user.id) throw new UnauthorizedError();
+
+  await queries.togglePostPublication(postId, post.published);
+  res.sendStatus(204);
+});
+
 module.exports = {
   createPost,
   getAllPosts,
   getPostById,
   updatePost,
   deletePost,
+  togglePostPublication,
 };

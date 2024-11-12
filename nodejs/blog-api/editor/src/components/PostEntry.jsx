@@ -56,7 +56,7 @@ const Actions = styled.div`
   text-align: center;
 `;
 
-const PostEntry = ({ entry, onDelete }) => {
+const PostEntry = ({ entry, onDelete, handleTogglePublication }) => {
   const commentCount = entry._count.comments;
   const createdAt = formatDate(entry.createdAt);
   const updatedAt = formatDate(entry.updatedAt);
@@ -82,7 +82,9 @@ const PostEntry = ({ entry, onDelete }) => {
           </p>
         </PostInfo>
         <Actions>
-          <button>{entry.published ? "Unpublish" : "Publish"}</button>
+          <button onClick={handleTogglePublication}>
+            {entry.published ? "Unpublish" : "Publish"}
+          </button>
           <Link to={`/editor/${entry.id}`}>Edit</Link>
           <button onClick={onDelete}>delete</button>
         </Actions>
@@ -113,6 +115,7 @@ PostEntry.propTypes = {
     }),
   }),
   onDelete: PropTypes.func,
+  handleTogglePublication: PropTypes.func,
 };
 
 export default PostEntry;

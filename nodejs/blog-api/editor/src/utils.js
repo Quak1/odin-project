@@ -50,6 +50,19 @@ const getUserPost = async (postId, user) => {
   }
 };
 
+const togglePostPublication = async (postId, user) => {
+  try {
+    const url = `${API_URL}/posts/${postId}/togglePublication`;
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${user.token}` },
+      method: "PATCH",
+    });
+    return res;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export {
   getUserInfo,
   setUserInfo,
@@ -58,4 +71,5 @@ export {
   getUserPosts,
   getUserPost,
   deletePost,
+  togglePostPublication,
 };
