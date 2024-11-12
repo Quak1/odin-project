@@ -11,7 +11,7 @@ const { errorHandler } = require("./controllers/middleware");
 const app = express();
 app.use(express.json());
 require("./config/passport");
-app.use(cors());
+app.use(cors({ origin: JSON.parse(process.env.ORIGINS) }));
 
 // Routes
 app.get("/", (req, res) => res.sendStatus(200));
