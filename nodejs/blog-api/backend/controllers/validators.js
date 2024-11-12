@@ -50,7 +50,7 @@ const postValidator = [
   body("headerPicture")
     .isURL()
     .withMessage("Header picture must be a valid URL.")
-    .optional(),
+    .optional({ values: "falsy" }),
   body("tags")
     .isArray()
     .withMessage("Tags must be formated as an array of strings.")
