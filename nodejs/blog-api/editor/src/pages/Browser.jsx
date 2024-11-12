@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext, Link } from "react-router-dom";
 
 import PostEntry from "../components/PostEntry";
 import { deletePost, getUserPosts } from "../utils";
@@ -26,6 +26,7 @@ const Browser = () => {
 
   return (
     <div>
+      <Link to="/new">New post!</Link>
       {!entries
         ? "Loading..."
         : !entries.length

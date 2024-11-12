@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import Browser from "./pages/Browser.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
+import NewPost from "./pages/NewPost.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup />,
+      },
+      {
+        path: "new",
+        element: <NewPost />,
       },
     ],
   },
