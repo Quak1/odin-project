@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { BROWSER_URL } from "../utils";
 
 const Nav = styled.nav`
   display: flex;
@@ -13,6 +14,11 @@ const Nav = styled.nav`
     color: ${(props) => props.theme.main};
     a {
       text-decoration: none;
+      display: block;
+    }
+    a:last-child {
+      font-size: 16px;
+      text-decoration: underline;
     }
   }
 
@@ -42,6 +48,7 @@ const Header = ({ user, logout }) => {
     <Nav>
       <p>
         <Link to="/">Post Editor</Link>
+        <a href={BROWSER_URL}>Post browser</a>
       </p>
       <ul>
         {user ? (

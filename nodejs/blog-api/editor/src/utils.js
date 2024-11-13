@@ -1,5 +1,6 @@
 const KEY = "userInfo";
 const API_URL = import.meta.env.VITE_BACKEND_URL;
+const BROWSER_URL = import.meta.env.VITE_BROWSER_URL;
 
 const setUserInfo = (id, username, token) => {
   localStorage.setItem(KEY, JSON.stringify({ id, username, token }));
@@ -68,6 +69,7 @@ export {
   setUserInfo,
   clearUserInfo,
   API_URL,
+  BROWSER_URL,
   getUserPosts,
   getUserPost,
   deletePost,
