@@ -3,7 +3,9 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "dev": "node --watch app.js"
+        "dev": "node --watch app.js",
+        "populate": "node ./src/populateDb.js",
+        "start": "NODE_ENV=production node app.js"
     },
     "keywords": [],
     "author": "",
