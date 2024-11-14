@@ -1,0 +1,23 @@
+body {
+  margin: 10px 0;
+  font-family: sans-serif;
+}
+
+canvas {
+  width: 100%;
+}
+
+#selector {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+#name {
+  position: fixed;
+  top: 0;
+  right: 0;
+  font-weight: bold;
+  font-size: 34px;
+  background-color: black;
+  color: white;
+}
