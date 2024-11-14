@@ -1,43 +1,3 @@
-const maps = [
-  {
-    id: 1,
-    name: "Pokemon",
-    url: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2b67f731-a21c-4ac8-8a91-65beb31ef176/d3fvvj8-baf84b8f-e86d-4ce2-8548-6bb5ba4908b4.jpg/v1/fill/w_1600,h_2300,q_75,strp/gotta_catch__em_all___649__pokemon_poster_by_viking011_d3fvvj8-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzJiNjdmNzMxLWEyMWMtNGFjOC04YTkxLTY1YmViMzFlZjE3NlwvZDNmdnZqOC1iYWY4NGI4Zi1lODZkLTRjZTItODU0OC02YmI1YmE0OTA4YjQuanBnIiwiaGVpZ2h0IjoiPD0yMzAwIiwid2lkdGgiOiI8PTE2MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uud2F0ZXJtYXJrIl0sIndtayI6eyJwYXRoIjoiXC93bVwvMmI2N2Y3MzEtYTIxYy00YWM4LThhOTEtNjViZWIzMWVmMTc2XC92aWtpbmcwMTEtNC5wbmciLCJvcGFjaXR5Ijo5NSwicHJvcG9ydGlvbnMiOjAuNDUsImdyYXZpdHkiOiJjZW50ZXIifX0.5wSVOdWFRb51PKlAQJFHLZJA6QEjbw6T6DXNl5riW4g",
-  },
-  {
-    id: 2,
-    name: "test",
-    url: "testurl",
-  },
-];
-
-const tags = {
-  1: [
-    {
-      name: "test",
-      x: 0,
-      y: 0,
-      w: 100,
-      h: 100,
-    },
-    {
-      name: "test2",
-
-      x: 300,
-      y: 300,
-      w: 200,
-      h: 100,
-    },
-    {
-      name: "supa",
-      x: 0,
-      y: 500,
-      w: 2300,
-      h: 100,
-    },
-  ],
-};
-
 const select = document.getElementById("mapSelect");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
@@ -45,6 +5,7 @@ const goBtn = document.getElementById("goBtn");
 const nameDiv = document.getElementById("name");
 const img = new Image();
 let currentTags;
+let currentMapId;
 let startX;
 let startY;
 let isDrawing = false;
@@ -65,6 +26,8 @@ document.addEventListener("keydown", (e) => {
 });
 
 async function getMaps() {
+  const res = await fetch("/maps");
+  const maps = await res.json();
   return maps;
 }
 
@@ -80,11 +43,21 @@ async function loadMaps() {
 }
 
 async function setMapTags(mapId) {
-  currentTags = tags[mapId];
+  const res = await fetch("/maps/" + mapId);
+  const tags = await res.json();
+  currentTags = tags;
+  currentMapId = mapId;
 }
 
 async function saveTag(tag) {
-  currentTags.push(tag);
+  const res = await fetch("/maps/" + currentMapId, {
+    method: "POST",
+    body: JSON.stringify(tag),
+    headers: { "Content-Type": "application/json" },
+  });
+  const newTag = await res.json();
+  currentTags.push(newTag);
+  draw();
 }
 
 async function handleGo() {
