@@ -1,3 +1,4 @@
+const range = document.getElementById("range");
 const select = document.getElementById("mapSelect");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
@@ -23,6 +24,10 @@ document.addEventListener("keydown", (e) => {
     isDrawing = false;
     draw();
   }
+});
+range.addEventListener("input", (e) => {
+  canvas.style.width = `${img.width * Number(range.value)}px`;
+  canvas.style.height = `${img.height * Number(range.value)}px`;
 });
 
 async function getMaps() {
