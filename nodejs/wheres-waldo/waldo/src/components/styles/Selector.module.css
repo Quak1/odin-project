@@ -1,0 +1,24 @@
+.selector {
+  position: absolute;
+}
+
+.entry {
+  display: flex;
+  background-color: red;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 3px 8px;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+
+  p {
+    font-weight: bold;
+  }
+}
+
+.entry:hover {
+  filter: brightness(55%);
+}
