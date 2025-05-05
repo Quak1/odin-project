@@ -1,14 +1,16 @@
 import { useState } from "react";
 
+import styles from "./styles/Game.module.css";
+
 import Selector from "./Selector";
 import Map from "./Map";
-import styles from "./styles/Game.module.css";
+import Header from "./Header";
 
 // 1600 x 2300
 const mapUrl =
   "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2b67f731-a21c-4ac8-8a91-65beb31ef176/d3fvvj8-baf84b8f-e86d-4ce2-8548-6bb5ba4908b4.jpg/v1/fill/w_1600,h_2300,q_75,strp/gotta_catch__em_all___649__pokemon_poster_by_viking011_d3fvvj8-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzJiNjdmNzMxLWEyMWMtNGFjOC04YTkxLTY1YmViMzFlZjE3NlwvZDNmdnZqOC1iYWY4NGI4Zi1lODZkLTRjZTItODU0OC02YmI1YmE0OTA4YjQuanBnIiwiaGVpZ2h0IjoiPD0yMzAwIiwid2lkdGgiOiI8PTE2MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uud2F0ZXJtYXJrIl0sIndtayI6eyJwYXRoIjoiXC93bVwvMmI2N2Y3MzEtYTIxYy00YWM4LThhOTEtNjViZWIzMWVmMTc2XC92aWtpbmcwMTEtNC5wbmciLCJvcGFjaXR5Ijo5NSwicHJvcG9ydGlvbnMiOjAuNDUsImdyYXZpdHkiOiJjZW50ZXIifX0.5wSVOdWFRb51PKlAQJFHLZJA6QEjbw6T6DXNl5riW4g";
 
-const chars = [
+const initialChars = [
   {
     id: 1,
     name: "Lapras",
@@ -35,21 +37,32 @@ const positions = [
 const Game = () => {
   const [selectorPos, setSelectorPos] = useState(null);
   const [naturalPos, setNaturalPos] = useState(null);
-
-  const onClick = (e) => {
-    if (selectorPos) setSelectorPos(null);
-    else setSelectorPos({ top: e.pageY, left: e.pageX });
-  };
+  const [chars, setChars] = useState(initialChars);
 
   const selectorOnClick = (char) => {
     return (e) => {
       e.stopPropagation();
       setSelectorPos(null);
+
       console.log(isSelected(char));
+
+      const charId = char.id;
+      if (isSelected(char))
+        setChars(
+          chars.map((char) => {
+            if (char.id === charId) return { ...char, found: true };
+            else return char;
+          }),
+        );
     };
   };
 
   const mapOnClick = (e) => {
+    if (selectorPos) {
+      setSelectorPos(null);
+      return;
+    }
+
     const img = e.target;
     const x = Math.round(
       (img.naturalWidth / img.offsetWidth) * e.nativeEvent.offsetX,
@@ -59,6 +72,7 @@ const Game = () => {
     );
 
     setNaturalPos({ x, y });
+    setSelectorPos({ top: e.pageY, left: e.pageX });
     console.log(`(${x}, ${y})`);
   };
 
@@ -76,8 +90,8 @@ const Game = () => {
   };
 
   return (
-    <div className={styles.game} onClick={onClick}>
-      <div className={styles.space}></div>
+    <div className={styles.game}>
+      <Header characters={chars} />
       <Map imageUrl={mapUrl} onClick={mapOnClick} />
       {selectorPos && (
         <Selector
