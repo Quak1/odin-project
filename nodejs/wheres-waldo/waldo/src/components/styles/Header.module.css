@@ -1,11 +1,16 @@
 .header {
   position: sticky;
   display: flex;
-  gap: 2px;
-  justify-content: center;
+  justify-content: space-evenly;
 
   top: 0;
   user-select: none;
+  z-index: 1;
+}
+
+.container {
+  display: flex;
+  gap: 5px;
 }
 
 .entry {

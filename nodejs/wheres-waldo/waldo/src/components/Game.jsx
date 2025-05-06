@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./styles/Game.module.css";
 
@@ -38,6 +38,26 @@ const Game = () => {
   const [selectorPos, setSelectorPos] = useState(null);
   const [naturalPos, setNaturalPos] = useState(null);
   const [chars, setChars] = useState(initialChars);
+  const [timerSeconds, setTimerSeconds] = useState(0);
+  const [timerId, setTimerId] = useState(null);
+
+  useEffect(() => {
+    const timerStart = Date.now();
+    const interval = setInterval(() => {
+      setTimerSeconds(Math.floor((Date.now() - timerStart) / 1000));
+    }, 1000);
+    setTimerId(interval);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const allFound = chars.every((char) => char.found);
+    if (allFound && timerId) {
+      clearInterval(timerId);
+      setTimerId(null);
+    }
+  }, [chars]);
 
   const selectorOnClick = (char) => {
     return (e) => {
@@ -91,7 +111,7 @@ const Game = () => {
 
   return (
     <div className={styles.game}>
-      <Header characters={chars} />
+      <Header characters={chars} elapsed={timerSeconds} />
       <Map imageUrl={mapUrl} onClick={mapOnClick} />
       {selectorPos && (
         <Selector
