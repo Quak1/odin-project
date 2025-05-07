@@ -1,8 +1,8 @@
 import styles from "./styles/Timer.module.css";
 
 const Timer = ({ elapsed }) => {
-  const minutes = Math.floor(elapsed / 60);
-  const seconds = elapsed % 60;
+  const minutes = Math.floor(elapsed / 60 / 1000);
+  const seconds = Math.floor(elapsed / 1000) % 60;
 
   return (
     <div className={styles.timer}>

@@ -38,14 +38,14 @@ const Game = () => {
   const [selectorPos, setSelectorPos] = useState(null);
   const [naturalPos, setNaturalPos] = useState(null);
   const [chars, setChars] = useState(initialChars);
-  const [timerSeconds, setTimerSeconds] = useState(0);
+  const [timerMillis, setTimerMillis] = useState(0);
   const [timerId, setTimerId] = useState(null);
 
   useEffect(() => {
     const timerStart = Date.now();
     const interval = setInterval(() => {
-      setTimerSeconds(Math.floor((Date.now() - timerStart) / 1000));
-    }, 1000);
+      setTimerMillis(Date.now() - timerStart);
+    }, 100);
     setTimerId(interval);
 
     return () => clearInterval(interval);
@@ -111,7 +111,7 @@ const Game = () => {
 
   return (
     <div className={styles.game}>
-      <Header characters={chars} elapsed={timerSeconds} />
+      <Header characters={chars} elapsed={timerMillis} />
       <Map imageUrl={mapUrl} onClick={mapOnClick} />
       {selectorPos && (
         <Selector
