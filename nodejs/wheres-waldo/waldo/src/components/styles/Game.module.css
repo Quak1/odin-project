@@ -7,3 +7,7 @@
   height: 200px;
   background-color: black;
 }
+
+.mapContainer {
+  position: relative;
+}

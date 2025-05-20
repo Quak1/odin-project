@@ -5,10 +5,15 @@ import styles from "./styles/Game.module.css";
 import Selector from "./Selector";
 import Map from "./Map";
 import Header from "./Header";
+import FoundMarker from "./FoundMarker";
 
 // 1600 x 2300
-const mapUrl =
-  "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2b67f731-a21c-4ac8-8a91-65beb31ef176/d3fvvj8-baf84b8f-e86d-4ce2-8548-6bb5ba4908b4.jpg/v1/fill/w_1600,h_2300,q_75,strp/gotta_catch__em_all___649__pokemon_poster_by_viking011_d3fvvj8-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzJiNjdmNzMxLWEyMWMtNGFjOC04YTkxLTY1YmViMzFlZjE3NlwvZDNmdnZqOC1iYWY4NGI4Zi1lODZkLTRjZTItODU0OC02YmI1YmE0OTA4YjQuanBnIiwiaGVpZ2h0IjoiPD0yMzAwIiwid2lkdGgiOiI8PTE2MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uud2F0ZXJtYXJrIl0sIndtayI6eyJwYXRoIjoiXC93bVwvMmI2N2Y3MzEtYTIxYy00YWM4LThhOTEtNjViZWIzMWVmMTc2XC92aWtpbmcwMTEtNC5wbmciLCJvcGFjaXR5Ijo5NSwicHJvcG9ydGlvbnMiOjAuNDUsImdyYXZpdHkiOiJjZW50ZXIifX0.5wSVOdWFRb51PKlAQJFHLZJA6QEjbw6T6DXNl5riW4g";
+const map = {
+  name: "Pokemon",
+  w: 1600,
+  h: 2300,
+  url: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2b67f731-a21c-4ac8-8a91-65beb31ef176/d3fvvj8-baf84b8f-e86d-4ce2-8548-6bb5ba4908b4.jpg/v1/fill/w_1600,h_2300,q_75,strp/gotta_catch__em_all___649__pokemon_poster_by_viking011_d3fvvj8-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzJiNjdmNzMxLWEyMWMtNGFjOC04YTkxLTY1YmViMzFlZjE3NlwvZDNmdnZqOC1iYWY4NGI4Zi1lODZkLTRjZTItODU0OC02YmI1YmE0OTA4YjQuanBnIiwiaGVpZ2h0IjoiPD0yMzAwIiwid2lkdGgiOiI8PTE2MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uud2F0ZXJtYXJrIl0sIndtayI6eyJwYXRoIjoiXC93bVwvMmI2N2Y3MzEtYTIxYy00YWM4LThhOTEtNjViZWIzMWVmMTc2XC92aWtpbmcwMTEtNC5wbmciLCJvcGFjaXR5Ijo5NSwicHJvcG9ydGlvbnMiOjAuNDUsImdyYXZpdHkiOiJjZW50ZXIifX0.5wSVOdWFRb51PKlAQJFHLZJA6QEjbw6T6DXNl5riW4g",
+};
 
 const initialChars = [
   {
@@ -29,9 +34,9 @@ const initialChars = [
 ];
 
 const positions = [
-  { id: 1, name: "Lapras", x: 906, y: 227, w: 84, h: 177 },
-  { id: 2, name: "Grotle", x: 224, y: 1, w: 88, h: 75 },
-  { id: 3, name: "Bayleef", x: 119, y: 230, w: 78, h: 73 },
+  { id: 1, name: "Lapras", x1: 906, y1: 227, x2: 990, y2: 404 },
+  { id: 2, name: "Grotle", x1: 224, y1: 1, x2: 332, y2: 76 },
+  { id: 3, name: "Bayleef", x1: 119, y1: 230, x2: 197, y2: 303 },
 ];
 
 const Game = () => {
@@ -45,7 +50,7 @@ const Game = () => {
     const timerStart = Date.now();
     const interval = setInterval(() => {
       setTimerMillis(Date.now() - timerStart);
-    }, 100);
+    }, 1000);
     setTimerId(interval);
 
     return () => clearInterval(interval);
@@ -67,10 +72,19 @@ const Game = () => {
       console.log(isSelected(char));
 
       const charId = char.id;
-      if (isSelected(char))
+      const charPos = isSelected(char);
+      if (charPos)
         setChars(
           chars.map((char) => {
-            if (char.id === charId) return { ...char, found: true };
+            if (char.id === charId)
+              return {
+                ...char,
+                found: true,
+                x: charPos.x1,
+                y: charPos.y1,
+                w: charPos.x2 - charPos.x1,
+                h: charPos.y2 - charPos.y1,
+              };
             else return char;
           }),
         );
@@ -101,18 +115,27 @@ const Game = () => {
 
     if (!charPos) return false;
 
-    return (
-      naturalPos.x >= charPos.x &&
-      naturalPos.x <= charPos.x + charPos.w &&
-      naturalPos.y >= charPos.y &&
-      naturalPos.y <= charPos.y + charPos.h
-    );
+    if (
+      naturalPos.x >= charPos.x1 &&
+      naturalPos.x <= charPos.x2 &&
+      naturalPos.y >= charPos.y1 &&
+      naturalPos.y <= charPos.y2
+    )
+      return charPos;
+    else return null;
   };
 
   return (
     <div className={styles.game}>
       <Header characters={chars} elapsed={timerMillis} />
-      <Map imageUrl={mapUrl} onClick={mapOnClick} />
+      <div className={styles.mapContainer}>
+        {chars
+          .filter((char) => char.found)
+          .map((char) => (
+            <FoundMarker char={char} map={map} key={char.id} />
+          ))}
+        <Map imageUrl={map.url} onClick={mapOnClick} />
+      </div>
       {selectorPos && (
         <Selector
           characters={chars}

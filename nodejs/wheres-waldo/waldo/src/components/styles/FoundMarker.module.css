@@ -1,0 +1,6 @@
+.marker {
+  position: absolute;
+  background-color: #3c3c3c;
+  box-shadow: #3c3c3c 0 0 10px 10px;
+  opacity: 80%;
+}
