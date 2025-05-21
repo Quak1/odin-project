@@ -1,3 +1,5 @@
+const { matchedData } = require("express-validator");
+
 const queries = require("../prisma/queries");
 
 const getMaps = async (_, res) => {
@@ -7,16 +9,15 @@ const getMaps = async (_, res) => {
 };
 
 const getRandomChars = async (req, res) => {
-  const mapId = req.params.id;
-  const n = req.query.chars;
+  const { mapId, n } = matchedData(req);
 
-  const chars = await queries.getRandomCharacters(Number(mapId), Number(n));
+  const chars = await queries.getRandomCharacters(mapId, n);
+
   res.status(200).json(chars);
 };
 
 const checkTag = async (req, res) => {
-  const { mapId, charId } = req.params;
-  const { x, y } = req.query;
+  const { mapId, charId, x, y } = matchedData(req);
 
   const tag = await queries.isTagValid(mapId, charId, x, y);
 

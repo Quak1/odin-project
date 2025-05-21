@@ -12,8 +12,10 @@ async function getRandomCharacters(mapId, n) {
 async function isTagValid(mapId, charId, x, y) {
   const tag = await prisma.tag.findUnique({
     where: {
-      map_id: mapId,
-      character_id: charId,
+      character_id_map_id: {
+        map_id: mapId,
+        character_id: charId,
+      },
     },
   });
 
