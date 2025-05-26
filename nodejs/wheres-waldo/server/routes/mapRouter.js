@@ -10,6 +10,10 @@ const {
 // Get maps info
 router.get("/", controller.getMaps);
 
+router.get("/session", (req, res) => {
+  res.status(200).json(req.session);
+});
+
 // Generate random chars
 router.get(
   "/:mapId",
@@ -29,6 +33,6 @@ router.get(
 );
 
 // Check if player is done
-// router.get("/:id/done", () => {});
+router.get("/:mapId/done", controller.isDone);
 
 module.exports = router;
