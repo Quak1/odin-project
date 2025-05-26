@@ -1,7 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 
 const mapRouter = require("./routes/mapRouter");
+const sessionConfig = require("./config/session");
+
+app.use(sessionConfig);
 
 app.get("/", (_, res) => {
   res.send("Hello World!");

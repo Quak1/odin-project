@@ -34,6 +34,7 @@ async function getMapsInfo() {
 }
 
 module.exports = {
+  prismaClient: prisma,
   getRandomCharacters,
   isTagValid,
   getMapsInfo,
