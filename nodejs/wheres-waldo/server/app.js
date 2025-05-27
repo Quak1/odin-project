@@ -4,7 +4,9 @@ const app = express();
 
 const mapRouter = require("./routes/mapRouter");
 const sessionConfig = require("./config/session");
+const corsConfig = require("./config/cors");
 
+app.use(corsConfig);
 app.use(sessionConfig);
 
 app.get("/", (_, res) => {
