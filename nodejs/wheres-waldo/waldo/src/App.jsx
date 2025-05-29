@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <MapSelector maps={mapList} setMap={setMap} />
-      {map && <Game />}
+      {map && <Game map={map} />}
     </>
   );
 }

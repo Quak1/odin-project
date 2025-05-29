@@ -1,25 +1,39 @@
+import { useRef, useEffect } from "react";
+import styles from "./styles/MapSelector.module.css";
+
 const MapSelector = ({ maps, setMap }) => {
-  console.log("MapSelector", maps);
+  const modal = useRef(null);
+
+  useEffect(() => {
+    modal.current.showModal();
+  }, []);
+
+  const chooseMap = (map) => {
+    setMap(map);
+    modal.current.close();
+  };
 
   return (
-    <div>
+    <dialog className={styles.container} ref={modal}>
       <h1>Welcome!</h1>
-      <p>Choose a map to play:</p>
+      <p>Choose a map:</p>
       {maps && (
-        <div>
+        <div className={styles.cardContainer}>
           {maps.map((map) => (
-            <MapCard map={map} />
+            <MapCard map={map} key={map.id} buttonClick={chooseMap} />
           ))}
         </div>
       )}
-    </div>
+    </dialog>
   );
 };
 
-const MapCard = ({ map }) => (
-  <div key={map.id}>
-    <img src={map.url} alt={`${map.name}`} />
-    <p>{map.name}</p>
+const MapCard = ({ map, buttonClick }) => (
+  <div className={styles.card}>
+    <div className={styles.imageContainer}>
+      <img src={map.url} alt={map.name} />
+    </div>
+    <button onClick={() => buttonClick(map)}>{map.name}</button>
   </div>
 );
 
