@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 
 import styles from "./styles/Game.module.css";
 import { API_URL } from "../config/constants";
+import useTimer from "../hooks/useTimer";
 
 import Selector from "./Selector";
 import Map from "./Map";
@@ -10,57 +11,43 @@ import FoundMarker from "./FoundMarker";
 
 const Game = ({ map }) => {
   const [selectorPos, setSelectorPos] = useState(null);
-  const naturalPosRef = useRef(null);
   const [chars, setChars] = useState([]);
-  const [timerMillis, setTimerMillis] = useState(0);
-  const timerIdRef = useRef(null);
+  const startTime = useRef(0);
+  const naturalPosRef = useRef(null);
+  const { elapsed: timerMillis, stop: stopTimer } = useTimer(startTime.current);
 
   useEffect(() => {
     fetch(`${API_URL}/map/${map.id}?n=2`, { credentials: "include" })
       .then((res) => res.json())
       .then((data) => {
         setChars(data.chars);
-
-        if (timerIdRef.current) clearInterval(timerIdRef.current);
-        timerIdRef.current = setInterval(() => {
-          setTimerMillis(Date.now() - data.start);
-        }, 1000);
+        startTime.current = data.start;
       });
-
-    return () => {
-      if (timerIdRef.current) {
-        clearInterval(timerIdRef.current);
-        timerIdRef.current = null;
-      }
-    };
   }, []);
 
-  useEffect(() => {
-    const allFound = chars.every((char) => char.found);
-    if (allFound && timerIdRef.current) {
-      clearInterval(timerIdRef.current);
-      timerIdRef.current = null;
-    }
-  }, [chars]);
-
-  const selectorOnClick = (char) => {
+  const selectorOnClick = (clickChar) => {
     return async (e) => {
       e.stopPropagation();
       setSelectorPos(null);
 
-      const charId = char.id;
-      const charPos = await isSelected(char);
+      const charPos = await isSelected(clickChar);
+
       if (charPos.found)
-        setChars(
-          chars.map((char) => {
-            if (char.id === charId)
+        setChars((prevChars) => {
+          const updatedChars = prevChars.map((char) => {
+            if (char.id === clickChar.id)
               return {
                 ...char,
                 ...charPos,
               };
             else return char;
-          }),
-        );
+          });
+
+          const allFound = updatedChars.every((char) => char.found);
+          if (allFound) stopTimer();
+
+          return updatedChars;
+        });
     };
   };
 
@@ -80,7 +67,6 @@ const Game = ({ map }) => {
 
     naturalPosRef.current = { x, y };
     setSelectorPos({ top: e.pageY, left: e.pageX });
-    console.log(`(${x}, ${y})`);
   };
 
   const isSelected = async (char) => {
