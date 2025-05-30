@@ -4,7 +4,7 @@ import Game from "./components/Game";
 import MapSelector from "./components/MapSelector";
 
 import "./styles.module.css";
-import fetchData from "./config/fetchData";
+import { fetchData } from "./utils";
 
 function App() {
   const [mapList, setMapList] = useState(null);

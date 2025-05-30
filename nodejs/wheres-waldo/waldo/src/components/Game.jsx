@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { ToastContainer, toast, Slide } from "react-toastify";
 
 import styles from "./styles/Game.module.css";
-import fetchData from "../config/fetchData";
+import { fetchData } from "../utils";
 import useTimer from "../hooks/useTimer";
 
 import Selector from "./Selector";
