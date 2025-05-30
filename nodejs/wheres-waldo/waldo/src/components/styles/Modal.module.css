@@ -1,0 +1,27 @@
+.container {
+  max-width: 500px;
+  text-align: center;
+
+  > p {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  button {
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: #eee;
+    border: 2px black solid;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+
+    &:active {
+      filter: brightness(0.7);
+    }
+  }
+}

@@ -9,6 +9,7 @@ import Selector from "./Selector";
 import Map from "./Map";
 import Header from "./Header";
 import FoundMarker from "./FoundMarker";
+import WinScreen from "./WinScreen";
 
 const Game = ({ map, reset }) => {
   const [selectorPos, setSelectorPos] = useState(null);
@@ -16,6 +17,7 @@ const Game = ({ map, reset }) => {
   const startTime = useRef(0);
   const naturalPosRef = useRef(null);
   const { elapsed: timerMillis, stop: stopTimer } = useTimer(startTime.current);
+  const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
     fetchData(`map/${map.id}?n=2`).then((data) => {
@@ -56,7 +58,7 @@ const Game = ({ map, reset }) => {
 
           const allFound = updatedChars.every((char) => char.found);
           if (allFound) {
-            reset();
+            setGameOver(true);
             stopTimer();
           }
 
@@ -112,6 +114,7 @@ const Game = ({ map, reset }) => {
           onClick={selectorOnClick}
         />
       )}
+      {gameOver && <WinScreen map={map} elapsed={timerMillis} reset={reset} />}
       <ToastContainer />
     </div>
   );

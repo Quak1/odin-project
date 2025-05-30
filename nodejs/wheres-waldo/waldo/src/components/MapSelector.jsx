@@ -1,4 +1,6 @@
 import { useRef, useEffect } from "react";
+
+import modalStyles from "./styles/Modal.module.css";
 import styles from "./styles/MapSelector.module.css";
 
 const MapSelector = ({ maps, setMap }) => {
@@ -14,7 +16,7 @@ const MapSelector = ({ maps, setMap }) => {
   };
 
   return (
-    <dialog className={styles.container} ref={modal}>
+    <dialog className={modalStyles.container} ref={modal}>
       <h1>Welcome!</h1>
       <p>Choose a map:</p>
       {maps && (
