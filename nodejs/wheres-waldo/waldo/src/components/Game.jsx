@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { ToastContainer, toast, Slide } from "react-toastify";
 
 import styles from "./styles/Game.module.css";
 import { API_URL } from "../config/constants";
@@ -25,6 +26,18 @@ const Game = ({ map }) => {
       });
   }, []);
 
+  const notify = (msg, type = "success") => {
+    toast(msg, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      transition: Slide,
+      className: styles.toast,
+      type: type,
+    });
+  };
+
   const selectorOnClick = (clickChar) => {
     return async (e) => {
       e.stopPropagation();
@@ -32,7 +45,7 @@ const Game = ({ map }) => {
 
       const charPos = await isSelected(clickChar);
 
-      if (charPos.found)
+      if (charPos.found) {
         setChars((prevChars) => {
           const updatedChars = prevChars.map((char) => {
             if (char.id === clickChar.id)
@@ -48,6 +61,10 @@ const Game = ({ map }) => {
 
           return updatedChars;
         });
+        notify(`You found ${clickChar.name}!`, "success");
+      } else {
+        notify(`That's not ${clickChar.name}. Keep looking!`, "error");
+      }
     };
   };
 
@@ -96,6 +113,7 @@ const Game = ({ map }) => {
           onClick={selectorOnClick}
         />
       )}
+      <ToastContainer />
     </div>
   );
 };

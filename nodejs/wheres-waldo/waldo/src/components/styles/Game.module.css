@@ -12,3 +12,7 @@
   position: relative;
   line-height: 0;
 }
+
+.toast {
+  color: black;
+}
