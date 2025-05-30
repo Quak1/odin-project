@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { ToastContainer, toast, Slide } from "react-toastify";
 
 import styles from "./styles/Game.module.css";
-import { API_URL } from "../config/constants";
+import fetchData from "../config/fetchData";
 import useTimer from "../hooks/useTimer";
 
 import Selector from "./Selector";
@@ -18,12 +18,10 @@ const Game = ({ map, reset }) => {
   const { elapsed: timerMillis, stop: stopTimer } = useTimer(startTime.current);
 
   useEffect(() => {
-    fetch(`${API_URL}/map/${map.id}?n=2`, { credentials: "include" })
-      .then((res) => res.json())
-      .then((data) => {
-        setChars(data.chars);
-        startTime.current = data.start;
-      });
+    fetchData(`map/${map.id}?n=2`).then((data) => {
+      setChars(data.chars);
+      startTime.current = data.start;
+    });
   }, []);
 
   const notify = (msg, type = "success") => {
@@ -90,12 +88,10 @@ const Game = ({ map, reset }) => {
   };
 
   const isSelected = async (char) => {
-    const res = await fetch(
-      `${API_URL}/map/${map.id}/char/${char.id}/tag?x=${naturalPosRef.current.x}&y=${naturalPosRef.current.y}`,
+    return await fetchData(
+      `map/${map.id}/char/${char.id}/tag?x=${naturalPosRef.current.x}&y=${naturalPosRef.current.y}`,
       { credentials: "include" },
     );
-    const found = await res.json();
-    return found;
   };
 
   return (

@@ -4,7 +4,7 @@ import Game from "./components/Game";
 import MapSelector from "./components/MapSelector";
 
 import "./styles.module.css";
-import { API_URL } from "./config/constants";
+import fetchData from "./config/fetchData";
 
 function App() {
   const [mapList, setMapList] = useState(null);
@@ -15,9 +15,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetch(`${API_URL}/map`)
-      .then((res) => res.json())
-      .then((data) => setMapList(data));
+    fetchData(`map`).then((data) => setMapList(data));
   }, []);
 
   return (
