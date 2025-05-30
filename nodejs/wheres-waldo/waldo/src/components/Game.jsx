@@ -10,7 +10,7 @@ import Map from "./Map";
 import Header from "./Header";
 import FoundMarker from "./FoundMarker";
 
-const Game = ({ map }) => {
+const Game = ({ map, reset }) => {
   const [selectorPos, setSelectorPos] = useState(null);
   const [chars, setChars] = useState([]);
   const startTime = useRef(0);
@@ -57,7 +57,10 @@ const Game = ({ map }) => {
           });
 
           const allFound = updatedChars.every((char) => char.found);
-          if (allFound) stopTimer();
+          if (allFound) {
+            reset();
+            stopTimer();
+          }
 
           return updatedChars;
         });
