@@ -1,82 +1,62 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import styles from "./styles/Game.module.css";
+import { API_URL } from "../config/constants";
 
 import Selector from "./Selector";
 import Map from "./Map";
 import Header from "./Header";
 import FoundMarker from "./FoundMarker";
 
-const initialChars = [
-  {
-    id: 1,
-    name: "Lapras",
-    img: "https://img.pokemondb.net/sprites/black-white/normal/lapras.png",
-  },
-  {
-    id: 2,
-    name: "Grotle",
-    img: "https://img.pokemondb.net/sprites/black-white/normal/grotle.png",
-  },
-  {
-    id: 3,
-    name: "Bayleef",
-    img: "https://img.pokemondb.net/sprites/black-white/normal/bayleef.png",
-  },
-];
-
-const positions = [
-  { id: 1, name: "Lapras", x1: 906, y1: 227, x2: 990, y2: 404 },
-  { id: 2, name: "Grotle", x1: 224, y1: 1, x2: 332, y2: 76 },
-  { id: 3, name: "Bayleef", x1: 119, y1: 230, x2: 197, y2: 303 },
-];
-
 const Game = ({ map }) => {
   const [selectorPos, setSelectorPos] = useState(null);
-  const [naturalPos, setNaturalPos] = useState(null);
-  const [chars, setChars] = useState(initialChars);
+  const naturalPosRef = useRef(null);
+  const [chars, setChars] = useState([]);
   const [timerMillis, setTimerMillis] = useState(0);
-  const [timerId, setTimerId] = useState(null);
+  const timerIdRef = useRef(null);
 
-  console.log("Game", map);
   useEffect(() => {
-    const timerStart = Date.now();
-    const interval = setInterval(() => {
-      setTimerMillis(Date.now() - timerStart);
-    }, 1000);
-    setTimerId(interval);
+    fetch(`${API_URL}/map/${map.id}?n=2`, { credentials: "include" })
+      .then((res) => res.json())
+      .then((data) => {
+        setChars(data.chars);
 
-    return () => clearInterval(interval);
+        if (timerIdRef.current) clearInterval(timerIdRef.current);
+        timerIdRef.current = setInterval(() => {
+          setTimerMillis(Date.now() - data.start);
+        }, 1000);
+      });
+
+    return () => {
+      if (timerIdRef.current) {
+        clearInterval(timerIdRef.current);
+        timerIdRef.current = null;
+      }
+    };
   }, []);
 
   useEffect(() => {
     const allFound = chars.every((char) => char.found);
-    if (allFound && timerId) {
-      clearInterval(timerId);
-      setTimerId(null);
+    if (allFound && timerIdRef.current) {
+      clearInterval(timerIdRef.current);
+      timerIdRef.current = null;
     }
   }, [chars]);
 
   const selectorOnClick = (char) => {
-    return (e) => {
+    return async (e) => {
       e.stopPropagation();
       setSelectorPos(null);
 
-      console.log(isSelected(char));
-
       const charId = char.id;
-      const charPos = isSelected(char);
-      if (charPos)
+      const charPos = await isSelected(char);
+      if (charPos.found)
         setChars(
           chars.map((char) => {
             if (char.id === charId)
               return {
                 ...char,
-                found: true,
-                x: charPos.x1,
-                y: charPos.y1,
-                w: charPos.x2 - charPos.x1,
-                h: charPos.y2 - charPos.y1,
+                ...charPos,
               };
             else return char;
           }),
@@ -98,24 +78,18 @@ const Game = ({ map }) => {
       (img.naturalHeight / img.offsetHeight) * e.nativeEvent.offsetY,
     );
 
-    setNaturalPos({ x, y });
+    naturalPosRef.current = { x, y };
     setSelectorPos({ top: e.pageY, left: e.pageX });
     console.log(`(${x}, ${y})`);
   };
 
-  const isSelected = (char) => {
-    const charPos = positions.find((p) => p.id === char.id);
-
-    if (!charPos) return false;
-
-    if (
-      naturalPos.x >= charPos.x1 &&
-      naturalPos.x <= charPos.x2 &&
-      naturalPos.y >= charPos.y1 &&
-      naturalPos.y <= charPos.y2
-    )
-      return charPos;
-    else return null;
+  const isSelected = async (char) => {
+    const res = await fetch(
+      `${API_URL}/map/${map.id}/char/${char.id}/tag?x=${naturalPosRef.current.x}&y=${naturalPosRef.current.y}`,
+      { credentials: "include" },
+    );
+    const found = await res.json();
+    return found;
   };
 
   return (

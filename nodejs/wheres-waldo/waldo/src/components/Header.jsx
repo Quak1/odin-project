@@ -10,7 +10,7 @@ const Header = ({ characters, elapsed }) => {
           <div key={char.id} className={styles.entry}>
             <div className={styles.wrapper}>
               <img
-                src={char.img}
+                src={char.image}
                 alt={char.name}
                 className={char.found ? styles.grayscale : ""}
               />

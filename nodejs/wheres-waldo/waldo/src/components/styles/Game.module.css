@@ -10,4 +10,5 @@
 
 .mapContainer {
   position: relative;
+  line-height: 0;
 }
