@@ -14,6 +14,9 @@
   aspect-ratio: 1;
   background-color: black;
   line-height: 0;
+  border: 2px #ddd solid;
+  border-radius: 10px;
+  overflow: hidden;
 
   img {
     width: 100%;

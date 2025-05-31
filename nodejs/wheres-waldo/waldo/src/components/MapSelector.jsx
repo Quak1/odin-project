@@ -33,7 +33,7 @@ const MapSelector = ({ maps, setMap }) => {
 const MapCard = ({ map, buttonClick }) => (
   <div className={styles.card}>
     <div className={styles.imageContainer}>
-      <img src={map.url} alt={map.name} />
+      <img src={map.cardImg || map.url} alt={map.name} />
     </div>
     <button onClick={() => buttonClick(map)}>{map.name}</button>
   </div>

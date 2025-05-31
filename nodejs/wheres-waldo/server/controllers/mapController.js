@@ -21,7 +21,7 @@ const getRandomChars = async (req, res) => {
   req.session.mapId = mapId;
   req.session.start = new Date().getTime();
 
-  res.status(200).json(chars);
+  res.status(200).json({ chars, start: req.session.start });
 };
 
 const checkTag = async (req, res) => {

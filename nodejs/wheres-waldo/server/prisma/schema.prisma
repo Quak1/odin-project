@@ -15,12 +15,13 @@ datasource db {
 }
 
 model Map {
-  id   Int    @id @default(autoincrement())
-  name String @unique @db.VarChar(50)
-  w    Int
-  h    Int
-  url  String
-  tags Tag[]
+  id      Int     @id @default(autoincrement())
+  name    String  @unique @db.VarChar(50)
+  w       Int
+  h       Int
+  url     String
+  cardImg String?
+  tags    Tag[]
 }
 
 model Tag {
