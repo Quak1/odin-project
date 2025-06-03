@@ -5,6 +5,7 @@ const controller = require("../controllers/mapController");
 const {
   validateInt,
   handleValidationErrors,
+  validateUsername,
 } = require("../controllers/validators");
 
 // Get maps info
@@ -34,5 +35,21 @@ router.get(
 
 // Check if player is done
 router.get("/:mapId/done", controller.isDone);
+
+// Get top scores
+router.get(
+  "/:mapId/top-scores",
+  validateInt("param", "mapId"),
+  handleValidationErrors,
+  controller.getTopScores,
+);
+
+router.post(
+  "/:mapId/score",
+  validateInt("param", "mapId"),
+  validateUsername(),
+  handleValidationErrors,
+  controller.recordScore,
+);
 
 module.exports = router;

@@ -5,11 +5,15 @@ export const fetchData = async (resource) => {
   return await res.json();
 };
 
-export const postData = async (resource) => {
-  const res = await fetch(`${API_URL}/${resource}`, {
+export const postData = async (resource, data) => {
+  const url = new URL(`${API_URL}/${resource}`);
+  url.search = new URLSearchParams(data);
+
+  const res = await fetch(url, {
     method: "POST",
     credentials: "include",
   });
+
   return await res.json();
 };
 
@@ -22,6 +26,11 @@ export const formatMinutes = (millis) => {
 
 export const formatMillis = (millis) => {
   return `${formatMinutes(millis)}.${millis % 1000}`;
+};
+
+export const formatDate = (d) => {
+  const date = new Date(d).toLocaleDateString("en-ZA");
+  return date;
 };
 
 const formatTimeComponent = (t) => (t < 10 ? `0${t}` : t);

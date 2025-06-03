@@ -23,7 +23,15 @@ const validateInt = (source, ...fields) => {
   );
 };
 
+const validateUsername = () =>
+  query("username")
+    .exists()
+    .withMessage("Username is required")
+    .isAlphanumeric()
+    .withMessage("Username must be alphanumeric");
+
 module.exports = {
   handleValidationErrors,
   validateInt,
+  validateUsername,
 };

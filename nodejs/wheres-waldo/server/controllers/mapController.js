@@ -60,9 +60,30 @@ const isDone = async (req, res) => {
   }
 };
 
+const getTopScores = async (req, res) => {
+  const { mapId } = matchedData(req);
+
+  const scores = await queries.getTopScores(mapId, 10);
+
+  res.status(200).json(scores);
+};
+
+const recordScore = async (req, res) => {
+  const { mapId, username } = matchedData(req);
+  const { time } = req.session;
+
+  if (!time) return res.status(401);
+
+  const confirm = await queries.recordScore(mapId, username, time);
+
+  res.status(200).json(confirm);
+};
+
 module.exports = {
   getMaps,
   getRandomChars,
   checkTag,
   isDone,
+  getTopScores,
+  recordScore,
 };

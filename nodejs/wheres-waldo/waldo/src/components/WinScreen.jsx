@@ -1,10 +1,10 @@
 import { useRef, useEffect } from "react";
 
-import styles from "./styles/WinScreen.module.css";
 import modalStyles from "./styles/Modal.module.css";
-import { formatMillis } from "../utils";
+import { formatMinutes } from "../utils";
+import Leaderboard from "./Leaderboard";
 
-const MapSelector = ({ map, elapsed, reset }) => {
+const WinScreen = ({ map, elapsed, reset }) => {
   const modal = useRef(null);
 
   useEffect(() => {
@@ -12,18 +12,17 @@ const MapSelector = ({ map, elapsed, reset }) => {
   }, []);
 
   return (
-    <dialog
-      className={`${modalStyles.container} ${styles.container}`}
-      ref={modal}
-    >
-      <h1>You Win!</h1>
+    <dialog className={`${modalStyles.container}`} ref={modal}>
+      <h1>You win!</h1>
       <p>
-        It took you {formatMillis(elapsed)} minutes to find all targets on the{" "}
+        It took you {formatMinutes(elapsed)} minutes to find all targets on the{" "}
         {map.name} map
       </p>
+      <hr />
+      <Leaderboard mapId={map.id} />
       <button onClick={reset}>Play again</button>
     </dialog>
   );
 };
 
-export default MapSelector;
+export default WinScreen;
