@@ -7,10 +7,11 @@
 .entry {
   display: flex;
   align-items: center;
-  background-color: red;
+  background-color: #eee;
   border-radius: 5px;
   margin-bottom: 5px;
   padding-right: 8px;
+  outline: #222 2px solid;
 
   img {
     width: 50px;
@@ -23,5 +24,5 @@
 }
 
 .entry:hover {
-  filter: brightness(55%);
+  filter: brightness(85%);
 }
