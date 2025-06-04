@@ -3,7 +3,6 @@ import { ToastContainer, toast, Slide } from "react-toastify";
 
 import styles from "./styles/Game.module.css";
 import { fetchData } from "../utils";
-import useTimer from "../hooks/useTimer";
 
 import Selector from "./Selector";
 import Map from "./Map";
@@ -15,8 +14,8 @@ const Game = ({ map, reset }) => {
   const [selectorPos, setSelectorPos] = useState(null);
   const [chars, setChars] = useState([]);
   const startTime = useRef(0);
+  const gameElapsed = useRef(0);
   const naturalPosRef = useRef(null);
-  const { elapsed: timerMillis, stop: stopTimer } = useTimer(startTime.current);
   const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
@@ -59,14 +58,13 @@ const Game = ({ map, reset }) => {
           const allFound = updatedChars.every((char) => char.found);
           if (allFound) {
             setGameOver(true);
-            stopTimer();
           }
 
           return updatedChars;
         });
         notify(`You found ${clickChar.name}!`, "success");
       } else {
-        notify(`That's not ${clickChar.name}. Keep looking!`, "error");
+        notify(`That's not ${clickChar.name}. Keep looking!`, "warning");
       }
     };
   };
@@ -98,7 +96,12 @@ const Game = ({ map, reset }) => {
 
   return (
     <div className={styles.game}>
-      <Header characters={chars} elapsed={timerMillis} />
+      <Header
+        characters={chars}
+        gameElapsed={gameElapsed}
+        gameOver={gameOver}
+        startTime={startTime.current}
+      />
       <div className={styles.mapContainer}>
         {chars
           .filter((char) => char.found)
@@ -114,7 +117,9 @@ const Game = ({ map, reset }) => {
           onClick={selectorOnClick}
         />
       )}
-      {gameOver && <WinScreen map={map} elapsed={timerMillis} reset={reset} />}
+      {gameOver && (
+        <WinScreen map={map} elapsed={gameElapsed.current} reset={reset} />
+      )}
       <ToastContainer />
     </div>
   );
