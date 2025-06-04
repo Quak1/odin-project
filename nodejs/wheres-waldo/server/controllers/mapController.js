@@ -28,9 +28,11 @@ const checkTag = async (req, res) => {
   const { mapId, charId, x, y } = matchedData(req);
   const { chars } = req.session;
 
+  if (!(charId in chars)) return res.status(200).json({ found: false });
+
   const tag = await queries.isTagValid(mapId, charId, x, y);
 
-  if (tag && charId in chars) {
+  if (tag) {
     req.session.chars[charId] = true;
     if (Object.values(chars).every((val) => val)) {
       req.session.time = new Date().getTime() - req.session.start;
@@ -76,7 +78,9 @@ const recordScore = async (req, res) => {
 
   const confirm = await queries.recordScore(mapId, username, time);
 
-  res.status(200).json(confirm);
+  req.session.destroy((err) => {
+    res.status(200).json(confirm);
+  });
 };
 
 module.exports = {
