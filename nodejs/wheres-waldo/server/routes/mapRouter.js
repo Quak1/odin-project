@@ -11,10 +11,6 @@ const {
 // Get maps info
 router.get("/", controller.getMaps);
 
-router.get("/session", (req, res) => {
-  res.status(200).json(req.session);
-});
-
 // Generate random chars
 router.get(
   "/:mapId",
@@ -34,7 +30,12 @@ router.get(
 );
 
 // Check if player is done
-router.get("/:mapId/done", controller.isDone);
+router.get(
+  "/:mapId/done",
+  validateInt("param", "mapId"),
+  handleValidationErrors,
+  controller.isDone,
+);
 
 // Get top scores
 router.get(
