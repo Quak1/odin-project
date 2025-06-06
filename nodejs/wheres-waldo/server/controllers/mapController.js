@@ -11,7 +11,7 @@ const getMaps = async (_, res) => {
 const getRandomChars = async (req, res) => {
   const { mapId, n } = matchedData(req);
 
-  const chars = await queries.getRandomCharacters(mapId, n);
+  const chars = await queries.getRandomCharacters(mapId, 3);
 
   if (!chars.length) throw new Error();
 

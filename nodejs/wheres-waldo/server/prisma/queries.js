@@ -6,7 +6,6 @@ async function getRandomCharacters(mapId, n) {
     where: { tag: { some: { map_id: mapId } } },
   });
 
-  // return characters.slice(0, n);
   return characters.sort(() => 0.5 - Math.random()).slice(0, n);
 }
 
