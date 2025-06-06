@@ -3,4 +3,7 @@
   align-items: center;
   font-weight: bold;
   font-size: 80px;
+  background-color: rgb(255, 255, 255, 0.8);
+  align-self: center;
+  line-height: 1em;
 }
