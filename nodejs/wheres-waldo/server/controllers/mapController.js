@@ -13,6 +13,8 @@ const getRandomChars = async (req, res) => {
 
   const chars = await queries.getRandomCharacters(mapId, n);
 
+  if (!chars.length) throw new Error();
+
   delete req.session.time;
   req.session.chars = chars.reduce(
     (obj, char) => ({ ...obj, [char.id]: false }),
@@ -74,7 +76,7 @@ const recordScore = async (req, res) => {
   const { mapId, username } = matchedData(req);
   const { time } = req.session;
 
-  if (!time) return res.status(401);
+  if (!time) return res.sendStatus(400);
 
   const confirm = await queries.recordScore(mapId, username, time);
 

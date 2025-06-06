@@ -6,7 +6,7 @@ const handleValidationErrors = (req, res, next) => {
   if (!errors.isEmpty()) {
     return res
       .status(400)
-      .json({ errors: errors.array({ onlyFirstError: true }) });
+      .json({ error: errors.array({ onlyFirstError: true })[0] });
   }
 
   next();
