@@ -9,6 +9,9 @@ const WinScreen = ({ map, elapsed, reset }) => {
 
   useEffect(() => {
     modal.current.showModal();
+    modal.current.addEventListener("cancel", (event) => {
+      event.preventDefault();
+    });
   }, []);
 
   return (

@@ -15,7 +15,9 @@ function App() {
   };
 
   useEffect(() => {
-    fetchData(`map`).then((data) => setMapList(data));
+    fetchData(`map`)
+      .then((data) => setMapList(data))
+      .catch(() => setMapList([]));
   }, []);
 
   return (

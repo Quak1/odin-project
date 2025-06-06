@@ -2,12 +2,16 @@ import { useRef, useEffect } from "react";
 
 import modalStyles from "./styles/Modal.module.css";
 import styles from "./styles/MapSelector.module.css";
+import Loader from "./Loader";
 
 const MapSelector = ({ maps, setMap }) => {
   const modal = useRef(null);
 
   useEffect(() => {
     modal.current.showModal();
+    modal.current.addEventListener("cancel", (event) => {
+      event.preventDefault();
+    });
   }, []);
 
   const chooseMap = (map) => {
@@ -19,11 +23,18 @@ const MapSelector = ({ maps, setMap }) => {
     <dialog className={modalStyles.container} ref={modal}>
       <h1>Welcome!</h1>
       <p>Choose a map:</p>
-      {maps && (
+      {!maps ? (
+        <Loader />
+      ) : maps.length ? (
         <div className={styles.cardContainer}>
           {maps.map((map) => (
             <MapCard map={map} key={map.id} buttonClick={chooseMap} />
           ))}
+        </div>
+      ) : (
+        <div className={styles.error}>
+          <p>There was an error fetching the maps list.</p>
+          <p>Please come back later.</p>
         </div>
       )}
     </dialog>

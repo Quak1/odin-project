@@ -24,3 +24,9 @@
     object-fit: cover;
   }
 }
+
+.error {
+  color: maroon;
+  font-size: 18px;
+  font-weight: bold;
+}
