@@ -13,6 +13,8 @@
   line-height: 0;
 }
 
-.toast {
-  color: black;
+.loader {
+  position: absolute;
+  z-index: 100;
+  transform: translate(-50%, -50%);
 }

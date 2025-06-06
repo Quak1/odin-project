@@ -1,50 +1,56 @@
 import { useEffect, useState, useRef } from "react";
-import { ToastContainer, toast, Slide } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 import styles from "./styles/Game.module.css";
-import { fetchData } from "../utils";
+import { fetchData, notify, notifyFatal } from "../utils";
 
 import Selector from "./Selector";
 import Map from "./Map";
 import Header from "./Header";
 import FoundMarker from "./FoundMarker";
 import WinScreen from "./WinScreen";
+import Loader from "./Loader";
 
 const Game = ({ map, reset }) => {
   const [selectorPos, setSelectorPos] = useState(null);
   const [chars, setChars] = useState([]);
-  const startTime = useRef(0);
+  const startTime = useRef(null);
   const gameElapsed = useRef(0);
   const naturalPosRef = useRef(null);
   const [gameOver, setGameOver] = useState(false);
+  const [loader, setLoader] = useState(null);
 
   useEffect(() => {
-    fetchData(`map/${map.id}?n=2`).then((data) => {
-      setChars(data.chars);
-      startTime.current = data.start;
-    });
+    fetchData(`map/${map.id}?n=3`)
+      .then((data) => {
+        if (data.error) {
+          notifyFatal(data.error + " Please come back later.");
+          setGameOver(true);
+        } else {
+          setChars(data.chars);
+          startTime.current = data.start;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
-
-  const notify = (msg, type = "success") => {
-    toast(msg, {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      transition: Slide,
-      className: styles.toast,
-      type: type,
-    });
-  };
 
   const selectorOnClick = (clickChar) => {
     return async (e) => {
       e.stopPropagation();
+
+      setLoader(selectorPos);
       setSelectorPos(null);
-
       const charPos = await isSelected(clickChar);
+      setLoader(null);
 
-      if (charPos.found) {
+      if (charPos.error) {
+        notify(
+          `There has been an error verifying ${clickChar.name}. Please try again`,
+          "error",
+        );
+      } else if (charPos.found) {
         setChars((prevChars) => {
           const updatedChars = prevChars.map((char) => {
             if (char.id === clickChar.id)
@@ -94,6 +100,8 @@ const Game = ({ map, reset }) => {
     );
   };
 
+  console.log("outside", loader);
+
   return (
     <div className={styles.game}>
       <Header
@@ -102,9 +110,14 @@ const Game = ({ map, reset }) => {
         gameOver={gameOver}
         startTime={startTime.current}
       />
+      {loader && (
+        <div className={styles.loader} style={loader}>
+          <Loader />
+        </div>
+      )}
       <div className={styles.mapContainer}>
         {chars
-          .filter((char) => char.found)
+          .filter((char) => char.found || char.loading)
           .map((char) => (
             <FoundMarker char={char} map={map} key={char.id} />
           ))}
@@ -120,7 +133,7 @@ const Game = ({ map, reset }) => {
       {gameOver && (
         <WinScreen map={map} elapsed={gameElapsed.current} reset={reset} />
       )}
-      <ToastContainer />
+      <ToastContainer style={{ color: "black" }} />
     </div>
   );
 };

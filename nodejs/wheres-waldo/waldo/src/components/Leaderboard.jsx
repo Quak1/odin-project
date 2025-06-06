@@ -1,5 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { fetchData, formatDate, formatMillis, postData } from "../utils";
+
+import Loader from "./Loader";
+import {
+  fetchData,
+  formatDate,
+  formatMillis,
+  notify,
+  notifyFatal,
+  postData,
+} from "../utils";
 
 import styles from "./styles/Leaderboard.module.css";
 
@@ -9,7 +18,6 @@ const Leaderboard = ({ mapId }) => {
 
   useEffect(() => {
     fetchData(`map/${mapId}/top-scores`).then((scores) => {
-      console.log(scores);
       setTopScores(scores);
     });
   }, []);
@@ -21,13 +29,26 @@ const Leaderboard = ({ mapId }) => {
     const username = input.value;
 
     if (!timeSubmitted.current) {
+      if (!username) return;
+
       timeSubmitted.current = true;
+      notify("Submitting your score.", "info");
       postData(`map/${mapId}/score`, { username })
-        .then(() => fetchData(`map/${mapId}/top-scores`))
-        .then((scores) => setTopScores(scores))
-        .then(() => (input.disabled = true));
+        .then((data) => {
+          if (data.error) throw new Error(data.error);
+          notify("Score submitted. Updating leaderboard.", "success");
+          setTopScores(null);
+          return fetchData(`map/${mapId}/top-scores`);
+        })
+        .then((scores) => {
+          setTopScores(scores);
+          input.disabled = true;
+        })
+        .catch((err) => {
+          notifyFatal(err.message, "error");
+        });
     } else {
-      console.log("you did that alreaady");
+      notify("You can't submit your score twice.", "error");
     }
 
     input.value = "";
@@ -46,7 +67,7 @@ const Leaderboard = ({ mapId }) => {
         </div>
       </form>
       {!topScores ? (
-        "Loading leaderboard..."
+        <Loader />
       ) : (
         <table className={styles.table}>
           <thead>
