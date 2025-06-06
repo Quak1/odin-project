@@ -3,6 +3,7 @@ import { useRef, useEffect } from "react";
 import modalStyles from "./styles/Modal.module.css";
 import styles from "./styles/MapSelector.module.css";
 import Loader from "./Loader";
+import Info from "./Info";
 
 const MapSelector = ({ maps, setMap }) => {
   const modal = useRef(null);
@@ -21,6 +22,7 @@ const MapSelector = ({ maps, setMap }) => {
 
   return (
     <dialog className={modalStyles.container} ref={modal}>
+      <Info />
       <h1>Welcome!</h1>
       <p>Choose a map:</p>
       {!maps ? (

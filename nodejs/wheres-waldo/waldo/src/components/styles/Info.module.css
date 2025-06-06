@@ -1,0 +1,50 @@
+.infoContainer {
+  .button {
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    margin-top: 0;
+    font-size: 14px;
+    font-weight: normal;
+
+    background-color: var(--off-white);
+    border: 1px black solid;
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    svg {
+      width: 20px;
+    }
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+
+    &:active {
+      filter: brightness(0.7);
+    }
+  }
+}
+
+.dialog {
+  h1,
+  h2,
+  ul,
+  ol {
+    margin: 0;
+  }
+
+  h2 {
+    margin-top: 20px;
+  }
+
+  .button {
+    left: unset;
+    right: 20px;
+  }
+}

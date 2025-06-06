@@ -1,7 +1,10 @@
 body {
+  --off-white: rgb(242, 240, 242);
+  --off-white-70: rgb(242, 240, 242, 70%);
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: var(--off-white);
 }
 
 p {
