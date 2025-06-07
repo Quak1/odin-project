@@ -15,7 +15,7 @@ async function postTag(req, res) {
   const tag = req.body;
   const { mapId } = req.params;
   const newTag = await saveTag(tag, mapId);
-  res.json(newTag[0]);
+  res.json(newTag);
 }
 
 module.exports = {

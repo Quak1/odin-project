@@ -55,11 +55,17 @@ async function setMapTags(mapId) {
 }
 
 async function saveTag(tag) {
+  tag.x1 = Math.round(tag.x1);
+  tag.x2 = Math.round(tag.x2);
+  tag.y1 = Math.round(tag.y1);
+  tag.y2 = Math.round(tag.y2);
+
   const res = await fetch("/maps/" + currentMapId, {
     method: "POST",
     body: JSON.stringify(tag),
     headers: { "Content-Type": "application/json" },
   });
+
   const newTag = await res.json();
   currentTags.push(newTag);
   draw();
@@ -86,7 +92,7 @@ function draw() {
   ctx.drawImage(img, 0, 0, img.width, img.height);
   for (const tag of currentTags) {
     ctx.fillStyle = "rgb(0 0 0 / 0.5)";
-    ctx.fillRect(tag.x, tag.y, tag.w, tag.h);
+    ctx.fillRect(tag.x1, tag.y1, tag.x2 - tag.x1, tag.y2 - tag.y1);
   }
 }
 
@@ -104,16 +110,14 @@ function handleCanvasClick(e) {
   } else {
     // Second click - Finalize the rectangle
     isDrawing = false;
-    const minX = Math.min(startX, mouseX);
-    const minY = Math.min(startY, mouseY);
     const name = prompt("Name?");
     if (name)
       saveTag({
         name,
-        x: minX,
-        y: minY,
-        w: Math.max(startX, mouseX) - minX,
-        h: Math.max(startY, mouseY) - minY,
+        x1: Math.min(startX, mouseX),
+        x2: Math.max(startX, mouseX),
+        y1: Math.min(startY, mouseY),
+        y2: Math.max(startY, mouseY),
       });
     draw();
   }
@@ -139,8 +143,8 @@ function handleCanvasMousemove(e) {
 
 function getRectName(x, y) {
   for (const tag of currentTags) {
-    if (x >= tag.x && x <= tag.x + tag.w && y >= tag.y && y <= tag.y + tag.h)
-      return tag.name;
+    if (x >= tag.x1 && x <= tag.x2 && y >= tag.y1 && y <= tag.y2)
+      return tag.character_id;
   }
 }
 

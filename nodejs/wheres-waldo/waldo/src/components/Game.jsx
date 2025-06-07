@@ -100,8 +100,6 @@ const Game = ({ map, reset }) => {
     );
   };
 
-  console.log("outside", loader);
-
   return (
     <div className={styles.game}>
       <Header
