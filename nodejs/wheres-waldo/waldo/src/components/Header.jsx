@@ -21,7 +21,7 @@ const Header = ({ characters, startTime, gameOver, gameElapsed }) => {
               <div key={char.id} className={styles.entry}>
                 <div className={styles.wrapper}>
                   <img
-                    src={char.image}
+                    src={char.image || null}
                     alt={char.name}
                     className={char.found ? styles.grayscale : ""}
                   />

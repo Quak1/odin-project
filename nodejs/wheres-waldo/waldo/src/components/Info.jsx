@@ -57,7 +57,7 @@ const Info = () => {
         <h2>Artwork credits:</h2>
         <ul>
           {pictures.map((pic) => (
-            <li>
+            <li key={pic.link}>
               <a href={pic.link}>{pic.title}</a> by{" "}
               <a href={pic.profile}>{pic.artist}</a> on DevianArt
             </li>

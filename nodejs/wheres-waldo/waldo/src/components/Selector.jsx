@@ -23,7 +23,7 @@ const Selector = ({ characters, pos, onClick }) => {
         (char) =>
           !char.found && (
             <div key={char.id} className={styles.entry} onClick={onClick(char)}>
-              <img src={char.image} alt={char.name} />
+              <img src={char.image || null} alt={char.name} />
               <p>{char.name}</p>
             </div>
           ),

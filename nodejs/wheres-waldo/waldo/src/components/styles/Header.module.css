@@ -1,6 +1,7 @@
 .header {
   position: sticky;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
 
   top: 0;
@@ -10,7 +11,7 @@
 
 .container {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 5px;
 }
 
@@ -18,7 +19,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5px;
+  width: 100px;
   padding-top: 0;
 
   font-weight: bold;
@@ -28,6 +29,21 @@
   position: relative;
 
   background: white;
+
+  p {
+    padding: 0 3px;
+  }
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-align: center;
 }
 
 .grayscale {
@@ -37,8 +53,15 @@
 .wrapper {
   position: relative;
   width: 100%;
+  aspect-ratio: 1;
   display: flex;
   justify-content: center;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
 }
 
 .cross {
