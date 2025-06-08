@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Game from "./components/Game";
 import MapSelector from "./components/MapSelector";
 
-import "./styles.module.css";
+import "./styles.css";
 import { fetchData } from "./utils";
 
 function App() {
