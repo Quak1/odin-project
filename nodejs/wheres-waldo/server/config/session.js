@@ -7,6 +7,7 @@ module.exports = expressSession({
   cookie: {
     maxAge: 1 * 60 * 60 * 1000,
     secure: process.env.NODE_ENV === "production",
+    sameSite: "none",
   },
   secret: process.env.SESSION_SECRET,
   resave: false,
