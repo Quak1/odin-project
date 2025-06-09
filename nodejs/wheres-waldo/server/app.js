@@ -7,6 +7,7 @@ const sessionConfig = require("./config/session");
 const corsConfig = require("./config/cors");
 const errorHandler = require("./controllers/errorHandler");
 
+app.set("trust proxy", true);
 app.use(corsConfig);
 app.use(sessionConfig);
 
