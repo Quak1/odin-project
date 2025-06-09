@@ -1,7 +1,20 @@
 const { PrismaClient } = require("../generated/prisma/client");
 const prisma = new PrismaClient();
 
+const DISCONNECT_DELAY = process.env.PRISMA_DISCONNECT_DELAY_MS;
+let disconnectTimeout = null;
+
+const resetTimeout = () => {
+  if (disconnectTimeout) clearTimeout(disconnectTimeout);
+  disconnectTimeout = setTimeout(() => {
+    prisma.$disconnect().then(() => {
+      console.log("Prisma disconnected due to inactivity.");
+    });
+  }, DISCONNECT_DELAY);
+};
+
 async function getRandomCharacters(mapId, n) {
+  resetTimeout();
   const characters = await prisma.character.findMany({
     where: { tag: { some: { map_id: mapId } } },
   });
@@ -10,6 +23,7 @@ async function getRandomCharacters(mapId, n) {
 }
 
 async function isTagValid(mapId, charId, x, y) {
+  resetTimeout();
   const tag = await prisma.tag.findUnique({
     where: {
       character_id_map_id: {
@@ -30,10 +44,12 @@ async function isTagValid(mapId, charId, x, y) {
 }
 
 async function getMapsInfo() {
+  resetTimeout();
   return await prisma.map.findMany();
 }
 
 async function getTopScores(mapId, n) {
+  resetTimeout();
   return await prisma.score.findMany({
     where: { map_id: mapId },
     orderBy: { score: "asc" },
@@ -42,6 +58,7 @@ async function getTopScores(mapId, n) {
 }
 
 async function recordScore(mapId, username, score) {
+  resetTimeout();
   return await prisma.score.create({
     data: {
       username,
