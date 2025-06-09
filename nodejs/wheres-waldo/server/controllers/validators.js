@@ -30,7 +30,9 @@ const validateUsername = () =>
     .exists()
     .withMessage("Username is required")
     .isAlphanumeric()
-    .withMessage("Username must be alphanumeric");
+    .withMessage(
+      "Username must be alphanumeric. Avoid spaces and other special characters.",
+    );
 
 module.exports = {
   handleValidationErrors,

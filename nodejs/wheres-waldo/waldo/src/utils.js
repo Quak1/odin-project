@@ -18,6 +18,7 @@ export const postData = async (resource, data) => {
   });
 
   if (res.ok) return await res.json();
+  else if (res.status === 400) return { error: (await res.json()).error.msg };
   else return { error: "There was an error submitting your score." };
 };
 

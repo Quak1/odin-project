@@ -31,12 +31,13 @@ const Leaderboard = ({ mapId }) => {
     if (!timeSubmitted.current) {
       if (!username) return;
 
-      timeSubmitted.current = true;
       notify("Submitting your score.", "info");
       postData(`map/${mapId}/score`, { username })
         .then((data) => {
           if (data.error) throw new Error(data.error);
+
           notify("Score submitted. Updating leaderboard.", "success");
+          timeSubmitted.current = true;
           setTopScores(null);
           return fetchData(`map/${mapId}/top-scores`);
         })
