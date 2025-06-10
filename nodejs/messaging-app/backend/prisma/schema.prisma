@@ -13,3 +13,51 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
+}
+
+model User {
+  id         String   @id @default(cuid())
+  username   String   @unique
+  password   String
+  about      String
+  name       String
+  picture    String
+  lastSeenAt DateTime
+
+  ownedChats   Chat[] @relation("ChatOwner")
+  memberChats  Chat[] @relation("ChatMembers")
+  pendingChats Chat[] @relation("ChatPendingMembers")
+
+  Message Message[]
+}
+
+model Chat {
+  id       String  @id @default(cuid())
+  name     String
+  isGroupd Boolean @default(false)
+
+  ownerId        String
+  owner          User   @relation("ChatOwner", fields: [ownerId], references: [id])
+  members        User[] @relation("ChatMembers")
+  pendingMembers User[] @relation("ChatPendingMembers")
+
+  Message Message[]
+}
+
+model Message {
+  id      String   @id @default(cuid())
+  content String?
+  sentAt  DateTime @default(now())
+
+  senderId String
+  sender   User   @relation(fields: [senderId], references: [id])
+
+  chatId String
+  chat   Chat   @relation(fields: [chatId], references: [id])
+}
