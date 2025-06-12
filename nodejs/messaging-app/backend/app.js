@@ -3,6 +3,7 @@ const express = require("express");
 // App setup
 const app = express();
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Session setup
 const sessionConfig = require("./config/session");
