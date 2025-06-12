@@ -25,10 +25,10 @@ model User {
   id         String   @id @default(cuid())
   username   String   @unique
   password   String
-  about      String
-  name       String
-  picture    String
-  lastSeenAt DateTime
+  about      String?
+  name       String?
+  picture    String?
+  lastSeenAt DateTime @default(now())
 
   ownedChats   Chat[] @relation("ChatOwner")
   memberChats  Chat[] @relation("ChatMembers")
