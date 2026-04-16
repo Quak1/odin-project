@@ -14,7 +14,9 @@ app.use(passport.session());
 
 // Routes
 const authRouter = require("./routes/authRouter");
+const chatRouter = require("./routes/chatRouter");
 app.use("/", authRouter);
+app.use("/chat", chatRouter);
 
 // start server
 const PORT = process.env.PORT || 3000;

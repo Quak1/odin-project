@@ -1,4 +1,4 @@
-const { body, validationResult } = require("express-validator");
+const { body, param, validationResult } = require("express-validator");
 const queries = require("../prisma/queries");
 
 const handleValidationErrors = (req, res, next) => {
@@ -45,8 +45,16 @@ const registerValidator = () => [
     .withMessage("Password and password confirmation don't match."),
 ];
 
+const fieldValidator = (field, location = "body") => {
+  const f = location === "body" ? body : param;
+  return f(field)
+    .exists({ values: "falsy" })
+    .withMessage(`${field} is required.`);
+};
+
 module.exports = {
   handleValidationErrors,
   loginValidator,
   registerValidator,
+  fieldValidator,
 };
